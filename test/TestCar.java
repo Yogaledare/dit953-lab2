@@ -37,4 +37,15 @@ public class TestCar {
 
     }
 
+    @Test
+    public void tryRotateCarToLeft() {
+        Vector2D target = new Vector2D(-0.707, 0.707 );
+        saab95.turnLeft();
+
+        // against recommendations, but anyway..
+        assertEquals(target.getX(), saab95.getDirection().getX(), 0.01);
+        assertEquals(target.getY(), saab95.getDirection().getY(), 0.01);
+
+    }
+
 }
