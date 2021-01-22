@@ -7,14 +7,18 @@
 
 import java.awt.*;
 
-public abstract class  Car implements Movable {
+public abstract class Car implements Movable {
+    Car () {
+        position = new Vector2D(0,0);
+        direction = new Vector2D(0, 1);
+    }
     /**
      * Car model.
      */
     public String modelName;
 
     /**
-     * Color of car, uses Color.
+     * Color of car
      */
     public Color color;
 
@@ -38,13 +42,17 @@ public abstract class  Car implements Movable {
 
 
     /**
-     * Returns number of doors the car have
+     * Numbers of doors the car have.
      * @return number of doors
      */
     public int getNrDoors() {
         return nrDoors;
     }
 
+    /**
+     * Set number of doors the car have.
+     * @param nrDoors number of passenger doors, including driver but  excluding bonnet.
+     */
     public void setNrDoors(int nrDoors) {
         this.nrDoors = nrDoors;
     }
@@ -56,24 +64,32 @@ public abstract class  Car implements Movable {
      */
     public double getEnginePower() { return enginePower; }
 
+    /**
+     * Engine power in bhp?
+     * @param enginePower valid interval 0-1 ?
+     */
     public void setEnginePower(double enginePower) {
         this.enginePower = enginePower;
     }
 
     /**
      * Returns current speed
-     * @return
+     * @return the speed from 0.1 to 1.0
      */
     public double getCurrentSpeed(){
         return currentSpeed;
     }
 
+    /**
+     * Color of the car
+     * @return cars paintwork
+     */
     public Color getColor(){
         return color;
     }
 
     /**
-     * Sets RAL color of car                                (1)
+     * Sets color of car                                (1)
      * <p>
      * Longer description. If there were any, it would be    (2)
      * here.
@@ -87,19 +103,32 @@ public abstract class  Car implements Movable {
         color = clr;
     }
 
+    /**
+     * Start the car.
+     */
     public void startEngine(){
         currentSpeed = 0.1;
     }
 
-    // comment added
+    /**
+     * Stop the car
+      */
     public void stopEngine(){
         currentSpeed = 0;
     }
 
+    /**
+     * Car model
+     * @return what kind of model it is.
+     */
     public String getModelName() {
         return modelName;
     }
 
+    /**
+     * set the car model, is it really allowed to change this ?
+     * @param modelName change model name to something new.
+     */
     public void setModelName(String modelName) {
         this.modelName = modelName;
     }
@@ -134,14 +163,26 @@ public abstract class  Car implements Movable {
         position = position.plus(step);
     }
 
+    /**
+     * Turn car 45 degree to left.
+     */
     public void turnLeft() {
         direction = direction.rotateCC(Math.PI / 4);
     }
 
+    /**
+     * Turn car 45 degree to right.
+     */
     public void turnRight() {
         direction = direction.rotateCC(- Math.PI / 4);
     }
 
+    public Vector2D getPosition() {
+        return position;
+    }
 
+    public Vector2D getDirection() {
+        return direction;
+    }
 
 }
