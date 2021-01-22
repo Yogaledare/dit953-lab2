@@ -24,7 +24,7 @@ public abstract class  Car implements Movable {
     public double currentSpeed;
 
     /**
-     * enginePower
+     * Engine power
      */
     public double enginePower;
 
@@ -37,7 +37,6 @@ public abstract class  Car implements Movable {
     private Vector2D direction;
 
 
-
     /**
      * Returns number of doors the car have
      * @return number of doors
@@ -46,11 +45,20 @@ public abstract class  Car implements Movable {
         return nrDoors;
     }
 
+    public void setNrDoors(int nrDoors) {
+        this.nrDoors = nrDoors;
+    }
+
+
     /**
      * Returns how much power the car have.
      * @return power of the car
      */
     public double getEnginePower() { return enginePower; }
+
+    public void setEnginePower(double enginePower) {
+        this.enginePower = enginePower;
+    }
 
     /**
      * Returns current speed
@@ -88,6 +96,13 @@ public abstract class  Car implements Movable {
         currentSpeed = 0;
     }
 
+    public String getModelName() {
+        return modelName;
+    }
+
+    public void setModelName(String modelName) {
+        this.modelName = modelName;
+    }
 
     /**
      * Return speed factor.                           (1)
