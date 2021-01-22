@@ -17,8 +17,20 @@ public abstract class  Car implements Movable {
      * Color of car, uses Color.
      */
     public Color color;
+
+    /**
+     * Current speed valid interval from 0 to 1.0
+     */
     public double currentSpeed;
+
+    /**
+     * enginePower
+     */
     public double enginePower;
+
+    /**
+     * Number of doors
+     */
     public int nrDoors;
 
     private Vector2D position;
@@ -26,13 +38,24 @@ public abstract class  Car implements Movable {
 
 
 
-
+    /**
+     * Returns number of doors the car have
+     * @return number of doors
+     */
     public int getNrDoors() {
         return nrDoors;
     }
 
+    /**
+     * Returns how much power the car have.
+     * @return power of the car
+     */
     public double getEnginePower() { return enginePower; }
 
+    /**
+     * Returns current speed
+     * @return
+     */
     public double getCurrentSpeed(){
         return currentSpeed;
     }
