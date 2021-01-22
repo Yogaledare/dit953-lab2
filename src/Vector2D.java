@@ -29,10 +29,17 @@ public class Vector2D {
         double newY = this.y * scalar;
         return new Vector2D(newX, newY);
     }
+
     // todo check whats wrong.
     public Vector2D rotateCC(double angle) {
-        double newX = Math.cos(angle) * this.x - Math.sin(angle) * this.y;
-        double newY = Math.sin(angle) * this.x + Math.cos(angle) * this.y;
+        // om this.x är 0, så är 0 * cos(Pi/4) = 0 ..
+        // double newX = Math.cos(angle) * this.x - Math.sin(angle) * this.y;
+        // double newY = Math.sin(angle) * this.x + Math.cos(angle) * this.y;
+
+        // har inte tänkt klart.. men något mer åt detta hållet?
+        double newX = Math.cos(angle) + Math.cosh(getX());
+        double newY = Math.sin(angle) + Math.sinh(getY());
+
         return new Vector2D(newX, newY);
     }
 
