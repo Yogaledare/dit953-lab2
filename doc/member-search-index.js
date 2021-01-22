@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"<Unnamed>","c":"Saab95","l":"decrementSpeed(double)"},{"p":"<Unnamed>","c":"Saab95","l":"incrementSpeed(double)"},{"p":"<Unnamed>","c":"Saab95","l":"Saab95()","u":"%3Cinit%3E()"},{"p":"<Unnamed>","c":"Saab95","l":"setTurboOff()"},{"p":"<Unnamed>","c":"Saab95","l":"setTurboOn()"},{"p":"<Unnamed>","c":"Saab95","l":"speedFactor()"}];updateSearchResults();
