@@ -29,7 +29,7 @@ public class Vector2D {
         double newY = this.y * scalar;
         return new Vector2D(newX, newY);
     }
-
+    // todo check whats wrong.
     public Vector2D rotateCC(double angle) {
         double newX = Math.cos(angle) * this.x - Math.sin(angle) * this.y;
         double newY = Math.sin(angle) * this.x + Math.cos(angle) * this.y;
