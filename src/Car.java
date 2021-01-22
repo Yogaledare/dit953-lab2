@@ -11,27 +11,27 @@ public abstract class  Car implements Movable {
     /**
      * Car model.
      */
-    public String modelName;
+    private String modelName;
 
     /**
      * Color of car, uses Color.
      */
-    public Color color;
+    private Color color;
 
     /**
      * Current speed valid interval from 0 to 1.0
      */
-    public double currentSpeed;
+    private double currentSpeed;
 
     /**
      * Engine power
      */
-    public double enginePower;
+    private double enginePower;
 
     /**
      * Number of doors
      */
-    public int nrDoors;
+    private int nrDoors;
 
     private Vector2D position;
     private Vector2D direction;
@@ -67,6 +67,8 @@ public abstract class  Car implements Movable {
     public double getCurrentSpeed(){
         return currentSpeed;
     }
+
+    public void setCurrentSpeed(double speed){ currentSpeed = speed; }
 
     public Color getColor(){
         return color;
@@ -121,12 +123,12 @@ public abstract class  Car implements Movable {
 
     // TODO fix this method according to lab pm
     public void gas(double amount){
-        incrementSpeed(amount);
+        incrementSpeed(clamp(amount, 0, 1));
     }
 
     // TODO fix this method according to lab pm
     public void brake(double amount){
-        decrementSpeed(amount);
+        decrementSpeed(clamp(amount, 0, 1));
     }
 
     public void move() {
@@ -142,6 +144,9 @@ public abstract class  Car implements Movable {
         direction = direction.rotateCC(- Math.PI / 4);
     }
 
-
+    private double clamp(double d, double min, double max){
+        d = Math.max(d, min);
+        return Math.min(d, max);
+    }
 
 }
