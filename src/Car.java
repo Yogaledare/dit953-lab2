@@ -11,7 +11,12 @@ public abstract class Car implements Movable {
     Car () {
         position = new Vector2D(0,0);
         direction = new Vector2D(0, 1);
+        stopEngine();
     }
+
+    private Vector2D position;
+    private Vector2D direction;
+
     /**
      * Car model.
      */
@@ -37,8 +42,6 @@ public abstract class Car implements Movable {
      */
     private int nrDoors;
 
-    private Vector2D position;
-    private Vector2D direction;
 
 
     /**
@@ -181,8 +184,9 @@ public abstract class Car implements Movable {
 
     private double clamp(double d, double min, double max){
         d = Math.max(d, min);
-        return Math.min(d, max);
+        return Math.min(Math.max(d, min), max);
     }
+
     public Vector2D getPosition() {
         return position;
     }

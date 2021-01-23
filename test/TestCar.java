@@ -38,7 +38,7 @@ public class TestCar {
     }
 
     @Test
-    public void TurnCarLeftOnce() {
+    public void turnSaab95LeftOnce() {
         Vector2D target = new Vector2D(-1, 0 );
         saab95.turnLeft();
 
@@ -49,7 +49,7 @@ public class TestCar {
     }
 
     @Test
-    public void TurnCarRightOnce() {
+    public void turnSaab95RightOnce() {
         Vector2D target = new Vector2D(1, 0 );
         saab95.turnRight();
 
@@ -60,7 +60,7 @@ public class TestCar {
 
 
     @Test
-    public void TurnCarRightTwice() {
+    public void turnSaab95RightTwice() {
         Vector2D target = new Vector2D(0, -1 );
         saab95.turnRight();
         saab95.turnRight();

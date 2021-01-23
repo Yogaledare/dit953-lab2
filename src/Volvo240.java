@@ -9,7 +9,7 @@ public class Volvo240 extends Car{
         setColor(Color.black);
         setEnginePower(100);
         setModelName("Volvo240");
-        stopEngine();
+
     }
 
     @Override
