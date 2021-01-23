@@ -1,17 +1,14 @@
 /**
  * @author      Niklas  Axelsson < name @ student.gu.se>
  * @author      Carl    Stewart < name @ student.gu.se>
- * @author      Marcus  Uppström < name @ student.gu.se>
+ * @author      Marcus  Uppström < gusuppma@student.gu.se>
  * @version     0.1                 (current version number of program)
  */
 
 import java.awt.*;
 
 public abstract class Car implements Movable {
-    Car () {
-        position = new Vector2D(0,0);
-        direction = new Vector2D(0, 1);
-    }
+
     /**
      * Car model.
      */
@@ -37,9 +34,22 @@ public abstract class Car implements Movable {
      */
     private int nrDoors;
 
+
+
     private Vector2D position;
     private Vector2D direction;
 
+
+
+    public Car(String modelName, Color color, double enginePower, int nrDoors) {
+        this.modelName = modelName;
+        this.color = color;
+        this.enginePower = enginePower;
+        this.nrDoors = nrDoors;
+        this.position = new Vector2D(0,0);
+        this.direction = new Vector2D(0, 1);
+        stopEngine();
+    }
 
     /**
      * Numbers of doors the car have.
@@ -50,33 +60,20 @@ public abstract class Car implements Movable {
     }
 
     /**
-     * Set number of doors the car have.
-     * @param nrDoors number of passenger doors, including driver but  excluding bonnet.
-     */
-    public void setNrDoors(int nrDoors) {
-        this.nrDoors = nrDoors;
-    }
-
-
-    /**
      * Returns how much power the car have.
      * @return power of the car
      */
     public double getEnginePower() { return enginePower; }
 
-    /**
-     * Engine power in bhp?
-     * @param enginePower valid interval 0-1 ?
-     */
-    public void setEnginePower(double enginePower) {
-        this.enginePower = enginePower;
-    }
+
+// todo är det sant att speed är mellan 0.1 och 1.0?
 
     /**
      * Returns current speed
+     *
      * @return the speed from 0.1 to 1.0
      */
-    public double getCurrentSpeed(){
+    public double getCurrentSpeed() {
         return currentSpeed;
     }
 
@@ -84,7 +81,7 @@ public abstract class Car implements Movable {
      * Color of the car
      * @return cars paintwork
      */
-    public void setCurrentSpeed(double speed){ currentSpeed = speed; }
+//    public void setCurrentSpeed(double speed){ currentSpeed = speed; }
 
     public Color getColor(){
         return color;
@@ -105,19 +102,6 @@ public abstract class Car implements Movable {
         color = clr;
     }
 
-    /**
-     * Start the car.
-     */
-    public void startEngine(){
-        currentSpeed = 0.1;
-    }
-
-    /**
-     * Stop the car
-      */
-    public void stopEngine(){
-        currentSpeed = 0;
-    }
 
     /**
      * Car model
@@ -127,13 +111,22 @@ public abstract class Car implements Movable {
         return modelName;
     }
 
+
+
     /**
-     * set the car model, is it really allowed to change this ?
-     * @param modelName change model name to something new.
+     * Start the car.
      */
-    public void setModelName(String modelName) {
-        this.modelName = modelName;
+    public void startEngine(){
+        currentSpeed = 0.1;
     }
+
+    /**
+     * Stop the car
+     */
+    public void stopEngine(){
+        currentSpeed = 0;
+    }
+
 
     /**
      * Return speed factor.                           (1)
@@ -146,9 +139,16 @@ public abstract class Car implements Movable {
      *
      * @return Returns the speed factor.
      */
-    public abstract double speedFactor();
-    public abstract void incrementSpeed(double amount);
-    public abstract void decrementSpeed(double amount);
+
+    public abstract double findSpeedFactor();
+
+    private void incrementSpeed(double amount) {
+        currentSpeed = (Math.min(getCurrentSpeed() + findSpeedFactor() * amount, enginePower));
+    }
+
+    public void decrementSpeed(double amount) {
+        currentSpeed = (Math.max(getCurrentSpeed() - findSpeedFactor() * amount, 0));
+    }
 
     // TODO fix this method according to lab pm
     public void gas(double amount){
@@ -160,20 +160,23 @@ public abstract class Car implements Movable {
         decrementSpeed(clamp(amount, 0, 1));
     }
 
+    /**
+     * Move car in its current direction an amount proportional to its speed.
+     */
     public void move() {
         Vector2D step = direction.multiplyByScalar(currentSpeed);
         position = position.plus(step);
     }
 
     /**
-     * Turn car 90 degree to left.
+     * Turn car 90 degrees to left.
      */
     public void turnLeft() {
         direction = direction.rotateCC(Math.PI / 2);
     }
 
     /**
-     * Turn car 90 degree to right.
+     * Turn car 90 degrees to right.
      */
     public void turnRight() {
         direction = direction.rotateCC(-Math.PI / 2);
@@ -183,6 +186,7 @@ public abstract class Car implements Movable {
         d = Math.max(d, min);
         return Math.min(d, max);
     }
+
     public Vector2D getPosition() {
         return position;
     }
@@ -192,3 +196,42 @@ public abstract class Car implements Movable {
     }
 
 }
+
+
+/*
+ *//* *
+ * set the car model, is it really allowed to change this ?
+ * @param modelName change model name to something new.
+ *//*
+    public void setModelName(String modelName) {
+        this.modelName = modelName;
+    }
+    */
+
+
+
+/*
+
+ */
+/* *
+ * Set number of doors the car have.
+ * @param nrDoors number of passenger doors, including driver but  excluding bonnet.
+ *//*
+
+    public void setNrDoors(int nrDoors) {
+        this.nrDoors = nrDoors;
+    }
+*/
+
+
+
+/* *
+ * Engine power in bhp?
+ * @param enginePower valid interval 0-1 ?
+ *//*
+
+    public void setEnginePower(double enginePower) {
+        this.enginePower = enginePower;
+    }
+*/
+
