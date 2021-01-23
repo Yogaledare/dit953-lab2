@@ -71,7 +71,7 @@ public abstract class Car implements Movable {
     /**
      * Returns current speed
      *
-     * @return the speed from 0.1 to 1.0
+     * @return the speed from 0 to enginePower
      */
     public double getCurrentSpeed() {
         return currentSpeed;
