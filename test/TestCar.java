@@ -38,14 +38,36 @@ public class TestCar {
     }
 
     @Test
-    public void tryRotateCarToLeft() {
-        Vector2D target = new Vector2D(-0.707, 0.707 );
+    public void turnSaab95LeftOnce() {
+        Vector2D target = new Vector2D(-1, 0 );
         saab95.turnLeft();
 
         // against recommendations, but anyway..
         assertEquals(target.getX(), saab95.getDirection().getX(), 0.01);
         assertEquals(target.getY(), saab95.getDirection().getY(), 0.01);
 
+    }
+
+    @Test
+    public void turnSaab95RightOnce() {
+        Vector2D target = new Vector2D(1, 0 );
+        saab95.turnRight();
+
+        // against recommendations, but anyway..
+        assertEquals(target.getX(), saab95.getDirection().getX(), 0.01);
+        assertEquals(target.getY(), saab95.getDirection().getY(), 0.01);
+    }
+
+
+    @Test
+    public void turnSaab95RightTwice() {
+        Vector2D target = new Vector2D(0, -1 );
+        saab95.turnRight();
+        saab95.turnRight();
+
+        // against recommendations, but anyway..
+        assertEquals(target.getX(), saab95.getDirection().getX(), 0.01);
+        assertEquals(target.getY(), saab95.getDirection().getY(), 0.01);
     }
 
 }
