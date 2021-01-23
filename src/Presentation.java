@@ -121,7 +121,7 @@ class SpeedPane extends Pane {
     private void paintSpeed() {
         double rectHeight = 30;
         double rectWidth = 100;
-        double speedPercent = 0; // bind this value to cars current speed
+        double speedPercent = c.getCurrentSpeed(); // bind this value to cars current speed
 
 
         Rectangle rectangle = new Rectangle(0, 0, rectWidth, rectHeight);
@@ -129,6 +129,7 @@ class SpeedPane extends Pane {
         rectangle.setStroke(Color.BLACK);
         Line line = new Line(speedPercent, 0, speedPercent, rectHeight);
         line.setStroke(Color.RED);
+
 
         getChildren().clear();
         getChildren().addAll(rectangle, line);
