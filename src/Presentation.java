@@ -11,10 +11,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
+
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+
 import javafx.stage.Stage;
+
 
 public class Presentation extends Application {
     private Car car = new Volvo240();
@@ -34,6 +36,7 @@ public class Presentation extends Application {
         MoveHandlerEvent handleMove = new MoveHandlerEvent();
         btMove.setOnAction(handleMove);
 
+
         BorderPane pane = new BorderPane();
         pane.setTop(new CustomPane("Top"));
         pane.setLeft(new CustomPane("Turn left"));
@@ -41,8 +44,12 @@ public class Presentation extends Application {
         HBox centerBox = new HBox();
         centerBox.setSpacing(20);
         centerBox.setAlignment(Pos.CENTER);
+
+        // draw the rectangle with a bar to show speed
         SpeedPane speedPane = new SpeedPane(car);
+
         centerBox.getChildren().add(speedPane);
+
         pane.setCenter(centerBox);
 
         pane.setRight(new CustomPane("Turn right"));
@@ -67,6 +74,9 @@ public class Presentation extends Application {
         @Override
         public void handle(ActionEvent actionEvent) {
             car.gas(0.2);
+            // todo - Tell speedPane to repaint
+
+
             System.out.println("Gas pressed");
         }
     }
@@ -105,6 +115,7 @@ class CustomPane extends StackPane {
 
 
 class SpeedPane extends Pane {
+
     private double speed;
     private Car c;
 
@@ -119,20 +130,26 @@ class SpeedPane extends Pane {
     }
 
     private void paintSpeed() {
+
         double rectHeight = 30;
         double rectWidth = 100;
-        double speedPercent = c.getCurrentSpeed(); // bind this value to cars current speed
+        double speedPercent = c.getCurrentSpeed();
 
 
         Rectangle rectangle = new Rectangle(0, 0, rectWidth, rectHeight);
         rectangle.setFill(Color.WHITE);
         rectangle.setStroke(Color.BLACK);
-        Line line = new Line(speedPercent, 0, speedPercent, rectHeight);
-        line.setStroke(Color.RED);
+        Rectangle speed = new Rectangle(0, 0, speedPercent*10, rectHeight);
+        speed.setFill(Color.RED);
+
+        Label speedText = new Label("Speed: " + c.getCurrentSpeed());
+        speedText.setAlignment(Pos.CENTER);
 
 
         getChildren().clear();
-        getChildren().addAll(rectangle, line);
+
+        getChildren().addAll(rectangle, speed);
+
     }
 
     @Override
