@@ -12,35 +12,47 @@ public abstract class Car implements Movable {
     /**
      * Car model.
      */
-    private String modelName;
+    private final String modelName;
 
     /**
-     * Color of car
+     * Color of car.
      */
     private Color color;
 
     /**
-     * Current speed valid interval from 0 to 1.0
+     * Current speed valid interval from 0 to Engine power.
      */
     private double currentSpeed;
 
     /**
      * Engine power
      */
-    private double enginePower;
+    private final double enginePower;
 
     /**
      * Number of doors
      */
-    private int nrDoors;
+    private final int nrDoors;
 
 
-
+    /**
+     * Position for the car.
+     */
     private Vector2D position;
+
+    /**
+     * Direction / orientation for which the car is heading.
+     */
     private Vector2D direction;
 
 
-
+    /**
+     * Cars constructor
+     * @param modelName Manufactures car model.
+     * @param color Color of the car
+     * @param enginePower Engine power, relates to max speed
+     * @param nrDoors number of doors
+     */
     public Car(String modelName, Color color, double enginePower, int nrDoors) {
         this.modelName = modelName;
         this.color = color;
@@ -60,13 +72,11 @@ public abstract class Car implements Movable {
     }
 
     /**
-     * Returns how much power the car have.
+     * Returns power of the car.
      * @return power of the car
      */
     public double getEnginePower() { return enginePower; }
 
-
-// todo är det sant att speed är mellan 0.1 och 1.0?
 
     /**
      * Returns current speed
@@ -81,8 +91,6 @@ public abstract class Car implements Movable {
      * Color of the car
      * @return cars paintwork
      */
-//    public void setCurrentSpeed(double speed){ currentSpeed = speed; }
-
     public Color getColor(){
         return color;
     }
@@ -90,13 +98,11 @@ public abstract class Car implements Movable {
     /**
      * Sets color of car                                (1)
      * <p>
-     * Longer description. If there were any, it would be    (2)
-     * here.
-     * <p>
-     * And even more explanations to follow in consecutive
-     * paragraphs separated by HTML paragraph breaks.
+     * Possible to repaint the car.  (2)
      *
-     * @param  clr Description text text text.          (3)
+     * <p>
+     * If the car has been into bodywork, then it needs a fresh repaint
+     * @param  clr color          (3)
      */
     public void setColor(Color clr){
         color = clr;
@@ -110,8 +116,6 @@ public abstract class Car implements Movable {
     public String getModelName() {
         return modelName;
     }
-
-
 
     /**
      * Start the car.
@@ -129,35 +133,41 @@ public abstract class Car implements Movable {
 
 
     /**
-     * Return speed factor.                           (1)
-     * <p>
-     * Longer description. If there were any, it would be    (2)
-     * here.
-     * <p>
-     * And even more explanations to follow in consecutive
-     * paragraphs separated by HTML paragraph breaks.
-     *
+     * Return speed factor.
      * @return Returns the speed factor.
      */
-
     public abstract double findSpeedFactor();
 
+    /**
+     * Increase speed
+     * @param amount how much the speed should increase for every move.
+     */
     private void incrementSpeed(double amount) {
         currentSpeed = (Math.min(getCurrentSpeed() + findSpeedFactor() * amount, enginePower));
     }
 
+    /**
+     * Decrease speed
+     * @param amount how much the speed should decrease for every move.
+     */
     public void decrementSpeed(double amount) {
         currentSpeed = (Math.max(getCurrentSpeed() - findSpeedFactor() * amount, 0));
     }
 
-    // TODO fix this method according to lab pm
+    /**
+     * Gas can only be the same or increase
+     * @param amount how much the gas is pressed
+     */
     public void gas(double amount){
         incrementSpeed(clamp(amount, 0, 1));
     }
 
-    // TODO fix this method according to lab pm
+    /**
+     * Release the gas
+     * @param amount decrease the gas.
+     */
     public void brake(double amount){
-        decrementSpeed(clamp(amount, 0, 1));
+        decrementSpeed(clamp(amount, 0.1, 1)); // min set to 0.1 since 0.0 == engineStop ?!
     }
 
     /**
@@ -182,15 +192,18 @@ public abstract class Car implements Movable {
         direction = direction.rotateCC(-Math.PI / 2);
     }
 
+    // Todo: javadoc
     private double clamp(double d, double min, double max){
         d = Math.max(d, min);
         return Math.min(d, max);
     }
 
+    // Todo: javadoc
     public Vector2D getPosition() {
         return position;
     }
 
+    // Todo: javadoc
     public Vector2D getDirection() {
         return direction;
     }
