@@ -166,17 +166,17 @@ public abstract class Car implements Movable {
     }
 
     /**
-     * Turn car 45 degree to left.
+     * Turn car 90 degree to left.
      */
     public void turnLeft() {
-        direction = direction.rotateCC(Math.PI / 4);
+        direction = direction.rotateCC(Math.PI / 2);
     }
 
     /**
-     * Turn car 45 degree to right.
+     * Turn car 90 degree to right.
      */
     public void turnRight() {
-        direction = direction.rotateCC(- Math.PI / 4);
+        direction = direction.rotateCC(-Math.PI / 2);
     }
 
     private double clamp(double d, double min, double max){
