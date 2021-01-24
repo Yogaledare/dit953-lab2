@@ -150,7 +150,7 @@ public abstract class Car implements Movable {
      * Decrease speed
      * @param amount how much the speed should decrease for every move.
      */
-    public void decrementSpeed(double amount) {
+    private void decrementSpeed(double amount) {
         currentSpeed = (Math.max(getCurrentSpeed() - findSpeedFactor() * amount, 0));
     }
 
