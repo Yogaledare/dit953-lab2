@@ -53,7 +53,7 @@ public abstract class Car implements Movable {
      * The initial position (x, y) and direction (x, y) of the object is set to (0, 0) and (0, 1).
      * @param modelName the model name of the car
      * @param color the color of the car
-     * @param enginePower the engine power of the car, relates to max speed
+     * @param enginePower the engine power of the car
      * @param nrDoors the number of doors of the car
      */
     public Car(String modelName, Color color, double enginePower, int nrDoors) {
@@ -153,7 +153,7 @@ public abstract class Car implements Movable {
 
     /**
      * Increases the speed of the car by calling incrementSpeed with amount as argument.
-     * Amount should be between 0 and 1. If amount < 0, 0 will be used as argument. If amount > 1, 1 will be used.
+     * Amount is clamped to the interval [0, 1].
      * @param amount a value between 0 and 1 representing how much the gas is pressed
      */
     public void gas(double amount){
@@ -162,7 +162,7 @@ public abstract class Car implements Movable {
 
     /**
      * Decreases the speed of the car by calling decrementSpeed with amount as argument.
-     * Amount should be between 0 and 1. If amount < 0, 0 will be used as argument. If amount > 1, 1 will be used.
+     * Amount is clamped to the interval [0, 1].
      * @param amount a value between 0 and 1 representing how much the brake is pressed
      */
     public void brake(double amount){
@@ -170,7 +170,7 @@ public abstract class Car implements Movable {
     }
 
     /**
-     * Move car in its current direction by length = currentSpeed.
+     * Moves the car in its current direction by length = currentSpeed.
      */
     public void move() {
         Vector2D step = direction.multiplyByScalar(currentSpeed);
@@ -178,14 +178,14 @@ public abstract class Car implements Movable {
     }
 
     /**
-     * Turn the car 90 degrees to the left.
+     * Turns the car 90 degrees to the left.
      */
     public void turnLeft() {
         direction = direction.rotateCC(Math.PI / 2);
     }
 
     /**
-     * Turn the car 90 degrees to the right.
+     * Turns the car 90 degrees to the right.
      */
     public void turnRight() {
         direction = direction.rotateCC(-Math.PI / 2);
