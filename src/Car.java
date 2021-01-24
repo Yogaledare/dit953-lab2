@@ -133,7 +133,7 @@ public abstract class Car implements Movable {
 
     /**
      * Increases the speed of the car by an amount times the speed factor of the car.
-     * The speed cannot exceed the value of the enginePower of the car.
+     * The speed cannot exceed the enginePower of the car.
      * @param amount how much the speed should increase for every move.
      */
     private void incrementSpeed(double amount) {
@@ -141,7 +141,8 @@ public abstract class Car implements Movable {
     }
 
     /**
-     * Decrease speed
+     * Decreases the speed of the car by an amount times the speed factor of the car.
+     * The speed can not go below 0.
      * @param amount how much the speed should decrease for every move.
      */
     private void decrementSpeed(double amount) {
