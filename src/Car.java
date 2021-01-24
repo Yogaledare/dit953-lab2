@@ -119,21 +119,21 @@ public abstract class Car implements Movable {
     }
 
     /**
-     * Stops the car by setting currentSpoeed to 0.
+     * Stops the car by setting currentSpeed to 0.
      */
     public void stopEngine(){
         currentSpeed = 0;
     }
 
-
     /**
-     * Return speed factor.
-     * @return Returns the speed factor.
+     * Determines the speed factor of the car.
+     * @return the speed factor of the car
      */
     public abstract double findSpeedFactor();
 
     /**
-     * Increase speed
+     * Increases the speed of the car by an amount times the speed factor of the car.
+     * The speed cannot exceed the value of the enginePower of the car.
      * @param amount how much the speed should increase for every move.
      */
     private void incrementSpeed(double amount) {
