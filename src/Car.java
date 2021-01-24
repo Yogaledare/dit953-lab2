@@ -49,10 +49,10 @@ public abstract class Car implements Movable {
     /**
      * Constructs a Car object with the specified modelYear, color, enginePower and nrDoors.
      * The initial position (x, y) and direction (x, y) of the object is set to (0, 0) and (0, 1).
-     * @param modelName Manufactures car model.
-     * @param color Color of the car
-     * @param enginePower Engine power, relates to max speed
-     * @param nrDoors number of doors
+     * @param modelName the model name of the car
+     * @param color the color of the car
+     * @param enginePower the engine power of the car, relates to max speed
+     * @param nrDoors the number of doors of the car
      */
     public Car(String modelName, Color color, double enginePower, int nrDoors) {
         this.modelName = modelName;
@@ -65,68 +65,61 @@ public abstract class Car implements Movable {
     }
 
     /**
-     * Numbers of doors the car have.
-     * @return number of doors
+     * Returns the number of doors of the car.
+     * @return the number of doors of the car
      */
     public int getNrDoors() {
         return nrDoors;
     }
 
     /**
-     * Returns power of the car.
-     * @return power of the car
+     * Returns the enginePower of the car.
+     * @return the enginePower of the car
      */
     public double getEnginePower() { return enginePower; }
 
 
     /**
-     * Returns current speed
-     *
-     * @return the speed from 0 to enginePower
+     * Returns the current speed of the car. The speed has a value between 0 and the enginePower of the car.
+     * @return the current speed of the car.
      */
     public double getCurrentSpeed() {
         return currentSpeed;
     }
 
     /**
-     * Color of the car
-     * @return cars paintwork
+     * Returns the color of the car.
+     * @return the color of the car.
      */
     public Color getColor(){
         return color;
     }
 
     /**
-     * Sets color of car                                (1)
-     * <p>
-     * Possible to repaint the car.  (2)
-     *
-     * <p>
-     * If the car has been into bodywork, then it needs a fresh repaint
-     * @param  clr color          (3)
-     */
-    public void setColor(Color clr){
-        color = clr;
-    }
-
-
-    /**
-     * Car model
-     * @return what kind of model it is.
+     * Returns the modelName of the car.
+     * @return the modelName of the car
      */
     public String getModelName() {
         return modelName;
     }
 
     /**
-     * Start the car.
+     * Sets the color of car.
+     * @param clr the new color of the car
+     */
+    public void setColor(Color clr){
+        color = clr;
+    }
+
+    /**
+     * Starts the car by setting currentSpeed to 0.1.
      */
     public void startEngine(){
         currentSpeed = 0.1;
     }
 
     /**
-     * Stop the car
+     * Stops the car by setting currentSpoeed to 0.
      */
     public void stopEngine(){
         currentSpeed = 0;
