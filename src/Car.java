@@ -7,6 +7,10 @@
 
 import java.awt.*;
 
+
+/**
+ * An abstract class representing a generic car.
+ */
 public abstract class Car implements Movable {
 
     /**
@@ -130,7 +134,7 @@ public abstract class Car implements Movable {
     public abstract double findSpeedFactor();
 
     /**
-     * Increases the speed of the car by the speedFactor of the car times a scale factor (amount).
+     * Increases the speed of the car by the speed factor of the car times a scale factor (amount).
      * The speed cannot exceed the enginePower of the car.
      * @param amount how much the speed should increase for every move.
      */
@@ -139,7 +143,7 @@ public abstract class Car implements Movable {
     }
 
     /**
-     * Decreases the speed of the car by the speedFactor of the car times a scale factor (amount).
+     * Decreases the speed of the car by the speed factor of the car times a scale factor (amount).
      * The speed can not go below 0.
      * @param amount how much the speed should decrease for every move.
      */
