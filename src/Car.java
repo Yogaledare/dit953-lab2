@@ -1,7 +1,7 @@
 /**
  * @author      Niklas  Axelsson < name @ student.gu.se>
- * @author      Carl    Stewart < name @ student.gu.se>
- * @author      Marcus  Uppström < gusuppma@student.gu.se>
+ * @author      Carl    Stewart <gusstewca@student.gu.se>
+ * @author      Marcus  Uppström <gusuppma@student.gu.se>
  * @version     0.1                 (current version number of program)
  */
 

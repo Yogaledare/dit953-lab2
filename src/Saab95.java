@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Saab95 extends Car {
+public class Saab95 extends Car implements AuxTurbo {
 
     private boolean turboOn;
 
@@ -23,7 +23,7 @@ public class Saab95 extends Car {
         return getEnginePower() * 0.01 * findTurboFactor();
     }
 
-    private double findTurboFactor() {
+    public double findTurboFactor() {
         if (turboOn) return 1.3;
         return 1;
     }
