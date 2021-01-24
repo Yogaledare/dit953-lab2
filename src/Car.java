@@ -10,17 +10,17 @@ import java.awt.*;
 public abstract class Car implements Movable {
 
     /**
-     * Car model.
+     * Car model
      */
     private final String modelName;
 
     /**
-     * Color of car.
+     * Color of car
      */
     private Color color;
 
     /**
-     * Current speed valid interval from 0 to Engine power.
+     * Current speed valid interval from 0 to Engine power
      */
     private double currentSpeed;
 
@@ -34,17 +34,15 @@ public abstract class Car implements Movable {
      */
     private final int nrDoors;
 
-
     /**
-     * Position for the car.
+     * Position vector of the car
      */
     private Vector2D position;
 
     /**
-     * Direction / orientation for which the car is heading.
+     * Direction vector of the car
      */
     private Vector2D direction;
-
 
     /**
      * Constructs a Car object with the specified modelYear, color, enginePower and nrDoors.
@@ -132,7 +130,7 @@ public abstract class Car implements Movable {
     public abstract double findSpeedFactor();
 
     /**
-     * Increases the speed of the car by an amount times the speed factor of the car.
+     * Increases the speed of the car by the speedFactor of the car times a scale factor (amount).
      * The speed cannot exceed the enginePower of the car.
      * @param amount how much the speed should increase for every move.
      */
@@ -141,7 +139,7 @@ public abstract class Car implements Movable {
     }
 
     /**
-     * Decreases the speed of the car by an amount times the speed factor of the car.
+     * Decreases the speed of the car by the speedFactor of the car times a scale factor (amount).
      * The speed can not go below 0.
      * @param amount how much the speed should decrease for every move.
      */
@@ -150,23 +148,25 @@ public abstract class Car implements Movable {
     }
 
     /**
-     * Gas can only be the same or increase
-     * @param amount how much the gas is pressed
+     * Increases the speed of the car by calling incrementSpeed with amount as argument.
+     * Amount should be between 0 and 1. If amount < 0, 0 will be used as argument. If amount > 1, 1 will be used.
+     * @param amount a value between 0 and 1 representing how much the gas is pressed
      */
     public void gas(double amount){
         incrementSpeed(clamp(amount, 0, 1));
     }
 
     /**
-     * Release the gas
-     * @param amount decrease the gas.
+     * Decreases the speed of the car by calling decrementSpeed with amount as argument.
+     * Amount should be between 0 and 1. If amount < 0, 0 will be used as argument. If amount > 1, 1 will be used.
+     * @param amount a value between 0 and 1 representing how much the brake is pressed
      */
     public void brake(double amount){
-        decrementSpeed(clamp(amount, 0.1, 1)); // min set to 0.1 since 0.0 == engineStop ?!
+        decrementSpeed(clamp(amount, 0, 1));
     }
 
     /**
-     * Move car in its current direction an amount proportional to its speed.
+     * Move car in its current direction by length = currentSpeed.
      */
     public void move() {
         Vector2D step = direction.multiplyByScalar(currentSpeed);
@@ -174,36 +174,56 @@ public abstract class Car implements Movable {
     }
 
     /**
-     * Turn car 90 degrees to left.
+     * Turn the car 90 degrees to the left.
      */
     public void turnLeft() {
         direction = direction.rotateCC(Math.PI / 2);
     }
 
     /**
-     * Turn car 90 degrees to right.
+     * Turn the car 90 degrees to the right.
      */
     public void turnRight() {
         direction = direction.rotateCC(-Math.PI / 2);
     }
 
-    // Todo: javadoc
+    /**
+     * Clamps a value d to the interval [min, max].
+     * If d is outside the interval, either min or max is returned depending on if d is below min or above max.
+     * If d is inside the interval, d is returned.
+     * @param d the value to be clamped
+     * @param min the min bound
+     * @param max the max bound
+     * @return the clamped value
+     */
     private double clamp(double d, double min, double max){
         d = Math.max(d, min);
         return Math.min(d, max);
     }
 
-    // Todo: javadoc
+    /**
+     * Returns the position vector of the car.
+     * @return the position vector of the car
+     */
     public Vector2D getPosition() {
         return position;
     }
 
-    // Todo: javadoc
+    /**
+     * Returns the direction vector of the car.
+     * @return the direction vector of the car
+     */
     public Vector2D getDirection() {
         return direction;
     }
 
 }
+
+
+
+// min set to 0.1 since 0.0 == engineStop ?!
+// tog bort detta. amount är inte slutvärdet utan en skalfaktor
+
 
 
 /*
