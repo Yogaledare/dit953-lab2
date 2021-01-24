@@ -44,7 +44,7 @@ public class Saab95 extends Car implements AuxTurbo {
 
     /**
      * Returns the turbo factor of the Saab95.
-     * @returnthe turbo factor of the Saab95
+     * @return the turbo factor of the Saab95
      */
     public double findTurboFactor() {
         if (turboOn) return 1.3;
