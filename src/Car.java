@@ -47,7 +47,8 @@ public abstract class Car implements Movable {
 
 
     /**
-     * Cars constructor
+     * Constructs a Car object with the specified modelYear, color, enginePower and nrDoors.
+     * The initial position (x, y) and direction (x, y) of the object is set to (0, 0) and (0, 1).
      * @param modelName Manufactures car model.
      * @param color Color of the car
      * @param enginePower Engine power, relates to max speed
