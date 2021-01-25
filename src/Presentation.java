@@ -2,21 +2,32 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Presentation extends Application {
+    // private Car car = new Volvo240();
     // private Car car = new AudiURQuattro();
-    private Car car = new Volvo240();
     // private Car car = new Saab95();
+
+    List<Car> cars = new ArrayList<>();
+
 
     @Override
     public void start(Stage stage) throws Exception {
+
+        cars.add(new Saab95());
+        cars.add(new Volvo240());
+        cars.add(new AudiURQuattro());
+
+        int carChoice = 0;
 
         Button btGas = new Button("Gas");
         Button btBreak = new Button("Break");
@@ -24,19 +35,32 @@ public class Presentation extends Application {
         Button btLeft = new Button("Left");
         Button btRight = new Button("Right");
 
-
         BorderPane pane = new BorderPane();
 
+        VBox vBox = new VBox();
+
+        Menu menu = new Menu("Cars");
+        MenuItem item1 = new MenuItem("Saab95");
+        MenuItem item2 = new MenuItem("Volvo240");
+        MenuItem item3 = new MenuItem("AudiQuattro");
+
+        menu.getItems().addAll(item1, item2, item3);
+        MenuBar menuBar = new MenuBar(menu);
+        vBox.getChildren().add(menuBar);
+
         // Top pane
-        if (car instanceof AuxTrim && car instanceof AuxTurbo) {
-            pane.setTop(new CustomPane(car.getModelName() + " got both trim and a turbo."));
-        } else if (car instanceof AuxTrim) {
-            pane.setTop(new CustomPane(car.getModelName() + " with Trim"));
-        } else if (car instanceof AuxTurbo) {
-            pane.setTop(new CustomPane(car.getModelName() + " with Turbo"));
+        if (cars.get(carChoice) instanceof AuxTrim && cars.get(carChoice) instanceof AuxTurbo) {
+            vBox.getChildren().add(new CustomPane(cars.get(carChoice).getModelName() + " got both trim and a turbo."));
+
+        } else if (cars.get(carChoice) instanceof AuxTrim) {
+            vBox.getChildren().add(new CustomPane(cars.get(carChoice).getModelName() + " with Trim"));
+        } else if (cars.get(carChoice) instanceof AuxTurbo) {
+            vBox.getChildren().add(new CustomPane(cars.get(carChoice).getModelName() + " with Turbo"));
         } else {
-            pane.setTop(new CustomPane(car.getModelName() + " is a poor car without turbo or trim."));
+            vBox.getChildren().add(new CustomPane(cars.get(carChoice).getModelName() + " is a poor car without turbo or trim."));
         }
+
+        pane.setTop(vBox);
 
         // Left pane
         VBox leftBox = new VBox();
@@ -57,7 +81,7 @@ public class Presentation extends Application {
         HBox centerBox = new HBox();
         centerBox.setSpacing(20);
         centerBox.setAlignment(Pos.CENTER);
-        SpeedPane speedPane = new SpeedPane(car);
+        SpeedPane speedPane = new SpeedPane(cars.get(carChoice));
         centerBox.getChildren().add(speedPane);
         pane.setCenter(centerBox);
 
@@ -70,7 +94,6 @@ public class Presentation extends Application {
         pane.setBottom(hBox);
 
 
-
         // make scene
         Scene scene = new Scene(pane);
         stage.setTitle("Presentation of Car");
@@ -79,34 +102,33 @@ public class Presentation extends Application {
 
         // Event handlers
         btGas.setOnAction(e -> {
-            car.gas(1.0);
-            speedPane.setSpeed(car.getCurrentSpeed());
+            cars.get(carChoice).gas(1.0);
+            speedPane.setSpeed(cars.get(carChoice).getCurrentSpeed());
             System.out.println("Gas pressed (1.0)");
         });
 
         btBreak.setOnAction(e -> {
-            car.brake(1.0);
-            speedPane.setSpeed(car.getCurrentSpeed());
+            cars.get(carChoice).brake(1.0);
+            speedPane.setSpeed(cars.get(carChoice).getCurrentSpeed());
             System.out.println("Break pressed (1.0)");
         });
 
         btMove.setOnAction(e -> {
-            car.move();
-            System.out.println("Move pressed\n" + car.getCurrentSpeed() +
-                    " - x-pos: " + car.getPosition().getX() +
-                    " y-pos: " + car.getPosition().getY()  ) ;
+            cars.get(carChoice).move();
+            System.out.println("Move pressed\n" + cars.get(carChoice).getCurrentSpeed() +
+                    " - x-pos: " + cars.get(carChoice).getPosition().getX() +
+                    " y-pos: " + cars.get(carChoice).getPosition().getY());
         });
 
         btLeft.setOnAction(e -> {
-            car.turnLeft();
-            System.out.println("Left pressed\n" + car.getCurrentSpeed());
+            cars.get(carChoice).turnLeft();
+            System.out.println("Left pressed\n" + cars.get(carChoice).getCurrentSpeed());
         });
 
         btRight.setOnAction(e -> {
-            car.turnRight();
-            System.out.println("Right pressed\n" + car.getCurrentSpeed());
+            cars.get(carChoice).turnRight();
+            System.out.println("Right pressed\n" + cars.get(carChoice).getCurrentSpeed());
         });
-
 
 
     }
