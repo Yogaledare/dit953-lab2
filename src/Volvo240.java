@@ -6,7 +6,7 @@ import java.awt.*;
 public class Volvo240 extends Car implements AuxTrim {
 
     /**
-     * Trim factor
+     * Trim factor, multiplier for speed factor
      */
     private final static double trimFactor = 1.25;
 
