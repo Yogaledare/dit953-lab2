@@ -88,23 +88,34 @@ public class TestCar {
     }
 
     @Test
-    public void paintSaab95Red() {
-        saab95.setColor(Color.RED);
-        assertEquals(Color.RED, saab95.getColor());
+    public void paintYellow() {
+        for (Car car : cars) {
+            car.setColor(Color.YELLOW);
+            assertEquals(Color.YELLOW, car.getColor());
+        }
     }
 
     @Test
     public void gasToMaxAndTryToGoAbove() {
+        for (Car car : cars) {
+            while (car.getCurrentSpeed() < car.getEnginePower()) {
+                car.gas(1);
+            }
 
-        while (saab95.getCurrentSpeed() < saab95.getEnginePower()) {
-            saab95.gas(1);
+            for (int i = 0; i < 10; i++) {
+                car.gas(1);
+            }
+            assertTrue(car.getCurrentSpeed() <= car.getEnginePower());
+        }
+    }
+
+    public void checkThatSpeedFactorIsPositive() {
+        for (Car car : cars) {
+            assertTrue(car.findSpeedFactor() >= 0);
         }
 
-        for (int i = 0; i < 10; i++) {
-            saab95.gas(1);
-        }
 
-        assertTrue(saab95.getCurrentSpeed() <= saab95.getEnginePower());
+
     }
 
     // todo testa clamp
