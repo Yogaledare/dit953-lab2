@@ -19,6 +19,8 @@ public class Presentation extends Application {
 
     List<Car> cars = new ArrayList<>();
 
+    int carChoice = 0;
+
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -27,7 +29,6 @@ public class Presentation extends Application {
         cars.add(new Volvo240());
         cars.add(new AudiURQuattro());
 
-        int carChoice = 0;
 
         Button btGas = new Button("Gas");
         Button btBreak = new Button("Break");
@@ -128,6 +129,18 @@ public class Presentation extends Application {
         btRight.setOnAction(e -> {
             cars.get(carChoice).turnRight();
             System.out.println("Right pressed\n" + cars.get(carChoice).getCurrentSpeed());
+        });
+
+        item1.setOnAction(e -> {
+            carChoice = 0;
+        });
+
+        item2.setOnAction(e -> {
+            carChoice = 1;
+        });
+
+        item3.setOnAction(e -> {
+            carChoice = 2;
         });
 
 
