@@ -13,23 +13,10 @@ import java.util.List;
 
 
 public class Presentation extends Application {
-    // private Car car = new Volvo240();
-    // private Car car = new AudiURQuattro();
-    // private Car car = new Saab95();
 
     List<Car> cars = new ArrayList<>();
 
-    int carChoice = 0;
-
-
-    @Override
-    public void start(Stage stage) throws Exception {
-
-        cars.add(new Saab95());
-        cars.add(new Volvo240());
-        cars.add(new AudiURQuattro());
-
-
+    private void setupCar(int carChoice, Stage stage) {
         Button btGas = new Button("Gas");
         Button btBreak = new Button("Break");
         Button btMove = new Button("Move");
@@ -41,6 +28,7 @@ public class Presentation extends Application {
         VBox vBox = new VBox();
 
         Menu menu = new Menu("Cars");
+
         MenuItem item1 = new MenuItem("Saab95");
         MenuItem item2 = new MenuItem("Volvo240");
         MenuItem item3 = new MenuItem("AudiQuattro");
@@ -77,7 +65,6 @@ public class Presentation extends Application {
         rightBox.getChildren().add(btRight);
         pane.setRight(rightBox);
 
-
         // Bottom pane (gas, move, break)
         HBox centerBox = new HBox();
         centerBox.setSpacing(20);
@@ -97,7 +84,7 @@ public class Presentation extends Application {
 
         // make scene
         Scene scene = new Scene(pane);
-        stage.setTitle("Presentation of Car");
+        stage.setTitle("Presentation of " + cars.get(carChoice).getModelName());
         stage.setScene(scene);
         stage.show();
 
@@ -132,16 +119,33 @@ public class Presentation extends Application {
         });
 
         item1.setOnAction(e -> {
-            carChoice = 0;
+            stage.close();
+            setupCar(0,stage);
+
         });
 
         item2.setOnAction(e -> {
-            carChoice = 1;
+            stage.close();
+            setupCar(1,stage);
+
         });
 
         item3.setOnAction(e -> {
-            carChoice = 2;
+            stage.close();
+            setupCar(2,stage);
         });
+
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+
+        cars.add(new Saab95());
+        cars.add(new Volvo240());
+        cars.add(new AudiURQuattro());
+
+        setupCar(0,stage);
+
 
 
     }
