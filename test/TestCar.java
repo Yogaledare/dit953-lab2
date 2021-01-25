@@ -1,6 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.awt.*;
 import java.util.Arrays;
 
 import static org.junit.Assert.*;
@@ -75,6 +76,7 @@ public class TestCar {
         saab95.setColor(Color.RED);
         assertEquals(Color.RED, saab95.getColor());
     }
+
     @Test
     public void gasToMaxAndTryToGoAbove() {
 
