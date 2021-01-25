@@ -200,7 +200,7 @@ public abstract class Car implements Movable {
      * @param max the max bound
      * @return the clamped value
      */
-    private double clamp(double d, double min, double max){
+    public static double clamp(double d, double min, double max){
         d = Math.max(d, min);
         return Math.min(d, max);
     }

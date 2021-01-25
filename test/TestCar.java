@@ -112,7 +112,6 @@ public class TestCar {
     @Test 
     public void checkForValidModelNames() {
         List<String> validModelNames = Arrays.asList("Saab95", "Volvo240");
-
         for (Car car : cars) {
             assertTrue(validModelNames.contains(car.getModelName()));
         }
@@ -121,7 +120,6 @@ public class TestCar {
     @Test
     public void tryToBreakBelowZero() {
         for (Car car : cars) {
-
             for (int i = 0; i < 10; i++) {
                 car.brake(1);
             }
@@ -167,6 +165,22 @@ public class TestCar {
     }
 
 
+    @Test
+    public void checkThatClampClampsCorrectly() {
+        double[] ds = {-16.3, 0.5, 24.8};
+        double[] key = {0, 0.5, 1};
+        double min = 0;
+        double max = 1;
+
+        for (int i = 0; i < ds.length;i++) {
+            ds[i] = Car.clamp(ds[i], min, max);
+        }
+
+        for (int i = 0; i < ds.length; i++) {
+            assertEquals(ds[i], key[i], 0.0);
+        }
+
+    }
 
     // todo testa clamp
 
