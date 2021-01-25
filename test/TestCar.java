@@ -12,27 +12,11 @@ import static org.junit.Assert.*;
 public class TestCar {
 
     List<Car> cars = new ArrayList<>();
-
-    Car saab95;
-
     @Before
     public void setup() {
-
-
         cars.add(new Saab95());
         cars.add(new Volvo240());
-//        cars.add(new saab95());
-
-
-        saab95 = new Saab95();
     }
-
-/*    @Test
-    public void testGetSaab95ModelName() {
-        for (Car car : cars) {
-            assertEquals("Saab95", car.getModelName());
-        }
-    }*/
 
     @Test
     public void startAndStop() {
@@ -50,7 +34,6 @@ public class TestCar {
             car.gas(1.0);
             car.move();
             Vector2D target = new Vector2D(0.0,1.35);
-//            System.out.println(car.getPosition().getY());
             assertEquals(car.getPosition().getY(), target.getY(), 0.0);
         }
     }
@@ -101,7 +84,6 @@ public class TestCar {
             while (car.getCurrentSpeed() < car.getEnginePower()) {
                 car.gas(1);
             }
-
             for (int i = 0; i < 10; i++) {
                 car.gas(1);
             }
@@ -156,14 +138,12 @@ public class TestCar {
         }
     }
 
-
     @Test
     public void checkThatNrOfDoorsIsPositive() {
         for (Car car : cars) {
             assertTrue(car.getNrDoors() >= 0);
         }
     }
-
 
     @Test
     public void checkThatClampClampsCorrectly() {
@@ -179,31 +159,5 @@ public class TestCar {
         for (int i = 0; i < ds.length; i++) {
             assertEquals(ds[i], key[i], 0.0);
         }
-
     }
-
-    // todo testa clamp
-
-
 }
-
-
-        /*
-        saab95.startEngine();
-        saab95.gas(1.0);
-        saab95.move();
-        Vector2D target = new Vector2D(0.0,1.35);
-        System.out.println(saab95.getPosition().getY());
-        assertEquals(saab95.getPosition().getY(), target.getY(), 0.0);
-*/
-
-
-
-        /*Vector2D target = new Vector2D(-1, 0 );
-        saab95.turnLeft();*/
-
-// against recommendations, but anyway..
-
-
-
-// against recommendations, but anyway..
