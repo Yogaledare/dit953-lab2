@@ -175,7 +175,7 @@ public abstract class Car implements Movable {
     public void move() {
         Vector2D step = direction.multiplyByScalar(currentSpeed);
         position = position.plus(step);
-    }
+}
 
     /**
      * Turns the car 90 degrees to the left.

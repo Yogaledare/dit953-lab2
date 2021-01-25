@@ -109,6 +109,26 @@ public class TestCar {
         }
     }
 
+    @Test 
+    public void checkForValidModelNames() {
+        List<String> validModelNames = Arrays.asList("Saab95", "Volvo240");
+
+        for (Car car : cars) {
+            assertTrue(validModelNames.contains(car.getModelName()));
+        }
+    }
+
+    @Test
+    public void tryToBreakBelowZero() {
+        for (Car car : cars) {
+
+            for (int i = 0; i < 10; i++) {
+                car.brake(1);
+            }
+            assertEquals(0, car.getCurrentSpeed(), 0.0);
+        }
+    }
+
     @Test
     public void checkThatSpeedFactorIsPositive() {
         for (Car car : cars) {
@@ -137,6 +157,16 @@ public class TestCar {
             }
         }
     }
+
+
+    @Test
+    public void checkThatNrOfDoorsIsPositive() {
+        for (Car car : cars) {
+            assertTrue(car.getNrDoors() >= 0);
+        }
+    }
+
+
 
     // todo testa clamp
 
