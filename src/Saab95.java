@@ -22,17 +22,16 @@ public class Saab95 extends Car implements AuxTurbo {
     /**
      * Sets turboOn to true.
      */
-    public void setTurboOn(){
-	    turboOn = true;
+    public void setTurboOn() {
+        turboOn = true;
     }
 
     /**
      * Sets turboOn to false.
      */
-    public void setTurboOff(){
-	    turboOn = false;
+    public void setTurboOff() {
+        turboOn = false;
     }
-
 
     /**
      * Returns the value of turboOn.

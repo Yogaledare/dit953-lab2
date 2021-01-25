@@ -109,12 +109,14 @@ public class TestCar {
         }
     }
 
+    @Test
     public void checkThatSpeedFactorIsPositive() {
         for (Car car : cars) {
             assertTrue(car.findSpeedFactor() >= 0);
         }
     }
 
+    @Test
     public void turnTurboOn() {
         for (Car car : cars) {
             if (car instanceof Saab95) {
@@ -125,6 +127,7 @@ public class TestCar {
         }
     }
 
+    @Test
     public void turnTurboOff() {
         for (Car car : cars) {
             if (car instanceof Saab95) {
