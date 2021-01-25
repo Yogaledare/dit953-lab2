@@ -10,7 +10,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-
 import javafx.stage.Stage;
 
 
@@ -127,6 +126,7 @@ class SpeedPane extends Pane {
         Rectangle rectangle = new Rectangle(0, 0, rectWidth, rectHeight);
         rectangle.setFill(Color.WHITE);
         rectangle.setStroke(Color.BLACK);
+        // faktor 10 ligger där för att man skall se att något händer..
         Rectangle speed = new Rectangle(0, 0, speedPercent * 10, rectHeight);
         speed.setFill(Color.RED);
 

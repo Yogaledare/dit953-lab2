@@ -1,6 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.awt.*;
 import java.util.Arrays;
 
 import static org.junit.Assert.*;
@@ -70,4 +71,9 @@ public class TestCar {
         assertEquals(target.getY(), saab95.getDirection().getY(), 0.01);
     }
 
+    @Test
+    public void paintSaab95Red() {
+        saab95.setColor(Color.RED);
+        assertEquals(Color.RED, saab95.getColor());
+    }
 }
