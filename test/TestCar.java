@@ -113,9 +113,26 @@ public class TestCar {
         for (Car car : cars) {
             assertTrue(car.findSpeedFactor() >= 0);
         }
+    }
 
+    public void turnTurboOn() {
+        for (Car car : cars) {
+            if (car instanceof Saab95) {
+                ((Saab95) car).setTurboOff();
+                ((Saab95) car).setTurboOn();
+                assertTrue(((Saab95) car).getTurboOn());
+            }
+        }
+    }
 
-
+    public void turnTurboOff() {
+        for (Car car : cars) {
+            if (car instanceof Saab95) {
+                ((Saab95) car).setTurboOn();
+                ((Saab95) car).setTurboOff();
+                assertFalse(((Saab95) car).getTurboOn());
+            }
+        }
     }
 
     // todo testa clamp

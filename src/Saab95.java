@@ -33,6 +33,15 @@ public class Saab95 extends Car implements AuxTurbo {
 	    turboOn = false;
     }
 
+
+    /**
+     * Returns the value of turboOn.
+     * @return the value of turboOn
+     */
+    public boolean getTurboOn() {
+        return turboOn;
+    }
+
     /**
      * Returns the speed factor of the Saab95.
      * @return the speed factor of the Saab95
