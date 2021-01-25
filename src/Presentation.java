@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
+
 
 
 public class Presentation extends Application {
@@ -113,7 +113,7 @@ public class Presentation extends Application {
 
         btMove.setOnAction(e -> {
             cars.get(carChoice).move();
-            System.out.println("Move pressed\n" + cars.get(carChoice).getCurrentSpeed() +
+            System.out.println("Move pressed\n" + "Speed: " + cars.get(carChoice).getCurrentSpeed() +
                     " - x-pos: " + cars.get(carChoice).getPosition().getX() +
                     " y-pos: " + cars.get(carChoice).getPosition().getY());
         });
