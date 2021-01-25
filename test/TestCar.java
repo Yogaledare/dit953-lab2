@@ -27,13 +27,6 @@ public class TestCar {
         saab95 = new Saab95();
     }
 
-/*    @Test
-    public void testGetSaab95ModelName() {
-        for (Car car : cars) {
-            assertEquals("Saab95", car.getModelName());
-        }
-    }*/
-
     @Test
     public void startAndStop() {
         for (Car car : cars) {
@@ -179,31 +172,5 @@ public class TestCar {
         for (int i = 0; i < ds.length; i++) {
             assertEquals(ds[i], key[i], 0.0);
         }
-
     }
-
-    // todo testa clamp
-
-
 }
-
-
-        /*
-        saab95.startEngine();
-        saab95.gas(1.0);
-        saab95.move();
-        Vector2D target = new Vector2D(0.0,1.35);
-        System.out.println(saab95.getPosition().getY());
-        assertEquals(saab95.getPosition().getY(), target.getY(), 0.0);
-*/
-
-
-
-        /*Vector2D target = new Vector2D(-1, 0 );
-        saab95.turnLeft();*/
-
-// against recommendations, but anyway..
-
-
-
-// against recommendations, but anyway..

@@ -28,26 +28,3 @@ public class Volvo240 extends Car implements AuxTrim {
     }
 
 }
-
-
-
-
-/*    @Override
-    public void incrementSpeed(double amount) {
-        setCurrentSpeed(Math.min(getCurrentSpeed() + findSpeedFactor() * amount, getEnginePower()));
-    }
-
-    @Override
-    public void decrementSpeed(double amount) {
-        setCurrentSpeed(Math.max(getCurrentSpeed() - findSpeedFactor() * amount, 0));
-    }*/
-
-
-
-/*    public Volvo240(){
-        setNrDoors(4);
-        setColor(Color.black);
-        setEnginePower(100);
-        setModelName("Volvo240");
-        stopEngine();
-    }*/
