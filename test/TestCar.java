@@ -81,6 +81,8 @@ public class TestCar {
     @Test
     public void gasToMaxAndTryToGoAbove() {
         for (Car car : cars) {
+            car.startEngine();
+
             while (car.getCurrentSpeed() < car.getEnginePower()) {
                 car.gas(1);
             }
@@ -90,6 +92,21 @@ public class TestCar {
             assertTrue(car.getCurrentSpeed() <= car.getEnginePower());
         }
     }
+
+    @Test
+    public void tryGasWithEngineOff() {
+        for (Car car : cars) {
+
+            // car.startEngine();
+            for (int i = 0; i < 10; i++) {
+                car.gas(1);
+                car.move();
+            }
+
+            assertEquals(0 , car.getCurrentSpeed(),0);
+        }
+    }
+
 
     @Test 
     public void checkForValidModelNames() {
@@ -102,6 +119,8 @@ public class TestCar {
     @Test
     public void tryToBreakBelowZero() {
         for (Car car : cars) {
+            car.startEngine();
+
             for (int i = 0; i < 10; i++) {
                 car.brake(1);
             }

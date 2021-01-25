@@ -1,8 +1,8 @@
 /**
- * @author      Niklas  Axelsson < name @ student.gu.se>
- * @author      Carl    Stewart <gusstewca@student.gu.se>
- * @author      Marcus  Uppström <gusuppma@student.gu.se>
- * @version     0.1                 (current version number of program)
+ * @author Niklas  Axelsson < name @ student.gu.se>
+ * @author Carl    Stewart <gusstewca@student.gu.se>
+ * @author Marcus  Uppström <gusuppma@student.gu.se>
+ * @version 0.1                 (current version number of program)
  */
 
 import java.awt.*;
@@ -61,7 +61,7 @@ public abstract class Car implements Movable {
         this.color = color;
         this.enginePower = enginePower;
         this.nrDoors = nrDoors;
-        this.position = new Vector2D(0,0);
+        this.position = new Vector2D(0, 0);
         this.direction = new Vector2D(0, 1);
         stopEngine();
     }
@@ -78,7 +78,9 @@ public abstract class Car implements Movable {
      * Returns the enginePower of the car.
      * @return the enginePower of the car
      */
-    public double getEnginePower() { return enginePower; }
+    public double getEnginePower() {
+        return enginePower;
+    }
 
 
     /**
@@ -93,7 +95,7 @@ public abstract class Car implements Movable {
      * Returns the color of the car.
      * @return the color of the car.
      */
-    public Color getColor(){
+    public Color getColor() {
         return color;
     }
 
@@ -109,21 +111,21 @@ public abstract class Car implements Movable {
      * Sets the color of car.
      * @param clr the new color of the car
      */
-    public void setColor(Color clr){
+    public void setColor(Color clr) {
         color = clr;
     }
 
     /**
      * Starts the car by setting currentSpeed to 0.1.
      */
-    public void startEngine(){
+    public void startEngine() {
         currentSpeed = 0.1;
     }
 
     /**
      * Stops the car by setting currentSpeed to 0.
      */
-    public void stopEngine(){
+    public void stopEngine() {
         currentSpeed = 0;
     }
 
@@ -139,7 +141,9 @@ public abstract class Car implements Movable {
      * @param amount how much the speed should increase for every move.
      */
     private void incrementSpeed(double amount) {
-        currentSpeed = clamp(getCurrentSpeed() + findSpeedFactor() * amount, 0, enginePower);
+        if (currentSpeed != 0) {
+            currentSpeed = clamp(getCurrentSpeed() + findSpeedFactor() * amount, 0, enginePower);
+        }
     }
 
     /**
@@ -156,7 +160,7 @@ public abstract class Car implements Movable {
      * Amount is clamped to the interval [0, 1].
      * @param amount a value between 0 and 1 representing how much the gas is pressed
      */
-    public void gas(double amount){
+    public void gas(double amount) {
         incrementSpeed(clamp(amount, 0, 1));
     }
 
@@ -165,7 +169,7 @@ public abstract class Car implements Movable {
      * Amount is clamped to the interval [0, 1].
      * @param amount a value between 0 and 1 representing how much the brake is pressed
      */
-    public void brake(double amount){
+    public void brake(double amount) {
         decrementSpeed(clamp(amount, 0, 1));
     }
 
@@ -175,7 +179,7 @@ public abstract class Car implements Movable {
     public void move() {
         Vector2D step = direction.multiplyByScalar(currentSpeed);
         position = position.plus(step);
-}
+    }
 
     /**
      * Turns the car 90 degrees to the left.
@@ -200,7 +204,7 @@ public abstract class Car implements Movable {
      * @param max the max bound
      * @return the clamped value
      */
-    public static double clamp(double d, double min, double max){
+    public static double clamp(double d, double min, double max) {
         d = Math.max(d, min);
         return Math.min(d, max);
     }
