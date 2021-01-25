@@ -139,7 +139,7 @@ public abstract class Car implements Movable {
      * @param amount how much the speed should increase for every move.
      */
     private void incrementSpeed(double amount) {
-        currentSpeed = (Math.min(getCurrentSpeed() + findSpeedFactor() * amount, enginePower));
+        currentSpeed = clamp(getCurrentSpeed() + findSpeedFactor() * amount, 0, enginePower);
     }
 
     /**
@@ -148,7 +148,7 @@ public abstract class Car implements Movable {
      * @param amount how much the speed should decrease for every move.
      */
     private void decrementSpeed(double amount) {
-        currentSpeed = (Math.max(getCurrentSpeed() - findSpeedFactor() * amount, 0));
+        currentSpeed = clamp(getCurrentSpeed() - findSpeedFactor() * amount, 0, enginePower);
     }
 
     /**
