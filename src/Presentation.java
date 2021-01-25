@@ -4,18 +4,15 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 
 public class Presentation extends Application {
-    private Car car = new AudiURQuattro();
-    // private Car car = new Volvo240();
+    // private Car car = new AudiURQuattro();
+    private Car car = new Volvo240();
     // private Car car = new Saab95();
 
     @Override
@@ -24,26 +21,36 @@ public class Presentation extends Application {
         Button btGas = new Button("Gas");
         Button btBreak = new Button("Break");
         Button btMove = new Button("Move");
+        Button btLeft = new Button("Left");
+        Button btRight = new Button("Right");
 
 
         BorderPane pane = new BorderPane();
 
         // Top pane
         if (car instanceof AuxTrim && car instanceof AuxTurbo) {
-            pane.setTop(new CustomPane("Trim and turbo"));
+            pane.setTop(new CustomPane(car.getModelName() + " got both trim and a turbo."));
         } else if (car instanceof AuxTrim) {
-            pane.setTop(new CustomPane("Trim"));
+            pane.setTop(new CustomPane(car.getModelName() + " with Trim"));
         } else if (car instanceof AuxTurbo) {
-            pane.setTop(new CustomPane("Turbo"));
+            pane.setTop(new CustomPane(car.getModelName() + " with Turbo"));
         } else {
-            pane.setTop(new CustomPane("Poor car without turbo or trim."));
+            pane.setTop(new CustomPane(car.getModelName() + " is a poor car without turbo or trim."));
         }
 
         // Left pane
-        pane.setLeft(new CustomPane("Turn left"));
+        VBox leftBox = new VBox();
+        leftBox.setSpacing(20);
+        leftBox.setAlignment(Pos.CENTER);
+        leftBox.getChildren().add(btLeft);
+        pane.setLeft(leftBox);
 
         // Right pane
-        pane.setRight(new CustomPane("Turn right"));
+        VBox rightBox = new VBox();
+        rightBox.setSpacing(20);
+        rightBox.setAlignment(Pos.CENTER);
+        rightBox.getChildren().add(btRight);
+        pane.setRight(rightBox);
 
 
         // Bottom pane (gas, move, break)
@@ -72,21 +79,34 @@ public class Presentation extends Application {
 
         // Event handlers
         btGas.setOnAction(e -> {
-            car.gas(0.2);
+            car.gas(1.0);
             speedPane.setSpeed(car.getCurrentSpeed());
-            System.out.println("Gas pressed");
+            System.out.println("Gas pressed (1.0)");
         });
 
         btBreak.setOnAction(e -> {
-            car.brake(0.2);
+            car.brake(1.0);
             speedPane.setSpeed(car.getCurrentSpeed());
-            System.out.println("Break pressed");
+            System.out.println("Break pressed (1.0)");
         });
 
         btMove.setOnAction(e -> {
             car.move();
-            System.out.println("Move pressed\n" + car.getCurrentSpeed());
+            System.out.println("Move pressed\n" + car.getCurrentSpeed() +
+                    " - x-pos: " + car.getPosition().getX() +
+                    " y-pos: " + car.getPosition().getY()  ) ;
         });
+
+        btLeft.setOnAction(e -> {
+            car.turnLeft();
+            System.out.println("Left pressed\n" + car.getCurrentSpeed());
+        });
+
+        btRight.setOnAction(e -> {
+            car.turnRight();
+            System.out.println("Right pressed\n" + car.getCurrentSpeed());
+        });
+
 
 
     }
@@ -126,8 +146,7 @@ class SpeedPane extends Pane {
         Rectangle rectangle = new Rectangle(0, 0, rectWidth, rectHeight);
         rectangle.setFill(Color.WHITE);
         rectangle.setStroke(Color.BLACK);
-        // faktor 10 ligger där för att man skall se att något händer..
-        Rectangle speed = new Rectangle(0, 0, speedPercent * 10, rectHeight);
+        Rectangle speed = new Rectangle(0, 0, (speedPercent * rectWidth) / c.getEnginePower(), rectHeight);
         speed.setFill(Color.RED);
 
         Label speedText = new Label("Speed: " + c.getCurrentSpeed());
@@ -181,7 +200,6 @@ class TurboPane extends Pane {
 
 
 class TrimPane extends Pane {
-
     public void paint() {
         // show trim.
         // show trim effect.
