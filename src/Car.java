@@ -29,7 +29,7 @@ public abstract class Car implements Movable {
     private double currentSpeed;
 
     /**
-     * Engine power
+     * Engine power affects top speed, acceleration and deceleration
      */
     private final double enginePower;
 
