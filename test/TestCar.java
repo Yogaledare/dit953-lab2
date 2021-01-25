@@ -88,7 +88,7 @@ public class TestCar {
             saab95.gas(1);
         }
 
-        assertTrue(saab95.getCurrentSpeed() < saab95.getEnginePower());
+        assertTrue(saab95.getCurrentSpeed() <= saab95.getEnginePower());
     }
 
 }
