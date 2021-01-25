@@ -12,19 +12,10 @@ import static org.junit.Assert.*;
 public class TestCar {
 
     List<Car> cars = new ArrayList<>();
-
-    Car saab95;
-
     @Before
     public void setup() {
-
-
         cars.add(new Saab95());
         cars.add(new Volvo240());
-//        cars.add(new saab95());
-
-
-        saab95 = new Saab95();
     }
 
     @Test
@@ -94,7 +85,6 @@ public class TestCar {
             while (car.getCurrentSpeed() < car.getEnginePower()) {
                 car.gas(1);
             }
-
             for (int i = 0; i < 10; i++) {
                 car.gas(1);
             }
@@ -149,14 +139,12 @@ public class TestCar {
         }
     }
 
-
     @Test
     public void checkThatNrOfDoorsIsPositive() {
         for (Car car : cars) {
             assertTrue(car.getNrDoors() >= 0);
         }
     }
-
 
     @Test
     public void checkThatClampClampsCorrectly() {
