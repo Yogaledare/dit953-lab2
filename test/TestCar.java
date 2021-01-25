@@ -71,6 +71,11 @@ public class TestCar {
     }
 
     @Test
+    public void paintSaab95Red() {
+        saab95.setColor(Color.RED);
+        assertEquals(Color.RED, saab95.getColor());
+    }
+    @Test
     public void gasToMaxAndTryToGoAbove() {
 
         while (saab95.getCurrentSpeed() <= saab95.getEnginePower()) {
