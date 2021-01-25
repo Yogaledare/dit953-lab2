@@ -80,7 +80,7 @@ public class TestCar {
     @Test
     public void gasToMaxAndTryToGoAbove() {
 
-        while (saab95.getCurrentSpeed() <= saab95.getEnginePower()) {
+        while (saab95.getCurrentSpeed() < saab95.getEnginePower()) {
             saab95.gas(1);
         }
 
