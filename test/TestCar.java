@@ -34,7 +34,6 @@ public class TestCar {
             car.gas(1.0);
             car.move();
             Vector2D target = new Vector2D(0.0,1.35);
-//            System.out.println(car.getPosition().getY());
             assertEquals(car.getPosition().getY(), target.getY(), 0.0);
         }
     }
