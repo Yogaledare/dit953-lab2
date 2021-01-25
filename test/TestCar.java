@@ -70,4 +70,18 @@ public class TestCar {
         assertEquals(target.getY(), saab95.getDirection().getY(), 0.01);
     }
 
+    @Test
+    public void gasToMaxAndTryToGoAbove() {
+
+        while (saab95.getCurrentSpeed() <= saab95.getEnginePower()) {
+            saab95.gas(1);
+        }
+
+        for (int i = 0; i < 10; i++) {
+            saab95.gas(1);
+        }
+
+        assertTrue(saab95.getCurrentSpeed() < saab95.getEnginePower());
+    }
+
 }
