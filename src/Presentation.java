@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 
 public class Presentation extends Application {
@@ -33,6 +34,10 @@ public class Presentation extends Application {
         MenuItem item2 = new MenuItem("Volvo240");
         MenuItem item3 = new MenuItem("AudiQuattro");
 
+        CheckBox chTurbo = new CheckBox("turbo");
+
+        CheckBox chEngine = new CheckBox("EngineOn");
+
         menu.getItems().addAll(item1, item2, item3);
         MenuBar menuBar = new MenuBar(menu);
         vBox.getChildren().add(menuBar);
@@ -40,13 +45,18 @@ public class Presentation extends Application {
         // Top pane
         if (cars.get(carChoice) instanceof AuxTrim && cars.get(carChoice) instanceof AuxTurbo) {
             vBox.getChildren().add(new CustomPane(cars.get(carChoice).getModelName() + " got both trim and a turbo."));
-
+            vBox.getChildren().add(chTurbo);
+            vBox.getChildren().add(chEngine);
         } else if (cars.get(carChoice) instanceof AuxTrim) {
             vBox.getChildren().add(new CustomPane(cars.get(carChoice).getModelName() + " with Trim"));
+            vBox.getChildren().add(chEngine);
         } else if (cars.get(carChoice) instanceof AuxTurbo) {
             vBox.getChildren().add(new CustomPane(cars.get(carChoice).getModelName() + " with Turbo"));
+            vBox.getChildren().add(chTurbo);
+            vBox.getChildren().add(chEngine);
         } else {
             vBox.getChildren().add(new CustomPane(cars.get(carChoice).getModelName() + " is a poor car without turbo or trim."));
+            vBox.getChildren().add(chEngine);
         }
 
         pane.setTop(vBox);
@@ -135,6 +145,27 @@ public class Presentation extends Application {
             setupCar(2,stage);
         });
 
+        chTurbo.setOnAction( e -> {
+            if (chTurbo.isSelected()) {
+                ((AuxTurbo) cars.get(carChoice)).setTurboOn();
+                System.out.println("Turbo on");
+            } else {
+                ((AuxTurbo) cars.get(carChoice)).setTurboOff();
+                System.out.println("Turbo off");
+            }
+        });
+
+        chEngine.setOnAction( e -> {
+            if (chEngine.isSelected()) {
+                cars.get(carChoice).startEngine();
+                speedPane.setSpeed(cars.get(carChoice).getCurrentSpeed());
+                System.out.println("Engine on");
+            } else {
+                cars.get(carChoice).stopEngine();
+                speedPane.setSpeed(cars.get(carChoice).getCurrentSpeed());
+                System.out.println("Engine off");
+            }
+        });
     }
 
     @Override
