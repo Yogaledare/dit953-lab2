@@ -12,6 +12,7 @@ import static org.junit.Assert.*;
 public class TestCar {
 
     List<Car> cars = new ArrayList<>();
+
     @Before
     public void setup() {
         cars.add(new Saab95());

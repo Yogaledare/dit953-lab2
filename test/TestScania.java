@@ -1,14 +1,18 @@
+import org.junit.Before;
 import org.junit.Test;
+
 
 public class TestScania {
     @Test
     public void tryToDriveScaniaTruckWhenPlattformIsDown() {
-        Scania defaultTruck = new Scania();
-
 
 
     }
 
-    public void tryToRaisePlatformWhileDriving(){}
+    public void tryToRaisePlatformWhileDriving() {
+        truck.startEngine();
+        truck.gas(1.0);
+
+    }
 
 }
