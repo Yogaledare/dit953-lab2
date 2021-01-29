@@ -5,6 +5,11 @@ public class Scania extends Car{
     private double platformAngle = 0.0;
     private final double platformSpeed = 1.0;
 
+
+    public Scania() {
+        this("Scania", Color.WHITE, 100, 2);
+    }
+
     /**
      * Constructs a Car object with the specified modelYear, color, enginePower and nrDoors.
      * The initial position (x, y) and direction (x, y) of the object is set to (0, 0) and (0, 1).
@@ -36,7 +41,7 @@ public class Scania extends Car{
 
     @Override
     public void move() {
-        if (platformAngle > 0) {
+        if (platformAngle == 0) {
             super.move();
         }
     }
