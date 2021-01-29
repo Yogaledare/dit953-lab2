@@ -1,9 +1,9 @@
 import java.awt.*;
 
-public class Scania extends Car{
+public class Scania extends Car {
 
     private double platformAngle = 0.0;
-    private final double platformSpeed = 1.0;
+    private final double platformSpeed = 70;
 
 
     public Scania() {
@@ -51,4 +51,10 @@ public class Scania extends Car{
         return 0;
     }
 
+    @Override
+    public void startEngine() {
+        if (getPlatformAngle()==0) {
+            super.startEngine();
+        }
+    }
 }
