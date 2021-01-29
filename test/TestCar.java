@@ -58,7 +58,6 @@ public class TestCar {
         }
     }
 
-
     @Test
     public void turnRightTwice() {
         for (Car car : cars) {
@@ -107,7 +106,6 @@ public class TestCar {
         }
     }
 
-
     @Test 
     public void checkForValidModelNames() {
         List<String> validModelNames = Arrays.asList("Saab95", "Volvo240");
@@ -138,7 +136,7 @@ public class TestCar {
     @Test
     public void turnTurboOn() {
         for (Car car : cars) {
-            if (car instanceof Saab95) {
+            if (car instanceof AuxTurbo) {
                 ((Saab95) car).setTurboOff();
                 ((Saab95) car).setTurboOn();
                 assertTrue(((Saab95) car).getTurboOn());
@@ -149,7 +147,7 @@ public class TestCar {
     @Test
     public void turnTurboOff() {
         for (Car car : cars) {
-            if (car instanceof Saab95) {
+            if (car instanceof AuxTurbo) {
                 ((Saab95) car).setTurboOn();
                 ((Saab95) car).setTurboOff();
                 assertFalse(((Saab95) car).getTurboOn());

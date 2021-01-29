@@ -98,6 +98,7 @@ public class Presentation extends Application {
         stage.setScene(scene);
         stage.show();
 
+
         // Event handlers
         btGas.setOnAction(e -> {
             cars.get(carChoice).gas(1.0);
@@ -176,8 +177,6 @@ public class Presentation extends Application {
         cars.add(new AudiURQuattro());
 
         setupCar(0,stage);
-
-
 
     }
 }

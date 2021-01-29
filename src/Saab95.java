@@ -3,6 +3,7 @@ import java.awt.*;
 /**
  * A class representing a Saab95 car.
  */
+
 public class Saab95 extends Car implements AuxTurbo {
 
     /**
