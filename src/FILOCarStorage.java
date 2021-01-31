@@ -1,12 +1,12 @@
 import java.util.*;
 
-public class FiloCarStorage implements ICarStorage {
+public class FILOCarStorage implements ICarStorage {
     private final int capacity;
     private final double maxHeight;
     private final double maxWidth;
     private Deque<Car> storedCars;
 
-    public FiloCarStorage(int capacity, double maxHeight, double maxWidth) {
+    public FILOCarStorage(int capacity, double maxHeight, double maxWidth) {
         this.capacity = capacity;
         this.maxHeight = maxHeight;
         this.maxWidth = maxWidth;
