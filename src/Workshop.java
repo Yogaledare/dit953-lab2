@@ -19,7 +19,7 @@ public class Workshop<T extends Storable> implements IStorageUnit<T> {
             if (storageUnit.getCapacity() <= storageUnit.getSize()) throw new ArithmeticException("Tried to add car to storageUnit: capacity is " + storageUnit.getCapacity());
             storageUnit.store(item);
         } catch (ArithmeticException ex) {
-            System.out.println("Workshop is full!");
+            System.err.println("Workshop is full!");
         }
     }
 
