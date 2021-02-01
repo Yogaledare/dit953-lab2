@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class TestWorkshop {
-    Workshop<Volvo240> bilia = new Workshop<>();
+    Workshop<Volvo240> bilia = new Workshop<Volvo240>(20, 3, 6);
 
     @Test
     public void addCartoWorkshop() {

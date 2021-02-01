@@ -1,8 +1,10 @@
+import java.io.IOException;
+
 public class Workshop<T extends Storable> implements IStorageUnit<T> {
 
     private final LIFOStorageUnit<T> storageUnit;
 
-    public Workshop(int capacity, double maxWidth, double maxHeight){
+    public Workshop(int capacity, double maxWidth, double maxHeight) {
         storageUnit = new LIFOStorageUnit<>(capacity, maxWidth, maxHeight);
     }
 
@@ -13,21 +15,18 @@ public class Workshop<T extends Storable> implements IStorageUnit<T> {
 
     @Override
     public void store(T item) {
-        storageUnit.store(item);
+        try {
+            if (storageUnit.getCapacity() <= storageUnit.getSize()) throw new ArithmeticException("Tried to add car to storageUnit: capacity is " + storageUnit.getCapacity());
+            storageUnit.store(item);
+        } catch (ArithmeticException ex) {
+            System.out.println("Workshop is full!");
+        }
     }
 
     @Override
     public T remove() {
         return storageUnit.remove();
     }
-
-    // public double getMaxWidth() {
-    //    return storageUnit.getMaxWidth();
-    // }
-
-    // public double getMaxLength() {
-    //    return storageUnit.getMaxLength();
-    //}
 
     public int getSize() {
         return storageUnit.getSize();
