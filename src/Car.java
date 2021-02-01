@@ -195,18 +195,9 @@ public abstract class Car implements Movable, Storable {
         direction = direction.rotateCC(-Math.PI / 2);
     }
 
-    /**
-     * Clamps a value d to the interval [min, max].
-     * If d is outside the interval, either min or max is returned depending on if d is below min or above max.
-     * If d is inside the interval, d is returned.
-     * @param d the value to be clamped
-     * @param min the min bound
-     * @param max the max bound
-     * @return the clamped value
-     */
-    public static double clamp(double d, double min, double max) {
-        d = Math.max(d, min);
-        return Math.min(d, max);
+
+    public void setPosition(Vector2D position) {
+        this.position = position;
     }
 
     /**

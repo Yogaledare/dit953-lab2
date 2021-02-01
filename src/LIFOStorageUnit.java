@@ -24,7 +24,7 @@ public class LIFOStorageUnit<T extends Storable> implements IStorageUnit<T> {
         return maxWidth;
     }
 
-    public double getMaxHeight() {
+    public double getMaxLength() {
         return maxHeight;
     }
 

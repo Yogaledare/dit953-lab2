@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class TransportTruck<T extends Storable> extends Car implements Movable, IStorageUnit<T> {
+public class TransportTruck<T extends Car> extends Car implements Movable, IStorageUnit<T> {
 
     private final LIFOStorageUnit<T> LIFOStorageUnit;
 
@@ -30,8 +30,8 @@ public class TransportTruck<T extends Storable> extends Car implements Movable, 
         return LIFOStorageUnit.getMaxWidth();
     }
 
-    public double getMaxHeight() {
-        return LIFOStorageUnit.getMaxHeight();
+    public double getMaxLength() {
+        return LIFOStorageUnit.getMaxLength();
     }
 
 }
