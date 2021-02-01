@@ -26,9 +26,9 @@ public class Scania extends Car {
     /**
      * Raises the angle of the loading platform of the truck
      */
-    public void raisePlatform(){
-        if(getCurrentSpeed() > 0) return;
-        platformAngle += platformSpeed;
+    public void raisePlatform() {
+        if (getCurrentSpeed() > 0) return;
+        platformAngle = Vector2D.clamp(platformAngle += platformSpeed, 0, 70);
     }
 
     /**
