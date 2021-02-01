@@ -11,7 +11,7 @@ import java.awt.*;
 /**
  * An abstract class representing a generic car.
  */
-public abstract class Car implements Movable {
+public abstract class Car implements Movable, Storable {
 
     /**
      * Car model
