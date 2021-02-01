@@ -1,10 +1,11 @@
+/*
 import java.util.Deque;
 
-public class FIFOStorageUnit implements IStorageUnit {
+public class FIFOStorageUnit<T extends Storable> implements IStorageUnit {
     private final int capacity;
     private final double maxWidth;
     private final double maxHeight;
-    private Deque<Storable> storage;
+    private Deque<T> storage;
 
     public FIFOStorageUnit(int capacity, double maxWidth, double maxHeight) {
         this.capacity = capacity;
@@ -12,11 +13,11 @@ public class FIFOStorageUnit implements IStorageUnit {
         this.maxHeight = maxHeight;
     }
 
-    public <T extends Storable> void store(T item) {
+    public void store(T item) {
         storage.addLast(item);
     }
 
-    public Storable remove() {
+    public T remove() {
         return storage.removeFirst();
     }
 
@@ -31,3 +32,4 @@ public class FIFOStorageUnit implements IStorageUnit {
 
 
 }
+*/

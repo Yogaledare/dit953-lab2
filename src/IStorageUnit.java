@@ -1,7 +1,7 @@
-public interface IStorageUnit {
+public interface IStorageUnit<T extends Storable> {
 
-    <T extends Storable> void store(T item);
-    Storable remove();
+    void store(T item);
+    T remove();
     double getMaxWidth();
     double getMaxHeight();
 

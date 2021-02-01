@@ -1,10 +1,10 @@
 import java.util.Deque;
 
-public class LIFOStorageUnit implements IStorageUnit {
+public class LIFOStorageUnit<T extends Storable> implements IStorageUnit<T> {
     private final int capacity;
     private final double maxWidth;
     private final double maxHeight;
-    private Deque<Storable> storage;
+    private Deque<T> storage;
 
     public LIFOStorageUnit(int capacity, double maxWidth, double maxHeight) {
         this.capacity = capacity;
@@ -12,11 +12,11 @@ public class LIFOStorageUnit implements IStorageUnit {
         this.maxHeight = maxHeight;
     }
 
-    public <T extends Storable> void store(T item) {
+    public void store(T item) {
         storage.addLast(item);
     }
 
-    public Storable remove() {
+    public T remove() {
         return storage.removeLast();
     }
 
@@ -26,5 +26,9 @@ public class LIFOStorageUnit implements IStorageUnit {
 
     public double getMaxHeight() {
         return maxHeight;
+    }
+
+    public int getCapacity() {
+        return capacity;
     }
 }
