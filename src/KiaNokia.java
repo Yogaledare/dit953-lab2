@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class KiaNokia extends Car {
+public class KiaNokia extends Vehicle {
 
     // This car has no turbo or trim.
 

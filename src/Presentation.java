@@ -15,7 +15,7 @@ import java.util.List;
 
 public class Presentation extends Application {
 
-    List<Car> cars = new ArrayList<>();
+    List<Vehicle> cars = new ArrayList<>();
 
     private void setupCar(int carChoice, Stage stage) {
         Button btGas = new Button("Gas");
@@ -193,9 +193,9 @@ class CustomPane extends StackPane {
 
 class SpeedPane extends Pane {
     private double speed;
-    private Car c; // bind this car to start car ?
+    private Vehicle c; // bind this car to start car ?
 
-    public SpeedPane(Car car) {
+    public SpeedPane(Vehicle car) {
         this.c = car;
         setSpeed(c.getCurrentSpeed());
     }

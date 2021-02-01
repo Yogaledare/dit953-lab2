@@ -4,7 +4,7 @@ import java.awt.*;
  * A class representing a Saab95 car.
  */
 
-public class Saab95 extends Car implements AuxTurbo {
+public class Saab95 extends Vehicle implements AuxTurbo {
 
     /**
      * Flag to indicate if turbo is on or not.

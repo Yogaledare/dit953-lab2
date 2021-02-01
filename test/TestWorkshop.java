@@ -1,14 +1,12 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import java.awt.*;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class TestWorkshop {
     Workshop<Volvo240> bilia;
-    Workshop<Car> alisWorkshop;
+    Workshop<Vehicle> alisWorkshop;
     Volvo240 volvo240;
 
     @Before
@@ -28,7 +26,7 @@ public class TestWorkshop {
         final int CAPACITY = 10;
         alisWorkshop = new Workshop<>(CAPACITY, 3, 5);
 
-        Car pandas = new KiaNokia();
+        Vehicle pandas = new KiaNokia();
         for (int i = 0; i < alisWorkshop.getCapacity(); i++) {
             alisWorkshop.store(pandas);
         }

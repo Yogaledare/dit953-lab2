@@ -9,9 +9,9 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class TestCar {
+public class TestVehicle {
 
-    List<Car> cars = new ArrayList<>();
+    List<Vehicle> cars = new ArrayList<>();
 
     @Before
     public void setup() {
@@ -21,7 +21,7 @@ public class TestCar {
 
     @Test
     public void startAndStop() {
-        for (Car car : cars) {
+        for (Vehicle car : cars) {
             car.startEngine();
             car.stopEngine();
             assertEquals(0, car.getCurrentSpeed(), 0.0);
@@ -30,7 +30,7 @@ public class TestCar {
 
     @Test
     public void driveOneStep() {
-        for (Car car : cars) {
+        for (Vehicle car : cars) {
             car.startEngine();
             car.gas(1.0);
             car.move();
@@ -41,7 +41,7 @@ public class TestCar {
 
     @Test
     public void turnLeftOnce() {
-        for (Car car : cars) {
+        for (Vehicle car : cars) {
             Vector2D target = new Vector2D(-1, 0 );
             car.turnLeft();
             assertEquals(target.getX(), car.getDirection().getX(), 0.01);
@@ -51,7 +51,7 @@ public class TestCar {
 
     @Test
     public void turnRightOnce() {
-        for (Car car : cars) {
+        for (Vehicle car : cars) {
             Vector2D target = new Vector2D(1, 0 );
             car.turnRight();
             assertEquals(target.getX(), car.getDirection().getX(), 0.01);
@@ -61,7 +61,7 @@ public class TestCar {
 
     @Test
     public void turnRightTwice() {
-        for (Car car : cars) {
+        for (Vehicle car : cars) {
             Vector2D target = new Vector2D(0, -1 );
             car.turnRight();
             car.turnRight();
@@ -72,7 +72,7 @@ public class TestCar {
 
     @Test
     public void paintYellow() {
-        for (Car car : cars) {
+        for (Vehicle car : cars) {
             car.setColor(Color.YELLOW);
             assertEquals(Color.YELLOW, car.getColor());
         }
@@ -80,7 +80,7 @@ public class TestCar {
 
     @Test
     public void gasToMaxAndTryToGoAbove() {
-        for (Car car : cars) {
+        for (Vehicle car : cars) {
             car.startEngine();
 
             while (car.getCurrentSpeed() < car.getEnginePower()) {
@@ -95,7 +95,7 @@ public class TestCar {
 
     @Test
     public void tryGasWithEngineOff() {
-        for (Car car : cars) {
+        for (Vehicle car : cars) {
 
             // car.startEngine();
             for (int i = 0; i < 10; i++) {
@@ -110,14 +110,14 @@ public class TestCar {
     @Test 
     public void checkForValidModelNames() {
         List<String> validModelNames = Arrays.asList("Saab95", "Volvo240");
-        for (Car car : cars) {
+        for (Vehicle car : cars) {
             assertTrue(validModelNames.contains(car.getModelName()));
         }
     }
 
     @Test
     public void tryToBreakBelowZero() {
-        for (Car car : cars) {
+        for (Vehicle car : cars) {
             car.startEngine();
 
             for (int i = 0; i < 10; i++) {
@@ -129,14 +129,14 @@ public class TestCar {
 
     @Test
     public void checkThatSpeedFactorIsPositive() {
-        for (Car car : cars) {
+        for (Vehicle car : cars) {
             assertTrue(car.findSpeedFactor() >= 0);
         }
     }
 
     @Test
     public void turnTurboOn() {
-        for (Car car : cars) {
+        for (Vehicle car : cars) {
             if (car instanceof AuxTurbo) {
                 ((Saab95) car).setTurboOff();
                 ((Saab95) car).setTurboOn();
@@ -147,7 +147,7 @@ public class TestCar {
 
     @Test
     public void turnTurboOff() {
-        for (Car car : cars) {
+        for (Vehicle car : cars) {
             if (car instanceof AuxTurbo) {
                 ((Saab95) car).setTurboOn();
                 ((Saab95) car).setTurboOff();
@@ -158,7 +158,7 @@ public class TestCar {
 
     @Test
     public void checkThatNrOfDoorsIsPositive() {
-        for (Car car : cars) {
+        for (Vehicle car : cars) {
             assertTrue(car.getNrDoors() >= 0);
         }
     }

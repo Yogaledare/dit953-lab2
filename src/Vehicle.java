@@ -11,7 +11,7 @@ import java.awt.*;
 /**
  * An abstract class representing a generic car.
  */
-public abstract class Car implements Movable, Storable {
+public abstract class Vehicle implements Movable, Storable {
 
     /**
      * Car model
@@ -56,7 +56,7 @@ public abstract class Car implements Movable, Storable {
      * @param enginePower the engine power of the car
      * @param nrDoors the number of doors of the car
      */
-    public Car(String modelName, Color color, double enginePower, int nrDoors) {
+    public Vehicle(String modelName, Color color, double enginePower, int nrDoors) {
         this.modelName = modelName;
         this.color = color;
         this.enginePower = enginePower;

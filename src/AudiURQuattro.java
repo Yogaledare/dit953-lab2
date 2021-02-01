@@ -4,7 +4,7 @@
 
 import java.awt.*;
 
-public class AudiURQuattro extends Car implements AuxTurbo, AuxTrim {
+public class AudiURQuattro extends Vehicle implements AuxTurbo, AuxTrim {
     private boolean turboOn = false;
     private final static double trimFactor = 1.25;
 
