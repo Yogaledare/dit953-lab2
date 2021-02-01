@@ -15,7 +15,7 @@ public class TestWorkshop {
 
         bilia.store(volvo240);
 
-        assertEquals(1, bilia.);
+        assertEquals(1, bilia.getSize());
     }
 
     @Test

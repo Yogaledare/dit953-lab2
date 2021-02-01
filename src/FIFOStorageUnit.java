@@ -12,10 +12,12 @@ public class FIFOStorageUnit<T extends Storable> implements IStorageUnit {
         this.maxLength = maxLength;
     }
 
+    @Override
     public void store(T item) {
         storage.addLast(item);
     }
 
+    @Override
     public T remove() {
         return storage.removeFirst();
     }
