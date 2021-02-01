@@ -16,13 +16,6 @@ public class LIFOStorageUnit<T extends Storable> implements IStorageUnit<T> {
         return storage.removeLast();
     }
 
-    // public double getMaxWidth() {
-    //   return storage.getMaxWidth();
-    // }
-
-    // public double getMaxLength() {
-    //    return storage.getMaxLength();
-    // }
 
     public int getCapacity() {
         return storage.getCapacity();
