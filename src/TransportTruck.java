@@ -39,13 +39,6 @@ public class TransportTruck<T extends Car> extends Car implements Movable, IStor
         }
     }
 
-    // public double getMaxWidth() {
-    //    return LIFOStorageUnit.getMaxWidth();
-    // }
-
-    // public double getMaxLength() {
-    //    return LIFOStorageUnit.getMaxLength();
-    // }
 
 }
 

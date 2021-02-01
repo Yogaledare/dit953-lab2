@@ -4,12 +4,12 @@ public class Workshop<T extends Storable> implements IStorageUnit<T> {
 
     private final LIFOStorageUnit<T> storageUnit;
 
-    public Workshop(int capacity, double maxWidth, double maxHeight) {
-        storageUnit = new LIFOStorageUnit<>(capacity, maxWidth, maxHeight);
+    public Workshop(int capacity, double maxWidth, double maxLength) {
+        storageUnit = new LIFOStorageUnit<>(capacity, maxWidth, maxLength);
     }
 
     public Workshop() {
-        this(20, 2.3, 1.6);
+        this(1, 2, 5);
     }
 
 
