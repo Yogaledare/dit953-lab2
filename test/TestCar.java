@@ -171,11 +171,12 @@ public class TestCar {
         double max = 1;
 
         for (int i = 0; i < ds.length;i++) {
-            ds[i] = Car.clamp(ds[i], min, max);
+            ds[i] = Vector2D.clamp(ds[i], min, max);
         }
 
         for (int i = 0; i < ds.length; i++) {
             assertEquals(ds[i], key[i], 0.0);
         }
     }
+
 }

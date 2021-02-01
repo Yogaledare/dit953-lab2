@@ -23,6 +23,18 @@ public class Scania extends Car {
         super(modelName, color, enginePower, nrDoors);
     }
 
+    public double getPlatformAngle(){
+        return platformAngle;
+    }
+
+    public void setPlatformAngle(double platformAngle) {
+        this.platformAngle = Vector2D.clamp(platformAngle, 0, 70);
+    }
+
+    public double getPlatformSpeed() {
+        return platformSpeed;
+    }
+
     /**
      * Raises the angle of the loading platform of the truck
      */
@@ -36,19 +48,18 @@ public class Scania extends Car {
      */
     public void lowerPlatform(){
         if(getCurrentSpeed() > 0) return;
-        platformAngle += platformSpeed;
+        platformAngle = Vector2D.clamp(platformAngle -= platformSpeed, 0, 70);
     }
 
     @Override
     public void move() {
-        if (platformAngle == 0) {
-            super.move();
-        }
+        if(platformAngle > 0) return;
+        super.move();
     }
 
     @Override
     public double findSpeedFactor(){
-        return 0;
+        return getEnginePower() * 0.01;
     }
 
     @Override

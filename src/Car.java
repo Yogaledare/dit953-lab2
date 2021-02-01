@@ -142,7 +142,7 @@ public abstract class Car implements Movable, Storable {
      */
     private void incrementSpeed(double amount) {
         if (currentSpeed != 0) {
-            currentSpeed = clamp(getCurrentSpeed() + findSpeedFactor() * amount, 0, enginePower);
+            currentSpeed = Vector2D.clamp(getCurrentSpeed() + findSpeedFactor() * amount, 0, enginePower);
         }
     }
 
@@ -152,7 +152,7 @@ public abstract class Car implements Movable, Storable {
      * @param amount how much the speed should decrease for every move.
      */
     private void decrementSpeed(double amount) {
-        currentSpeed = clamp(getCurrentSpeed() - findSpeedFactor() * amount, 0, enginePower);
+        currentSpeed = Vector2D.clamp(getCurrentSpeed() - findSpeedFactor() * amount, 0, enginePower);
     }
 
     /**
@@ -161,7 +161,7 @@ public abstract class Car implements Movable, Storable {
      * @param amount a value between 0 and 1 representing how much the gas is pressed
      */
     public void gas(double amount) {
-        incrementSpeed(clamp(amount, 0, 1));
+        incrementSpeed(Vector2D.clamp(amount, 0, 1));
     }
 
     /**
@@ -170,7 +170,7 @@ public abstract class Car implements Movable, Storable {
      * @param amount a value between 0 and 1 representing how much the brake is pressed
      */
     public void brake(double amount) {
-        decrementSpeed(clamp(amount, 0, 1));
+        decrementSpeed(Vector2D.clamp(amount, 0, 1));
     }
 
     /**
