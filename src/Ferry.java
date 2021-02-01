@@ -20,14 +20,6 @@ public class Ferry<T extends Storable> implements Movable, IStorageUnit<T> {
         return storageUnit.remove();
     }
 
-    // public double getMaxWidth() {
-    //     return 0;
-    // }
-
-    // public double getMaxLength() {
-    //    return 0;
-    // }
-
     @Override
     public void move() {
 

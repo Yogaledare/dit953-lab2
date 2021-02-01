@@ -16,7 +16,8 @@ public class Workshop<T extends Storable> implements IStorageUnit<T> {
     @Override
     public void store(T item) {
         try {
-            if (storageUnit.getCapacity() <= storageUnit.getSize()) throw new ArithmeticException("Tried to add car to storageUnit: capacity is " + storageUnit.getCapacity());
+            if (storageUnit.getCapacity() <= storageUnit.getSize())
+                throw new ArithmeticException("Tried to add car to storageUnit: capacity is " + storageUnit.getCapacity());
             storageUnit.store(item);
         } catch (ArithmeticException ex) {
             System.err.println("Workshop is full!");
@@ -30,6 +31,10 @@ public class Workshop<T extends Storable> implements IStorageUnit<T> {
 
     public int getSize() {
         return storageUnit.getSize();
+    }
+
+    public int getCapacity() {
+        return storageUnit.getCapacity();
     }
 
 }
