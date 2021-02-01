@@ -3,11 +3,12 @@ import java.awt.*;
 public class TransportTruck<T extends Car> extends Car implements Movable, IStorageUnit<T> {
 
     private final LIFOStorageUnit<T> LIFOStorageUnit;
-
+    private final double truckLength;
 
     public TransportTruck(String modelName, Color color, double enginePower, int nrDoors,
-                             LIFOStorageUnit<T> LIFOStorageUnit) {
+                             double truckLength, LIFOStorageUnit<T> LIFOStorageUnit) {
         super(modelName, color, enginePower, nrDoors);
+        this.truckLength = truckLength;
         this.LIFOStorageUnit = LIFOStorageUnit;
     }
 
@@ -17,14 +18,26 @@ public class TransportTruck<T extends Car> extends Car implements Movable, IStor
     }
 
     // For an object to be a specific _Car_ storage truck, that has to be declared when creating the object.
-    public void store(T item) {
-        LIFOStorageUnit.store(item);
+    public void store(T car) {
+        LIFOStorageUnit.store(car);
+        car.setPosition(this.getPosition());
+
     }
 
     public T remove() {
-        return LIFOStorageUnit.remove();
+        T car = LIFOStorageUnit.remove();
+        Vector2D offset = this.getDirection().multiplyByScalar(-truckLength / 2.1);
+        Vector2D unloadedPosition = this.getPosition().plus(offset);
+        car.setPosition(unloadedPosition);
+        return car;
     }
 
+    public void move() {
+        super.move();
+        for(T car : LIFOStorageUnit.getStorage()) {
+            car.setPosition(this.getPosition());
+        }
+    }
 
     // public double getMaxWidth() {
     //    return LIFOStorageUnit.getMaxWidth();

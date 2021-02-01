@@ -1,15 +1,10 @@
 import java.util.Deque;
 
 public class LIFOStorageUnit<T extends Storable> implements IStorageUnit<T> {
-    private final int capacity;
-    private final double maxWidth;
-    private final double maxHeight;
-    private Deque<T> storage;
+    private final Container<T> storage;
 
-    public LIFOStorageUnit(int capacity, double maxWidth, double maxHeight) {
-        this.capacity = capacity;
-        this.maxWidth = maxWidth;
-        this.maxHeight = maxHeight;
+    public LIFOStorageUnit(int capacity, double maxWidth, double maxLength) {
+        this.storage = new Container<T>(capacity, maxWidth, maxLength);
     }
 
     public void store(T item) {
@@ -21,15 +16,35 @@ public class LIFOStorageUnit<T extends Storable> implements IStorageUnit<T> {
         return storage.removeLast();
     }
 
-    public double getMaxWidth() {
-        return maxWidth;
-    }
+    // public double getMaxWidth() {
+    //   return storage.getMaxWidth();
+    // }
 
-    public double getMaxLength() {
-        return maxHeight;
-    }
+    // public double getMaxLength() {
+    //    return storage.getMaxLength();
+    // }
 
     public int getCapacity() {
-        return capacity;
+        return storage.getCapacity();
+    }
+
+    public Deque<T> getStorage() {
+        return storage.getStorage();
+    }
+
+    public int getSize() {
+        return storage.getSize();
     }
 }
+
+
+/*    private final int capacity;
+    private final double maxWidth;
+    private final double maxHeight;
+    private Deque<T> storage;*/
+
+/*    public LIFOStorageUnit(int capacity, double maxWidth, double maxHeight) {
+        this.capacity = capacity;
+        this.maxWidth = maxWidth;
+        this.maxHeight = maxHeight;
+    }*/
