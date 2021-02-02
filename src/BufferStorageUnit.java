@@ -58,7 +58,7 @@ public class BufferStorageUnit<T extends Storable> implements IStorageUnit<T>{
     }
 
 }
-
+/*
 class Customer<T> {
 
     private T ownedItem;
@@ -68,7 +68,7 @@ class Customer<T> {
     }
 
 }
-
+*/
 
 
 /*

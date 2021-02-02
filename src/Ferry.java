@@ -14,7 +14,6 @@ public class Ferry<T extends Storable> extends Vehicle implements Movable, IStor
     public Ferry(FIFO<T> storageUnit) {
         super("VikingLine", Color.WHITE, 10000, 2 );
         this.storage = storageUnit;
-        //vehicle = new Vehicles.Vehicle("", Color.PINK, 666, 1); Behöver generalisera vad en vehicle är och separera ut car grejer
     }
 
     @Override
@@ -35,7 +34,6 @@ public class Ferry<T extends Storable> extends Vehicle implements Movable, IStor
 
 
 /*
-
     Skapa en representation av en bilfärja - dvs en färja på vilken det går att lasta bilar.
 
     Notera att bilfärjan inte är en bil (doh), men att många av de metoder vi hittills använt för olika sorters bilar bör gå att applicera även på färjan.

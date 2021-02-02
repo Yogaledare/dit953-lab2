@@ -7,15 +7,16 @@ import static org.junit.Assert.assertTrue;
 
 public class TestScania {
     Scania truck;
-
+    Volvo240 volvo240;
     @Before
     public void setUp() {
         truck = new Scania();
+        volvo240 = new Volvo240();
     }
 
     @Test
     public void tryToDriveScaniaTruckWhenPlattformIsDown() {
-        truck.raisePlatform();
+        truck.raiseRamp();
 
         truck.startEngine();
         truck.gas(1.0);
@@ -30,10 +31,26 @@ public class TestScania {
         truck.startEngine();
         truck.gas(1.0);
 
-        truck.raisePlatform();
+        truck.raiseRamp();
 
         truck.move();
-        assertEquals(0, truck.getPlatformAngle(), 0.1);
+        assertEquals(0, truck.getRampAngle(), 0.1);
      }
+
+     @Test
+    public void storeCarOnPlatformWithoutSettingRampAngle() {
+
+        truck.store(volvo240);
+        assertEquals(0, truck.getNumberOfCars());
+     }
+
+    @Test
+    public void storeCarOnPlatformWithOpenRamp() {
+        truck.lowerRamp();
+        truck.store(volvo240);
+        assertEquals(1, truck.getNumberOfCars());
+
+    }
+
 
 }
