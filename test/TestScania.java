@@ -15,7 +15,7 @@ public class TestScania {
     }
 
     @Test
-    public void tryToDriveScaniaTruckWhenPlattformIsDown() {
+    public void tryToDriveScaniaTruckWhenPlattformIsUp() {
         truck.raiseRamp();
 
         truck.startEngine();
