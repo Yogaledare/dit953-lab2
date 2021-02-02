@@ -28,25 +28,29 @@ public class Scania extends Vehicle implements AuxPlatform {
     }
 
     /**
-     * Raises the angle of the loading platform of the truck
-     * returns true if platform is moving.
+     * Raise loading platform.
+     * returns true if platform is at load position.
      */
     public boolean raisePlatform() {
         if (getCurrentSpeed() == 0) {
-            platformAngle = Vector2D.clamp(platformAngle += PLATFORMSPEED, 0, 70);
+            while (platformAngle < 70) {
+                platformAngle = Vector2D.clamp(platformAngle += PLATFORMSPEED, 0, 70);
+            }
         }
-        return (platformAngle != 70);
+        return (platformAngle == 70);
     }
 
     /**
-     * Lowers the angle of the loading platform of the truck
-     * return true if platform is moving.
+     * Lower loading platform to ground.
+     * return true when platform is a 0 degree sensor.
      */
     public boolean lowerPlatform() {
         if (getCurrentSpeed() == 0) {
-            platformAngle = Vector2D.clamp(platformAngle -= PLATFORMSPEED, 0, 70);
+            while (platformAngle > 0) {
+                platformAngle = Vector2D.clamp(platformAngle -= PLATFORMSPEED, 0, 70);
+            }
         }
-        return (platformAngle != 0);
+        return (platformAngle == 0);
     }
 
     @Override

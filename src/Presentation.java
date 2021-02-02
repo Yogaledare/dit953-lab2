@@ -1,3 +1,4 @@
+// import Cars.AudiURQuattro;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -174,7 +175,7 @@ public class Presentation extends Application {
 
         cars.add(new Saab95());
         cars.add(new Volvo240());
-        cars.add(new AudiURQuattro());
+        // cars.add(new AudiURQuattro());
 
         setupCar(0,stage);
 

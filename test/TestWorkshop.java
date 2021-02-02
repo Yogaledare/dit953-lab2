@@ -26,7 +26,7 @@ public class TestWorkshop {
         final int CAPACITY = 10;
         alisWorkshop = new Workshop<>(CAPACITY, 3, 5);
 
-        Vehicle pandas = new KiaNokia();
+        Vehicle pandas = new Saab95();
         for (int i = 0; i < alisWorkshop.getCapacity(); i++) {
             alisWorkshop.store(pandas);
         }

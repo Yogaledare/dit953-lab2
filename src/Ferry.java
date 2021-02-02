@@ -1,14 +1,18 @@
-public class Ferry<T extends Storable> implements Movable, IStorageUnit<T> {
+import java.awt.*;
+
+public class Ferry<T extends Storable> extends Vehicle implements Movable, IStorageUnit<T> {
 
     private final FIFO<T> storage;
 
     //private final Vehicles.Vehicle vehicle;
 
     public Ferry(){
+        super("VikingLine", Color.WHITE, 10000, 2 );
         this.storage = new FIFO<T>(10, 1, 1);
     }
 
     public Ferry(FIFO<T> storageUnit) {
+        super("VikingLine", Color.WHITE, 10000, 2 );
         this.storage = storageUnit;
         //vehicle = new Vehicles.Vehicle("", Color.PINK, 666, 1); Behöver generalisera vad en vehicle är och separera ut car grejer
     }
@@ -24,21 +28,8 @@ public class Ferry<T extends Storable> implements Movable, IStorageUnit<T> {
     }
 
     @Override
-    public void move() {
-        //vehicle.move();
-        for(T storedGood : storage.getStorage()) {
-            //storedGood.setPosition(vehicle.getPosition());
-        }
-    }
-
-    @Override
-    public void turnLeft() {
-        //vehicle.turnLeft();
-    }
-
-    @Override
-    public void turnRight() {
-        //vehicle.turnRight();
+    public double findSpeedFactor() {
+        return getEnginePower() * 0.01;
     }
 }
 
