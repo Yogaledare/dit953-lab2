@@ -1,9 +1,9 @@
 import java.awt.*;
 
-public class Scania extends Vehicle {
+public class Scania extends Vehicle implements AuxPlatform {
 
     private double platformAngle = 0.0;
-    private final double platformSpeed = 70;
+    private final double PLATFORMSPEED = 1;
 
 
     public Scania() {
@@ -11,7 +11,7 @@ public class Scania extends Vehicle {
     }
 
     /**
-     * Constructs a Car object with the specified modelYear, color, enginePower and nrDoors.
+     * Constructs a Vehicle object with the specified modelName, color, enginePower and nrDoors.
      * The initial position (x, y) and direction (x, y) of the object is set to (0, 0) and (0, 1).
      *
      * @param modelName   the model name of the car
@@ -23,49 +23,38 @@ public class Scania extends Vehicle {
         super(modelName, color, enginePower, nrDoors);
     }
 
-    public double getPlatformAngle(){
+    public double getPlatformAngle() {
         return platformAngle;
-    }
-
-    public void setPlatformAngle(double platformAngle) {
-        this.platformAngle = Vector2D.clamp(platformAngle, 0, 70);
-    }
-
-    public double getPlatformSpeed() {
-        return platformSpeed;
     }
 
     /**
      * Raises the angle of the loading platform of the truck
+     * returns true if platform is moving.
      */
-    public void raisePlatform() {
-        if (getCurrentSpeed() > 0) return;
-        platformAngle = Vector2D.clamp(platformAngle += platformSpeed, 0, 70);
+    public boolean raisePlatform() {
+        platformAngle = Vector2D.clamp(platformAngle += PLATFORMSPEED, 0, 70);
+        return (platformAngle != 70);
     }
 
     /**
      * Lowers the angle of the loading platform of the truck
+     * return true if platform is moving.
      */
-    public void lowerPlatform(){
-        if(getCurrentSpeed() > 0) return;
-        platformAngle = Vector2D.clamp(platformAngle -= platformSpeed, 0, 70);
+    public boolean lowerPlatform() {
+        platformAngle = Vector2D.clamp(platformAngle -= PLATFORMSPEED, 0, 70);
+        return (platformAngle!=0);
     }
 
     @Override
-    public void move() {
-        if(platformAngle > 0) return;
-        super.move();
-    }
-
-    @Override
-    public double findSpeedFactor(){
+    public double findSpeedFactor() {
         return getEnginePower() * 0.01;
     }
 
     @Override
     public void startEngine() {
-        if (getPlatformAngle()==0) {
+        if (getPlatformAngle() == 0) {
             super.startEngine();
         }
     }
+
 }
