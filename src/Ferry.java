@@ -1,28 +1,32 @@
 public class Ferry<T extends Storable> implements Movable, IStorageUnit<T> {
 
-    private final FIFOStorageUnit<T> storageUnit;
+    private final FIFO<T> storage;
 
     //private final Vehicles.Vehicle vehicle;
 
-    public Ferry(FIFOStorageUnit<T> storageUnit) {
-        this.storageUnit = storageUnit;
+    public Ferry(){
+        this.storage = new FIFO<T>(10, 1, 1);
+    }
+
+    public Ferry(FIFO<T> storageUnit) {
+        this.storage = storageUnit;
         //vehicle = new Vehicles.Vehicle("", Color.PINK, 666, 1); Behöver generalisera vad en vehicle är och separera ut car grejer
     }
 
     @Override
     public void store(T item) {
-        storageUnit.store(item);
+        storage.add(item);
     }
 
     @Override
     public T remove() {
-        return storageUnit.remove();
+        return storage.remove();
     }
 
     @Override
     public void move() {
         //vehicle.move();
-        for(T storedGood : storageUnit.getStorage()) {
+        for(T storedGood : storage.getStorage()) {
             //storedGood.setPosition(vehicle.getPosition());
         }
     }
