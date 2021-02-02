@@ -32,7 +32,9 @@ public class Scania extends Vehicle implements AuxPlatform {
      * returns true if platform is moving.
      */
     public boolean raisePlatform() {
-        platformAngle = Vector2D.clamp(platformAngle += PLATFORMSPEED, 0, 70);
+        if (getCurrentSpeed() == 0) {
+            platformAngle = Vector2D.clamp(platformAngle += PLATFORMSPEED, 0, 70);
+        }
         return (platformAngle != 70);
     }
 
@@ -41,8 +43,10 @@ public class Scania extends Vehicle implements AuxPlatform {
      * return true if platform is moving.
      */
     public boolean lowerPlatform() {
-        platformAngle = Vector2D.clamp(platformAngle -= PLATFORMSPEED, 0, 70);
-        return (platformAngle!=0);
+        if (getCurrentSpeed() == 0) {
+            platformAngle = Vector2D.clamp(platformAngle -= PLATFORMSPEED, 0, 70);
+        }
+        return (platformAngle != 0);
     }
 
     @Override

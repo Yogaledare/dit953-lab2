@@ -21,7 +21,7 @@ public class TestScania {
         truck.gas(1.0);
 
         truck.move();
-        System.out.println("speed: " + truck.getCurrentSpeed());
+        // System.out.println("speed: " + truck.getCurrentSpeed());
         assertTrue(truck.getPosition().equals(new Vector2D(0, 0)));
     }
 
@@ -31,6 +31,7 @@ public class TestScania {
         truck.gas(1.0);
 
         truck.raisePlatform();
+
         truck.move();
         assertEquals(0, truck.getPlatformAngle(), 0.1);
      }
