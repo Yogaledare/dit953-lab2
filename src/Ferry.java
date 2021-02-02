@@ -1,14 +1,12 @@
-import java.util.Collection;
-
 public class Ferry<T extends Storable> implements Movable, IStorageUnit<T> {
 
     private final FIFOStorageUnit<T> storageUnit;
 
-    //private final Vehicle vehicle;
+    //private final Vehicles.Vehicle vehicle;
 
     public Ferry(FIFOStorageUnit<T> storageUnit) {
         this.storageUnit = storageUnit;
-        //vehicle = new Vehicle("", Color.PINK, 666, 1); Behöver generalisera vad en vehicle är och separera ut car grejer
+        //vehicle = new Vehicles.Vehicle("", Color.PINK, 666, 1); Behöver generalisera vad en vehicle är och separera ut car grejer
     }
 
     @Override
