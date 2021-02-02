@@ -4,11 +4,12 @@ public class Ferry<T extends Storable> implements Movable, IStorageUnit<T> {
 
     private final FIFOStorageUnit<T> storageUnit;
 
+    //private final Vehicle vehicle;
+
     public Ferry(FIFOStorageUnit<T> storageUnit) {
         this.storageUnit = storageUnit;
+        //vehicle = new Vehicle("", Color.PINK, 666, 1); Behöver generalisera vad en vehicle är och separera ut car grejer
     }
-
-
 
     @Override
     public void store(T item) {
@@ -22,17 +23,20 @@ public class Ferry<T extends Storable> implements Movable, IStorageUnit<T> {
 
     @Override
     public void move() {
-
+        //vehicle.move();
+        for(T storedGood : storageUnit.getStorage()) {
+            //storedGood.setPosition(vehicle.getPosition());
+        }
     }
 
     @Override
     public void turnLeft() {
-
+        //vehicle.turnLeft();
     }
 
     @Override
     public void turnRight() {
-
+        //vehicle.turnRight();
     }
 }
 

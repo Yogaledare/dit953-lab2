@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class TransportTruck<T extends Vehicle> extends Vehicle implements Movable, IStorageUnit<T> {
+public class TransportTruck<T extends Storable> extends Vehicle implements Movable, IStorageUnit<T> {
 
     private final LIFOStorageUnit<T> LIFOStorageUnit;
     private final double truckLength;
@@ -21,7 +21,6 @@ public class TransportTruck<T extends Vehicle> extends Vehicle implements Movabl
     public void store(T car) {
         LIFOStorageUnit.store(car);
         car.setPosition(this.getPosition());
-
     }
 
     public T remove() {

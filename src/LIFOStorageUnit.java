@@ -30,6 +30,45 @@ public class LIFOStorageUnit<T extends Storable> implements IStorageUnit<T> {
     }
 }
 
+/*
+public class LIFOStorageUnit<T extends Storable> implements IStorageUnit<T> {
+
+    private final int capacity;
+    private final double maxWidth;
+    private final double maxLength;
+    private final Deque<T> storage;
+
+    public LIFOStorageUnit(int capacity, double maxWidth, double maxLength) {
+        this.capacity = capacity;
+        this.maxWidth = maxWidth;
+        this.maxLength = maxLength;
+        this.storage = new ArrayDeque<>(capacity);
+    }
+
+    @Override
+    public void store(T item) {
+        storage.addLast(item);
+    }
+
+    @Override
+    public T remove() {
+        return storage.removeLast();
+    }
+
+    public int getCapacity() {
+        return storage.getCapacity();
+    }
+
+    public Deque<T> getStorage() {
+        return storage.getStorage();
+    }
+
+    public int getSize() {
+        return storage.getSize();
+    }
+}
+ */
+
 
 /*    private final int capacity;
     private final double maxWidth;
