@@ -18,4 +18,10 @@ public interface Movable {
      */
     void turnRight();
 
+//    double findSpeedFactor();
+
+    void gas(double amount, double speedFactor);
+
+    void brake(double amount, double speedFactor);
+
 }

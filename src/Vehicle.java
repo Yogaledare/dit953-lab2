@@ -79,9 +79,9 @@ public class Vehicle implements Positionable{
      * The speed cannot exceed the enginePower of the vehicle.
      * @param amount how much the speed should increase for every move.
      */
-    private void incrementSpeed(double amount) {
+    private void incrementSpeed(double amount, double speedFactor) {
         if (currentSpeed != 0) {
-            currentSpeed = Vector2D.clamp(getCurrentSpeed() + findSpeedFactor() * amount, 0, enginePower);
+            currentSpeed = Vector2D.clamp(getCurrentSpeed() + speedFactor * amount, 0, enginePower);
         }
     }
 
@@ -90,8 +90,8 @@ public class Vehicle implements Positionable{
      * The speed can not go below 0.
      * @param amount how much the speed should decrease for every move.
      */
-    private void decrementSpeed(double amount) {
-        currentSpeed = Vector2D.clamp(getCurrentSpeed() - findSpeedFactor() * amount, 0, enginePower);
+    private void decrementSpeed(double amount, double speedFactor) {
+        currentSpeed = Vector2D.clamp(getCurrentSpeed() - speedFactor * amount, 0, enginePower);
     }
 
     /**
@@ -99,8 +99,8 @@ public class Vehicle implements Positionable{
      * Amount is clamped to the interval [0, 1].
      * @param amount a value between 0 and 1 representing how much the gas is pressed
      */
-    public void gas(double amount) {
-        incrementSpeed(Vector2D.clamp(amount, 0, 1));
+    public void gas(double amount, double speedFactor) {
+        incrementSpeed(Vector2D.clamp(amount, 0, 1), speedFactor);
     }
 
     /**
@@ -108,8 +108,8 @@ public class Vehicle implements Positionable{
      * Amount is clamped to the interval [0, 1].
      * @param amount a value between 0 and 1 representing how much the brake is pressed
      */
-    public void brake(double amount) {
-        decrementSpeed(Vector2D.clamp(amount, 0, 1));
+    public void brake(double amount, double speedFactor) {
+        decrementSpeed(Vector2D.clamp(amount, 0, 1), speedFactor);
     }
 
     /**
@@ -141,6 +141,7 @@ public class Vehicle implements Positionable{
     public Vector2D getDirection() {
         return direction;
     }
-
+    @Override public Vector2D getPosition(){ return position; }
+    @Override public void setPosition(Vector2D vector2D){ position = vector2D; }
 }
 

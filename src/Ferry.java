@@ -1,19 +1,21 @@
 import java.awt.*;
 
-public class Ferry<T extends Storable> extends Vehicle implements Movable, IStorageUnit<T> {
+public class Ferry<T extends Storable & Positionable> implements Movable, IStorageUnit<T> {
 
     private final FIFO<T> storage;
-
-    // private final Vehicles.Vehicle vehicle;
+    private final Vehicle vehicle;
 
     public Ferry(){
         this.storage = new FIFO<T>(10, 1, 1);
+        vehicle = new Vehicle(1000);
     }
 
     public Ferry(FIFO<T> storageUnit) {
         this.storage = storageUnit;
+        vehicle = new Vehicle(1000);
     }
 
+    // ------ STORABLE --------
     @Override
     public void store(T item) {
         storage.add(item);
@@ -24,10 +26,37 @@ public class Ferry<T extends Storable> extends Vehicle implements Movable, IStor
         return storage.remove();
     }
 
+    // ------ MOVABLE --------
+    @Override
+    public void move() {
+        vehicle.move();
+    }
+
+    /**
+     * Turns the vehicle 90 degrees to the left.
+     */
+    @Override
+    public void turnLeft() {
+        vehicle.turnLeft();
+    }
+
+    /**
+     * Turns the vehicle 90 degrees to the right.
+     */
+    @Override
+    public void turnRight() {
+        vehicle.turnRight();
+    }
+
+    /**
+     * Determines the speed factor of the vehicle.
+     * @return the speed factor of the vehicle
+     */
     @Override
     public double findSpeedFactor() {
-        return getEnginePower() * 0.01;
+        return vehicle.getEnginePower() * 0.01;
     }
+
 }
 
 

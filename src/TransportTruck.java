@@ -1,8 +1,7 @@
 import java.awt.*;
 
-public class TransportTruck<T extends Storable> extends Vehicle implements Movable, IStorageUnit<T>, AuxRamp {
-
-    /*
+public class TransportTruck<T extends Storable & Positionable> implements Movable, Positionable, IStorageUnit<T>, AuxPlatform {
+/*
     Biltransportens ramp har endast två lägen, uppe eller nere.
     Rampen kan endast vara nere om biltransporten står stilla.
     Bilar kan endast lastas om rampen är nere, och de befinner sig rimligt nära biltransporten (gör ett eget antagande, de exakta detaljerna är inte viktiga).
@@ -27,9 +26,13 @@ public class TransportTruck<T extends Storable> extends Vehicle implements Movab
     private double rampAngle = 45;
     private final double RAMPSPEED = 1;
 
+    private final Vehicle vehicle;
+    private Vector2D position;
+
     public TransportTruck(double truckLength, LIFO<T> storage, double width, double length) {
         this.truckLength = truckLength;
         this.storage = storage;
+        vehicle = new Vehicle(10000000);
     }
 
     // For an object to be a specific _Car_ storage truck, that has to be declared when creating the object.
@@ -47,7 +50,7 @@ public class TransportTruck<T extends Storable> extends Vehicle implements Movab
     public T remove() {
         if (rampAngle == 0) {
             T car = storage.remove();
-            Vector2D offset = this.getDirection().multiplyByScalar(-truckLength / 2.1);
+            Vector2D offset = vehicle.getDirection().multiplyByScalar(-truckLength / 2.1);
             Vector2D unloadedPosition = this.getPosition().plus(offset);
             car.setPosition(unloadedPosition);
             return car;
@@ -57,13 +60,34 @@ public class TransportTruck<T extends Storable> extends Vehicle implements Movab
         }
     }
 
+    @Override
     public void move() {
         if (getRampAngle() == 70) {
-            super.move();
-            for (T car : storage.getStorage()) {
-                car.setPosition(this.getPosition());
+            vehicle.moveForward();
+            for (T stored : storage.getStorage()) {
+                stored.setPosition(this.getPosition());
             }
         }
+    }
+
+    @Override
+    public void turnLeft(){
+        vehicle.turnLeft();
+    }
+
+    @Override
+    public void turnRight(){
+        vehicle.turnRight();
+    }
+
+    @Override
+    public double findSpeedFactor() {
+        return vehicle.getEnginePower() * 0.01;
+    }
+
+    @Override
+    public void startEngine() {
+
     }
 
     public double getRampAngle() {
@@ -75,7 +99,7 @@ public class TransportTruck<T extends Storable> extends Vehicle implements Movab
      * returns true if platform is at load position.
      */
     public boolean raiseRamp() {
-        if (getCurrentSpeed() == 0) {
+        if (vehicle.getCurrentSpeed() == 0) {
             while (rampAngle < 70) {
                 rampAngle = Vector2D.clamp(rampAngle += RAMPSPEED, 0, 70);
             }
@@ -90,7 +114,7 @@ public class TransportTruck<T extends Storable> extends Vehicle implements Movab
      * return true when platform is a 0 degree sensor.
      */
     public boolean lowerRamp() {
-        if (getCurrentSpeed() == 0) {
+        if (vehicle.getCurrentSpeed() == 0) {
             while (rampAngle > 0) {
                 rampAngle = Vector2D.clamp(rampAngle -= RAMPSPEED, 0, 70);
             }
@@ -101,13 +125,9 @@ public class TransportTruck<T extends Storable> extends Vehicle implements Movab
     public int getStorageCount() {
         return storage.getSize();
     }
+
+    @Override public Vector2D getPosition(){ return position; }
+    @Override public void setPosition(Vector2D vector2D){ position = vector2D; }
+
+
 }
-
-
-
-/*    public TransportTruck(String modelName, Color color, double enginePower, int nrDoors,
-                             int capacity, double maxWidth, double maxHeight) {
-        super(modelName, color, enginePower, nrDoors);
-        this.LIFOStorageUnit = new LIFOStorageUnit<T>(capacity, maxWidth, maxHeight);
-    }*/
-
