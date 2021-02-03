@@ -26,6 +26,15 @@ public abstract class Container<T extends Storable> {
         this.storage = new ArrayDeque<>(capacity);
     }
 
+    public void move(Vehicle vehicle){
+
+        for (T stored : storage) {
+            stored.follow(this);
+            stored.setPosition(vehicle.getPosition());
+            stored.setDirection(vehicle.getDirection());
+        }
+    }
+
     public double getMaxWidth() {
         return maxWidth;
     }

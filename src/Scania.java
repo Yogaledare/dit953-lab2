@@ -26,6 +26,11 @@ public class Scania implements Movable, Storable, Positionable, AuxPlatform {
         ramp = new Ramp(70, 1);
     }
 
+    public Scania(){
+        car = new Car(10, "Scania", Color.blue, 2, 3, 5);
+        ramp = new Ramp(70, 1);
+    }
+
     public double findSpeedFactor() {
         return car.getEnginePower() * 0.01;
     }
@@ -58,8 +63,13 @@ public class Scania implements Movable, Storable, Positionable, AuxPlatform {
     }
 
     @Override
+    public boolean isMoving() {
+        return car.isMoving();
+    }
+
+    @Override
     public boolean raise() {
-        if (car.getCurrentSpeed() == 0) {
+        if (!isMoving()) {
             ramp.raise();
         }
         return ramp.fullyRaised();
@@ -67,7 +77,7 @@ public class Scania implements Movable, Storable, Positionable, AuxPlatform {
 
     @Override
     public boolean lower() {
-        if (car.getCurrentSpeed() == 0) {
+        if (!isMoving()) {
             ramp.lower();
         }
         return ramp.fullyLowered();

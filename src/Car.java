@@ -136,4 +136,9 @@ public class Car implements Storable, Positionable, Movable {
         vehicle.brake(amount, speedFactor);
     }
 
+    @Override
+    public boolean isMoving() {
+        return vehicle.getCurrentSpeed() > 0;
+    }
+
 }

@@ -4,32 +4,53 @@ public class Ferry<T extends Storable & Positionable> implements Movable, IStora
 
     private final FIFO<T> storage;
     private final Vehicle vehicle;
+    private final Ramp ramp;
 
     public Ferry(){
-        this.storage = new FIFO<T>(10, 1, 1);
+        storage = new FIFO<T>(10, 1, 1);
         vehicle = new Vehicle(1000);
+        ramp = new Ramp(70, 1);
     }
 
     public Ferry(FIFO<T> storageUnit) {
         this.storage = storageUnit;
         vehicle = new Vehicle(1000);
+        ramp = new Ramp(70, 1);
     }
 
     // ------ STORABLE --------
     @Override
     public void store(T item) {
-        storage.add(item);
+        if (vehicle.getPosition().dst(item.getPosition()) < 2 && ramp.fullyLowered()) {
+            storage.add(item);
+            item.setPosition(vehicle.getPosition());
+        }
     }
 
     @Override
     public T remove() {
-        return storage.remove();
+        if (ramp.fullyLowered()) {
+            T car = storage.remove();
+            Vector2D offset = vehicle.getDirection().multiplyByScalar(5);
+            Vector2D unloadedPosition = vehicle.getPosition().plus(offset);
+            car.setPosition(unloadedPosition);
+            return car;
+        } else {
+            // fail to unload, due to ramp is up.
+            return null;
+        }
     }
 
     // ------ MOVABLE --------
     @Override
     public void move() {
-        vehicle.move();
+        if (ramp.fullyRaised()) {
+            vehicle.move();
+            storage.follow(vehicle);
+            for (T stored : storage.getStorage()) {
+                stored.setPosition(vehicle.getPosition());
+            }
+        }
     }
 
     /**
@@ -37,7 +58,8 @@ public class Ferry<T extends Storable & Positionable> implements Movable, IStora
      */
     @Override
     public void turnLeft() {
-        vehicle.turnLeft();
+        if(ramp.fullyRaised())
+            vehicle.turnLeft();
     }
 
     /**
@@ -45,14 +67,14 @@ public class Ferry<T extends Storable & Positionable> implements Movable, IStora
      */
     @Override
     public void turnRight() {
-        vehicle.turnRight();
+        if(ramp.fullyRaised())
+            vehicle.turnRight();
     }
 
     /**
      * Determines the speed factor of the vehicle.
      * @return the speed factor of the vehicle
      */
-    @Override
     public double findSpeedFactor() {
         return vehicle.getEnginePower() * 0.01;
     }

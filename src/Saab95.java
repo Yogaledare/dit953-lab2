@@ -89,6 +89,11 @@ public class Saab95 implements Positionable, Storable, Movable, AuxTurbo {
     }
 
     @Override
+    public boolean isMoving() {
+        return car.isMoving();
+    }
+
+    @Override
     public double getWidth() {
         return car.getWidth();
     }

@@ -22,15 +22,13 @@ public class TransportTruck<T extends Storable & Positionable> implements Movabl
     */
 
     private final LIFO<T> storage;
-    private final double truckLength;
 
     private final Ramp ramp;
 
     private final Vehicle vehicle;
     private Vector2D position;
 
-    public TransportTruck(double truckLength, int capacity, double maxW, double maxL) {
-        this.truckLength = truckLength;
+    public TransportTruck(int capacity, double maxW, double maxL) {
         storage = new LIFO<T>(capacity, maxW, maxL);
         vehicle = new Vehicle(10000000);
         ramp = new Ramp(70, 1);
@@ -87,6 +85,11 @@ public class TransportTruck<T extends Storable & Positionable> implements Movabl
     @Override
     public void brake(double amount, double speedFactor) {
         vehicle.brake(amount, findSpeedFactor());
+    }
+
+    @Override
+    public boolean isMoving() {
+        return vehicle.getCurrentSpeed() > 0;
     }
 
     public double findSpeedFactor() {

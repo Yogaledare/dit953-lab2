@@ -3,7 +3,7 @@
  * using the first in first out rules
  * @param <T> The type stored in the container
  */
-public class FIFO<T extends Storable> extends Container<T> {
+public class FIFO<T extends Transportable> extends Container<T> {
 
     public FIFO(int capacity, double maxWidth, double maxLength) {
         super(capacity, maxWidth, maxLength);
@@ -11,6 +11,10 @@ public class FIFO<T extends Storable> extends Container<T> {
 
     @Override
     public T remove() {
-        return storage.removeFirst();
+        T car = storage.removeFirst();
+        Vector2D offset = car.getDirection().multiplyByScalar(-5);
+        Vector2D unloadedPosition = car.getPosition().plus(offset);
+        car.setPosition(unloadedPosition);
+        return car;
     }
 }

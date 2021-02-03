@@ -80,9 +80,9 @@ public class Vehicle implements Positionable{
      * @param amount how much the speed should increase for every move.
      */
     private void incrementSpeed(double amount, double speedFactor) {
-        if (currentSpeed != 0) {
-            currentSpeed = Vector2D.clamp(getCurrentSpeed() + speedFactor * amount, 0, enginePower);
-        }
+        if(currentSpeed == 0)
+            startEngine();
+        currentSpeed = Vector2D.clamp(getCurrentSpeed() + speedFactor * amount, 0, enginePower);
     }
 
     /**
@@ -92,6 +92,8 @@ public class Vehicle implements Positionable{
      */
     private void decrementSpeed(double amount, double speedFactor) {
         currentSpeed = Vector2D.clamp(getCurrentSpeed() - speedFactor * amount, 0, enginePower);
+        if(currentSpeed == 0)
+            stopEngine();
     }
 
     /**
