@@ -11,8 +11,4 @@ public interface AuxPlatform {
      */
     boolean lower();
 
-    /**
-     * It's only possible to start engine if platform is at 0 degree.
-     */
-    void startEngine();
 }

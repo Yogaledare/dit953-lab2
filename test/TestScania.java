@@ -22,7 +22,7 @@ public class TestScania {
          * och lastbilen ska inte kunna köra om flaket är uppfällt.
          * */
 
-        truck.raiseRamp(); // set ramp to 70 degree
+        truck.raise(); // set ramp to 70 degree
         truck.startEngine();  // try start engine.
         truck.gas(1.0);
         truck.move();

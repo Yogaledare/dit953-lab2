@@ -35,7 +35,7 @@ public class TestTransportTruck {
     public void loadCarOntoTowTruckAndCloseRamp() {
         towTruck.lowerRamp();
         towTruck.store(new Volvo240());
-        towTruck.raiseRamp();
+        towTruck.raise();
 
         assertEquals(70, towTruck.getRampAngle(),0.1);
     }
@@ -44,7 +44,7 @@ public class TestTransportTruck {
     public void loadCarOntoTowTruckAndCloseRampAndStartEngine() {
         towTruck.lowerRamp();
         towTruck.store(new Volvo240());
-        towTruck.raiseRamp();
+        towTruck.raise();
         towTruck.startEngine();
         assertEquals(0.1, towTruck.getCurrentSpeed(),0.01);
     }
@@ -54,7 +54,7 @@ public class TestTransportTruck {
     public void loadCarOntoTowTruckAndCloseRampAndCountContent() {
         towTruck.lowerRamp();
         towTruck.store(new Volvo240());
-        towTruck.raiseRamp();
+        towTruck.raise();
 
         assertEquals(1, towTruck.getStorageCount());
     }
@@ -64,7 +64,7 @@ public class TestTransportTruck {
     public void loadCarOntoTowTruckAndCloseRampAndOpenRampAndUnload() {
         towTruck.lowerRamp();
         towTruck.store(new Volvo240());
-        towTruck.raiseRamp();
+        towTruck.raise();
         towTruck.startEngine();
         towTruck.stopEngine();
         towTruck.lowerRamp();
@@ -77,7 +77,7 @@ public class TestTransportTruck {
     public void loadCarOntoTowTruckAndCloseRampAndForgetToOpenRampAndUnload() {
         towTruck.lowerRamp();
         towTruck.store(new Volvo240());
-        towTruck.raiseRamp();
+        towTruck.raise();
         towTruck.startEngine();
         towTruck.stopEngine();
         towTruck.remove(); // Car is sent to void!

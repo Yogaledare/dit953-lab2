@@ -26,6 +26,8 @@ public class TransportTruck<T extends Storable & Positionable> implements Movabl
     private double rampAngle = 45;
     private final double RAMPSPEED = 1;
 
+    private Ramp ramp;
+
     private final Vehicle vehicle;
     private Vector2D position;
 
@@ -33,6 +35,7 @@ public class TransportTruck<T extends Storable & Positionable> implements Movabl
         this.truckLength = truckLength;
         this.storage = storage;
         vehicle = new Vehicle(10000000);
+        ramp = new Ramp(70, 1);
     }
 
     // For an object to be a specific _Car_ storage truck, that has to be declared when creating the object.
@@ -62,8 +65,8 @@ public class TransportTruck<T extends Storable & Positionable> implements Movabl
 
     @Override
     public void move() {
-        if (getRampAngle() == 70) {
-            vehicle.moveForward();
+        if (ramp.fullyRaised()) {
+            vehicle.move();
             for (T stored : storage.getStorage()) {
                 stored.setPosition(this.getPosition());
             }
@@ -72,12 +75,14 @@ public class TransportTruck<T extends Storable & Positionable> implements Movabl
 
     @Override
     public void turnLeft(){
-        vehicle.turnLeft();
+        if(ramp.fullyRaised())
+            vehicle.turnLeft();
     }
 
     @Override
     public void turnRight(){
-        vehicle.turnRight();
+        if(ramp.fullyRaised())
+            vehicle.turnRight();
     }
 
     @Override
@@ -85,26 +90,15 @@ public class TransportTruck<T extends Storable & Positionable> implements Movabl
         return vehicle.getEnginePower() * 0.01;
     }
 
-    @Override
-    public void startEngine() {
-
-    }
-
-    public double getRampAngle() {
-        return rampAngle;
-    }
-
     /**
      * Raise loading platform.
      * returns true if platform is at load position.
      */
-    public boolean raiseRamp() {
+    public boolean raise() {
         if (vehicle.getCurrentSpeed() == 0) {
-            while (rampAngle < 70) {
-                rampAngle = Vector2D.clamp(rampAngle += RAMPSPEED, 0, 70);
-            }
+            ramp.raise();
         }
-        return (getRampAngle() == 70);
+        return ramp.fullyRaised();
     }
 
 
@@ -115,11 +109,9 @@ public class TransportTruck<T extends Storable & Positionable> implements Movabl
      */
     public boolean lowerRamp() {
         if (vehicle.getCurrentSpeed() == 0) {
-            while (rampAngle > 0) {
-                rampAngle = Vector2D.clamp(rampAngle -= RAMPSPEED, 0, 70);
-            }
+            ramp.lower();
         }
-        return (getRampAngle() == 0);
+        return ramp.fullyLowered();
     }
 
     public int getStorageCount() {
