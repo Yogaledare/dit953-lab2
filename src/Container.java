@@ -43,7 +43,8 @@ public abstract class Container<T extends Storable> {
     }
 
     public void add(T item) {
-        storage.addLast(item);
+        if(item.getWidth() <= getMaxWidth() && item.getLength() <= getMaxLength())
+            storage.addLast(item);
     }
 
     public int getSize() {

@@ -4,7 +4,7 @@ public class Ramp {
      */
     private final double maxAngle;
     private double rampAngle;
-    private double rampSpeed;
+    private final double rampSpeed;
 
     public Ramp(double maxAngle, double speed){
         this.maxAngle = maxAngle;

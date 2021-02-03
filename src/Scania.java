@@ -2,9 +2,8 @@ import java.awt.*;
 
 public class Scania implements Movable, Storable, Positionable, AuxPlatform {
 
-    private double platformAngle;
-
-    private Car car;
+    private final Car car;
+    private final Ramp ramp;
 
     /**
      * Constructs a Scania truck object with the specified modelName, color, enginePower, nrDoors, width and length.
@@ -19,17 +18,14 @@ public class Scania implements Movable, Storable, Positionable, AuxPlatform {
      */
     public Scania(double enginePower, String modelName, Color color, int nrDoors, double width, double length) {
         car = new Car(enginePower, modelName, color, nrDoors, width, length);
-        platformAngle = 0;
+        ramp = new Ramp(70, 1);
     }
 
     public Scania(Car car) {
         this.car = car;
-        platformAngle = 0;
+        ramp = new Ramp(70, 1);
     }
 
-
-
-    @Override
     public double findSpeedFactor() {
         return car.getEnginePower() * 0.01;
     }
@@ -41,49 +37,40 @@ public class Scania implements Movable, Storable, Positionable, AuxPlatform {
 
     @Override
     public void turnLeft() {
-
+        if(ramp.fullyRaised())
+            car.turnLeft();
     }
 
     @Override
     public void turnRight() {
-
+        if(ramp.fullyRaised())
+            car.turnRight();
     }
 
     @Override
     public void gas(double amount, double speedFactor) {
-
+        car.gas(amount, findSpeedFactor());
     }
 
     @Override
     public void brake(double amount, double speedFactor) {
-
+        car.brake(amount, findSpeedFactor());
     }
 
     @Override
     public boolean raise() {
-        setPlatformAngle(70);
-        return (getPlatformAngle() == 70);
+        if (car.getCurrentSpeed() == 0) {
+            ramp.raise();
+        }
+        return ramp.fullyRaised();
     }
 
     @Override
     public boolean lower() {
-
-        return false;
-    }
-
-    @Override
-    public void startEngine() {
-        if (platformAngle == 0) {
-            car.startEngine();
+        if (car.getCurrentSpeed() == 0) {
+            ramp.lower();
         }
-    }
-
-    public double getPlatformAngle() {
-        return platformAngle;
-    }
-
-    public void setPlatformAngle(double platformAngle) {
-        this.platformAngle = platformAngle;
+        return ramp.fullyLowered();
     }
 
     @Override

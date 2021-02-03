@@ -23,35 +23,29 @@ public class TransportTruck<T extends Storable & Positionable> implements Movabl
 
     private final LIFO<T> storage;
     private final double truckLength;
-    private double rampAngle = 45;
-    private final double RAMPSPEED = 1;
 
-    private Ramp ramp;
+    private final Ramp ramp;
 
     private final Vehicle vehicle;
     private Vector2D position;
 
-    public TransportTruck(double truckLength, LIFO<T> storage, double width, double length) {
+    public TransportTruck(double truckLength, int capacity, double maxW, double maxL) {
         this.truckLength = truckLength;
-        this.storage = storage;
+        storage = new LIFO<T>(capacity, maxW, maxL);
         vehicle = new Vehicle(10000000);
         ramp = new Ramp(70, 1);
     }
 
     // For an object to be a specific _Car_ storage truck, that has to be declared when creating the object.
     public void store(T car) {
-        if (this != car) {
-            if (car.getLength() <= this.getLength()) {
-                if (rampAngle == 0) {
-                    storage.add(car);
-                    car.setPosition(this.getPosition());
-                }
-            }
+        if (position.dst(car.getPosition()) < 2 && ramp.fullyLowered()) {
+            storage.add(car);
+            car.setPosition(this.getPosition());
         }
     }
 
     public T remove() {
-        if (rampAngle == 0) {
+        if (ramp.fullyLowered()) {
             T car = storage.remove();
             Vector2D offset = vehicle.getDirection().multiplyByScalar(-truckLength / 2.1);
             Vector2D unloadedPosition = this.getPosition().plus(offset);
@@ -86,6 +80,15 @@ public class TransportTruck<T extends Storable & Positionable> implements Movabl
     }
 
     @Override
+    public void gas(double amount, double speedFactor) {
+        vehicle.gas(amount, findSpeedFactor());
+    }
+
+    @Override
+    public void brake(double amount, double speedFactor) {
+        vehicle.brake(amount, findSpeedFactor());
+    }
+
     public double findSpeedFactor() {
         return vehicle.getEnginePower() * 0.01;
     }
@@ -101,13 +104,12 @@ public class TransportTruck<T extends Storable & Positionable> implements Movabl
         return ramp.fullyRaised();
     }
 
-
     /**
      * Lower loading platform to ground.
      * It's is only possible to lower when engine is off.
      * return true when platform is a 0 degree sensor.
      */
-    public boolean lowerRamp() {
+    public boolean lower() {
         if (vehicle.getCurrentSpeed() == 0) {
             ramp.lower();
         }

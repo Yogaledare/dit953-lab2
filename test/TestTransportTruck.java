@@ -16,7 +16,7 @@ public class TestTransportTruck {
 
     @Test
     public void loadCarOntoTowTruck() {
-        towTruck.lowerRamp();
+        towTruck.lower();
         towTruck.store(new Volvo240());
         assertEquals(1, towTruck.getStorageCount());
 
@@ -24,7 +24,7 @@ public class TestTransportTruck {
 
     @Test
     public void loadCarOntoTowTruckAndStartEngineWithoutClosingRamp() {
-        towTruck.lowerRamp();
+        towTruck.lower();
         towTruck.store(new Volvo240());
         towTruck.startEngine();
         assertNotEquals(0, towTruck.getCurrentSpeed(), 0.01);
@@ -33,7 +33,7 @@ public class TestTransportTruck {
 
     @Test
     public void loadCarOntoTowTruckAndCloseRamp() {
-        towTruck.lowerRamp();
+        towTruck.lower();
         towTruck.store(new Volvo240());
         towTruck.raise();
 
@@ -42,7 +42,7 @@ public class TestTransportTruck {
 
     @Test
     public void loadCarOntoTowTruckAndCloseRampAndStartEngine() {
-        towTruck.lowerRamp();
+        towTruck.lower();
         towTruck.store(new Volvo240());
         towTruck.raise();
         towTruck.startEngine();
@@ -52,7 +52,7 @@ public class TestTransportTruck {
 
     @Test
     public void loadCarOntoTowTruckAndCloseRampAndCountContent() {
-        towTruck.lowerRamp();
+        towTruck.lower();
         towTruck.store(new Volvo240());
         towTruck.raise();
 
@@ -62,12 +62,12 @@ public class TestTransportTruck {
 
     @Test
     public void loadCarOntoTowTruckAndCloseRampAndOpenRampAndUnload() {
-        towTruck.lowerRamp();
+        towTruck.lower();
         towTruck.store(new Volvo240());
         towTruck.raise();
         towTruck.startEngine();
         towTruck.stopEngine();
-        towTruck.lowerRamp();
+        towTruck.lower();
         towTruck.remove(); // Car is sent to void!
 
         assertEquals(0, towTruck.getStorageCount());
@@ -75,7 +75,7 @@ public class TestTransportTruck {
 
     @Test
     public void loadCarOntoTowTruckAndCloseRampAndForgetToOpenRampAndUnload() {
-        towTruck.lowerRamp();
+        towTruck.lower();
         towTruck.store(new Volvo240());
         towTruck.raise();
         towTruck.startEngine();

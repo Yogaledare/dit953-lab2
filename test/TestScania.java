@@ -31,12 +31,12 @@ public class TestScania {
 
     @Test
     public void tryToRaisePlatformWhileDriving() {
-        truck.lowerRamp();
+        truck.lower();
         truck.startEngine();
         truck.gas(1.0);
         truck.move();
 
-        truck.raiseRamp(); // try set ramp to 70.
+        truck.raise(); // try set ramp to 70.
 
         assertNotEquals(70, truck.getRampAngle(), 0.1);
      }

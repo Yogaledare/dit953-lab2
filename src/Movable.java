@@ -24,4 +24,6 @@ public interface Movable {
 
     void brake(double amount, double speedFactor);
 
+    boolean isMoving();
+
 }
