@@ -2,13 +2,31 @@ import java.awt.*;
 
 public class TransportTruck<T extends Storable> extends Vehicle implements Movable, IStorageUnit<T>, AuxRamp {
 
+    /*
+    Biltransportens ramp har endast två lägen, uppe eller nere.
+    Rampen kan endast vara nere om biltransporten står stilla.
+    Bilar kan endast lastas om rampen är nere, och de befinner sig rimligt nära biltransporten (gör ett eget antagande, de exakta detaljerna är inte viktiga).
+    Bilar kan endast lossas om rampen är nere. De bör då hamna rimligt nära biltransporten.
+    Bilar kan endast lossas i omvänd ordning från hur de lastades, dvs den sista bilen som lastades måste vara först att lossas (first-in-last-out).
+    Biltransporten ska inte kunna lasta på sig själv.
+    Under det att en bil är lastad på biltransporten ska dess position i världen alltid vara densamma som biltransportens position.
+
+    Viktiga saker att ha i åtanke under den här uppgiften:
+
+    Undvik kodduplicering för funktionalitet som är gemensam för flera olika klasser, e.g. lastbil och biltransport.
+    Fundera över behovet av polymorfism för olika ändamål, och hur det påverkar framtida extensibilitet.
+    Fundera över hur ni bäst håller reda på de bilar som lastats - vilken sorts datastruktur är bäst för ändamålet?
+
+    Kom ihåg att skriva Javadoc-dokumentation, och JUnit-tester för relevanta aspekter av er kod.
+    */
+
     private final LIFO<T> storage;
     private final double truckLength;
     private double rampAngle = 45;
     private final double RAMPSPEED = 1;
 
     public TransportTruck(String modelName, Color color, double enginePower, int nrDoors,
-                             double truckLength, LIFO<T> storage) {
+                          double truckLength, LIFO<T> storage) {
         super(modelName, color, enginePower, nrDoors);
         this.truckLength = truckLength;
         this.storage = storage;
@@ -23,9 +41,12 @@ public class TransportTruck<T extends Storable> extends Vehicle implements Movab
     // For an object to be a specific _Car_ storage truck, that has to be declared when creating the object.
     public void store(T car) {
         // TODO: It should only be possible to store a car when ramp is down at 0 degree
-        if (rampAngle == 0) {
-            storage.add(car);
-            car.setPosition(this.getPosition());
+        if (this != car) {
+
+            if (rampAngle == 0) {
+                storage.add(car);
+                car.setPosition(this.getPosition());
+            }
         }
     }
 

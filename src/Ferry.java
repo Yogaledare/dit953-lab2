@@ -4,7 +4,7 @@ public class Ferry<T extends Storable> extends Vehicle implements Movable, IStor
 
     private final FIFO<T> storage;
 
-    //private final Vehicles.Vehicle vehicle;
+    // private final Vehicles.Vehicle vehicle;
 
     public Ferry(){
         super("VikingLine", Color.WHITE, 10000, 2 );
