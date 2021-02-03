@@ -32,8 +32,8 @@ public class TestVehicle {
     public void driveOneStep() {
         for (Vehicle car : cars) {
             car.startEngine();
-            car.gas(1.0);
-            car.move();
+            // car.gas(1.0, );
+            car.moveForward();
             Vector2D target = new Vector2D(0.0,1.35);
             assertEquals(car.getPosition().getY(), target.getY(), 0.0);
         }

@@ -7,12 +7,10 @@ public class Ferry<T extends Storable> extends Vehicle implements Movable, IStor
     // private final Vehicles.Vehicle vehicle;
 
     public Ferry(){
-        super("VikingLine", Color.WHITE, 10000, 2 );
         this.storage = new FIFO<T>(10, 1, 1);
     }
 
     public Ferry(FIFO<T> storageUnit) {
-        super("VikingLine", Color.WHITE, 10000, 2 );
         this.storage = storageUnit;
     }
 

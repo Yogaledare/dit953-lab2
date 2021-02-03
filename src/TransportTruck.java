@@ -6,7 +6,9 @@ public class TransportTruck<T extends Storable> extends Vehicle implements Movab
     Biltransportens ramp har endast två lägen, uppe eller nere.
     Rampen kan endast vara nere om biltransporten står stilla.
     Bilar kan endast lastas om rampen är nere, och de befinner sig rimligt nära biltransporten (gör ett eget antagande, de exakta detaljerna är inte viktiga).
-    Bilar kan endast lossas om rampen är nere. De bör då hamna rimligt nära biltransporten.
+    Bilar kan endast lossas om rampen är nere.
+     De bör då hamna rimligt nära biltransporten.
+
     Bilar kan endast lossas i omvänd ordning från hur de lastades, dvs den sista bilen som lastades måste vara först att lossas (first-in-last-out).
     Biltransporten ska inte kunna lasta på sig själv.
     Under det att en bil är lastad på biltransporten ska dess position i världen alltid vara densamma som biltransportens position.
@@ -25,33 +27,24 @@ public class TransportTruck<T extends Storable> extends Vehicle implements Movab
     private double rampAngle = 45;
     private final double RAMPSPEED = 1;
 
-    public TransportTruck(String modelName, Color color, double enginePower, int nrDoors,
-                          double truckLength, LIFO<T> storage) {
-        super(modelName, color, enginePower, nrDoors);
+    public TransportTruck(double truckLength, LIFO<T> storage, double width, double length) {
         this.truckLength = truckLength;
         this.storage = storage;
     }
 
-
-    @Override
-    public double findSpeedFactor() {
-        return 0;
-    }
-
     // For an object to be a specific _Car_ storage truck, that has to be declared when creating the object.
     public void store(T car) {
-        // TODO: It should only be possible to store a car when ramp is down at 0 degree
         if (this != car) {
-
-            if (rampAngle == 0) {
-                storage.add(car);
-                car.setPosition(this.getPosition());
+            if (car.getLength() <= this.getLength()) {
+                if (rampAngle == 0) {
+                    storage.add(car);
+                    car.setPosition(this.getPosition());
+                }
             }
         }
     }
 
     public T remove() {
-        // TODO: It should only be possible to store a car when ramp is down at 0 degree
         if (rampAngle == 0) {
             T car = storage.remove();
             Vector2D offset = this.getDirection().multiplyByScalar(-truckLength / 2.1);
@@ -65,8 +58,6 @@ public class TransportTruck<T extends Storable> extends Vehicle implements Movab
     }
 
     public void move() {
-        // TODO: do not drive when ramp is down.
-        // TODO: This is ugly, closed == 70 . use enum [OPEN, INPROGRESS, CLOSED]?
         if (getRampAngle() == 70) {
             super.move();
             for (T car : storage.getStorage()) {

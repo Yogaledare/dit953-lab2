@@ -11,7 +11,7 @@ public class TestTransportTruck {
     @Before
     public void setUp() {
         LIFO<Vehicle> platform = new LIFO<>(1,2.6, 6);
-        towTruck = new TransportTruck<>("MAN", Color.yellow, 500, 2, 9, platform );
+        towTruck = new TransportTruck<>("MAN", Color.yellow, 500, 2, 9, platform, 4, 10 );
     }
 
     @Test

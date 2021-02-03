@@ -4,19 +4,20 @@ import java.awt.*;
  * A class representing a Saab95 car.
  */
 
-public class Saab95 extends Vehicle implements AuxTurbo {
+public class Saab95 implements Positionable, Storable, Movable, AuxTurbo {
 
     /**
      * Flag to indicate if turbo is on or not.
      */
     private boolean turboOn;
+    private Car car;
 
     /**
      * Constructs a Saab95 object by calling its parent constructor with (hardcoded) presets for modelName, color,
      * enginePower and nrDoors. Initializes turboOn to false.
      */
-    public Saab95() {
-        super("Saab95", Color.red, 125, 2);
+    public Saab95(double width, double length) {
+        this.car = new Car(100, "Volvo240", Color.black, 4, width, length);
         turboOn = false;
     }
 
@@ -42,6 +43,18 @@ public class Saab95 extends Vehicle implements AuxTurbo {
         return turboOn;
     }
 
+
+
+
+    /**
+     * Returns the turbo factor of the Saab95.
+     * @return the turbo factor of the Saab95
+     */
+    public double findTurboFactor() {
+        if (turboOn) return 1.3;
+        return 1;
+    }
+
     /**
      * Returns the speed factor of the Saab95.
      * @return the speed factor of the Saab95
@@ -60,6 +73,25 @@ public class Saab95 extends Vehicle implements AuxTurbo {
         return 1;
     }
 
+    @Override
+    public double getWidth() {
+        return 0;
+    }
+
+    @Override
+    public double getLength() {
+        return 0;
+    }
+
+    @Override
+    public void setPosition(Vector2D position) {
+
+    }
+
+    @Override
+    public Vector2D getPosition() {
+        return null;
+    }
 }
 
 
