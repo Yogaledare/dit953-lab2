@@ -23,8 +23,6 @@ public class Scania extends TransportTruck<Vehicle>  {
 
     }
 
-
-
     @Override
     public double findSpeedFactor() {
         return getEnginePower() * 0.01;

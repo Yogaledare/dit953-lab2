@@ -86,7 +86,7 @@ public class TransportTruck<T extends Storable> extends Vehicle implements Movab
         return (getRampAngle() == 0);
     }
 
-    public int getNumberOfCars() {
+    public int getStorageCount() {
         return storage.getSize();
     }
 }
