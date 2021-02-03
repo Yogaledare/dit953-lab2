@@ -59,19 +59,40 @@ public class Saab95 implements Positionable, Storable, Movable, AuxTurbo {
      * Returns the speed factor of the Saab95.
      * @return the speed factor of the Saab95
      */
-    @Override
-    public double findSpeedFactor() {
-        return getEnginePower() * 0.01 * findTurboFactor();
+
+    private double findSpeedFactor() {
+        return car.getEnginePower() * 0.01 * findTurboFactor();
     }
 
-    /**
-     * Returns the turbo factor of the Saab95.
-     * @return the turbo factor of the Saab95
-     */
-    public double findTurboFactor() {
-        if (turboOn) return 1.3;
-        return 1;
+
+    @Override
+    public void move() {
+        car.move();
     }
+
+    @Override
+    public void turnLeft() {
+        car.turnLeft();
+    }
+
+    @Override
+    public void turnRight() {
+        car.turnRight();
+    }
+
+
+
+    @Override
+    public void gas(double amount, double speedFactor) {
+        car.gas(amount, findSpeedFactor());
+    }
+
+    @Override
+    public void brake(double amount, double speedFactor) {
+        car.brake(amount, findSpeedFactor());
+    }
+
+
 
     @Override
     public double getWidth() {

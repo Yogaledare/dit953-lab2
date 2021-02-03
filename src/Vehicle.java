@@ -24,7 +24,7 @@ public class Vehicle implements Positionable{
     private final double enginePower;
 
     /**
-     * Direction vector of the car
+     * Direction vector of the vehicle
      */
     private Vector2D direction;
     /**

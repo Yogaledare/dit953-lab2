@@ -3,19 +3,38 @@ import java.awt.*;
 /**
  * A class representing a Volvo240 car.
  */
-public class Volvo240 extends Vehicle implements AuxTrim {
+public class Volvo240 implements Positionable, Storable, Movable, AuxTrim {
 
     /**
      * Trim factor, multiplier for speed factor
      */
     private final static double trimFactor = 1.25;
 
+    private Car car;
+
     /**
      * Constructs a Volvo240 object by calling its parent constructor with (hardcoded) presets for modelName, color,
      * enginePower and nrDoors.
      */
-    public Volvo240() {
-        super("Volvo240", Color.black, 100, 4);
+    public Volvo240(double width, double length) {
+        this.car = new Car(100, "Volvo240", Color.black, 4, width, length);
+    }
+
+
+
+    @Override
+    public void move() {
+        car.move();
+    }
+
+    @Override
+    public void turnLeft() {
+        car.turnLeft();
+    }
+
+    @Override
+    public void turnRight() {
+        car.turnRight();
     }
 
     /**
@@ -24,7 +43,43 @@ public class Volvo240 extends Vehicle implements AuxTrim {
      */
     @Override
     public double findSpeedFactor() {
-        return getEnginePower() * 0.01 * trimFactor;
+        return car.getEnginePower() * 0.01 * trimFactor;
     }
 
+    @Override
+    public void gas(double amount, double speedFactor) {
+        car.gas(amount, findSpeedFactor());
+    }
+
+    @Override
+    public void brake(double amount, double speedFactor) {
+        car.brake(amount, findSpeedFactor());
+    }
+
+    @Override
+    public void setPosition(Vector2D position) {
+        car.setPosition(position);
+    }
+
+    @Override
+    public Vector2D getPosition() {
+        return car.getPosition();
+    }
+
+    @Override
+    public double getWidth() {
+        return car.getWidth();
+    }
+
+    @Override
+    public double getLength() {
+        return car.getLength();
+    }
 }
+
+
+/*    @Override
+    public double findSpeedFactor() {
+        return getEnginePower() * 0.01 * trimFactor;
+    }*/
+
