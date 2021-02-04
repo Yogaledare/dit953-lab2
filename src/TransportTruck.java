@@ -1,4 +1,6 @@
-public class TransportTruck<T extends Transportable> implements Movable/*, Transportable, IStorageUnit<T>, AuxPlatform */ {
+import java.awt.*;
+
+public class TransportTruck<T extends Transportable> implements Movable, Transporter<T> /*, Transportable, IStorageUnit<T>, AuxPlatform */ {
 /*
     Biltransportens ramp har endast två lägen, uppe eller nere.
     Rampen kan endast vara nere om biltransporten står stilla.
@@ -25,11 +27,17 @@ public class TransportTruck<T extends Transportable> implements Movable/*, Trans
 
     private final Ramp ramp;
 
-    private final Vehicle vehicle;
+    private final Car car;
 
     public TransportTruck(double enginePower, double width, double length, int capacity, double maxW, double maxL) {
-        vehicle = new Vehicle(enginePower, width, length);
-        storage = new LIFO<T>(capacity, maxW, maxL, 2, vehicle.getPosition(), vehicle.getDirection(), vehicle.getLength());
+        car = new Car(enginePower, width, length, "Transport Truck", Color.red, 2);
+        storage = new LIFO<>(capacity, maxW, maxL, 2, car.getPosition(), car.getDirection(), car.getLength());
+        ramp = new Ramp(70, 1);
+    }
+
+    public TransportTruck(Car car, int capacity, double maxW, double maxL) {
+        this.car = car;
+        storage = new LIFO<>(capacity, maxW, maxL, 2, car.getPosition(), car.getDirection(), car.getLength());
         ramp = new Ramp(70, 1);
     }
 
@@ -52,42 +60,59 @@ public class TransportTruck<T extends Transportable> implements Movable/*, Trans
     }
 
     @Override
+    public int getSize() {
+        return storage.getSize();
+    }
+
+    @Override
     public void move() {
-        if (ramp.fullyRaised()) {
-            vehicle.move();
-            storage.relocate(vehicle.getPosition(), vehicle.getDirection());
+        if (ramp.isFullyRaised()) {
+            car.move();
+            storage.relocate(car.getPosition(), car.getDirection());
         }
     }
 
     @Override
     public void turnLeft() {
-        if (ramp.fullyRaised())
-            vehicle.turnLeft();
+        if (ramp.isFullyRaised())
+            car.turnLeft();
     }
 
     @Override
     public void turnRight() {
-        if (ramp.fullyRaised())
-            vehicle.turnRight();
+        if (ramp.isFullyRaised())
+            car.turnRight();
     }
 
     @Override
-    public void gas(double amount, double speedFactor) {
-        vehicle.gas(amount, findSpeedFactor());
+    public void gas(double amount) {
+        car.gas(amount, findSpeedFactor());
     }
 
     @Override
-    public void brake(double amount, double speedFactor) {
-        vehicle.brake(amount, findSpeedFactor());
+    public void brake(double amount) {
+        car.brake(amount, findSpeedFactor());
     }
 
     @Override
     public boolean isMoving() {
-        return vehicle.getCurrentSpeed() > 0;
+        return car.getCurrentSpeed() > 0;
+    }
+
+    @Override
+    public void startEngine() {
+        if (ramp.isFullyRaised()) {
+            car.startEngine();
+        }
+    }
+
+    @Override
+    public void stopEngine() {
+        car.stopEngine();
     }
 
     public double findSpeedFactor() {
-        return vehicle.getEnginePower() * 0.01;
+        return car.getEnginePower() * 0.01;
     }
 
     /**
@@ -95,10 +120,10 @@ public class TransportTruck<T extends Transportable> implements Movable/*, Trans
      * returns true if platform is at load position.
      */
     public boolean raiseRamp() {
-        if (vehicle.getCurrentSpeed() == 0) {
+        if (car.getCurrentSpeed() == 0) {
             ramp.raise();
         }
-        return ramp.fullyRaised();
+        return ramp.isFullyRaised();
     }
 
     /**
@@ -107,7 +132,7 @@ public class TransportTruck<T extends Transportable> implements Movable/*, Trans
      * return true when platform is a 0 degree sensor.
      */
     public boolean lowerRamp() {
-        if (vehicle.getCurrentSpeed() == 0) {
+        if (car.getCurrentSpeed() == 0) {
             ramp.lower();
         }
         return ramp.isFullyLowered();

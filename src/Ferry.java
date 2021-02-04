@@ -32,11 +32,16 @@ public class Ferry<T extends Transportable> implements Movable/*, IStorageUnit<T
     return storage.remove();
     }
 
+    @Override
+    public int getSize() {
+        return storage.getSize();
+    }
+
     // ------ MOVABLE --------
 //    @Override
     @Override
     public void move() {
-        if (ramp.fullyRaised()) {
+        if (ramp.isFullyRaised()) {
             vehicle.move();
             storage.relocate(vehicle.getPosition(), vehicle.getDirection());
         }
@@ -47,7 +52,7 @@ public class Ferry<T extends Transportable> implements Movable/*, IStorageUnit<T
      */
     @Override
     public void turnLeft() {
-        if(ramp.fullyRaised())
+        if(ramp.isFullyRaised())
             vehicle.turnLeft();
     }
 
@@ -56,23 +61,33 @@ public class Ferry<T extends Transportable> implements Movable/*, IStorageUnit<T
      */
     @Override
     public void turnRight() {
-        if(ramp.fullyRaised())
+        if(ramp.isFullyRaised())
             vehicle.turnRight();
     }
 
     @Override
-    public void gas(double amount, double speedFactor) {
-
+    public void gas(double amount) {
+        vehicle.gas(amount, findSpeedFactor());
     }
 
     @Override
-    public void brake(double amount, double speedFactor) {
-
+    public void brake(double amount) {
+        vehicle.brake(amount, findSpeedFactor());
     }
 
     @Override
     public boolean isMoving() {
         return false;
+    }
+
+    @Override
+    public void startEngine() {
+        vehicle.startEngine();
+    }
+
+    @Override
+    public void stopEngine() {
+        vehicle.stopEngine();
     }
 
     /**

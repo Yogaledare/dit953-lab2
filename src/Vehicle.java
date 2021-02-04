@@ -11,7 +11,7 @@ import java.awt.*;
 /**
  * An abstract class representing a generic vehicle.
  */
-public class Vehicle implements Movable/*, Transportable*//*implements Positionable*/{
+public class Vehicle/*, Transportable*//*implements Positionable*/{
 
     /**
      * Current speed valid interval from 0 to Engine power
@@ -86,8 +86,6 @@ public class Vehicle implements Movable/*, Transportable*//*implements Positiona
      * @param amount how much the speed should increase for every move.
      */
     private void incrementSpeed(double amount, double speedFactor) {
-        if(currentSpeed == 0)
-            startEngine();
         currentSpeed = Vector2D.clamp(getCurrentSpeed() + speedFactor * amount, 0, enginePower);
     }
 
@@ -98,8 +96,6 @@ public class Vehicle implements Movable/*, Transportable*//*implements Positiona
      */
     private void decrementSpeed(double amount, double speedFactor) {
         currentSpeed = Vector2D.clamp(getCurrentSpeed() - speedFactor * amount, 0, enginePower);
-        if(currentSpeed == 0)
-            stopEngine();
     }
 
     /**
@@ -120,7 +116,6 @@ public class Vehicle implements Movable/*, Transportable*//*implements Positiona
         decrementSpeed(Vector2D.clamp(amount, 0, 1), speedFactor);
     }
 
-    @Override
     public boolean isMoving() {
         return currentSpeed > 0;
     }

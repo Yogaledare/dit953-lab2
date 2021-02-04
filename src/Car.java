@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Car implements Movable, Transportable {
+public class Car implements Transportable {
     /**
      * Car model
      */
@@ -23,13 +23,17 @@ public class Car implements Movable, Transportable {
 //    private final double length;
 
 
-    public Car(double enginePower, double width, double length, String modelName, Color color, int nrDoors/*, double width, double length*/){
+    public Car(double enginePower, double width, double length, String modelName, Color color, int nrDoors){
         this.vehicle = new Vehicle(enginePower, width, length);
         this.modelName = modelName;
         this.color = color;
         this.nrDoors = nrDoors;
-//        this.width = width;
-//        this.length = length;
+        vehicle.setPosition(new Vector2D(0, 0));
+    }
+
+    public Car(double enginePower, double width, double length, String modelName, Color color, int nrDoors, Vector2D pos){
+        this(enginePower, width, length, modelName, color, nrDoors);
+        vehicle.setPosition(pos);
     }
 
     /**
@@ -105,17 +109,20 @@ public class Car implements Movable, Transportable {
         return vehicle.getPosition();
     }
 
-    @Override
+    public Vector2D getDirection(){ return vehicle.getDirection(); }
+
+
+
     public void move() {
         vehicle.move();
     }
 
-    @Override
+
     public void turnLeft() {
         vehicle.turnLeft();
     }
 
-    @Override
+
     public void turnRight() {
         vehicle.turnRight();
     }
@@ -125,18 +132,30 @@ public class Car implements Movable, Transportable {
 //        return 0;
 //    }
 
-    @Override
     public void gas(double amount, double speedFactor) {
         vehicle.gas(amount, speedFactor);
     }
 
-    @Override
+
     public void brake(double amount, double speedFactor) {
         vehicle.brake(amount, speedFactor);
     }
 
-    @Override
+
     public boolean isMoving() {
         return vehicle.isMoving();
+    }
+
+
+    public void startEngine() {
+        vehicle.startEngine();
+    }
+
+    public void stopEngine() {
+        vehicle.stopEngine();
+    }
+
+    public double getCurrentSpeed(){
+        return vehicle.getCurrentSpeed();
     }
 }

@@ -4,13 +4,13 @@ import java.awt.*;
  * A class representing a Saab95 car.
  */
 
-public class Saab95 implements Movable, Transportable/*Positionable, Storable, Movable, AuxTurbo */{
+public class Saab95 implements Movable, Transportable, AuxTurbo{
 
     /**
      * Flag to indicate if turbo is on or not.
      */
     private boolean turboOn;
-    private Car car;
+    private final Car car;
 
     /**
      * Constructs a Saab95 object by calling its parent constructor with (hardcoded) presets for modelName, color,
@@ -79,18 +79,28 @@ public class Saab95 implements Movable, Transportable/*Positionable, Storable, M
     }
 
     @Override
-    public void gas(double amount, double speedFactor) {
+    public void gas(double amount) {
         car.gas(amount, findSpeedFactor());
     }
 
     @Override
-    public void brake(double amount, double speedFactor) {
+    public void brake(double amount) {
         car.brake(amount, findSpeedFactor());
     }
 
     @Override
     public boolean isMoving() {
         return car.isMoving();
+    }
+
+    @Override
+    public void startEngine() {
+        car.startEngine();
+    }
+
+    @Override
+    public void stopEngine() {
+        car.stopEngine();
     }
 
     @Override

@@ -32,7 +32,7 @@ public abstract class Container<T extends Transportable> implements IStorageUnit
         this.holder = new ArrayDeque<>(capacity);
     }
 
-    @Override
+    //@Override
     public void store(T item/*, Vector2D storagePosition*/) {
         if (holder.size() >= capacity) {
             throw new IllegalStateException("Container full");
@@ -50,7 +50,7 @@ public abstract class Container<T extends Transportable> implements IStorageUnit
         item.setPosition(position);
     }
 
-    @Override
+    //@Override
     public T remove(/*Vector2D offset*/) {
         T item = findItemToRemove();
         Vector2D offset = findOffset();
@@ -59,7 +59,7 @@ public abstract class Container<T extends Transportable> implements IStorageUnit
         return item;
     }
 
-    @Override
+    //@Override
     public void relocate(Vector2D position, Vector2D direction) {
         this.position = position;
         this.direction = direction;
@@ -69,6 +69,9 @@ public abstract class Container<T extends Transportable> implements IStorageUnit
 
     protected abstract Vector2D findOffset();
 
+    public int getSize(){
+        return holder.size();
+    }
 
 }
 

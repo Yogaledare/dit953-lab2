@@ -47,18 +47,28 @@ public class Volvo240 implements Movable, Transportable/*Positionable, Storable,
     }
 
     @Override
-    public void gas(double amount, double speedFactor) {
+    public void gas(double amount) {
         car.gas(amount, findSpeedFactor());
     }
 
     @Override
-    public void brake(double amount, double speedFactor) {
+    public void brake(double amount) {
         car.brake(amount, findSpeedFactor());
     }
 
     @Override
     public boolean isMoving() {
         return car.isMoving();
+    }
+
+    @Override
+    public void startEngine() {
+        car.startEngine();
+    }
+
+    @Override
+    public void stopEngine() {
+        car.stopEngine();
     }
 
     @Override

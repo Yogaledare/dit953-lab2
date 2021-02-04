@@ -12,138 +12,100 @@ import java.util.List;
 import static org.junit.Assert.*;
 public class TestVehicle {
 
-    List<Vehicle> cars = new ArrayList<>();
+    Saab95 saab95;
+    Volvo240 volvo240;
 
     @Before
     public void setup() {
-        cars.add(new Saab95());
-        cars.add(new Volvo240());
+        saab95 = new Saab95(2, 5);
+        volvo240 = new Volvo240(2, 4);
     }
 
     @Test
     public void startAndStop() {
-        for (Vehicle car : cars) {
-            car.startEngine();
-            car.stopEngine();
-            assertEquals(0, car.getCurrentSpeed(), 0.0);
-        }
+        saab95.startEngine();
+        saab95.stopEngine();
+        assertEquals(0, saab95.getCurrentSpeed(), 0.0);
     }
 
     @Test
     public void driveOneStep() {
-        for (Vehicle car : cars) {
-            car.startEngine();
-            // car.gas(1.0, );
-            car.moveForward();
-            Vector2D target = new Vector2D(0.0,1.35);
-            assertEquals(car.getPosition().getY(), target.getY(), 0.0);
-        }
+        saab95.startEngine();
+        saab95.gas(1.0);
+        saab95.move();
+        Vector2D target = new Vector2D(0.0, 1.35);
+        assertEquals(saab95.getPosition().getY(), target.getY(), 0.0);
     }
 
     @Test
     public void turnLeftOnce() {
-        for (Vehicle car : cars) {
-            Vector2D target = new Vector2D(-1, 0 );
-            car.turnLeft();
-            assertEquals(target.getX(), car.getDirection().getX(), 0.01);
-            assertEquals(target.getY(), car.getDirection().getY(), 0.01);
-        }
+        Vector2D target = new Vector2D(-1, 0);
+        saab95.turnLeft();
+        assertEquals(target.getX(), saab95.getDirection().getX(), 0.01);
+        assertEquals(target.getY(), saab95.getDirection().getY(), 0.01);
     }
 
     @Test
     public void turnRightOnce() {
-        for (Vehicle car : cars) {
-            Vector2D target = new Vector2D(1, 0 );
-            car.turnRight();
-            assertEquals(target.getX(), car.getDirection().getX(), 0.01);
-            assertEquals(target.getY(), car.getDirection().getY(), 0.01);
-        }
+        Vector2D target = new Vector2D(1, 0);
+        saab95.turnRight();
+        assertEquals(target.getX(), saab95.getDirection().getX(), 0.01);
+        assertEquals(target.getY(), saab95.getDirection().getY(), 0.01);
     }
 
     @Test
     public void turnRightTwice() {
-        for (Vehicle car : cars) {
-            Vector2D target = new Vector2D(0, -1 );
-            car.turnRight();
-            car.turnRight();
-            assertEquals(target.getX(), car.getDirection().getX(), 0.01);
-            assertEquals(target.getY(), car.getDirection().getY(), 0.01);
-        }
-    }
-
-    @Test
-    public void paintYellow() {
-        for (Vehicle car : cars) {
-            car.setColor(Color.YELLOW);
-            assertEquals(Color.YELLOW, car.getColor());
-        }
+        Vector2D target = new Vector2D(0, -1);
+        saab95.turnRight();
+        saab95.turnRight();
+        assertEquals(target.getX(), saab95.getDirection().getX(), 0.01);
+        assertEquals(target.getY(), saab95.getDirection().getY(), 0.01);
     }
 
     @Test
     public void gasToMaxAndTryToGoAbove() {
-        for (Vehicle car : cars) {
-            car.startEngine();
+        saab95.startEngine();
 
-            while (car.getCurrentSpeed() < car.getEnginePower()) {
-                car.gas(1);
-            }
-            for (int i = 0; i < 10; i++) {
-                car.gas(1);
-            }
-            assertTrue(car.getCurrentSpeed() <= car.getEnginePower());
+        while (saab95.getCurrentSpeed() < saab95.getEnginePower()) {
+            saab95.gas(1);
         }
+        for (int i = 0; i < 10; i++) {
+            saab95.gas(1);
+        }
+        assertTrue(saab95.getCurrentSpeed() <= saab95.getEnginePower());
     }
 
     @Test
     public void tryGasWithEngineOff() {
-        for (Vehicle car : cars) {
-
-            // car.startEngine();
-            for (int i = 0; i < 10; i++) {
-                car.gas(1);
-                car.move();
-            }
-
-            assertEquals(0 , car.getCurrentSpeed(),0);
+        // car.startEngine();
+        for (int i = 0; i < 10; i++) {
+            saab95.gas(1);
+            saab95.move();
         }
-    }
 
-    @Test 
-    public void checkForValidModelNames() {
-        List<String> validModelNames = Arrays.asList("Saab95", "Volvo240");
-        for (Vehicle car : cars) {
-            assertTrue(validModelNames.contains(car.getModelName()));
-        }
+        assertEquals(0, saab95.getCurrentSpeed(), 0);
     }
 
     @Test
     public void tryToBreakBelowZero() {
-        for (Vehicle car : cars) {
-            car.startEngine();
+        saab95.startEngine();
 
-            for (int i = 0; i < 10; i++) {
-                car.brake(1);
-            }
-            assertEquals(0, car.getCurrentSpeed(), 0.0);
+        for (int i = 0; i < 10; i++) {
+            saab95.brake(1);
         }
+        assertEquals(0, saab95.getCurrentSpeed(), 0.1);
     }
 
     @Test
-    public void checkThatSpeedFactorIsPositive() {
-        for (Vehicle car : cars) {
-            assertTrue(car.findSpeedFactor() >= 0);
-        }
+    public void checkThatTurboFactorIsPositive() {
+        assertTrue(saab95.findTurboFactor() >= 0);
     }
 
     @Test
     public void turnTurboOn() {
-        for (Vehicle car : cars) {
-            if (car instanceof AuxTurbo) {
-                ((Saab95) car).setTurboOff();
-                ((Saab95) car).setTurboOn();
-                assertTrue(((Saab95) car).getTurboOn());
-            }
-        }
+        saab95.setTurboOff();
+        saab95.setTurboOn();
+        assertTrue(saab95.getTurboOn());
     }
 
     @Test
@@ -181,4 +143,3 @@ public class TestVehicle {
     }
 
 }
-*/

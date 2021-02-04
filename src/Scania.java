@@ -17,7 +17,7 @@ public class Scania implements Movable, Transportable /*, Storable, Positionable
      * @param length      the length of the car
      */
     public Scania(double enginePower, double width, double length, String modelName, Color color, int nrDoors) {
-        car = new Car(enginePower, width, length, modelName, color, nrDoors);
+        car = new Car(enginePower, width, length, modelName, color, nrDoors, new Vector2D(0, 0));
         ramp = new Ramp(70, 1);
     }
 
@@ -42,23 +42,23 @@ public class Scania implements Movable, Transportable /*, Storable, Positionable
 
     @Override
     public void turnLeft() {
-        if(ramp.fullyRaised())
+        if(ramp.isFullyRaised())
             car.turnLeft();
     }
 
     @Override
     public void turnRight() {
-        if(ramp.fullyRaised())
+        if(ramp.isFullyRaised())
             car.turnRight();
     }
 
     @Override
-    public void gas(double amount, double speedFactor) {
+    public void gas(double amount) {
         car.gas(amount, findSpeedFactor());
     }
 
     @Override
-    public void brake(double amount, double speedFactor) {
+    public void brake(double amount) {
         car.brake(amount, findSpeedFactor());
     }
 
@@ -67,7 +67,17 @@ public class Scania implements Movable, Transportable /*, Storable, Positionable
         return car.isMoving();
     }
 
-//    @Override
+    @Override
+    public void startEngine() {
+        car.startEngine();
+    }
+
+    @Override
+    public void stopEngine() {
+        car.stopEngine();
+    }
+
+    //    @Override
     public boolean raise() {
         if (!isMoving()) {
             ramp.raise();

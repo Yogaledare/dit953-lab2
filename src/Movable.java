@@ -20,11 +20,14 @@ public interface Movable {
 
 //    double findSpeedFactor();
 
-    void gas(double amount, double speedFactor);
+    void gas(double amount);
 
-    void brake(double amount, double speedFactor);
+    void brake(double amount);
 
     boolean isMoving();
+
+    void startEngine();
+    void stopEngine();
 
 //    double getSpeed();
 }
