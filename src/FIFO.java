@@ -26,18 +26,3 @@ public class FIFO<T extends Transportable> extends Container<T> {
     }
 
 }
-
-
-
-//    @Override
-//    public T remove(Vector2D offset) {
-//        T item = storage.removeFirst();
-//        Vector2D unloadedPosition = item.getPosition().plus(offset);
-//        item.setPosition(unloadedPosition);
-//        return item;
-//    }
-
-
-
-
-//        Vector2D offset = car.getDirection().multiplyByScalar(-5);

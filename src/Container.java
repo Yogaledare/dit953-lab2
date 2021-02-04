@@ -3,6 +3,7 @@ import java.util.Deque;
 
 /**
  * An abstract class representing a cargo hold
+ *
  * @param <T> The type stored in the container
  */
 public abstract class Container<T extends Transportable> /*implements Transporter<T>*/ {
@@ -16,9 +17,8 @@ public abstract class Container<T extends Transportable> /*implements Transporte
     protected double length;
 
     /**
-     *
-     * @param capacity The maximum capacity
-     * @param maxWidth The maximum width of items stored
+     * @param capacity  The maximum capacity
+     * @param maxWidth  The maximum width of items stored
      * @param maxLength The maximum length of items stored
      */
     public Container(int capacity, double maxWidth, double maxLength, double pickUpRange,
@@ -33,8 +33,11 @@ public abstract class Container<T extends Transportable> /*implements Transporte
         this.holder = new ArrayDeque<>(capacity);
     }
 
-    //@Override
-    public void store(T item/*, Vector2D storagePosition*/) {
+    /**
+     * Store an item into holder.
+     * @param item is the item to be stored.
+     */
+    public void store(T item) {
         if (holder.size() >= capacity) {
             throw new IllegalStateException("Container full");
         }
@@ -44,7 +47,7 @@ public abstract class Container<T extends Transportable> /*implements Transporte
         if (item.getWidth() > maxWidth) {
             throw new IllegalArgumentException("Item too wide");
         }
-        if (item.getPosition().distanceTo(position) > length / 2 + pickUpRange) {
+        if (item.getPosition().distanceTo(position) > (length / 2) + pickUpRange) {
             throw new IllegalArgumentException("Item too far away");
         }
         holder.addLast(item);
@@ -64,7 +67,11 @@ public abstract class Container<T extends Transportable> /*implements Transporte
         return item;
     }
 
-    //@Override
+    /**
+     * relocate updates stored items vectors.
+     * @param position the current positions of the holder parent.
+     * @param direction the current orientataion of the holder parent
+     */
     public void relocate(Vector2D position, Vector2D direction) {
         this.position = position;
         this.direction = direction;
@@ -74,11 +81,23 @@ public abstract class Container<T extends Transportable> /*implements Transporte
         }
     }
 
+    /**
+     * FindItemToRemove finds which object to remove, depending on LIFO or FIFO
+     * @return type of container class.
+     */
     protected abstract T findItemToRemove();
 
+    /**
+     * findOffset to decide if the "direction" T should be FIFO or LIFO.
+     * @return type of container class
+     */
     protected abstract Vector2D findOffset();
 
-    public int getSize(){
+    /**
+     * Amount of objects in holder.
+     * @return the number of objects
+     */
+    public int getSize() {
         return holder.size();
     }
 

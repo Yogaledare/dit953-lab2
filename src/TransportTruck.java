@@ -11,6 +11,9 @@ public class TransportTruck<T extends Transportable> implements Movable, Transpo
      */
     private final LIFO<T> storage;
 
+    /**
+     * Ramp component
+     */
     private final Ramp ramp;
 
     /**
@@ -48,10 +51,14 @@ public class TransportTruck<T extends Transportable> implements Movable, Transpo
         ramp = new Ramp(70, 1);
     }
 
-    // For an object to be a specific _Car_ storage truck, that has to be declared when creating the object.
+    /**
+     * Add an item to the storage.
+     */
     public void store(T item) {
         if (ramp.isFullyLowered() && item != this) {
             storage.store(item);
+        } else {
+            System.err.println("Ramp is not down!");
         }
     }
 
@@ -64,8 +71,6 @@ public class TransportTruck<T extends Transportable> implements Movable, Transpo
             throw new IllegalStateException("Ramp not fully lowered");
         }
         return storage.remove();
-//        Vector2D offset = vehicle.getDirection().multiplyByScalar(vehicle.getLength() / 2 + storage.getPickUpRange());
-//        return storage.remove(offset);
     }
 
     /**

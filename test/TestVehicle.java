@@ -1,4 +1,4 @@
-/*
+
 
 import org.junit.Before;
 import org.junit.Test;
@@ -10,6 +10,7 @@ import java.util.List;
 
 
 import static org.junit.Assert.*;
+
 public class TestVehicle {
 
     Saab95 saab95;
@@ -39,27 +40,30 @@ public class TestVehicle {
 
     @Test
     public void turnLeftOnce() {
+        saab95.startEngine();
         Vector2D target = new Vector2D(-1, 0);
         saab95.turnLeft();
-        assertEquals(target.getX(), saab95.getDirection().getX(), 0.01);
-        assertEquals(target.getY(), saab95.getDirection().getY(), 0.01);
+        assertEquals(target.getX(), saab95.getDirection().getX(), 0.05);
+        assertEquals(target.getY(), saab95.getDirection().getY(), 0.05);
     }
 
     @Test
     public void turnRightOnce() {
+        saab95.startEngine();
         Vector2D target = new Vector2D(1, 0);
         saab95.turnRight();
-        assertEquals(target.getX(), saab95.getDirection().getX(), 0.01);
-        assertEquals(target.getY(), saab95.getDirection().getY(), 0.01);
+        assertEquals(target.getX(), saab95.getDirection().getX(), 0.05);
+        assertEquals(target.getY(), saab95.getDirection().getY(), 0.05);
     }
 
     @Test
     public void turnRightTwice() {
+        saab95.startEngine();
         Vector2D target = new Vector2D(0, -1);
         saab95.turnRight();
         saab95.turnRight();
-        assertEquals(target.getX(), saab95.getDirection().getX(), 0.01);
-        assertEquals(target.getY(), saab95.getDirection().getY(), 0.01);
+        assertEquals(target.getX(), saab95.getDirection().getX(), 0.05);
+        assertEquals(target.getY(), saab95.getDirection().getY(), 0.05);
     }
 
     @Test
@@ -105,20 +109,14 @@ public class TestVehicle {
 
     @Test
     public void turnTurboOff() {
-        for (Vehicle car : cars) {
-            if (car instanceof AuxTurbo) {
-                ((Saab95) car).setTurboOn();
-                ((Saab95) car).setTurboOff();
-                assertFalse(((Saab95) car).getTurboOn());
-            }
-        }
+        saab95.setTurboOn();
+        saab95.setTurboOff();
+        assertFalse(saab95.getTurboOn());
     }
 
     @Test
     public void checkThatNrOfDoorsIsPositive() {
-        for (Vehicle car : cars) {
-            assertTrue(car.getNrDoors() >= 0);
-        }
+        assertTrue(saab95.getNoOfDoors() >= 0);
     }
 
     @Test
@@ -128,7 +126,7 @@ public class TestVehicle {
         double min = 0;
         double max = 1;
 
-        for (int i = 0; i < ds.length;i++) {
+        for (int i = 0; i < ds.length; i++) {
             ds[i] = Vector2D.clamp(ds[i], min, max);
         }
 

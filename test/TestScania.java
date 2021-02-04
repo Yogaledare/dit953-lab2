@@ -17,15 +17,24 @@ public class TestScania {
                 Color.black, 2, new Vector2D(1, 1)));
     }
 
+
+    @Test
+    public void driveScaniaAndRaise() {
+        truck.lower();
+        truck.startEngine();
+        truck.gas(1.0);
+        truck.move();
+        truck.raise();
+        assertFalse(truck.isFullyRaised());
+    }
+
     @Test
     public void tryToDriveScaniaTruckWhenPlattformIsUp() {
 
-
-
          /*
-         Det är bara om lastbilen står stilla som flaket får ha en annan vinkel än 0.
-         Flaket ska inte kunna höjas om lastbilen är i rörelse;
-         och lastbilen ska inte kunna köra om flaket är uppfällt.
+           Det är bara om lastbilen står stilla som flaket får ha en annan vinkel än 0.
+           Flaket ska inte kunna höjas om lastbilen är i rörelse;
+           och lastbilen ska inte kunna köra om flaket är uppfällt.
          */
 
 
@@ -33,7 +42,7 @@ public class TestScania {
         truck.startEngine();  // try start engine.
         truck.gas(1.0);
         truck.move();
-        assertTrue(truck.getPosition().equals(new Vector2D(0, 0)));
+        assertTrue(truck.getPosition().equals(new Vector2D(1, 1)));
     }
 
     @Test
@@ -42,10 +51,8 @@ public class TestScania {
         truck.startEngine();
         truck.gas(1.0);
         truck.move();
-
         truck.raise(); // try set ramp to 70.
-
-        assertNotEquals(70, truck.getRampAngle(), 0.1);
+        assertFalse(truck.isFullyRaised());
      }
 }
 

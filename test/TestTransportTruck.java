@@ -10,7 +10,7 @@ public class TestTransportTruck {
 
     @Before
     public void setUp() {
-        towTruck = new TransportTruck<Volvo240>(1001, 5, 22, 9, 4, 10 );
+        towTruck = new TransportTruck<>(1001, 5, 22, 9, 4, 10 );
     }
 
     @Test
@@ -26,7 +26,7 @@ public class TestTransportTruck {
         // System.out.println("Ramp is down?: " + towTruck.isFullyLowered());
         towTruck.store(new Volvo240(2, 4));
         towTruck.startEngine();
-        assertNotEquals(0, towTruck.getCurrentSpeed(), 0.01);
+        assertFalse(towTruck.isMoving());
     }
 
 
@@ -36,7 +36,7 @@ public class TestTransportTruck {
         towTruck.store(new Volvo240(2, 4));
         towTruck.raiseRamp();
 
-        assertEquals(70, towTruck.getRampAngle(),0.1);
+        assertTrue(towTruck.isFullyRaised() );
     }
 
     @Test
@@ -45,7 +45,7 @@ public class TestTransportTruck {
         towTruck.store(new Volvo240(2, 4));
         towTruck.raiseRamp();
         towTruck.startEngine();
-        assertEquals(0.1, towTruck.getCurrentSpeed(),0.01);
+        assertTrue(towTruck.isMoving());
     }
 
 
@@ -73,6 +73,12 @@ public class TestTransportTruck {
     }
 
     @Test
+    public void loadTowTruckOnSelf() {
+            towTruck.store(towTruck);
+            assertEquals(0, towTruck.getSize());
+    }
+
+    @Test
     public void loadCarOntoTowTruckAndCloseRampAndForgetToOpenRampAndUnload() {
         try{
             towTruck.lowerRamp();
@@ -81,7 +87,7 @@ public class TestTransportTruck {
             towTruck.startEngine();
             towTruck.stopEngine();
             towTruck.remove(); // Car is sent to void!
-        }catch(IllegalStateException ex){
+        } catch(IllegalStateException ex){
                 assertEquals(1, towTruck.getSize());
         }
     }

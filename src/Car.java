@@ -24,11 +24,15 @@ public class Car {
      */
     private final Vehicle vehicle;
 
-//    private final double width;
-//
-//    private final double length;
-
-
+    /**
+     * Creates a representation of a car
+     * @param enginePower How powerful the car is
+     * @param width How wide the car is
+     * @param length How long the car is
+     * @param modelName The name of the car
+     * @param color The color of the car
+     * @param nrDoors How many doors the car has
+     */
     public Car(double enginePower, double width, double length, String modelName, Color color, int nrDoors){
         this.vehicle = new Vehicle(enginePower, width, length);
         this.modelName = modelName;
@@ -165,6 +169,11 @@ public class Car {
      */
     public int getNoOfDoors() { return this.nrDoors; }
 
+    /**
+     * increases the speed of the car
+     * @param amount how much to increase the speed
+     * @param speedFactor speed modifier
+     */
     public void gas(double amount, double speedFactor) {
         vehicle.gas(amount, speedFactor);
     }

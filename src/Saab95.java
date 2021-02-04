@@ -7,9 +7,13 @@ import java.awt.*;
 public class Saab95 implements Movable, Transportable, AuxTurbo{
 
     /**
-     * Flag to indicate if turbo is on or not.
+     * True if turbo is on or not.
      */
     private boolean turboOn;
+
+    /**
+     * Car component.
+     */
     private final Car car;
 
     /**
@@ -17,7 +21,7 @@ public class Saab95 implements Movable, Transportable, AuxTurbo{
      * turboOn to false.
      */
     public Saab95(double width, double length) {
-        this.car = new Car(100, width, length, "Volvo240", Color.black, 4);
+        this.car = new Car(100, width, length, "Saab95", Color.red, 2);
         turboOn = false;
     }
 
@@ -92,26 +96,46 @@ public class Saab95 implements Movable, Transportable, AuxTurbo{
         car.move();
     }
 
+    /**
+     * Turns the car 90 degrees to the left.
+     */
     @Override
     public void turnLeft() {
         car.turnLeft();
     }
 
+    /**
+     * Turns the car 90 degrees to the right.
+     */
     @Override
     public void turnRight() {
         car.turnRight();
     }
 
+    /**
+     * Increases the speed of the car by a fraction between 0 and 1 of its max acceleration capacity.
+     * @param amount a value between 0 and 1 representing how much the gas is pressed.
+     *               If outside this interval, the value will be clamped.
+     */
     @Override
     public void gas(double amount) {
         car.gas(amount, findSpeedFactor());
     }
 
+    /**
+     * Decreases the speed of the car by a fraction between 0 and 1 of its max deceleration capacity.
+     * @param amount a value between 0 and 1 representing how much the brake is pressed.
+     *               If outside this interval, the value will be clamped.
+     */
     @Override
     public void brake(double amount) {
         car.brake(amount, findSpeedFactor());
     }
 
+    /**
+     * Returns true if the speed of the car is nonzero and false if it is zero.
+     * @return true if the speed of the car is nonzero and false if it is zero.
+     */
     @Override
     public boolean isMoving() {
         return car.isMoving();
@@ -168,35 +192,22 @@ public class Saab95 implements Movable, Transportable, AuxTurbo{
     public Vector2D getPosition() {
         return car.getPosition();
     }
-}
 
-
-
-
-/*    @Override
-    public void incrementSpeed(double amount) {
-        setCurrentSpeed(getCurrentSpeed() + findSpeedFactor() * amount);
+    /**
+     * Sets the direction of the car
+     * @param direction the new direction of the car.
+     */
+    @Override
+    public void setDirection(Vector2D direction) {
+        car.setDirection(direction);
     }
 
-    @Override
-    public void decrementSpeed(double amount) {
-        setCurrentSpeed(getCurrentSpeed() - findSpeedFactor() * amount);
-    }*/
+    /**
+     * Returns the direction of the car.
+     * @return the direction of the car.
+     */
+    public Vector2D getDirection() {
+        return car.getDirection();
+    }
+}
 
-/*    public Saab95(){
-        setNrDoors(2);
-        setColor(Color.red);
-        setEnginePower(125);
-	    turboOn = false;
-        setModelName("Saab95");
-        stopEngine();
-    }*/
-
-
-
-/*    @Override
-    public double speedFactor(){
-        double turbo = 1;
-        if(turboOn) turbo = 1.3;
-        return getEnginePower() * 0.01 * turbo;
-    }*/

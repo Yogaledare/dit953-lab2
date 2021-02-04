@@ -3,6 +3,7 @@ import java.util.Vector;
 /**
  * An implemented class representing a cargo hold
  * using last in first out rules
+ *
  * @param <T> The type stored in the container
  */
 public class LIFO<T extends Transportable> extends Container<T> {
@@ -26,14 +27,4 @@ public class LIFO<T extends Transportable> extends Container<T> {
     protected Vector2D findOffset() {
         return direction.multiplyByScalar(-(length / 2 + pickUpRange / 2));
     }
-
-
 }
-
-//    @Override
-//    public T remove(Vector2D offset) {
-//        T item =  storage.removeLast();
-//        Vector2D unloadedPosition = item.getPosition().plus(offset);
-//        item.setPosition(unloadedPosition);
-//        return item;
-//    }

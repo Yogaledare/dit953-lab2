@@ -32,8 +32,14 @@ public class Vehicle {
      */
     private Vector2D position;
 
+    /**
+     * width of the vehicle
+     */
     private final double width;
 
+    /**
+     * length of the vehicle
+     */
     private final double length;
 
     /**
@@ -129,10 +135,15 @@ public class Vehicle {
      *
      * @param amount a value between 0 and 1 representing how much the brake is pressed
      */
+
     public void brake(double amount, double speedFactor) {
         decrementSpeed(Vector2D.clamp(amount, 0, 1), speedFactor);
     }
 
+    /**
+     * returns true if vehicle is moving.
+     * @return true if vehicle is moving.
+     */
     public boolean isMoving() {
         return currentSpeed > 0;
     }
@@ -149,14 +160,18 @@ public class Vehicle {
      * Turns the vehicle 90 degrees to the left.
      */
     public void turnLeft() {
-        direction = direction.rotateCC(Math.PI / 2);
+        if (engineOn) {
+            direction = direction.rotateCC(Math.PI / 2);
+        }
     }
 
     /**
      * Turns the vehicle 90 degrees to the right.
      */
     public void turnRight() {
-        direction = direction.rotateCC(-Math.PI / 2);
+        if (engineOn) {
+            direction = direction.rotateCC(-Math.PI / 2);
+        }
     }
 
     /**
@@ -164,7 +179,6 @@ public class Vehicle {
      *
      * @return the direction vector of the vehicle
      */
-
     public Vector2D getDirection() {
         return direction;
     }

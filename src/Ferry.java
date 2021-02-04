@@ -1,5 +1,11 @@
-public class Ferry<T extends Transportable> implements Movable/*, IStorageUnit<T>*/ {
-
+/**
+ * A movable ferry able to transport things
+ * @param <T> the things to transport
+ */
+public class Ferry<T extends Transportable> implements Movable, Transporter<T> {
+    /**
+     * storage component
+     */
     private final FIFO<T> storage;
     /**
      * Vehicle component
@@ -145,25 +151,3 @@ public class Ferry<T extends Transportable> implements Movable/*, IStorageUnit<T
     }
 
 }
-
-
-/*
-    Skapa en representation av en bilfärja - dvs en färja på vilken det går att lasta bilar.
-
-    Notera att bilfärjan inte är en bil (doh), men att många av de metoder vi hittills använt för olika sorters bilar bör gå att applicera även på färjan.
-    Hur åstadkommer ni bäst detta?
-    - implements Movable
-
-    På bilfärjan gäller samma regler som för biltransporten,
-    med undantaget att bilar lossas i samma ordning som de lastades,
-    dvs den första bilen som lastades måste vara först att lossas (first-in-first-out).
-
-
-
-Viktiga saker att ha i åtanke under den här uppgiften:
-
-    Undvik kodduplicering för funktionalitet som är gemensam för e.g. bilfärjan och biltransporten.
-    Fundera över behovet av polymorfism - nuvarande och ev. framtida.
-
-
- */

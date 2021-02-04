@@ -36,43 +36,21 @@ public class Workshop<T extends Transportable> /*implements IStorageUnit<T>*/ {
     public T remove() {
         return storage.remove();
     }
+
+    /**
+     * Current number of things to be repaired
+     * @return number of things in storage
+     */
+    public int getSize() {
+        return storage.getSize();
+    }
+
+    /**
+     * Max number of things that can be stored
+     * @return max number of things that can be stored at once
+     */
+    public int getCapacity() {
+        return storage.getCapacity();
+    }
+
 }
-
-
-
-
-
-//    private final Vector2D workshopLocation;
-//    private final Vector2D entranceDirection;
-//        this.workshopLocation = workshopLocation;
-//        this.entranceDirection = gateDirection;
-
-//    @Override
-//    public int getSize() {
-//        return storage.getSize();
-//    }
-//
-//    public int getCapacity() {
-//        return storage.getCapacity();
-//    }
-
-
-
-
-
-
-//    public Workshop() {
-//        this(1, 2, 5, new Vector2D(50, 100));
-//    }
-
-
-
-
-
-//        try {
-////            if (storageUnit.getCapacity() <= storageUnit.getSize())
-////                throw new ArithmeticException("Tried to add car to storageUnit: capacity is " + storageUnit.getCapacity());
-////
-//        } catch (ArithmeticException ex) {
-//            System.err.println("Workshop is full!");
-//        }
