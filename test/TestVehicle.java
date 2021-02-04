@@ -97,11 +97,6 @@ public class TestVehicle {
     }
 
     @Test
-    public void checkThatTurboFactorIsPositive() {
-        assertTrue(saab95.findTurboFactor() >= 0);
-    }
-
-    @Test
     public void turnTurboOn() {
         saab95.setTurboOff();
         saab95.setTurboOn();

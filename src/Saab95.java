@@ -13,8 +13,8 @@ public class Saab95 implements Movable, Transportable, AuxTurbo{
     private final Car car;
 
     /**
-     * Constructs a Saab95 object by calling its parent constructor with (hardcoded) presets for modelName, color,
-     * enginePower and nrDoors. Initializes turboOn to false.
+     * Constructs a Saab95 object with (hardcoded) presets for modelName, color, enginePower and nrDoors. Initializes
+     * turboOn to false.
      */
     public Saab95(double width, double length) {
         this.car = new Car(100, width, length, "Volvo240", Color.black, 4);
@@ -43,12 +43,11 @@ public class Saab95 implements Movable, Transportable, AuxTurbo{
         return turboOn;
     }
 
-
     /**
      * Returns the turbo factor of the Saab95.
      * @return the turbo factor of the Saab95
      */
-    public double findTurboFactor() {
+    private double findTurboFactor() {
         if (turboOn) return 1.3;
         return 1;
     }
@@ -57,7 +56,6 @@ public class Saab95 implements Movable, Transportable, AuxTurbo{
      * Returns the speed factor of the Saab95.
      * @return the speed factor of the Saab95
      */
-
     private double findSpeedFactor() {
         return car.getEnginePower() * 0.01 * findTurboFactor();
     }
@@ -119,31 +117,53 @@ public class Saab95 implements Movable, Transportable, AuxTurbo{
         return car.isMoving();
     }
 
+    /**
+     * Starts the car by setting its speed to 0.1.
+     */
     @Override
     public void startEngine() {
         car.startEngine();
     }
 
+    /**
+     * Stops the car by setting its speed to 0.
+     */
     @Override
     public void stopEngine() {
         car.stopEngine();
     }
 
+    /**
+     * Returns the width of the car.
+     * @return the width of the car.
+     */
     @Override
     public double getWidth() {
         return car.getWidth();
     }
 
+    /**
+     * Returns the length of the car. 
+     * @return the length of the car. 
+     */
     @Override
     public double getLength() {
         return car.getLength();
     }
 
+    /**
+     * Sets the position of the car. 
+     * @param position the new position of the car. 
+     */
     @Override
     public void setPosition(Vector2D position) {
         car.setPosition(position);
     }
 
+    /**
+     * Returns the position of the car. 
+     * @return the position of the car. 
+     */
     @Override
     public Vector2D getPosition() {
         return car.getPosition();

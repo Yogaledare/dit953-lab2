@@ -44,11 +44,13 @@ public class Vehicle {
     /**
      * Constructs a vehicle object with the specified modelYear, color, enginePower and nrDoors.
      * The initial position (x, y) and direction (x, y) of the object is set to (0, 0) and (0, 1).
+     *
      * @param enginePower the engine power of the vehicle
      */
     public Vehicle(double enginePower, double width, double length) {
         this.enginePower = enginePower;
         this.direction = new Vector2D(0, 1);
+        this.position = new Vector2D(0, 0);
         this.width = width;
         this.length = length;
         stopEngine();
@@ -56,6 +58,7 @@ public class Vehicle {
 
     /**
      * Returns the enginePower of the vehicle.
+     *
      * @return the enginePower of the vehicle
      */
     public double getEnginePower() {
@@ -65,6 +68,7 @@ public class Vehicle {
 
     /**
      * Returns the current speed of the vehicle. The speed has a value between 0 and the enginePower of the vehicle.
+     *
      * @return the current speed of the vehicle.
      */
     public double getCurrentSpeed() {
@@ -91,6 +95,7 @@ public class Vehicle {
     /**
      * Increases the speed of the vehicle by the speed factor of the vehicle times a scale factor (amount).
      * The speed cannot exceed the enginePower of the vehicle.
+     *
      * @param amount how much the speed should increase for every move.
      */
     private void incrementSpeed(double amount, double speedFactor) {
@@ -101,6 +106,7 @@ public class Vehicle {
     /**
      * Decreases the speed of the vehicle by the speed factor of the vehicle times a scale factor (amount).
      * The speed can not go below 0.
+     *
      * @param amount how much the speed should decrease for every move.
      */
     private void decrementSpeed(double amount, double speedFactor) {
@@ -110,6 +116,7 @@ public class Vehicle {
     /**
      * Increases the speed of the vehicle by calling incrementSpeed with amount as argument.
      * Amount is clamped to the interval [0, 1].
+     *
      * @param amount a value between 0 and 1 representing how much the gas is pressed
      */
     public void gas(double amount, double speedFactor) {
@@ -119,6 +126,7 @@ public class Vehicle {
     /**
      * Decreases the speed of the vehicle by calling decrementSpeed with amount as argument.
      * Amount is clamped to the interval [0, 1].
+     *
      * @param amount a value between 0 and 1 representing how much the brake is pressed
      */
     public void brake(double amount, double speedFactor) {
@@ -153,6 +161,7 @@ public class Vehicle {
 
     /**
      * Returns the direction vector of the vehicle.
+     *
      * @return the direction vector of the vehicle
      */
 
@@ -176,7 +185,10 @@ public class Vehicle {
         return width;
     }
 
-//    @Override
+    /**
+     * Vehicle length
+     * @return length of the vehicle
+     */
     public double getLength() {
         return length;
     }

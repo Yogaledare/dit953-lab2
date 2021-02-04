@@ -6,7 +6,7 @@ import java.awt.*;
 import static org.junit.Assert.*;
 
 public class TestTransportTruck {
-    TransportTruck<Volvo240> towTruck;
+    TransportTruck<Transportable> towTruck;
 
     @Before
     public void setUp() {
@@ -86,6 +86,14 @@ public class TestTransportTruck {
         }
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void tryLoadACarThatIsTooFarAway() {
+        Volvo240 farAwayVolvo = new Volvo240(2, 4);
+        farAwayVolvo.setPosition(new Vector2D(100, 100));
+        towTruck.lowerRamp();
+        towTruck.store(farAwayVolvo);
+
+    }
 }
 
 

@@ -5,7 +5,7 @@ import java.util.Deque;
  * An abstract class representing a cargo hold
  * @param <T> The type stored in the container
  */
-public abstract class Container<T extends Transportable> implements IStorageUnit<T>{
+public abstract class Container<T extends Transportable> /*implements Transporter<T>*/ {
     private final int capacity;
     private final double maxWidth;
     private final double maxLength;
@@ -21,7 +21,8 @@ public abstract class Container<T extends Transportable> implements IStorageUnit
      * @param maxWidth The maximum width of items stored
      * @param maxLength The maximum length of items stored
      */
-    public Container(int capacity, double maxWidth, double maxLength, double pickUpRange, Vector2D position, Vector2D direction, double length) {
+    public Container(int capacity, double maxWidth, double maxLength, double pickUpRange,
+                     Vector2D position, Vector2D direction, double length) {
         this.capacity = capacity;
         this.maxWidth = maxWidth;
         this.maxLength = maxLength;
@@ -50,8 +51,12 @@ public abstract class Container<T extends Transportable> implements IStorageUnit
         item.setPosition(position);
     }
 
-    //@Override
-    public T remove(/*Vector2D offset*/) {
+    /**
+     * Eject the item stored in holder.
+     * current item is decided by findItemToRemove(), which depends on if it's LIFO or FIFO.
+     * @return gives a item stored in holder.
+     */
+    public T remove() {
         T item = findItemToRemove();
         Vector2D offset = findOffset();
         Vector2D unloadedPosition = item.getPosition().plus(offset);
@@ -63,6 +68,10 @@ public abstract class Container<T extends Transportable> implements IStorageUnit
     public void relocate(Vector2D position, Vector2D direction) {
         this.position = position;
         this.direction = direction;
+        for (Transportable item : holder) {
+            item.setPosition(position);
+            item.setDirection(direction);
+        }
     }
 
     protected abstract T findItemToRemove();
@@ -73,60 +82,14 @@ public abstract class Container<T extends Transportable> implements IStorageUnit
         return holder.size();
     }
 
+    /**
+     * Amount of object the holder can store.
+     * @return the total capacity.
+     */
+    public int getCapacity() {
+        return capacity;
+    }
+
 }
 
 
-//    public abstract T remove();
-
-
-//    public abstract T remove(Vector2D offset);
-
-
-/*    public double getMaxWidth() {
-        return maxWidth;
-    }
-
-    public double getMaxLength() {
-        return maxLength;
-    }*/
-
-/*    public int getCapacity() {
-        return capacity;
-    }*/
-
-/*    public int getSize() {
-        return holder.size();
-    }*/
-
-
-/*    @Override
-    public double getPickUpRange() {
-        return pickUpRange;
-    }*/
-/*
-    @Override
-    public void moveCargo(Vector2D newPosition) {
-        for (T item : holder) {
-            item.setPosition(newPosition);
-        }
-    }
-*/
-
-
-//    public void move(Vehicle vehicle){
-//
-//        for (T stored : storage) {
-//            stored.follow(this);
-//            stored.setPosition(vehicle.getPosition());
-//            stored.setDirection(vehicle.getDirection());
-//        }
-//    }
-
-//    public Deque<T> getHolder() {
-//        return holder;
-//    }
-
-//    public void add(T item) {
-//        if(item.getWidth() <= getMaxWidth() && item.getLength() <= getMaxLength())
-//            holder.addLast(item);
-//    }

@@ -34,7 +34,7 @@ public class Car {
         this.modelName = modelName;
         this.color = color;
         this.nrDoors = nrDoors;
-        vehicle.setPosition(new Vector2D(0, 0));
+//        vehicle.setPosition(new Vector2D(0, 0));
     }
     /**
      * Creates a representation of a car
@@ -95,7 +95,7 @@ public class Car {
      * Returns the width of the car.
      * @return the width of the car
      */
-    @Override
+//    @Override
     public double getWidth() {
         return vehicle.getWidth();
     }
@@ -104,7 +104,7 @@ public class Car {
      * Returns the length of the car.
      * @return the length of the car
      */
-    @Override
+
     public double getLength() {
         return vehicle.getLength();
     }
@@ -112,16 +112,22 @@ public class Car {
     /**
      * Sets the position of the car.
      */
-    @Override
     public void setPosition(Vector2D position) {
         vehicle.setPosition(position);
+    }
+
+    /**
+     * Sets the direction of the car
+     * @param direction direction to be set
+     */
+    public void setDirection(Vector2D direction) {
+        vehicle.setDirection(direction);
     }
 
     /**
      * Returns the position of the car.
      * @return the position of the car
      */
-    @Override
     public Vector2D getPosition() {
         return vehicle.getPosition();
     }

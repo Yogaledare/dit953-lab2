@@ -18,12 +18,30 @@ public class TransportTruck<T extends Transportable> implements Movable, Transpo
      */
     private final Car car;
 
+    /**
+     * Constructs a Transport truck with the specified enginePower, width length, capacity and max dimensions for
+     * the stored units (witdth and length).
+     * @param enginePower the engine power of the truck.
+     * @param width the width of the truck.
+     * @param length the length of the truck.
+     * @param capacity the storage capacity (in units) of the truck.
+     * @param maxW max width of a stored item.
+     * @param maxL max length of a stored item.
+     */
     public TransportTruck(double enginePower, double width, double length, int capacity, double maxW, double maxL) {
         car = new Car(enginePower, width, length, "Transport Truck", Color.red, 2);
         storage = new LIFO<>(capacity, maxW, maxL, 2, car.getPosition(), car.getDirection(), car.getLength());
         ramp = new Ramp(70, 1);
     }
 
+    /**
+     * Constructs a transport truck object from a Car object and a storage capacity and max dimensions of stored items
+     * (width and length)
+     * @param car A car object from which to build the truck object.
+     * @param capacity the storage capacity (in units) of the truck.
+     * @param maxW max width of a stored item.
+     * @param maxL max length of a stored item.
+     */
     public TransportTruck(Car car, int capacity, double maxW, double maxL) {
         this.car = car;
         storage = new LIFO<>(capacity, maxW, maxL, 2, car.getPosition(), car.getDirection(), car.getLength());
@@ -50,45 +68,72 @@ public class TransportTruck<T extends Transportable> implements Movable, Transpo
 //        return storage.remove(offset);
     }
 
+    /**
+     * Returns the number of stored items.
+     * @return the number of stored items.
+     */
     @Override
     public int getSize() {
         return storage.getSize();
     }
 
+    /**
+     * Moves the truck in its current direction by length = current speed.
+     */
     @Override
     public void move() {
-        if (ramp.isFullyRaised()) {
-            car.move();
-            storage.relocate(car.getPosition(), car.getDirection());
-        }
+        car.move();
+        storage.relocate(car.getPosition(), car.getDirection());
     }
 
+    /**
+     * Turns the truck 90 degrees to the left.
+     */
     @Override
     public void turnLeft() {
-        if (ramp.isFullyRaised())
-            car.turnLeft();
+        car.turnLeft();
     }
 
+    /**
+     * Turns the truck 90 degrees to the right.
+     */
     @Override
     public void turnRight() {
         car.turnRight();
     }
 
+    /**
+     * Increases the speed of the truck by a fraction between 0 and 1 of its max acceleration capacity.
+     * @param amount a value between 0 and 1 representing how much the gas is pressed.
+     *               If outside this interval, the value will be clamped.
+     */
     @Override
     public void gas(double amount) {
         car.gas(amount, findSpeedFactor());
     }
 
+    /**
+     * Decreases the speed of the truck by a fraction between 0 and 1 of its max deceleration capacity.
+     * @param amount a value between 0 and 1 representing how much the brake is pressed.
+     *               If outside this interval, the value will be clamped.
+     */
     @Override
     public void brake(double amount) {
         car.brake(amount, findSpeedFactor());
     }
 
+    /**
+     * Returns true if the speed of the truck is nonzero and false if it is zero.
+     * @return true if the speed of the truck is nonzero and false if it is zero.
+     */
     @Override
     public boolean isMoving() {
         return car.getCurrentSpeed() > 0;
     }
 
+    /**
+     * Starts the truck by setting its speed to 0.1.
+     */
     @Override
     public void startEngine() {
         if (ramp.isFullyRaised()) {
@@ -96,36 +141,40 @@ public class TransportTruck<T extends Transportable> implements Movable, Transpo
         }
     }
 
+    /**
+     * Stops the truck by setting its speed to 0.
+     */
     @Override
     public void stopEngine() {
         car.stopEngine();
     }
 
-    public double findSpeedFactor() {
+    /**
+     * Returns the speed factor of the truck.
+     * @return the speed factor of the truck.
+     */
+    private double findSpeedFactor() {
         return car.getEnginePower() * 0.01;
     }
 
     /**
      * Raise loading platform.
-     * returns true if platform is at load position.
+     * It's is only possible to raise the ramp when engine is off.
      */
-    public boolean raiseRamp() {
+    public void raiseRamp() {
         if (car.getCurrentSpeed() == 0) {
             ramp.raise();
         }
-        return ramp.isFullyRaised();
     }
 
     /**
      * Lower loading platform to ground.
-     * It's is only possible to lower when engine is off.
-     * return true when platform is a 0 degree sensor.
+     * It's is only possible to lower the ramp when engine is off.
      */
-    public boolean lowerRamp() {
+    public void lowerRamp() {
         if (car.getCurrentSpeed() == 0) {
             ramp.lower();
         }
-        return ramp.isFullyLowered();
     }
 
     /**
