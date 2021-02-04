@@ -43,7 +43,7 @@ public class TestWorkshop {
         alisWorkshop = new Workshop<>(5, 3, 5);
         alisWorkshop.store(saab95);
         alisWorkshop.store(volvo240);
-        Vehicle returnCar;
+        Transportable returnCar;
 
         returnCar = alisWorkshop.remove();
         System.out.println(returnCar.getModelName());
@@ -60,9 +60,8 @@ public class TestWorkshop {
         assertEquals(0, bilia.getSize());
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class )
     public void addOversizeCar() {
         // TODO, var sätts width och length på en bil ?
     }
 }
-*/

@@ -62,7 +62,33 @@ public class Saab95 implements Movable, Transportable, AuxTurbo{
         return car.getEnginePower() * 0.01 * findTurboFactor();
     }
 
+    /**
+     * Number of doors
+     * @return returns numbers of doors the car have.
+     */
+    public int getNoOfDoors() {
+        return car.getNoOfDoors();
+    }
 
+    /**
+     * Current speed of Saab 95
+     * @return current speed.
+     */
+    public double getCurrentSpeed() {
+        return car.getCurrentSpeed();
+    }
+
+    /**
+     * Engine power, relates to max speed.
+     * @return get the enginepower. 
+     */
+    public double getEnginePower() {
+        return car.getEnginePower();
+    }
+
+    /**
+     * Moves the truck in its current direction by length = current speed.
+     */
     @Override
     public void move() {
         car.move();

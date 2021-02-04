@@ -10,7 +10,10 @@ public class Volvo240 implements Movable, Transportable/*Positionable, Storable,
      */
     private final static double trimFactor = 1.25;
 
-    private Car car;
+    /**
+     * Car component.
+     */
+    private final Car car;
 
     /**
      * Constructs a Volvo240 object by calling its parent constructor with (hardcoded) presets for modelName, color,

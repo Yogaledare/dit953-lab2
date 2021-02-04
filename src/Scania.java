@@ -1,7 +1,13 @@
 import java.awt.*;
 
-public class Scania implements Movable, Transportable /*, Storable, Positionable, AuxPlatform */{
+/**
+ * A movable truck with a movable ramp
+ */
+public class Scania implements Movable, Transportable {
 
+    /**
+     * Car component.
+     */
     private final Car car;
     private final Ramp ramp;
 
@@ -77,22 +83,10 @@ public class Scania implements Movable, Transportable /*, Storable, Positionable
         car.stopEngine();
     }
 
-    //    @Override
-    public boolean raise() {
-        if (!isMoving()) {
-            ramp.raise();
-        }
-        return ramp.fullyRaised();
-    }
-
-//    @Override
-    public boolean lower() {
-        if (!isMoving()) {
-            ramp.lower();
-        }
-        return ramp.isFullyLowered();
-    }
-
+    /**
+     * Sets the direction of the truck.
+     * @param direction the new direction.
+     */
     @Override
     public void setPosition(Vector2D position) {
         car.setPosition(position);

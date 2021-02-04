@@ -33,8 +33,8 @@ public class TestVehicle {
         saab95.startEngine();
         saab95.gas(1.0);
         saab95.move();
-        Vector2D target = new Vector2D(0.0, 1.35);
-        assertEquals(saab95.getPosition().getY(), target.getY(), 0.0);
+        Vector2D target = new Vector2D(0.0, 1.1);
+        assertTrue(target.equals(saab95.getPosition()));
     }
 
     @Test

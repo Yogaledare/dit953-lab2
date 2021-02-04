@@ -11,7 +11,7 @@ import java.awt.*;
 /**
  * An abstract class representing a generic vehicle.
  */
-public class Vehicle/*, Transportable*//*implements Positionable*/{
+public class Vehicle {
 
     /**
      * Current speed valid interval from 0 to Engine power
@@ -35,6 +35,11 @@ public class Vehicle/*, Transportable*//*implements Positionable*/{
     private final double width;
 
     private final double length;
+
+    /**
+     * true if engine is on.
+     */
+    private boolean engineOn;
 
     /**
      * Constructs a vehicle object with the specified modelYear, color, enginePower and nrDoors.
@@ -70,13 +75,16 @@ public class Vehicle/*, Transportable*//*implements Positionable*/{
      * Starts the vehicle by setting currentSpeed to 0.1.
      */
     public void startEngine() {
-        currentSpeed = 0.1;
+        if (!engineOn)
+            currentSpeed = 0.1;
+        engineOn = true;
     }
 
     /**
      * Stops the vehicle by setting currentSpeed to 0.
      */
     public void stopEngine() {
+        engineOn = false;
         currentSpeed = 0;
     }
 
@@ -86,7 +94,8 @@ public class Vehicle/*, Transportable*//*implements Positionable*/{
      * @param amount how much the speed should increase for every move.
      */
     private void incrementSpeed(double amount, double speedFactor) {
-        currentSpeed = Vector2D.clamp(getCurrentSpeed() + speedFactor * amount, 0, enginePower);
+        if (engineOn)
+            currentSpeed = Vector2D.clamp(getCurrentSpeed() + speedFactor * amount, 0, enginePower);
     }
 
     /**
@@ -151,10 +160,18 @@ public class Vehicle/*, Transportable*//*implements Positionable*/{
         return direction;
     }
 
-//    @Override
-    public Vector2D getPosition(){ return position; }
+    /**
+     * Returns x and y coordinate of Vehicle
+      * @return Vector2D(x, y)
+     */
+    public Vector2D getPosition() {
+        return position;
+    }
 
-//    @Override
+    /**
+     * Vehicle width
+     * @return width of the vehicle
+     */
     public double getWidth() {
         return width;
     }
@@ -164,7 +181,20 @@ public class Vehicle/*, Transportable*//*implements Positionable*/{
         return length;
     }
 
-    public void setPosition(Vector2D vector2D){ position = vector2D; }
+    /**
+     * Set position of vehicle
+     * @param position sets the coordinates of the vehicle.
+     */
+    public void setPosition(Vector2D position) {
+        this.position = position;
+    }
 
+    /**
+     * Set current direction of the vehicle.
+     * @param direction set a direction of length 1 in Vector2D.
+     */
+    public void setDirection(Vector2D direction) {
+        this.direction = direction;
+    }
 }
 

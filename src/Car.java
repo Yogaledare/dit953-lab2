@@ -1,21 +1,27 @@
 import java.awt.*;
 
-public class Car implements Transportable {
+/**
+ * The car component representing car features
+ */
+public class Car {
     /**
      * Car model
      */
     private final String modelName;
+
     /**
      * Color of car
      */
     private Color color;
 
     /**
-     * Number of doors
+     * Number of doors the car has
      */
-
     private final int nrDoors;
 
+    /**
+     * The underlying vehicle object
+     */
     private final Vehicle vehicle;
 
 //    private final double width;
@@ -30,7 +36,16 @@ public class Car implements Transportable {
         this.nrDoors = nrDoors;
         vehicle.setPosition(new Vector2D(0, 0));
     }
-
+    /**
+     * Creates a representation of a car
+     * @param enginePower How powerful the car is
+     * @param width How wide the car is
+     * @param length How long the car is
+     * @param modelName The name of the car
+     * @param color The color of the car
+     * @param nrDoors How many doors the car has
+     * @param pos Where to place the car
+     */
     public Car(double enginePower, double width, double length, String modelName, Color color, int nrDoors, Vector2D pos){
         this(enginePower, width, length, modelName, color, nrDoors);
         vehicle.setPosition(pos);
@@ -68,11 +83,13 @@ public class Car implements Transportable {
         return modelName;
     }
 
-
+    /**
+     * Returns how powerful the car is
+     * @return how powerful the car is
+     */
     public double getEnginePower() {
         return vehicle.getEnginePower();
     }
-
 
     /**
      * Returns the width of the car.
@@ -109,52 +126,78 @@ public class Car implements Transportable {
         return vehicle.getPosition();
     }
 
+    /**
+     * Returns the direction of the car.
+     * @return the direction of the car
+     */
     public Vector2D getDirection(){ return vehicle.getDirection(); }
 
-
-
+    /**
+     * Move the car based on its speed
+     */
     public void move() {
         vehicle.move();
     }
 
-
+    /**
+     * Turn the car left
+     */
     public void turnLeft() {
         vehicle.turnLeft();
     }
 
-
+    /**
+     * Turn the car right
+     */
     public void turnRight() {
         vehicle.turnRight();
     }
 
-//    @Override
-//    public double findSpeedFactor() {
-//        return 0;
-//    }
+    /**
+     * Returns number of doors on the car
+     * @return number of doors on the car
+     */
+    public int getNoOfDoors() { return this.nrDoors; }
 
     public void gas(double amount, double speedFactor) {
         vehicle.gas(amount, speedFactor);
     }
 
-
+    /**
+     * Reduces the speed of the car
+     * @param amount how much to reduce the speed
+     * @param speedFactor speed modifier
+     */
     public void brake(double amount, double speedFactor) {
         vehicle.brake(amount, speedFactor);
     }
 
-
+    /**
+     * Returns true if the car is moving
+     * @return true if car is moving
+     */
     public boolean isMoving() {
         return vehicle.isMoving();
     }
 
-
+    /**
+     * Enables the car to be moved
+     */
     public void startEngine() {
         vehicle.startEngine();
     }
 
+    /**
+     * Disables the car to be moved
+     */
     public void stopEngine() {
         vehicle.stopEngine();
     }
 
+    /**
+     * Returns how fast the car is moving
+     * @return how fast the car is moving
+     */
     public double getCurrentSpeed(){
         return vehicle.getCurrentSpeed();
     }

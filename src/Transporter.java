@@ -1,5 +1,5 @@
 /**
- * Transporter interface enables an object to act as an transporter.
+ * Transporter interface enables an object to act as a transporter.
  * @param <T>
  */
 public interface Transporter<T extends Transportable> {

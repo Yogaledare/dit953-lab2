@@ -1,32 +1,21 @@
 import java.awt.*;
 
-public class TransportTruck<T extends Transportable> implements Movable, Transporter<T> /*, Transportable, IStorageUnit<T>, AuxPlatform */ {
-/*
-    Biltransportens ramp har endast två lägen, uppe eller nere.
-    Rampen kan endast vara nere om biltransporten står stilla.
-    Bilar kan endast lastas om rampen är nere, och de befinner sig rimligt nära biltransporten (gör ett eget antagande, de exakta detaljerna är inte viktiga).
-    Bilar kan endast lossas om rampen är nere.
-     De bör då hamna rimligt nära biltransporten.
+/**
+ * A movable truck with storage
+ * @param <T> the things to store
+ */
+public class TransportTruck<T extends Transportable> implements Movable, Transporter<T>, Transportable /*, Transportable, IStorageUnit<T>, AuxPlatform */ {
 
-    Bilar kan endast lossas i omvänd ordning från hur de lastades, dvs den sista bilen som lastades måste vara först att lossas (first-in-last-out).
-    Biltransporten ska inte kunna lasta på sig själv.
-    Under det att en bil är lastad på biltransporten ska dess position i världen alltid vara densamma som biltransportens position.
-
-    Viktiga saker att ha i åtanke under den här uppgiften:
-
-    Undvik kodduplicering för funktionalitet som är gemensam för flera olika klasser, e.g. lastbil och biltransport.
-    Fundera över behovet av polymorfism för olika ändamål, och hur det påverkar framtida extensibilitet.
-    Fundera över hur ni bäst håller reda på de bilar som lastats - vilken sorts datastruktur är bäst för ändamålet?
-
-    Kom ihåg att skriva Javadoc-dokumentation, och JUnit-tester för relevanta aspekter av er kod.
-    */
-//    private final double cabinLength = 1.5;
-//    private Vector2D position;
-
+    /**
+     * Storage component
+     */
     private final LIFO<T> storage;
 
     private final Ramp ramp;
 
+    /**
+     * Car component
+     */
     private final Car car;
 
     public TransportTruck(double enginePower, double width, double length, int capacity, double maxW, double maxL) {
@@ -43,13 +32,15 @@ public class TransportTruck<T extends Transportable> implements Movable, Transpo
 
     // For an object to be a specific _Car_ storage truck, that has to be declared when creating the object.
     public void store(T item) {
-        if (ramp.isFullyLowered()) {
+        if (ramp.isFullyLowered() && item != this) {
             storage.store(item);
         }
     }
 
-    /*vehicle.getPosition().distanceTo(car.getPosition()) < 2 && */
-
+    /**
+     * Remove an item from the storage.
+     * @return the removed item.
+     */
     public T remove() {
         if (!ramp.isFullyLowered()) {
             throw new IllegalStateException("Ramp not fully lowered");
@@ -80,8 +71,7 @@ public class TransportTruck<T extends Transportable> implements Movable, Transpo
 
     @Override
     public void turnRight() {
-        if (ramp.isFullyRaised())
-            car.turnRight();
+        car.turnRight();
     }
 
     @Override
@@ -138,62 +128,73 @@ public class TransportTruck<T extends Transportable> implements Movable, Transpo
         return ramp.isFullyLowered();
     }
 
-//    public int getStorageCount() {
-//        return storage.getSize();
-//    }
+    /**
+     * Returns true if the ramp is fully raised, false otherwise.
+     * @return true if the ramp is fully raised, false otherwise.
+     */
+    public boolean isFullyRaised() {
+        return ramp.isFullyRaised();
+    }
 
-//    @Override
-//    public Vector2D getPosition() {
-//        return position;
-//    }
+    /**
+     * Returns true if the ramp is fully lowered, false otherwise.
+     * @return true if the ramp is fully lowered, false otherwise.
+     */
+    public boolean isFullyLowered() {
+        return ramp.isFullyLowered();
+    }
 
-//    @Override
-//    public double getWidth() {
-//        return vehicle.getWidth();
-//    }
+    /**
+     * Returns the position of the truck.
+     * @return the position of the truck.
+     */
+    @Override
+    public Vector2D getPosition() {
+        return car.getPosition();
+    }
 
-//    @Override
-//    public double getLength() {
-//        return vehicle.getLength();
-//    }
+    /**
+     * Sets the direction of the truck.
+     * @param direction the new direction.
+     */
+    @Override
+    public void setDirection(Vector2D direction) {
+        car.setDirection(direction);
+    }
 
+    /**
+     * Returns the direction of the truck.
+     * @return the direction of the truck.
+     */
+    @Override
+    public Vector2D getDirection() {
+        return car.getDirection();
+    }
 
+    /**
+     * Sets the position of the truck.
+     * @param position the new position.
+     */
+    @Override
+    public void setPosition(Vector2D position) {
+        car.setPosition(position);
+    }
 
+    /**
+     * Returns the width of the truck.
+     * @return the width of the truck.
+     */
+    @Override
+    public double getWidth() {
+        return car.getWidth();
+    }
 
+    /**
+     * Returns the length of the truck.
+     * @return the length of the truck.
+     */
+    @Override
+    public double getLength() {
+        return car.getLength();
+    }
 }
-
-/*    @Override
-    public void setPosition(Vector2D vector2D) {
-        position = vector2D;
-    }*/
-
-//    @Override
-//    public void moveCargo(Vector2D newPosition) {
-//
-//    }
-
-/*    public T remove() {
-        if (ramp.isFullyLowered()) {
-
-            T car = storage.remove();
-
-            Vector2D offset = vehicle.getDirection().multiplyByScalar(-truckLength / 2.1);
-            Vector2D unloadedPosition = this.getPosition().plus(offset);
-            car.setPosition(unloadedPosition);
-            return car;
-        } else {
-            // fail to unload, due to ramp is up.
-            return null;
-        }
-    }*/
-
-//            for (T stored : storage.getStorage()) {
-//                stored.setPosition(this.getPosition());
-//            }
-
-
-
-//            car.setPosition(this.getPosition());
-//            storage.add(car);
-
-//    @Override

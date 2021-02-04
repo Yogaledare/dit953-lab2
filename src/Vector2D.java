@@ -62,6 +62,14 @@ public class Vector2D {
         return new Vector2D(newX, newY);
     }
 
+    @Override
+    public String toString() {
+        return "Vector2D{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
+    }
+
     /**
      * Returns the x coordinate
      *
