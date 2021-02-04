@@ -1,3 +1,5 @@
+/*
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -8,7 +10,6 @@ import java.util.List;
 
 
 import static org.junit.Assert.*;
-
 public class TestVehicle {
 
     List<Vehicle> cars = new ArrayList<>();
@@ -180,3 +181,4 @@ public class TestVehicle {
     }
 
 }
+*/

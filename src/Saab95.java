@@ -4,7 +4,7 @@ import java.awt.*;
  * A class representing a Saab95 car.
  */
 
-public class Saab95 implements Positionable, Storable, Movable, AuxTurbo {
+public class Saab95 implements Movable, Transportable/*Positionable, Storable, Movable, AuxTurbo */{
 
     /**
      * Flag to indicate if turbo is on or not.

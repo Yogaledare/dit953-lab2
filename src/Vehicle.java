@@ -11,7 +11,7 @@ import java.awt.*;
 /**
  * An abstract class representing a generic vehicle.
  */
-public class Vehicle implements Positionable{
+public class Vehicle /*implements Positionable*/{
 
     /**
      * Current speed valid interval from 0 to Engine power
@@ -145,5 +145,6 @@ public class Vehicle implements Positionable{
     }
     @Override public Vector2D getPosition(){ return position; }
     @Override public void setPosition(Vector2D vector2D){ position = vector2D; }
+
 }
 

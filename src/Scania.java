@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Scania implements Movable, Storable, Positionable, AuxPlatform {
+public class Scania implements Movable, Transportable /*, Storable, Positionable, AuxPlatform */{
 
     private final Car car;
     private final Ramp ramp;

@@ -1,3 +1,5 @@
+/*
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -63,3 +65,4 @@ public class TestWorkshop {
         // TODO, var sätts width och length på en bil ?
     }
 }
+*/

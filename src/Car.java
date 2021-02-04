@@ -121,10 +121,10 @@ public class Car implements Storable, Positionable, Movable {
         vehicle.turnRight();
     }
 
-    @Override
-    public double findSpeedFactor() {
-        return 0;
-    }
+//    @Override
+//    public double findSpeedFactor() {
+//        return 0;
+//    }
 
     @Override
     public void gas(double amount, double speedFactor) {
@@ -140,5 +140,4 @@ public class Car implements Storable, Positionable, Movable {
     public boolean isMoving() {
         return vehicle.getCurrentSpeed() > 0;
     }
-
 }

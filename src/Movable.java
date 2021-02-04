@@ -26,4 +26,5 @@ public interface Movable {
 
     boolean isMoving();
 
+//    double getSpeed();
 }

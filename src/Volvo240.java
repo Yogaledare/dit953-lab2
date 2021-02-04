@@ -3,7 +3,7 @@ import java.awt.*;
 /**
  * A class representing a Volvo240 car.
  */
-public class Volvo240 implements Positionable, Storable, Movable, AuxTrim {
+public class Volvo240 implements Movable, Transportable/*Positionable, Storable, Movable, AuxTrim*/ {
 
     /**
      * Trim factor, multiplier for speed factor
@@ -21,6 +21,15 @@ public class Volvo240 implements Positionable, Storable, Movable, AuxTrim {
     }
 
 
+    /**
+     * Returns the speed factor of the Volvo240.
+     * @return the speed factor of the Volvo240
+     */
+
+    private double findSpeedFactor() {
+        return car.getEnginePower() * 0.01 * trimFactor;
+    }
+
 
     @Override
     public void move() {
@@ -37,15 +46,6 @@ public class Volvo240 implements Positionable, Storable, Movable, AuxTrim {
         car.turnRight();
     }
 
-    /**
-     * Returns the speed factor of the Volvo240.
-     * @return the speed factor of the Volvo240
-     */
-    @Override
-    public double findSpeedFactor() {
-        return car.getEnginePower() * 0.01 * trimFactor;
-    }
-
     @Override
     public void gas(double amount, double speedFactor) {
         car.gas(amount, findSpeedFactor());
@@ -54,6 +54,11 @@ public class Volvo240 implements Positionable, Storable, Movable, AuxTrim {
     @Override
     public void brake(double amount, double speedFactor) {
         car.brake(amount, findSpeedFactor());
+    }
+
+    @Override
+    public boolean isMoving() {
+        return car.isMoving();
     }
 
     @Override

@@ -1,3 +1,5 @@
+/*
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,12 +17,14 @@ public class TestScania {
     @Test
     public void tryToDriveScaniaTruckWhenPlattformIsUp() {
 
-        /*
+        */
+/*
          * Det är bara om lastbilen står stilla som flaket får ha en annan vinkel än 0.
          *
          * Flaket ska inte kunna höjas om lastbilen är i rörelse;
          * och lastbilen ska inte kunna köra om flaket är uppfällt.
-         * */
+         * *//*
+
 
         truck.raise(); // set ramp to 70 degree
         truck.startEngine();  // try start engine.
@@ -41,3 +45,4 @@ public class TestScania {
         assertNotEquals(70, truck.getRampAngle(), 0.1);
      }
 }
+*/
