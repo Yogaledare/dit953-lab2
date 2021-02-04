@@ -28,7 +28,7 @@ public class Ramp {
         return rampAngle == 70;
     }
 
-    public boolean fullyLowered(){
+    public boolean isFullyLowered(){
         return rampAngle == 0;
     }
 }

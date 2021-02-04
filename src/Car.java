@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Car implements Storable, Positionable, Movable {
+public class Car implements Movable, Transportable {
     /**
      * Car model
      */
@@ -18,19 +18,18 @@ public class Car implements Storable, Positionable, Movable {
 
     private final Vehicle vehicle;
 
-    private final double width;
+//    private final double width;
+//
+//    private final double length;
 
-    private final double length;
 
-
-
-    public Car(double enginePower, String modelName, Color color, int nrDoors, double width, double length){
-        this.vehicle = new Vehicle(enginePower);
+    public Car(double enginePower, double width, double length, String modelName, Color color, int nrDoors/*, double width, double length*/){
+        this.vehicle = new Vehicle(enginePower, width, length);
         this.modelName = modelName;
         this.color = color;
         this.nrDoors = nrDoors;
-        this.width = width;
-        this.length = length;
+//        this.width = width;
+//        this.length = length;
     }
 
     /**
@@ -77,7 +76,7 @@ public class Car implements Storable, Positionable, Movable {
      */
     @Override
     public double getWidth() {
-        return width;
+        return vehicle.getWidth();
     }
 
     /**
@@ -86,7 +85,7 @@ public class Car implements Storable, Positionable, Movable {
      */
     @Override
     public double getLength() {
-        return length;
+        return vehicle.getLength();
     }
 
     /**
@@ -138,6 +137,6 @@ public class Car implements Storable, Positionable, Movable {
 
     @Override
     public boolean isMoving() {
-        return vehicle.getCurrentSpeed() > 0;
+        return vehicle.isMoving();
     }
 }

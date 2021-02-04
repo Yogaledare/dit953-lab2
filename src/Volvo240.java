@@ -17,7 +17,7 @@ public class Volvo240 implements Movable, Transportable/*Positionable, Storable,
      * enginePower and nrDoors.
      */
     public Volvo240(double width, double length) {
-        this.car = new Car(100, "Volvo240", Color.black, 4, width, length);
+        this.car = new Car(100, width, length, "Volvo240", Color.black, 4);
     }
 
 

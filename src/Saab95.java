@@ -17,7 +17,7 @@ public class Saab95 implements Movable, Transportable/*Positionable, Storable, M
      * enginePower and nrDoors. Initializes turboOn to false.
      */
     public Saab95(double width, double length) {
-        this.car = new Car(100, "Volvo240", Color.black, 4, width, length);
+        this.car = new Car(100, width, length, "Volvo240", Color.black, 4);
         turboOn = false;
     }
 

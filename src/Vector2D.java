@@ -84,7 +84,7 @@ public class Vector2D {
         return x == other.x && y == other.y;
     }
 
-    public double dst(Vector2D other){
+    public double distanceTo(Vector2D other){
         return Math.sqrt(Math.pow(x - other.x, 2) + Math.pow(y - other.y, 2));
     }
 

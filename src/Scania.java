@@ -16,8 +16,8 @@ public class Scania implements Movable, Transportable /*, Storable, Positionable
      * @param width       the width of the car
      * @param length      the length of the car
      */
-    public Scania(double enginePower, String modelName, Color color, int nrDoors, double width, double length) {
-        car = new Car(enginePower, modelName, color, nrDoors, width, length);
+    public Scania(double enginePower, double width, double length, String modelName, Color color, int nrDoors) {
+        car = new Car(enginePower, width, length, modelName, color, nrDoors);
         ramp = new Ramp(70, 1);
     }
 
@@ -26,10 +26,10 @@ public class Scania implements Movable, Transportable /*, Storable, Positionable
         ramp = new Ramp(70, 1);
     }
 
-    public Scania(){
-        car = new Car(10, "Scania", Color.blue, 2, 3, 5);
-        ramp = new Ramp(70, 1);
-    }
+//    public Scania(){
+//        car = new Car(10, 2, 3, "Scania", Color.blue, 2, 3, 5);
+//        ramp = new Ramp(70, 1);
+//    }
 
     public double findSpeedFactor() {
         return car.getEnginePower() * 0.01;
@@ -67,7 +67,7 @@ public class Scania implements Movable, Transportable /*, Storable, Positionable
         return car.isMoving();
     }
 
-    @Override
+//    @Override
     public boolean raise() {
         if (!isMoving()) {
             ramp.raise();
@@ -75,12 +75,12 @@ public class Scania implements Movable, Transportable /*, Storable, Positionable
         return ramp.fullyRaised();
     }
 
-    @Override
+//    @Override
     public boolean lower() {
         if (!isMoving()) {
             ramp.lower();
         }
-        return ramp.fullyLowered();
+        return ramp.isFullyLowered();
     }
 
     @Override

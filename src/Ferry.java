@@ -1,55 +1,44 @@
-import java.awt.*;
-
-public class Ferry<T extends Storable & Positionable> implements Movable, IStorageUnit<T> {
+public class Ferry<T extends Transportable> implements Movable/*, IStorageUnit<T>*/ {
 
     private final FIFO<T> storage;
     private final Vehicle vehicle;
     private final Ramp ramp;
 
     public Ferry(){
-        storage = new FIFO<T>(10, 1, 1);
-        vehicle = new Vehicle(1000);
+        vehicle = new Vehicle(1000, 5, 15);
+        storage = new FIFO<T>(10, 1, 1, 2, vehicle.getPosition(), vehicle.getDirection(), vehicle.getLength());
         ramp = new Ramp(70, 1);
     }
 
     public Ferry(FIFO<T> storageUnit) {
+        vehicle = new Vehicle(1000, 5, 15);
         this.storage = storageUnit;
-        vehicle = new Vehicle(1000);
         ramp = new Ramp(70, 1);
     }
 
     // ------ STORABLE --------
-    @Override
-    public void store(T item) {
-        if (vehicle.getPosition().dst(item.getPosition()) < 2 && ramp.fullyLowered()) {
-            storage.add(item);
-            item.setPosition(vehicle.getPosition());
+//    @Override
+    public void store(T car) {
+        if (vehicle.getPosition().distanceTo(car.getPosition()) < 2 && ramp.isFullyLowered()) {
+            storage.store(car);
         }
     }
 
-    @Override
+//    @Override
     public T remove() {
-        if (ramp.fullyLowered()) {
-            T car = storage.remove();
-            Vector2D offset = vehicle.getDirection().multiplyByScalar(5);
-            Vector2D unloadedPosition = vehicle.getPosition().plus(offset);
-            car.setPosition(unloadedPosition);
-            return car;
-        } else {
-            // fail to unload, due to ramp is up.
-            return null;
-        }
+    if (!ramp.isFullyLowered()) {
+        throw new IllegalStateException("Ramp not fully lowered");
+    }
+    return storage.remove();
     }
 
     // ------ MOVABLE --------
+//    @Override
     @Override
     public void move() {
         if (ramp.fullyRaised()) {
             vehicle.move();
-            storage.follow(vehicle);
-            for (T stored : storage.getStorage()) {
-                stored.setPosition(vehicle.getPosition());
-            }
+            storage.relocate(vehicle.getPosition(), vehicle.getDirection());
         }
     }
 
@@ -69,6 +58,21 @@ public class Ferry<T extends Storable & Positionable> implements Movable, IStora
     public void turnRight() {
         if(ramp.fullyRaised())
             vehicle.turnRight();
+    }
+
+    @Override
+    public void gas(double amount, double speedFactor) {
+
+    }
+
+    @Override
+    public void brake(double amount, double speedFactor) {
+
+    }
+
+    @Override
+    public boolean isMoving() {
+        return false;
     }
 
     /**

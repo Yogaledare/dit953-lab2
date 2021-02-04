@@ -11,7 +11,7 @@ import java.awt.*;
 /**
  * An abstract class representing a generic vehicle.
  */
-public class Vehicle /*implements Positionable*/{
+public class Vehicle implements Movable/*, Transportable*//*implements Positionable*/{
 
     /**
      * Current speed valid interval from 0 to Engine power
@@ -32,14 +32,20 @@ public class Vehicle /*implements Positionable*/{
      */
     private Vector2D position;
 
+    private final double width;
+
+    private final double length;
+
     /**
      * Constructs a vehicle object with the specified modelYear, color, enginePower and nrDoors.
      * The initial position (x, y) and direction (x, y) of the object is set to (0, 0) and (0, 1).
      * @param enginePower the engine power of the vehicle
      */
-    public Vehicle(double enginePower) {
+    public Vehicle(double enginePower, double width, double length) {
         this.enginePower = enginePower;
         this.direction = new Vector2D(0, 1);
+        this.width = width;
+        this.length = length;
         stopEngine();
     }
 
@@ -114,6 +120,11 @@ public class Vehicle /*implements Positionable*/{
         decrementSpeed(Vector2D.clamp(amount, 0, 1), speedFactor);
     }
 
+    @Override
+    public boolean isMoving() {
+        return currentSpeed > 0;
+    }
+
     /**
      * Moves the vehicle in its current direction by length = currentSpeed.
      */
@@ -140,11 +151,25 @@ public class Vehicle /*implements Positionable*/{
      * Returns the direction vector of the vehicle.
      * @return the direction vector of the vehicle
      */
+
     public Vector2D getDirection() {
         return direction;
     }
-    @Override public Vector2D getPosition(){ return position; }
-    @Override public void setPosition(Vector2D vector2D){ position = vector2D; }
+
+//    @Override
+    public Vector2D getPosition(){ return position; }
+
+//    @Override
+    public double getWidth() {
+        return width;
+    }
+
+//    @Override
+    public double getLength() {
+        return length;
+    }
+
+    public void setPosition(Vector2D vector2D){ position = vector2D; }
 
 }
 

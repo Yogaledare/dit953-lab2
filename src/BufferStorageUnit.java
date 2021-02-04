@@ -1,3 +1,5 @@
+/*
+
 import java.util.ArrayDeque;
 import java.util.List;
 import java.util.ArrayList;
@@ -58,6 +60,7 @@ public class BufferStorageUnit<T extends Storable> implements IStorageUnit<T>{
     }
 
 }
+*/
 /*
 class Customer<T> {
 
@@ -68,9 +71,11 @@ class Customer<T> {
     }
 
 }
+*//*
+
+
+
 */
-
-
 /*
 
     1) En verkstad ska kunna ta emot ("lasta"?) ett antal bilar, upp till något max-antal som kan variera mellan olika verkstäder.
