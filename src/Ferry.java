@@ -2,15 +2,12 @@
  * A movable ferry able to transport things
  * @param <T> the things to transport
  */
-public class Ferry<T extends Transportable> implements Movable, Transporter<T> {
+public class Ferry<T extends Transportable> extends Vehicle implements Movable, Transporter<T> {
     /**
      * storage component
      */
     private final FIFO<T> storage;
-    /**
-     * Vehicle component
-     */
-    private final Vehicle vehicle;
+
     /**
      * Ramp component
      */
@@ -20,8 +17,8 @@ public class Ferry<T extends Transportable> implements Movable, Transporter<T> {
      * Creates a default Ferry (testing)
      */
     public Ferry(){
-        vehicle = new Vehicle(1000, 5, 15);
-        storage = new FIFO<T>(10, 1, 1, 2, vehicle.getPosition(), vehicle.getDirection(), vehicle.getLength());
+        super(1000, 5, 15);
+        storage = new FIFO<T>(10, 1, 1, 2, getPosition(), getDirection(), getLength());
         ramp = new Ramp(70, 1);
     }
 
@@ -30,7 +27,7 @@ public class Ferry<T extends Transportable> implements Movable, Transporter<T> {
      * @param storageUnit already existing storage
      */
     public Ferry(FIFO<T> storageUnit) {
-        vehicle = new Vehicle(1000, 5, 15);
+        super(1000, 5, 15);
         this.storage = storageUnit;
         ramp = new Ramp(70, 1);
     }
@@ -71,41 +68,12 @@ public class Ferry<T extends Transportable> implements Movable, Transporter<T> {
     // ------ MOVABLE --------
 
     /**
-     * Moves the Ferry
-     */
-    @Override
-    public void move() {
-        if (ramp.isFullyRaised()) {
-            vehicle.move();
-            storage.relocate(vehicle.getPosition(), vehicle.getDirection());
-        }
-    }
-
-    /**
-     * Turns the Ferry 90 degrees to the left.
-     */
-    @Override
-    public void turnLeft() {
-        if(ramp.isFullyRaised())
-            vehicle.turnLeft();
-    }
-
-    /**
-     * Turns the Ferry 90 degrees to the right.
-     */
-    @Override
-    public void turnRight() {
-        if(ramp.isFullyRaised())
-            vehicle.turnRight();
-    }
-
-    /**
      * increases the speed of the Ferry
      * @param amount how much to increase the speed
      */
     @Override
     public void gas(double amount) {
-        vehicle.gas(amount, findSpeedFactor());
+        gas(amount, findSpeedFactor());
     }
 
     /**
@@ -114,40 +82,102 @@ public class Ferry<T extends Transportable> implements Movable, Transporter<T> {
      */
     @Override
     public void brake(double amount) {
-        vehicle.brake(amount, findSpeedFactor());
-    }
-
-    /**
-     * Returns true if the Ferry is moving
-     * @return true if Ferry is moving
-     */
-    @Override
-    public boolean isMoving() {
-        return false;
-    }
-
-    /**
-     * Enables the Ferry to be moved
-     */
-    @Override
-    public void startEngine() {
-        vehicle.startEngine();
-    }
-
-    /**
-     * Disables the Ferry to be moved
-     */
-    @Override
-    public void stopEngine() {
-        vehicle.stopEngine();
+        brake(amount, findSpeedFactor());
     }
 
     /**
      * Determines the speed factor of the Ferry.
      * @return the speed factor of the Ferry
      */
-    public double findSpeedFactor() {
-        return vehicle.getEnginePower() * 0.01;
+    private double findSpeedFactor() {
+        return getEnginePower() * 0.01;
     }
 
 }
+
+
+/*
+
+    */
+/**
+     * Returns true if the Ferry is moving
+     * @return true if Ferry is moving
+     *//*
+
+    @Override
+    public boolean isMoving() {
+        return false;
+    }
+
+    */
+/**
+     * Enables the Ferry to be moved
+     *//*
+
+    @Override
+    public void startEngine() {
+        vehicle.startEngine();
+    }
+
+    */
+/**
+     * Disables the Ferry to be moved
+     *//*
+
+    @Override
+    public void stopEngine() {
+        vehicle.stopEngine();
+    }
+*/
+
+
+/*
+
+
+    */
+/**
+     * Moves the Ferry
+     *//*
+
+    @Override
+    public void move() {
+        if (ramp.isFullyRaised()) {
+            vehicle.move();
+            storage.relocate(vehicle.getPosition(), vehicle.getDirection());
+        }
+    }
+
+    */
+/**
+     * Turns the Ferry 90 degrees to the left.
+     *//*
+
+    @Override
+    public void turnLeft() {
+        if(ramp.isFullyRaised())
+            vehicle.turnLeft();
+    }
+
+    */
+/**
+     * Turns the Ferry 90 degrees to the right.
+     *//*
+
+    @Override
+    public void turnRight() {
+        if(ramp.isFullyRaised())
+            vehicle.turnRight();
+    }
+*/
+
+
+/*
+
+    */
+/**
+     * Vehicle component
+     *//*
+
+    private final Vehicle vehicle;
+
+    */
