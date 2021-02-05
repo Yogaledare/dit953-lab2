@@ -4,7 +4,7 @@ import java.awt.*;
  * A movable truck with storage
  * @param <T> the things to store
  */
-public class TransportTruck<T extends Transportable> extends Car implements Movable, Transporter<T>, Transportable /*, Transportable, IStorageUnit<T>, AuxPlatform */ {
+public class TransportTruck<T extends Transportable> extends Car implements Transporter<T>, Transportable /*, Transportable, IStorageUnit<T>, AuxPlatform */ {
 
     /**
      * Storage component

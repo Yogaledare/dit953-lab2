@@ -3,7 +3,7 @@ import java.awt.*;
 /**
  * A class representing a Volvo240 car.
  */
-public class Volvo240 extends Car implements Movable, Transportable, AuxTrim {
+public class Volvo240 extends Car implements Transportable, AuxTrim {
 
     /**
      * Trim factor, multiplier for speed factor

@@ -2,7 +2,7 @@
  * A movable ferry able to transport things
  * @param <T> the things to transport
  */
-public class Ferry<T extends Transportable> extends Vehicle implements Movable, Transporter<T> {
+public class Ferry<T extends Transportable> extends Vehicle implements Transporter<T> {
     /**
      * storage component
      */
