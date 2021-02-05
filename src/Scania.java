@@ -167,7 +167,7 @@ public class Scania implements Movable, Transportable {
      */
     @Override
     public Vector2D getDirection() {
-        return null;
+        return car.getDirection();
     }
 
     /**
