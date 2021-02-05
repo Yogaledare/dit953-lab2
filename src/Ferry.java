@@ -123,7 +123,7 @@ public class Ferry<T extends Transportable> implements Movable, Transporter<T> {
      */
     @Override
     public boolean isMoving() {
-        return false;
+        return vehicle.isMoving();
     }
 
     /**
@@ -146,7 +146,7 @@ public class Ferry<T extends Transportable> implements Movable, Transporter<T> {
      * Determines the speed factor of the Ferry.
      * @return the speed factor of the Ferry
      */
-    public double findSpeedFactor() {
+    private double findSpeedFactor() {
         return vehicle.getEnginePower() * 0.01;
     }
 
