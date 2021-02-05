@@ -21,10 +21,13 @@ public class TestWorkshop {
         saab95 = new Saab95(2,5);
     }
 
+
+
     @Test
     public void addCartoWorkshop() {
         bilia.store(volvo240);
-        // bilia.store(saab95);
+
+//         bilia.store(saab95); // Ger statiskt fel
 
         assertEquals(1, bilia.getSize());
     }
