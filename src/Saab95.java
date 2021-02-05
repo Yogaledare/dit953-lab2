@@ -55,31 +55,35 @@ public class Saab95 extends Car implements Movable, Transportable, AuxTurbo{
      * Returns the speed factor of the Saab95.
      * @return the speed factor of the Saab95
      */
-    private double findSpeedFactor() {
+    protected double findSpeedFactor() {
         return getEnginePower() * 0.01 * findTurboFactor();
     }
 
-    /**
-     * Increases the speed of the car by a fraction between 0 and 1 of its max acceleration capacity.
-     * @param amount a value between 0 and 1 representing how much the gas is pressed.
-     *               If outside this interval, the value will be clamped.
-     */
+
+}
+
+
+/*
+ *//**
+ * Increases the speed of the car by a fraction between 0 and 1 of its max acceleration capacity.
+ * @param amount a value between 0 and 1 representing how much the gas is pressed.
+ *               If outside this interval, the value will be clamped.
+ *//*
     @Override
     public void gas(double amount) {
         gas(amount, findSpeedFactor());
     }
 
-    /**
-     * Decreases the speed of the car by a fraction between 0 and 1 of its max deceleration capacity.
-     * @param amount a value between 0 and 1 representing how much the brake is pressed.
-     *               If outside this interval, the value will be clamped.
-     */
+    *//**
+ * Decreases the speed of the car by a fraction between 0 and 1 of its max deceleration capacity.
+ * @param amount a value between 0 and 1 representing how much the brake is pressed.
+ *               If outside this interval, the value will be clamped.
+ *//*
     @Override
     public void brake(double amount) {
         brake(amount, findSpeedFactor());
-    }
+    }*/
 
-}
 
 
 /*

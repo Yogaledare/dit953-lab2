@@ -68,34 +68,46 @@ public class Ferry<T extends Transportable> extends Vehicle implements Movable, 
     // ------ MOVABLE --------
 
     /**
+     * Determines the speed factor of the Ferry.
+     * @return the speed factor of the Ferry
+     */
+    protected double findSpeedFactor() {
+        return getEnginePower() * 0.01;
+    }
+
+    /**
+    * Disables the Ferry to be moved
+    */
+    @Override
+    public void startEngine() {
+        if(ramp.isFullyRaised())
+            super.startEngine();
+    }
+}
+
+
+
+/*
+    *//**
      * increases the speed of the Ferry
      * @param amount how much to increase the speed
-     */
+     *//*
     @Override
     public void gas(double amount) {
         gas(amount, findSpeedFactor());
     }
 
-    /**
+    *//**
      * Reduces the speed of the Ferry
      * @param amount how much to reduce the speed
-     */
+     *//*
     @Override
     public void brake(double amount) {
         brake(amount, findSpeedFactor());
     }
 
-    /**
-     * Determines the speed factor of the Ferry.
-     * @return the speed factor of the Ferry
-     */
-    private double findSpeedFactor() {
-        return getEnginePower() * 0.01;
-    }
 
-}
-
-
+    */
 /*
 
     */
@@ -120,15 +132,6 @@ public class Ferry<T extends Transportable> extends Vehicle implements Movable, 
     }
 
     */
-/**
-     * Disables the Ferry to be moved
-     *//*
-
-    @Override
-    public void stopEngine() {
-        vehicle.stopEngine();
-    }
-*/
 
 
 /*

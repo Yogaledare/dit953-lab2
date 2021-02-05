@@ -13,8 +13,7 @@ public class TestScania {
 
     @Before
     public void setUp() {
-        truck = new Scania(new Car(1000, 2, 6, "Scania lastbil",
-                Color.black, 2, new Vector2D(1, 1)));
+        truck = new Scania(1000, 2, 6, "Scania lastbil", Color.black, 2);
     }
 
 
@@ -37,7 +36,7 @@ public class TestScania {
            och lastbilen ska inte kunna köra om flaket är uppfällt.
          */
 
-
+        truck.setPosition(new Vector2D(1, 1));
         truck.raise(); // set ramp to 70 degree
         truck.startEngine();  // try start engine.
         truck.gas(1.0);

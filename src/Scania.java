@@ -30,7 +30,7 @@ public class Scania extends Car implements Movable, Transportable {
      * Returns the speed factor of the truck.
      * @return the speed factor of the truck.
      */
-    private double findSpeedFactor() {
+    protected double findSpeedFactor() {
         return getEnginePower() * 0.01;
     }
 
@@ -52,6 +52,18 @@ public class Scania extends Car implements Movable, Transportable {
         }
     }
 
+
+    /**
+     * Starts the truck by setting its speed to 0.1.
+     */
+    @Override
+    public void startEngine() {
+        if (isFullyLowered()) {
+            super.startEngine();
+        }
+    }
+
+
     /**
      * Returns true if the platform is fully raised, false otherwise.
      * @return true if the platform is fully raised, false otherwise.
@@ -68,29 +80,31 @@ public class Scania extends Car implements Movable, Transportable {
         return ramp.isFullyLowered();
     }
 
-    /**
+}
+
+/*
+
+    *//**
      * Increases the speed of the truck by a fraction between 0 and 1 of its max acceleration capacity.
      * @param amount a value between 0 and 1 representing how much the gas is pressed.
      *               If outside this interval, the value will be clamped.
-     */
+     *//*
     @Override
     public void gas(double amount) {
         gas(amount, findSpeedFactor());
     }
 
-    /**
+    *//**
      * Decreases the speed of the truck by a fraction between 0 and 1 of its max deceleration capacity.
      * @param amount a value between 0 and 1 representing how much the brake is pressed.
      *               If outside this interval, the value will be clamped.
-     */
+     *//*
     @Override
     public void brake(double amount) {
         brake(amount, findSpeedFactor());
     }
 
-}
-
-
+    */
 
 /*
 
@@ -103,23 +117,7 @@ public class Scania extends Car implements Movable, Transportable {
         return car.isMoving();
     }
 
-    *//**
-     * Starts the truck by setting its speed to 0.1.
-     *//*
-    @Override
-    public void startEngine() {
-        if (isFullyLowered()) {
-            car.startEngine();
-        }
-    }
 
-    *//**
-     * Stops the truck by setting its speed to 0.
-     *//*
-    @Override
-    public void stopEngine() {
-        car.stopEngine();
-    }
 
     *//**
      * Sets the direction of the truck.

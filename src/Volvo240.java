@@ -21,33 +21,37 @@ public class Volvo240 extends Car implements Movable, Transportable, AuxTrim {
      * Returns the speed factor of the Volvo240.
      * @return the speed factor of the Volvo240
      */
-    private double findSpeedFactor() {
+    protected double findSpeedFactor() {
         return getEnginePower() * 0.01 * trimFactor;
     }
 
-    /**
+
+}
+
+
+
+/*
+    *//**
      * Increases the speed of the car by a fraction between 0 and 1 of its max acceleration capacity.
      * @param amount a value between 0 and 1 representing how much the gas is pressed.
      *               If outside this interval, the value will be clamped.
-     */
+     *//*
     @Override
     public void gas(double amount) {
         gas(amount, findSpeedFactor());
     }
 
-    /**
+    *//**
      * Decreases the speed of the car by a fraction between 0 and 1 of its max deceleration capacity.
      * @param amount a value between 0 and 1 representing how much the brake is pressed.
      *               If outside this interval, the value will be clamped.
-     */
+     *//*
     @Override
     public void brake(double amount) {
         brake(amount, findSpeedFactor());
     }
 
-}
-
-
+    */
 
 /*
     *//**

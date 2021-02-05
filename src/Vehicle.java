@@ -11,7 +11,7 @@ import java.awt.*;
 /**
  * An abstract class representing a generic vehicle.
  */
-public class Vehicle {
+public abstract class Vehicle implements Movable{
 
     /**
      * Current speed valid interval from 0 to Engine power
@@ -125,8 +125,8 @@ public class Vehicle {
      *
      * @param amount a value between 0 and 1 representing how much the gas is pressed
      */
-    public void gas(double amount, double speedFactor) {
-        incrementSpeed(Vector2D.clamp(amount, 0, 1), speedFactor);
+    public void gas(double amount/*, double speedFactor*/) {
+        incrementSpeed(Vector2D.clamp(amount, 0, 1), findSpeedFactor());
     }
 
     /**
@@ -136,8 +136,8 @@ public class Vehicle {
      * @param amount a value between 0 and 1 representing how much the brake is pressed
      */
 
-    public void brake(double amount, double speedFactor) {
-        decrementSpeed(Vector2D.clamp(amount, 0, 1), speedFactor);
+    public void brake(double amount/*, double speedFactor*/) {
+        decrementSpeed(Vector2D.clamp(amount, 0, 1), findSpeedFactor());
     }
 
     /**
@@ -222,5 +222,11 @@ public class Vehicle {
     public void setDirection(Vector2D direction) {
         this.direction = direction;
     }
+
+    /**
+     * Abstract method for calculating speed factor.
+     * @return the speed factor of the veheicle.
+     */
+    protected abstract double findSpeedFactor();
 }
 

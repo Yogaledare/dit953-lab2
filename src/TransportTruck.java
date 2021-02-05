@@ -65,30 +65,10 @@ public class TransportTruck<T extends Transportable> extends Car implements Mova
     }
 
     /**
-     * Increases the speed of the truck by a fraction between 0 and 1 of its max acceleration capacity.
-     * @param amount a value between 0 and 1 representing how much the gas is pressed.
-     *               If outside this interval, the value will be clamped.
-     */
-    @Override
-    public void gas(double amount) {
-        gas(amount, findSpeedFactor());
-    }
-
-    /**
-     * Decreases the speed of the truck by a fraction between 0 and 1 of its max deceleration capacity.
-     * @param amount a value between 0 and 1 representing how much the brake is pressed.
-     *               If outside this interval, the value will be clamped.
-     */
-    @Override
-    public void brake(double amount) {
-        brake(amount, findSpeedFactor());
-    }
-
-    /**
      * Returns the speed factor of the truck.
      * @return the speed factor of the truck.
      */
-    private double findSpeedFactor() {
+    protected double findSpeedFactor() {
         return getEnginePower() * 0.01;
     }
 
@@ -113,6 +93,16 @@ public class TransportTruck<T extends Transportable> extends Car implements Mova
     }
 
     /**
+     * Starts the truck by setting its speed to 0.1.
+     */
+    @Override
+    public void startEngine() {
+        if (ramp.isFullyRaised()) {
+            super.startEngine();
+        }
+    }
+
+    /**
      * Returns true if the ramp is fully raised, false otherwise.
      * @return true if the ramp is fully raised, false otherwise.
      */
@@ -130,6 +120,30 @@ public class TransportTruck<T extends Transportable> extends Car implements Mova
 
 }
 
+/*
+
+    *//**
+     * Increases the speed of the truck by a fraction between 0 and 1 of its max acceleration capacity.
+     * @param amount a value between 0 and 1 representing how much the gas is pressed.
+     *               If outside this interval, the value will be clamped.
+     *//*
+    @Override
+    public void gas(double amount) {
+        gas(amount, findSpeedFactor());
+    }
+
+    *//**
+     * Decreases the speed of the truck by a fraction between 0 and 1 of its max deceleration capacity.
+     * @param amount a value between 0 and 1 representing how much the brake is pressed.
+     *               If outside this interval, the value will be clamped.
+     *//*
+    @Override
+    public void brake(double amount) {
+        brake(amount, findSpeedFactor());
+    }
+
+
+    */
 
 /*
 
@@ -199,15 +213,7 @@ public class TransportTruck<T extends Transportable> extends Car implements Mova
         return car.getCurrentSpeed() > 0;
     }
 
-    *//**
-     * Starts the truck by setting its speed to 0.1.
-     *//*
-    @Override
-    public void startEngine() {
-        if (ramp.isFullyRaised()) {
-            car.startEngine();
-        }
-    }
+
 
     *//**
      * Stops the truck by setting its speed to 0.
