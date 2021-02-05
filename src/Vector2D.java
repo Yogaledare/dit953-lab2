@@ -4,7 +4,6 @@ import java.util.Objects;
  * A vector class representing immutable vectors in a 2D cartesian coordinate system.
  */
 public class Vector2D {
-    hej
 
     /**
      * x coordinate

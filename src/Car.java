@@ -3,7 +3,7 @@ import java.awt.*;
 /**
  * The car component representing car features
  */
-public class Car {
+public class Car extends Vehicle {
     /**
      * Car model
      */
@@ -20,11 +20,6 @@ public class Car {
     private final int nrDoors;
 
     /**
-     * The underlying vehicle object
-     */
-    private final Vehicle vehicle;
-
-    /**
      * Creates a representation of a car
      * @param enginePower How powerful the car is
      * @param width How wide the car is
@@ -34,7 +29,7 @@ public class Car {
      * @param nrDoors How many doors the car has
      */
     public Car(double enginePower, double width, double length, String modelName, Color color, int nrDoors){
-        this.vehicle = new Vehicle(enginePower, width, length);
+        super(enginePower, width, length);
         this.modelName = modelName;
         this.color = color;
         this.nrDoors = nrDoors;
@@ -51,8 +46,11 @@ public class Car {
      * @param pos Where to place the car
      */
     public Car(double enginePower, double width, double length, String modelName, Color color, int nrDoors, Vector2D pos){
-        this(enginePower, width, length, modelName, color, nrDoors);
-        vehicle.setPosition(pos);
+        super(enginePower, width, length);
+        this.modelName = modelName;
+        this.color = color;
+        this.nrDoors = nrDoors;
+        setPosition(pos);
     }
 
     /**
@@ -88,132 +86,164 @@ public class Car {
     }
 
     /**
-     * Returns how powerful the car is
-     * @return how powerful the car is
-     */
-    public double getEnginePower() {
-        return vehicle.getEnginePower();
-    }
-
-    /**
-     * Returns the width of the car.
-     * @return the width of the car
-     */
-//    @Override
-    public double getWidth() {
-        return vehicle.getWidth();
-    }
-
-    /**
-     * Returns the length of the car.
-     * @return the length of the car
-     */
-
-    public double getLength() {
-        return vehicle.getLength();
-    }
-
-    /**
-     * Sets the position of the car.
-     */
-    public void setPosition(Vector2D position) {
-        vehicle.setPosition(position);
-    }
-
-    /**
-     * Sets the direction of the car
-     * @param direction direction to be set
-     */
-    public void setDirection(Vector2D direction) {
-        vehicle.setDirection(direction);
-    }
-
-    /**
-     * Returns the position of the car.
-     * @return the position of the car
-     */
-    public Vector2D getPosition() {
-        return vehicle.getPosition();
-    }
-
-    /**
-     * Returns the direction of the car.
-     * @return the direction of the car
-     */
-    public Vector2D getDirection(){ return vehicle.getDirection(); }
-
-    /**
-     * Move the car based on its speed
-     */
-    public void move() {
-        vehicle.move();
-    }
-
-    /**
-     * Turn the car left
-     */
-    public void turnLeft() {
-        vehicle.turnLeft();
-    }
-
-    /**
-     * Turn the car right
-     */
-    public void turnRight() {
-        vehicle.turnRight();
-    }
-
-    /**
      * Returns number of doors on the car
      * @return number of doors on the car
      */
     public int getNoOfDoors() { return this.nrDoors; }
 
-    /**
+}
+
+
+/*
+
+ */
+/**
+ * The underlying vehicle object
+ *//*
+
+    private final Vehicle vehicle;
+*/
+
+
+
+
+/*
+ *//**
+ * Returns how powerful the car is
+ * @return how powerful the car is
+ *//*
+    public double getEnginePower() {
+        return vehicle.getEnginePower();
+    }
+
+    *//**
+ * Returns the width of the car.
+ * @return the width of the car
+ *//*
+//    @Override
+    public double getWidth() {
+        return vehicle.getWidth();
+    }
+
+    *//**
+ * Returns the length of the car.
+ * @return the length of the car
+ *//*
+
+    public double getLength() {
+        return vehicle.getLength();
+    }
+
+    *//**
+ * Sets the position of the car.
+ *//*
+    public void setPosition(Vector2D position) {
+        vehicle.setPosition(position);
+    }
+
+    *//**
+ * Sets the direction of the car
+ * @param direction direction to be set
+ *//*
+    public void setDirection(Vector2D direction) {
+        vehicle.setDirection(direction);
+    }
+
+    *//**
+ * Returns the position of the car.
+ * @return the position of the car
+ *//*
+    public Vector2D getPosition() {
+        return vehicle.getPosition();
+    }
+
+    *//**
+ * Returns the direction of the car.
+ * @return the direction of the car
+ *//*
+    public Vector2D getDirection(){ return vehicle.getDirection(); }
+
+    *//**
+ * Move the car based on its speed
+ *//*
+    public void move() {
+        vehicle.move();
+    }
+
+    *//**
+ * Turn the car left
+ *//*
+    public void turnLeft() {
+        vehicle.turnLeft();
+    }
+
+    *//**
+ * Turn the car right
+ *//*
+    public void turnRight() {
+        vehicle.turnRight();
+    }*/
+
+/*
+
+
+    */
+/**
      * increases the speed of the car
      * @param amount how much to increase the speed
      * @param speedFactor speed modifier
-     */
+     *//*
+
     public void gas(double amount, double speedFactor) {
         vehicle.gas(amount, speedFactor);
     }
 
-    /**
+    */
+/**
      * Reduces the speed of the car
      * @param amount how much to reduce the speed
      * @param speedFactor speed modifier
-     */
+     *//*
+
     public void brake(double amount, double speedFactor) {
         vehicle.brake(amount, speedFactor);
     }
 
-    /**
+    */
+/**
      * Returns true if the car is moving
      * @return true if car is moving
-     */
+     *//*
+
     public boolean isMoving() {
         return vehicle.isMoving();
     }
 
-    /**
+    */
+/**
      * Enables the car to be moved
-     */
+     *//*
+
     public void startEngine() {
         vehicle.startEngine();
     }
 
-    /**
+    */
+/**
      * Disables the car to be moved
-     */
+     *//*
+
     public void stopEngine() {
         vehicle.stopEngine();
     }
 
-    /**
+    */
+/**
      * Returns how fast the car is moving
      * @return how fast the car is moving
-     */
+     *//*
+
     public double getCurrentSpeed(){
         return vehicle.getCurrentSpeed();
     }
-}
+    */
