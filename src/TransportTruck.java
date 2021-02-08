@@ -78,7 +78,7 @@ public class TransportTruck<T extends Transportable> extends Car implements Tran
      */
     public void raiseRamp() {
         if (getCurrentSpeed() == 0) {
-            ramp.raise();
+            ramp.raiseFully();
         }
     }
 
@@ -88,7 +88,7 @@ public class TransportTruck<T extends Transportable> extends Car implements Tran
      */
     public void lowerRamp() {
         if (getCurrentSpeed() == 0) {
-            ramp.lower();
+            ramp.lowerFully();
         }
     }
 
@@ -116,6 +116,12 @@ public class TransportTruck<T extends Transportable> extends Car implements Tran
      */
     public boolean isFullyLowered() {
         return ramp.isFullyLowered();
+    }
+
+    @Override
+    public void move() {
+        super.move();
+        storage.relocate(getPosition(), getDirection());
     }
 
 }

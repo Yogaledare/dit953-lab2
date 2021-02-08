@@ -29,7 +29,7 @@ public class Ramp {
     /**
      * Lower the ramp fully
      */
-    public void lower(){
+    public void lowerFully(){
         while (rampAngle > 0) {
             rampAngle = Vector2D.clamp(rampAngle -= rampSpeed, 0, maxAngle);
         }
@@ -38,7 +38,7 @@ public class Ramp {
     /**
      * Raise the ramp fully
      */
-    public void raise(){
+    public void raiseFully(){
         while (rampAngle < 70) {
             rampAngle = Vector2D.clamp(rampAngle += rampSpeed, 0, maxAngle);
         }

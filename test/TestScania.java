@@ -19,11 +19,11 @@ public class TestScania {
 
     @Test
     public void driveScaniaAndRaise() {
-        truck.lower();
+        truck.lower(70);
         truck.startEngine();
         truck.gas(1.0);
         truck.move();
-        truck.raise();
+        truck.raise(70);
         assertFalse(truck.isFullyRaised());
     }
 
@@ -37,7 +37,7 @@ public class TestScania {
          */
 
         truck.setPosition(new Vector2D(1, 1));
-        truck.raise(); // set ramp to 70 degree
+        truck.raise(70); // set ramp to 70 degree
         truck.startEngine();  // try start engine.
         truck.gas(1.0);
         truck.move();
@@ -46,11 +46,11 @@ public class TestScania {
 
     @Test
     public void tryToRaisePlatformWhileDriving() {
-        truck.lower();
+        truck.lower(70);
         truck.startEngine();
         truck.gas(1.0);
         truck.move();
-        truck.raise(); // try set ramp to 70.
+        truck.raise(70); // try set ramp to 70.
         assertFalse(truck.isFullyRaised());
      }
 }

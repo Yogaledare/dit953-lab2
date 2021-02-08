@@ -3,7 +3,7 @@ import java.awt.*;
 /**
  * The car component representing car features
  */
-public abstract class Car extends Vehicle {
+public abstract class Car extends Vehicle implements Transportable {
     /**
      * Car model
      */

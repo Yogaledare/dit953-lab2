@@ -83,5 +83,12 @@ public class Ferry<T extends Transportable> extends Vehicle implements Transport
         if(ramp.isFullyRaised())
             super.startEngine();
     }
+
+    @Override
+    public void move() {
+        super.move();
+        storage.relocate(getPosition(), getDirection());
+    }
+
 }
 

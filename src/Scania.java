@@ -8,8 +8,7 @@ public class Scania extends Car implements Transportable {
     /**
      * Ramp component.
      */
-    private final Ramp ramp;
-
+    private final Ramp platform;
     /**
      * Constructs a Scania truck object with the specified modelName, color, enginePower, nrDoors, width and length.
      * The initial position (x, y) and direction (x, y) of the object is set to (0, 0) and (0, 1).
@@ -22,7 +21,7 @@ public class Scania extends Car implements Transportable {
      */
     public Scania(double enginePower, double width, double length, String modelName, Color color, int nrDoors) {
         super(enginePower, width, length, modelName, color, nrDoors, new Vector2D(0, 0));
-        ramp = new Ramp(70, 1);
+        platform = new Ramp(70, 1);
     }
 
 
@@ -37,18 +36,19 @@ public class Scania extends Car implements Transportable {
     /**
      * Raises the ramp to its topmost position. Can not be done if the truck is moving.
      */
-    public void raise() {
+    public void raise(double amount) {
         if (!isMoving()) {
-            ramp.raise();
+
+            platform.raise(amount);
         }
     }
 
     /**
      * Lowers the ramp to its lowest position. Can not be done if the truck is moving.
      */
-    public void lower() {
+    public void lower(double amount) {
         if (!isMoving()) {
-            ramp.lower();
+            platform.lower(amount);
         }
     }
 
@@ -69,7 +69,7 @@ public class Scania extends Car implements Transportable {
      * @return true if the platform is fully raised, false otherwise.
      */
     public boolean isFullyRaised() {
-        return ramp.isFullyRaised();
+        return platform.isFullyRaised();
     }
 
     /**
@@ -77,7 +77,7 @@ public class Scania extends Car implements Transportable {
      * @return true if the platform is fully lowered, false otherwise.
      */
     public boolean isFullyLowered() {
-        return ramp.isFullyLowered();
+        return platform.isFullyLowered();
     }
 
 }
