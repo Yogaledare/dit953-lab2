@@ -26,6 +26,14 @@ public class Ramp {
         rampSpeed = speed;
     }
 
+    public void lower(double amount){
+        rampAngle = Vector2D.clamp(rampAngle -= amount, 0, maxAngle);
+    }
+
+    public void raise(double amount){
+        rampAngle = Vector2D.clamp(rampAngle += amount, 0, maxAngle);
+    }
+
     /**
      * Lower the ramp fully
      */
