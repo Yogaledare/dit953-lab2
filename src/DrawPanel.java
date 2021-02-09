@@ -4,14 +4,39 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
 
 // This panel represent the animated part of the view with the car images.
 
 public class DrawPanel extends JPanel{
 
-    private class DrawedCar{
+
+    private final Map<Object, BufferedImage> images = new HashMap<>();
+
+
+    public void bind(Object object, String imageFileName) {
+        try {
+            BufferedImage image = ImageIO.read(DrawPanel.class.getResourceAsStream(imageFileName));
+            images.put(object, image);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public BufferedImage get(Object object) {
+        BufferedImage image = images.get(object);
+        if (image != null) {
+            return image;
+        } else {
+            return images.get(object.getClass());
+        }
+    }
+
+/*    private class DrawedCar{
         public Car carRef;
         public BufferedImage image;
         public Point point;
@@ -21,30 +46,34 @@ public class DrawPanel extends JPanel{
             this.image = image;
             this.point = new Point();
         }
-    }
+    }*/
 
     // Just a single image, TODO: Generalize
     BufferedImage volvoImage;
 
-    private List<DrawedCar> drawedCars = new ArrayList<>();
+//    private List<DrawedCar> drawedCars = new ArrayList<>();
     // To keep track of a single cars position
     Point carPoint = new Point();
 
     // TODO: Make this general for all cars
-    /*void moveit(int x, int y){
-        carPoint.x = x;
-        carPoint.y = y;
-    }*/
-    void moveit(Car carToMove){
+    void moveit(Car car, int x, int y){
+        car.x = x;
+        car.y = y;
+    }
+
+
+
+
+/*    void moveit(Car carToMove){
         for(DrawedCar car : drawedCars){
             if(carToMove.equals(car.carRef) ){
                 car.point.x = (int)carToMove.getPosition().getX();
                 car.point.y = (int)carToMove.getPosition().getY();
             }
         }
-    }
+    }*/
 
-    public void connectCars(List<Car> cars){
+/*    public void connectCars(List<Car> cars){
         for(Car car : cars){
             try{
                 drawedCars.add(new DrawedCar(
@@ -55,6 +84,10 @@ public class DrawPanel extends JPanel{
                 ex.printStackTrace();
             }
         }
+    }*/
+
+    private void bindCars() {
+
     }
 
     // Initializes the panel and reads the images
@@ -70,11 +103,12 @@ public class DrawPanel extends JPanel{
 
             // Rememember to rightclick src New -> Package -> name: pics -> MOVE *.jpg to pics.
             // if you are starting in IntelliJ.
-            //volvoImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg"));
+//
         } catch (IOException ex)
         {
             ex.printStackTrace();
         }*/
+        volvoImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg"));
 
     }
 
