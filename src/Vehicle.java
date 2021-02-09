@@ -127,6 +127,8 @@ public abstract class Vehicle implements Movable{
      */
     public void gas(double amount/*, double speedFactor*/) {
         incrementSpeed(Vector2D.clamp(amount, 0, 1), findSpeedFactor());
+        // out text for debug only
+        System.out.println("Gas: " + amount );
     }
 
     /**

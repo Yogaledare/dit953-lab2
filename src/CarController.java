@@ -62,4 +62,72 @@ public class CarController {
             car.gas(gas);
         }
     }
+
+    void brake(int amount) {
+        double brake = ((double) amount) / 100;
+        for (Car car : cars
+        ) {
+            car.brake(brake);
+        }
+    }
+
+    void startEngineAll(){
+        for (Car c : cars ) {
+            c.startEngine();
+        }
+    }
+
+    void stopEngineAll(){
+        for (Car c : cars ) {
+            c.stopEngine();
+        }
+    }
+
+    void raise() {
+        for (Car c : cars ) {
+            try {
+                ((Scania) c).raise(10);
+            } catch( Exception ex) {
+
+            }
+        }
+
+    }
+
+    void lower() {
+        for (Car c : cars ) {
+            try {
+                ((Scania) c).lower(10);
+            } catch( Exception ex) {
+
+            }
+        }
+
+    }
+
+    void setTurboOn(){
+        for(Car c : cars){
+            try{
+                ((Saab95) c).setTurboOn();
+            }
+            catch(Exception ex){
+                // System.err.println("Error:" + ex.toString());
+            }
+
+        }
+    }
+
+    void setTurboOff(){
+        for(Car c : cars){
+            try{
+                ((Saab95) c).setTurboOff();
+            }
+            catch(ClassCastException ex){
+//                System.err.println("Error:" + ex.toString());
+            }
+
+        }
+    }
+
+
 }
