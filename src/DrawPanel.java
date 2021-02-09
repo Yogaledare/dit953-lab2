@@ -47,7 +47,7 @@ public class DrawPanel extends JPanel{
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.green);
         // Print an error message in case file is not found with a try/catch block
-        try {
+/*        try {
             // You can remove the "pics" part if running outside of IntelliJ and
             // everything is in the same main folder.
             // volvoImage = ImageIO.read(new File("Volvo240.jpg"));
@@ -58,7 +58,7 @@ public class DrawPanel extends JPanel{
         } catch (IOException ex)
         {
             ex.printStackTrace();
-        }
+        }*/
 
     }
 
