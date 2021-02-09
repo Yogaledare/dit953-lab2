@@ -29,11 +29,19 @@ public class CarController {
         // Instance of this class
         CarController cc = new CarController();
 
-        cc.cars.add(new Volvo240(2.3, 5.0));
+        Volvo240 volvo = new Volvo240(2, 4);
+        volvo.setPosition(new Vector2D(0, 0));
+        cc.cars.add(volvo);
+
+        Saab95 saab = new Saab95(2, 0);
+        saab.setPosition(new Vector2D(100, 0));
+        cc.cars.add(saab);
+
+
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
-
+        cc.frame.drawPanel.connectCars(cc.cars);
         // Start the timer
         cc.timer.start();
     }
@@ -47,12 +55,21 @@ public class CarController {
                 car.move();
                 int x = (int) Math.round(car.getPosition().getX());
                 int y = (int) Math.round(car.getPosition().getY());
-                frame.drawPanel.moveit(x, y);
+                TurnAround(car);
+                frame.drawPanel.moveit(car);
                 // repaint() calls the paintComponent method of the panel
                 // frame.drawPanel.repaint(); // repaint was called for each car..
             }
             frame.drawPanel.repaint();
         }
+    }
+
+    void TurnAround(Car car){
+        int y = (int)car.getPosition().getY();
+        if(y > 500 || y < 0){
+            car.setDirection(car.getDirection().multiplyByScalar(-1));
+        }
+
     }
 
     // Calls the gas method for each car once
