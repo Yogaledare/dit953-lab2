@@ -14,10 +14,31 @@ public class DrawPanel extends JPanel{
     // To keep track of a singel cars position
     Point volvoPoint = new Point();
 
-    // TODO: Make this genereal for all cars
-    void moveit(int x, int y){
-        volvoPoint.x = x;
-        volvoPoint.y = y;
+    // TODO: Make this general for all cars
+    /*void moveit(int x, int y){
+        carPoint.x = x;
+        carPoint.y = y;
+    }*/
+    void moveit(Car carToMove){
+        for(DrawedCar car : drawedCars){
+            if(carToMove.equals(car.carRef) ){
+                car.point.x = (int)carToMove.getPosition().getX();
+                car.point.y = (int)carToMove.getPosition().getY();
+            }
+        }
+    }
+
+    public void connectCars(List<Car> cars){
+        for(Car car : cars){
+            try{
+                drawedCars.add(new DrawedCar(
+                        car,
+                        ImageIO.read(DrawPanel.class.getResourceAsStream("pics/"+ car.getModelName() + ".jpg")))
+                );
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     // Initializes the panel and reads the images
@@ -46,6 +67,9 @@ public class DrawPanel extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(volvoImage, volvoPoint.x, volvoPoint.y, null); // see javadoc for more info on the parameters
+        for(DrawedCar car : drawedCars){
+            g.drawImage(car.image, car.point.x, car.point.y, null);
+        }
+        //g.drawImage(volvoImage, carPoint.x, carPoint.y, null); // see javadoc for more info on the parameters
     }
 }

@@ -49,8 +49,9 @@ public class CarController {
                 int y = (int) Math.round(car.getPosition().getY());
                 frame.drawPanel.moveit(x, y);
                 // repaint() calls the paintComponent method of the panel
-                frame.drawPanel.repaint();
+                // frame.drawPanel.repaint(); // repaint was called for each car..
             }
+            frame.drawPanel.repaint();
         }
     }
 
@@ -83,6 +84,9 @@ public class CarController {
         }
     }
 
+    /**
+     * Scania specific raise platform
+     */
     void raise() {
         for (Car c : cars ) {
             try {
@@ -94,6 +98,9 @@ public class CarController {
 
     }
 
+    /**
+     * Scania specific lower platform.
+     */
     void lower() {
         for (Car c : cars ) {
             try {
@@ -105,6 +112,9 @@ public class CarController {
 
     }
 
+    /**
+     * Saab95 specific turboOn
+     */
     void setTurboOn(){
         for(Car c : cars){
             try{
@@ -117,6 +127,9 @@ public class CarController {
         }
     }
 
+    /**
+     * Saab95 specific turboOff
+     */
     void setTurboOff(){
         for(Car c : cars){
             try{
