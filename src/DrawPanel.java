@@ -15,7 +15,7 @@ public class DrawPanel extends JPanel{
 
 
     private final Map<Object, BufferedImage> images = new HashMap<>();
-
+    private final CarController cc;
 
     public void bind(Object object, String imageFileName) {
         try {
@@ -26,7 +26,6 @@ public class DrawPanel extends JPanel{
         }
     }
 
-
     public BufferedImage get(Object object) {
         BufferedImage image = images.get(object);
         if (image != null) {
@@ -35,6 +34,59 @@ public class DrawPanel extends JPanel{
             return images.get(object.getClass());
         }
     }
+
+    private void bindCars() {
+        bind(Saab95.class, "pics/Saab95.jpg");
+        bind(Volvo240.class, "pics/Volvo240.jpg");
+        bind(Scania.class, "pics/Scania.jpg");
+    }
+
+    // Initializes the panel and reads the images
+    public DrawPanel(int x, int y, CarController cc) {
+        this.setDoubleBuffered(true);
+        this.setPreferredSize(new Dimension(x, y));
+        this.setBackground(Color.green);
+        this.cc = cc;
+        bindCars();
+
+    }
+
+    // This method is called each time the panel updates/refreshes/repaints itself
+    // TODO: Change to suit your needs.
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        for(Car car : cc.cars){
+            Vector2D position = car.getPosition();
+            int x = (int) position.getX();
+            int y = (int) position.getY();
+            g.drawImage(get(car), x, y, null);
+        }
+    }
+}
+
+
+
+
+//g.drawImage(volvoImage, carPoint.x, carPoint.y, null); // see javadoc for more info on the parameters
+
+// Print an error message in case file is not found with a try/catch block
+/*        try {
+            // You can remove the "pics" part if running outside of IntelliJ and
+            // everything is in the same main folder.
+            // volvoImage = ImageIO.read(new File("Volvo240.jpg"));
+
+            // Rememember to rightclick src New -> Package -> name: pics -> MOVE *.jpg to pics.
+            // if you are starting in IntelliJ.
+//
+        } catch (IOException ex)
+        {
+            ex.printStackTrace();
+        }*/
+//        volvoImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg"));
+
+
+
 
 /*    private class DrawedCar{
         public Car carRef;
@@ -48,18 +100,18 @@ public class DrawPanel extends JPanel{
         }
     }*/
 
-    // Just a single image, TODO: Generalize
-    BufferedImage volvoImage;
+// Just a single image, TODO: Generalize
+//    BufferedImage volvoImage;
 
 //    private List<DrawedCar> drawedCars = new ArrayList<>();
-    // To keep track of a single cars position
-    Point carPoint = new Point();
+// To keep track of a single cars position
+//    Point carPoint = new Point();
 
-    // TODO: Make this general for all cars
+/*    // TODO: Make this general for all cars
     void moveit(Car car, int x, int y){
         car.x = x;
         car.y = y;
-    }
+    }*/
 
 
 
@@ -86,40 +138,4 @@ public class DrawPanel extends JPanel{
         }
     }*/
 
-    private void bindCars() {
 
-    }
-
-    // Initializes the panel and reads the images
-    public DrawPanel(int x, int y) {
-        this.setDoubleBuffered(true);
-        this.setPreferredSize(new Dimension(x, y));
-        this.setBackground(Color.green);
-        // Print an error message in case file is not found with a try/catch block
-/*        try {
-            // You can remove the "pics" part if running outside of IntelliJ and
-            // everything is in the same main folder.
-            // volvoImage = ImageIO.read(new File("Volvo240.jpg"));
-
-            // Rememember to rightclick src New -> Package -> name: pics -> MOVE *.jpg to pics.
-            // if you are starting in IntelliJ.
-//
-        } catch (IOException ex)
-        {
-            ex.printStackTrace();
-        }*/
-        volvoImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg"));
-
-    }
-
-    // This method is called each time the panel updates/refreshes/repaints itself
-    // TODO: Change to suit your needs.
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        for(DrawedCar car : drawedCars){
-            g.drawImage(car.image, car.point.x, car.point.y, null);
-        }
-        //g.drawImage(volvoImage, carPoint.x, carPoint.y, null); // see javadoc for more info on the parameters
-    }
-}

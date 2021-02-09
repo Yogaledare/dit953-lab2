@@ -41,7 +41,7 @@ public class CarController {
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
-        cc.frame.drawPanel.connectCars(cc.cars);
+//        cc.frame.drawPanel.connectCars(cc.cars);
         // Start the timer
         cc.timer.start();
     }
@@ -53,10 +53,10 @@ public class CarController {
         public void actionPerformed(ActionEvent e) {
             for (Car car : cars) {
                 car.move();
-                int x = (int) Math.round(car.getPosition().getX());
-                int y = (int) Math.round(car.getPosition().getY());
+//                int x = (int) Math.round(car.getPosition().getX());
+//                int y = (int) Math.round(car.getPosition().getY());
                 TurnAround(car);
-                frame.drawPanel.moveit(car, x, y);
+//                frame.drawPanel.moveit(car, x, y);
                 // repaint() calls the paintComponent method of the panel
                 // frame.drawPanel.repaint(); // repaint was called for each car..
             }
