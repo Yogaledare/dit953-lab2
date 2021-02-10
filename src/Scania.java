@@ -19,9 +19,10 @@ public class Scania extends Car implements Transportable {
      * @param color the color of the car.
      * @param nrDoors the number of doors of the car.
      */
-    public Scania(double enginePower, double width, double length, String modelName, Color color, int nrDoors) {
-        super(enginePower, width, length, modelName, color, nrDoors, new Vector2D(0, 0));
+    public Scania(double width, double length /*String modelName, Color color, int nrDoors*/) {
+        super(70, 2, 6,"Scania",Color.RED,2, new Vector2D(0, 0));
         platform = new Ramp(70, 1);
+        platform.lowerFully();
     }
 
 

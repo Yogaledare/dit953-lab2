@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -33,9 +34,14 @@ public class CarController {
         volvo.setPosition(new Vector2D(0, 0));
         cc.cars.add(volvo);
 
-        Saab95 saab = new Saab95(2, 0);
+        Saab95 saab = new Saab95(2, 4);
         saab.setPosition(new Vector2D(100, 0));
         cc.cars.add(saab);
+
+        Scania scania = new Scania(2,7);
+        scania.setPosition(new Vector2D(200, 0));
+        cc.cars.add(scania);
+
 
 
 

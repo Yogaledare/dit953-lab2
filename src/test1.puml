@@ -1,0 +1,52 @@
+@startuml
+
+class CarController
+class DrawPanel
+class JPanel
+class CarView
+class JFrame
+class Car {
++move()
+}
+class Volvo240
+class Saab95
+class Scania {
++move() <<Override>>
+}
+
+
+JPanel <|-- DrawPanel
+JFrame <|-- CarView
+
+Car <|-- Volvo240
+Car <|-- Saab95
+Car <|-- Scania
+
+CarController o-- Car
+CarController o-- CarView
+DrawPanel o-- CarController
+CarView o- DrawPanel
+
+@enduml
+
+abstract AbstractCollection
+interface List
+interface Collection
+
+List <|-- AbstractList
+Collection <|-- AbstractCollection
+
+Collection <|- List
+AbstractCollection <|- AbstractList
+AbstractList <|-- ArrayList
+
+class ArrayList {
+Object[] elementData
+size()
+}
+
+enum TimeUnit {
+DAYS
+HOURS
+MINUTES
+}
