@@ -1,6 +1,13 @@
 @startuml
 
-class CarController
+class CarController {
+-length
+-height
+-width
+
++main()
++getFrame()
+}
 class DrawPanel
 class JPanel
 class CarView
@@ -26,6 +33,7 @@ CarController o-- Car
 CarController o-- CarView
 DrawPanel o-- CarController
 CarView o- DrawPanel
+CarView o- CarController
 
 @enduml
 
