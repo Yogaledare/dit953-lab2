@@ -129,12 +129,12 @@ public class CarView extends JFrame{
             }
         } );
         // Turbo on
-        turboOnButton.addActionListener(new ActionListener() {
+/*        turboOnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 carC.setTurboOn();
             }
-        } );
+        } );*/
         // Turbo off
         turboOffButton.addActionListener(new ActionListener() {
             @Override
@@ -169,4 +169,15 @@ public class CarView extends JFrame{
         // Make sure the frame exits when "x" is pressed
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
+
+
+    public void setTurboOnButtonActionListener(ActionListener actionListener) {
+        turboOnButton.addActionListener(actionListener);
+    }
+
+/*            turboOnButton.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            carC.setTurboOn();
+        }*/
 }

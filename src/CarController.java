@@ -41,6 +41,20 @@ public class CarController {
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
+        cc.frame.setTurboOnButtonActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        /*            turboOnButton.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            carC.setTurboOn();
+        }*/
+
+
         cc.frame.drawPanel.connectCars(cc.cars);
         // Start the timer
         cc.timer.start();
