@@ -146,17 +146,17 @@ class Vector2D {
 
 
 
-CarView <-- CarController
-CarView <-- DrawPanel
-CarView <-- JPanel
-CarView <-- JLabel
-CarView <-- JButton
-CarView <-- JSpinner
+CarView o--> CarController
+CarView o--> DrawPanel
+CarView o--> JPanel
+CarView o--> JLabel
+CarView o--> JButton
+CarView o--> JSpinner
 ActionListener <.. CarView
 
-CarController <-- Car
-CarController <- CarView
-CarController <-- TimerListener
+CarController o--> Car
+CarController o-> CarView
+CarController o--> TimerListener
 
 ActionListener <|.. TimerListener
 Car <|-- Volvo240
@@ -165,12 +165,12 @@ Car <|-- Scania
 
 
 
-DrawPanel +-- DrawedCar
+DrawPanel +--> DrawedCar
 
-DrawedCar <-- Point
-DrawedCar <-- Car
+DrawedCar o--> Point
+DrawedCar o--> Car
 
-Vehicle <-- Vector2D
+Vehicle o--> Vector2D
 
 Vehicle <|-- Car
 
@@ -186,8 +186,8 @@ class FIFO {}
 class Ferry{}
 Car <|-- TransportTruck
 class TransportTruck {}
-TransportTruck <-- LIFO
-Ferry <-- FIFO
+TransportTruck o--> LIFO
+Ferry o--> FIFO
 Vehicle <|-- Ferry
 Container <|-- FIFO
 Container <|-- LIFO
