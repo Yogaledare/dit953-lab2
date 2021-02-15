@@ -1,0 +1,163 @@
+@startuml
+
+class Volvo240 {
+-{static} trimFactor : double
+#findSpeedFactor() : double
+}
+
+class Saab95 {
+-turboOn : boolean
++setTurboOn() : void
++setTurboOff() : void
++getTurboOn() : boolean
+-findTurboFactor() : double
+#findSpeedFactor() : double
+}
+
+class Scania {
++raise(double) : void
++lower(double) : void
++startEngine() : void
++isFullyRaised() : boolean
++isFullyLowered() : boolean
+#findSpeedFactor() : double
+}
+
+
+abstract class Car {
+-modelName : String
+-color : Color
+-nrDoors : int
++getNrDoors() : int
++getColor() : Color
++setColor(Color) : void
++getModelName() : String
++getNoOfDoors() : int
+}
+
+abstract class Vehicle {
+-currentSpeed : double
+-enginePower : double
+-width : double
+-length : double
+-direction : Vector2D
+-position : Vector2D
+-boolean : engineOn
++getEnginePower() : double
++getCurrentSpeed() : double
++startEngine() : void
++stopEngine() : void
++gas(double) : void
++brake(double) : void
++isMoving() : boolean
++move() : void
++turnLeft() : void
++turnRight() : void
++getWidth() : double
++getLength() : double
++getDirection() : Vector2D
++getPosition() : Vector2D
++setPosition(Vector2D) : void
++setDirection(Vector2D) : void
+-incrementSpeed(double, double) : void
+-decrementSpeed(double, double) : void
+#{abstract} findSpeedFactor() : double
+
+}
+
+
+
+class Vector2D {
+-x : double
+-y : double
++plus(Vector2D) : Vector2D
++multiplyByScalar(double) : Vector2D
++rotateCC(double) : Vector2D
++distanceTo(Vector2D) : double
++{static}clamp(double, double, double) : double
+}
+
+
+
+Car <|-- Volvo240
+Car <|-- Saab95
+Car <|-- Scania
+
+
+
+Vehicle *--> Vector2D
+
+Vehicle <|-- Car
+
+abstract class Container {
+-capacity :int
+-maxWidth : double
+-maxLength : double
+-pickUpRange : double
+-position : Vector2D
+-direction : Vector2D
+-holder : Deque<T>
+-length : double
++store(T) : void
++remove() : T
++relocate(Vector2D, Vector2D) : void
++getSize() : int
++getCapacity() : int
+#{abstract} findItemToRemove() : T
+#{abstract} findOffset() : Vector2D
+}
+
+class LIFO {
+#findItemToRemove() : T
+#findOffset() : Vector2D
+}
+
+class FIFO {
+#findItemToRemove() : T
+#findOffset() : Vector2D
+}
+
+class TransportTruck {
+-storage : LIFO
+-ramp : Ramp
++store(T) : void
++remove() : T
++getSize() : int
++raiseRamp() : void
++lowerRamp() : void
++startEngine() : void
++isFullyRaised() : boolean
++isFullyLowered() : boolean
++move() : void
+#findSpeedFactor() : double
+}
+
+class Ferry{
+-storage : FIFO
+-ramp : Ramp
++store(T) : void
++remove() : T
++getSize() : int
++startEngine() : void
++move() : void
+#findSpeedFactor() : double
+}
+
+Car <|-- TransportTruck
+class TransportTruck {}
+TransportTruck *--> LIFO
+Ferry *--> FIFO
+Vehicle <|-- Ferry
+Container <|-- FIFO
+Container <|-- LIFO
+
+class Workshop {
+-storage : LIFO
+}
+
+Workshop *--> LIFO
+
+
+@enduml
+
+

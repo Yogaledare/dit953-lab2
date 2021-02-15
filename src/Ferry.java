@@ -67,6 +67,28 @@ public class Ferry<T extends Transportable> extends Vehicle implements Transport
 
     // ------ MOVABLE --------
 
+
+    /**
+     * Raise loading platform.
+     * It's is only possible to raise the ramp when engine is off.
+     */
+    public void raiseRamp() {
+        if (getCurrentSpeed() == 0) {
+            ramp.raiseFully();
+        }
+    }
+
+    /**
+     * Lower loading platform to ground.
+     * It's is only possible to lower the ramp when engine is off.
+     */
+    public void lowerRamp() {
+        if (getCurrentSpeed() == 0) {
+            ramp.lowerFully();
+        }
+    }
+
+
     /**
      * Determines the speed factor of the Ferry.
      * @return the speed factor of the Ferry
