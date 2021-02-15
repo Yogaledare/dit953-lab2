@@ -203,8 +203,6 @@ class Vector2D {
 
 
 
-
-
 CarView *--> DrawPanel
 CarView *--> JPanel
 CarView *--> JLabel
@@ -232,6 +230,9 @@ Vehicle <|-- Car
 
 
 @enduml
+
+
+CarController ..> ViewModel
 
 ActionListener <.. CarView
 
