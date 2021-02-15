@@ -1,0 +1,283 @@
+@startuml
+
+
+class ViewModel {
+-carRepresentations : List<CarRepresentation>
+
+}
+
+class CarRepresentation {
+-position : Vector2D
+-class : Class
+}
+
+ViewModel <--* DrawPanel
+CarRepresentation <--* ViewModel
+Vector2D <--* CarRepresentation
+
+class Application{
++main()
+}
+
+Application *---> CarController
+Application *---> CarView
+Application *---> Model
+
+interface ICarView{
++updateView(viewModel) : void
++setGasButtonActionListener(ActionListener) : void
++setBreakButtonActionListener(ActionListener) : void
++setStartButtonActionListener(ActionListener) : void
++setStopButtonActionListener(ActionListener) : void
++setTurboOnButtonActionListener(ActionListener) : void
++setTurboOffButtonActionListener(ActionListener) : void
++setLiftRedButtonActionListener(ActionListener) : void
++setLowerRedButtonActionListener(ActionListener) : void
+}
+
+ICarView <|.. CarView 
+ICarView <--* CarController
+
+class Model{
+-timer : Timer
+-boardWidth : double
+-boardLength : double
+-cars : List<Car> 
+-updateModel() : void
+-isOutOfBounds(Car) : boolean
+-bounceOffWall(Car) : void
+}
+
+Model *--> Car
+Model ..> ViewModel
+
+interface IModel{
++exportViewModel() : ViewModel
++startEngine(Car) : void
++stopEngine(Car) : void
++gas(Car) : void
++brake(Car) : void
++raise(Car) : void
++lower(Car) : void
++setTurboOn(Car) : void
++setTurboOff(Car) : void
+}
+
+IModel  <|.. Model
+IModel <--* CarController
+
+
+
+class CarController {
+-delay : int
+-timer : Timer
+-CarView : ICarView
+-iModel : IModel
++CarController(ICarView, IModel) : void
+-bindListeners() : void
+-gasAll(int) : void
+-brakeAll(int) : void
+-startEngineAll() : void
+-stopEngineAll() : void
+-setTurboOnAll() : void
+-setTurboOffAll() : void
+-raiseAll() : void
+-lowerAll() : void
+}
+
+class TimerListener {
++actionPerformed(ActionEvent) : void
+}
+
+class CarView {
+- drawPanel : DrawPanel
+- controlPanel : JPanel
+- gasPanel : JPanel
+- gasLabel : JLabel
+- gasButton : JButton
+- brakeButton : JButton
+- turboOnButton : JButton
+- turboOffButton : JButton
+- liftBedButton : JButton
+- lowerBedButton : JButton
+- startButton : JButton
+- stopButton : JButton
+- gasAmount : int
++ CarView(String)
+- initComponents() : void
+
+
+}
+
+class DrawPanel{
+-viewModel : ViewModel
++DrawPanel()
+#paintComponent(Graphics) : void
+}
+
+
+class JSpinner{}
+class JPanel{}
+class JButton {}
+class JLabel {}
+
+class Volvo240 {
+-{static} trimFactor : double
+#findSpeedFactor() : double
+}
+
+class Saab95 {
+-turboOn : boolean
++setTurboOn() : void
++setTurboOff() : void
++getTurboOn() : boolean
+-findTurboFactor() : double
+#findSpeedFactor() : double
+}
+
+class Scania {
++raise(double) : void
++lower(double) : void
++startEngine() : void
++isFullyRaised() : boolean
++isFullyLowered() : boolean
+#findSpeedFactor() : double
+}
+
+interface ActionListener
+
+abstract class Car {
+-modelName : String
+-color : Color
+-nrDoors : int
++getNrDoors() : int
++getColor() : Color
++setColor(Color) : void
++getModelName() : String
++getNoOfDoors() : int
+}
+
+abstract class Vehicle {
+-currentSpeed : double
+-enginePower : double
+-width : double
+-length : double
+-direction : Vector2D
+-position : Vector2D
+-boolean : engineOn
++getEnginePower() : double
++getCurrentSpeed() : double
++startEngine() : void
++stopEngine() : void
++gas(double) : void
++brake(double) : void
++isMoving() : boolean
++move() : void
++turnLeft() : void
++turnRight() : void
++getWidth() : double
++getLength() : double
++getDirection() : Vector2D
++getPosition() : Vector2D
++setPosition(Vector2D) : void
++setDirection(Vector2D) : void
+-incrementSpeed(double, double) : void
+-decrementSpeed(double, double) : void
+#{abstract} findSpeedFactor() : double
+
+}
+
+
+
+class Vector2D {
+-x : double
+-y : double
++getX() : double
++getY() : double
++plus(Vector2D) : Vector2D
++multiplyByScalar(double) : Vector2D
++rotateCC(double) : Vector2D
++distanceTo(Vector2D) : double
++{static}clamp(double, double, double) : double
+}
+
+
+
+
+
+CarView *--> DrawPanel
+CarView *--> JPanel
+CarView *--> JLabel
+CarView *--> JButton
+CarView *--> JSpinner
+
+
+
+
+Model *--> TimerListener
+
+ActionListener <|.. TimerListener
+Car <|-- Volvo240
+Car <|-- Saab95
+Car <|-- Scania
+
+
+
+
+Vehicle *--> Vector2D
+
+Vehicle <|-- Car
+
+
+
+
+@enduml
+
+ActionListener <.. CarView
+
+-{static} X : int
+-{static} Y : int
+
+class Point{
+}
+
+
+CarView o--> CarController
+CarController o-> CarView
+class DrawedCar {
++ carRef : Car
++ image : BufferedImage
++ point : Point
++ DrawedCar()
+}
+
+
+DrawPanel +--> DrawedCar
+
+DrawedCar *--> Point
+DrawedCar o--> Car
+
+CarController *--> Car
+
+abstract class AbstractList
+       abstract AbstractCollection
+       interface List
+       interface Collection
+
+       List <|-- AbstractList
+       Collection <|-- AbstractCollection
+
+       Collection <|- List
+       AbstractCollection <|- AbstractList
+       AbstractList <|-- ArrayList
+
+       class ArrayList {
+       Object[] elementData
+       size()
+       }
+
+       enum TimeUnit {
+       DAYS
+       HOURS
+       MINUTES
+       }
