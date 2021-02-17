@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
 
 // This panel represent the animated part of the view with the car images.
 
@@ -88,4 +90,59 @@ public class DrawPanel extends JPanel{
         }
         //g.drawImage(volvoImage, carPoint.x, carPoint.y, null); // see javadoc for more info on the parameters
     }
+
+/*    public class DrawPanel extends JPanel{
+
+
+        private final Map<Object, BufferedImage> images = new HashMap<>();
+        private final CarController cc;
+
+        public void bind(Object object, String imageFileName) {
+            try {
+                BufferedImage image = ImageIO.read(DrawPanel.class.getResourceAsStream(imageFileName));
+                images.put(object, image);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        public BufferedImage get(Object object) {
+            BufferedImage image = images.get(object);
+            if (image != null) {
+                return image;
+            } else {
+                return images.get(object.getClass());
+            }
+        }
+
+        private void bindCars() {
+            bind(Saab95.class, "pics/Saab95.jpg");
+            bind(Volvo240.class, "pics/Volvo240.jpg");
+            bind(Scania.class, "pics/Scania.jpg");
+        }
+
+        // Initializes the panel and reads the images
+        public DrawPanel(int x, int y, CarController cc) {
+            this.setDoubleBuffered(true);
+            this.setPreferredSize(new Dimension(x, y));
+            this.setBackground(Color.green);
+            this.cc = cc;
+            bindCars();
+
+        }
+
+        // This method is called each time the panel updates/refreshes/repaints itself
+        // TODO: Change to suit your needs.
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            for(Car car : cc.cars){
+                Vector2D position = car.getPosition();
+                int x = (int) position.getX();
+                int y = (int) position.getY();
+                g.drawImage(get(car), x, y, null);
+            }
+        }
+    }*/
+
 }
