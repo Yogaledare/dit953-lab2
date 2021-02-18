@@ -33,8 +33,7 @@ class Model{
 -compose
 -isOutOfBounds(Car) : boolean
 -bounceOffWall(Car) : void
-+ subscribe(Observer) : void
-+ unsubscribe(Observer) : void
++getSignal() : Signal
 }
 
 Model *--> Car
@@ -92,10 +91,8 @@ class CarView {
 - stopButton : JButton
 - gasAmount : int
 + CarView(String, Signal)
+- paintCars(List<IPaintable>) : void
 - initComponents() : void
-
-+ paintCars(List<IPaintable>) : void
-
 }
 
 class DrawPanel{
@@ -103,8 +100,8 @@ class DrawPanel{
 #paintComponent(Graphics) : void
 + bind(Object, String) : void
 + get(Object) : BufferedImage
-- bindCars() : void
 + paintCars(List<IPaintable>) : void
+- bindCars() : void
 }
 
 
@@ -227,8 +224,8 @@ Observer *-> IPaintable
 
 class Signal{
 - observers : List<Observer>
-+ subscribe(Observer) : void
-+ unsubscribe(Observer) : void
++ addSubscriber(Observer) : void
++ removeSubscriber(Observer) : void
 + publish(List<IPaintable>) : void
 }
 
@@ -289,26 +286,3 @@ DrawedCar *--> Point
 DrawedCar o--> Car
 
 CarController *--> Car
-
-abstract class AbstractList
-       abstract AbstractCollection
-       interface List
-       interface Collection
-
-       List <|-- AbstractList
-       Collection <|-- AbstractCollection
-
-       Collection <|- List
-       AbstractCollection <|- AbstractList
-       AbstractList <|-- ArrayList
-
-       class ArrayList {
-       Object[] elementData
-       size()
-       }
-
-       enum TimeUnit {
-       DAYS
-       HOURS
-       MINUTES
-       }
