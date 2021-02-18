@@ -99,29 +99,29 @@ abstract class Container {
 -holder : Deque<T>
 -length : double
 +store(T) : void
-+remove() : T
++remove() : Transportable
 +relocate(Vector2D, Vector2D) : void
 +getSize() : int
 +getCapacity() : int
-#{abstract} findItemToRemove() : T
+#{abstract} findItemToRemove() : Transportable
 #{abstract} findOffset() : Vector2D
 }
 
 class LIFO {
-#findItemToRemove() : T
+#findItemToRemove() : Transportable
 #findOffset() : Vector2D
 }
 
 class FIFO {
-#findItemToRemove() : T
+#findItemToRemove() : Transportable
 #findOffset() : Vector2D
 }
 
 class TransportTruck {
--storage : LIFO
+-storage : LIFO<Transportable>
 -ramp : Ramp
 +store(T) : void
-+remove() : T
++remove() : Transportable
 +getSize() : int
 +raiseRamp() : void
 +lowerRamp() : void
@@ -133,10 +133,10 @@ class TransportTruck {
 }
 
 class Ferry{
--storage : FIFO
+-storage : FIFO<Transportable>
 -ramp : Ramp
 +store(T) : void
-+remove() : T
++remove() : Transportable
 +getSize() : int
 +startEngine() : void
 +move() : void
@@ -144,19 +144,41 @@ class Ferry{
 }
 
 Car <|-- TransportTruck
-class TransportTruck {}
+
 TransportTruck *--> LIFO
-Ferry *--> FIFO
+Ferry *---> FIFO
 Vehicle <|-- Ferry
 Container <|-- FIFO
 Container <|-- LIFO
 
 class Workshop {
--storage : LIFO
+-storage : LIFO<Transportable>
 }
 
 Workshop *--> LIFO
 
+interface Transportable {
++setDirection(Vector2D) : void
++setPosition(Vector2D) : void
++getDirection() : Vector2D
++getPosition() : Vector2D
++getWidth() : double
++getLength() : double
+}
+
+interface Transporter {
++store(T) : void
++remove() : Transportable
++getSize() : int
+}
+
+Transporter <|.. Ferry
+Transporter <|.. TransportTruck
+
+Transportable <|.. Car
+
+Transportable <--* TransportTruck
+Transportable <--* Ferry
 
 @enduml
 

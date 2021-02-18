@@ -225,6 +225,8 @@ interface Observer{
 + publish(List<IPaintable>) : void
 }
 
+Observer <-* IPaintable
+
 class ObserverHandler{
 - observers : List<Observer>
 + subscribe(Observer) : void
