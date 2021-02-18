@@ -9,7 +9,9 @@ till 3 klasser med tydliga uppgifter som inte är cirkulärt beroende, dvs singl
 
 Användandet av observer pattern i modellen gör också att vi kan ... kopplingen och det följer OCP till större utsträckning
 då det lätt går att utöka observer patternet.
-och att vi förlitar oss på interfaces när modellen behöver skicka information till andra klasser
+
+Vi förlitar oss på interfaces när modellen behöver skicka information till andra klasser och döljer då allt som inte
+är relevant.
 
 Seperation of concern i den nya versionen är
 
