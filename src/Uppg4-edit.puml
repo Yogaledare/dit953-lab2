@@ -9,7 +9,6 @@ class Application{
 Application *--> CarController
 
 interface ICarView{
-+updateView(viewModel) : void
 +setGasButtonActionListener(ActionListener) : void
 +setBreakButtonActionListener(ActionListener) : void
 +setStartButtonActionListener(ActionListener) : void
@@ -20,7 +19,7 @@ interface ICarView{
 +setLowerRedButtonActionListener(ActionListener) : void
 }
 
-ICarView <|.. CarView 
+ICarView <|.. CarView
 ICarView <--* CarController
 
 
@@ -29,7 +28,7 @@ class Model{
 -boardWidth : double
 -boardLength : double
 -cars : List<Car>
--observerHandler : ObserverHandler
+-Signal : Signal
 -updateModel() : void
 -isOutOfBounds(Car) : boolean
 -bounceOffWall(Car) : void
@@ -41,7 +40,6 @@ Model *--> Car
 
 
 interface IModel{
-+exportViewModel() : ViewModel
 +startEngine(Car) : void
 +stopEngine(Car) : void
 +gas(Car) : void
@@ -60,7 +58,7 @@ IModel <--* CarController
 
 
 class CarController {
--CarView : ICarView
+-iCarView : ICarView
 -iModel : IModel
 +CarController(ICarView, IModel) : void
 -bindListeners() : void
@@ -100,10 +98,10 @@ class CarView {
 }
 
 class DrawPanel{
-- {static} images : Map<Object, BufferedImage>
+- images : Map<Object, BufferedImage>
 #paintComponent(Graphics) : void
-+ {static} bind(Object, String) : void
-+ {static} get(Object) : BufferedImage
++ bind(Object, String) : void
++ get(Object) : BufferedImage
 - bindCars() : void
 + paintCars(List<IPaintable>) : void
 }
@@ -142,7 +140,7 @@ interface ActionListener
 
 interface IPaintable {
 +getPosition() : Vector2D
-+getImage() : BufferedImage
++getClass() : Class
 }
 
 abstract class Car {
@@ -209,7 +207,6 @@ Car <|-- Scania
 
 IPaintable <|.. Car
 IPaintable <.. CarView
-IPaintable ...> BufferedImage
 
 DrawPanel ..> BufferedImage
 
@@ -227,7 +224,7 @@ interface Observer{
 
 Observer <-* IPaintable
 
-class ObserverHandler{
+class Signal{
 - observers : List<Observer>
 + subscribe(Observer) : void
 + unsubscribe(Observer) : void
@@ -235,11 +232,11 @@ class ObserverHandler{
 }
 
 Observer <|.. CarView
-Model *--> ObserverHandler
+Model *--> Signal
 
 
-ObserverHandler ..> Observer
-ObserverHandler ..> IPaintable
+Signal ..> Observer
+Signal ..> IPaintable
 
 
 

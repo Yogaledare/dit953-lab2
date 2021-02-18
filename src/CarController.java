@@ -81,7 +81,10 @@ public class CarController {
     void TurnAround(Car car){
         int y = (int)car.getPosition().getY();
         if(y > 500 || y < 0){
-            car.setDirection(car.getDirection().multiplyByScalar(-1));
+            car.turnRight();
+            car.turnRight();
+
+            // car.setDirection(car.getDirection().multiplyByScalar(-1));
         }
 
     }
