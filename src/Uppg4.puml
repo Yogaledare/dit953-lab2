@@ -216,7 +216,7 @@ Vehicle *--> Vector2D
 Vehicle <|-- Car
 
 interface Observer{
-+ actOnPublish(List<IPaintable>) : void
++ actOnPublish(List<? extends IPaintable>) : void
 }
 
 Observer *-> IPaintable
