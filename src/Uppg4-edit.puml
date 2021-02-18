@@ -222,7 +222,7 @@ interface Observer{
 + publish(List<IPaintable>) : void
 }
 
-Observer <-* IPaintable
+Observer *-> IPaintable
 
 class Signal{
 - observers : List<Observer>
