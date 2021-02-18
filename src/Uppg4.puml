@@ -5,7 +5,6 @@ class Application{
 {static}+main()
 }
 
-
 Application *--> CarController
 
 interface ICarView{
