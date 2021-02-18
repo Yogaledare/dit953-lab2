@@ -225,7 +225,7 @@ class Signal{
 - observers : List<Observer>
 + addSubscriber(Observer) : void
 + removeSubscriber(Observer) : void
-+ publish(List<IPaintable>) : void
++ publish(List<? extends IPaintable>) : void
 }
 
 Observer <|.. CarView
