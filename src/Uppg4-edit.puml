@@ -5,8 +5,7 @@ class Application{
 {static}+main()
 }
 
-Application *--> ICarView
-Application *--> IModel
+
 Application *--> CarController
 
 interface ICarView{
@@ -246,7 +245,8 @@ class BufferedImage{}
 class Graphics{}
 
 @enduml
-
+Application *--> ICarView
+Application *--> IModel
 
 Model ..> ViewModel
 class ViewModel {
