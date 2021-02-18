@@ -30,6 +30,7 @@ class Model{
 -cars : List<Car>
 -Signal : Signal
 -updateModel() : void
+-compose
 -isOutOfBounds(Car) : boolean
 -bounceOffWall(Car) : void
 + subscribe(Observer) : void
@@ -90,7 +91,7 @@ class CarView {
 - startButton : JButton
 - stopButton : JButton
 - gasAmount : int
-+ CarView(String)
++ CarView(String, Signal)
 - initComponents() : void
 
 + paintCars(List<IPaintable>) : void
@@ -98,7 +99,7 @@ class CarView {
 }
 
 class DrawPanel{
-- images : Map<Object, BufferedImage>
+- images : Map<String, BufferedImage>
 #paintComponent(Graphics) : void
 + bind(Object, String) : void
 + get(Object) : BufferedImage
@@ -140,7 +141,7 @@ interface ActionListener
 
 interface IPaintable {
 +getPosition() : Vector2D
-+getClass() : Class
++getModelName() : String
 }
 
 abstract class Car {
@@ -219,7 +220,7 @@ Vehicle *--> Vector2D
 Vehicle <|-- Car
 
 interface Observer{
-+ publish(List<IPaintable>) : void
++ actOnPublish(List<IPaintable>) : void
 }
 
 Observer *-> IPaintable
@@ -235,7 +236,7 @@ Observer <|.. CarView
 Model *--> Signal
 
 
-Signal ..> Observer
+Signal *--> Observer
 Signal ..> IPaintable
 
 
