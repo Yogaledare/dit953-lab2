@@ -29,7 +29,8 @@ class Model{
 -timer : Timer
 -boardWidth : double
 -boardLength : double
--cars : List<Car> 
+-cars : List<Car>
+-observerHandler : ObserverHandler
 -updateModel() : void
 -isOutOfBounds(Car) : boolean
 -bounceOffWall(Car) : void
@@ -207,8 +208,8 @@ Car <|-- Volvo240
 Car <|-- Saab95
 Car <|-- Scania
 
-IPaintable <|-- Car
-IPaintable <|.. CarView
+IPaintable <|.. Car
+IPaintable <.. CarView
 IPaintable ...> BufferedImage
 
 DrawPanel ..> BufferedImage
@@ -232,12 +233,12 @@ class ObserverHandler{
 + publish(List<IPaintable>) : void
 }
 
-Observer <|-- CarView
+Observer <|.. CarView
 Model *--> ObserverHandler
 
 
-ObserverHandler ..|> Observer
-ObserverHandler ..|> IPaintable
+ObserverHandler ..> Observer
+ObserverHandler ..> IPaintable
 
 
 
