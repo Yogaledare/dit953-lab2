@@ -19,7 +19,7 @@ interface ICarView{
 }
 
 ICarView <|.. CarView
-ICarView <..* CarController
+ICarView <.. CarController
 
 
 class Model{
