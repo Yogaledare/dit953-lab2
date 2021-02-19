@@ -57,13 +57,14 @@ class DrawedCar {
 + point : Point
 + DrawedCar()
 }
-
+package Swing {
 class Point{
 }
 class JSpinner{}
 class JPanel{}
 class JButton {}
 class JLabel {}
+}
 
 class Volvo240 {
 -{static} trimFactor : double
