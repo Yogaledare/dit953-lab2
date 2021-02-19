@@ -29,7 +29,6 @@ class Model{
 -cars : List<Car>
 -Signal : Signal
 -updateModel() : void
--compose
 -isOutOfBounds(Car) : boolean
 -bounceOffWall(Car) : void
 +getSignal() : Signal
@@ -221,7 +220,7 @@ interface Observer{
 Observer *-> IPaintable
 
 class Signal{
-- observers : List<Observer>
+- subscribers : List<Observer>
 + addSubscriber(Observer) : void
 + removeSubscriber(Observer) : void
 + publish(List<? extends IPaintable>) : void
