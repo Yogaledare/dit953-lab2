@@ -19,7 +19,7 @@ interface ICarView{
 }
 
 ICarView <|.. CarView
-ICarView <--* CarController
+ICarView <..* CarController
 
 
 class Model{
@@ -57,7 +57,6 @@ IModel <--* CarController
 
 
 class CarController {
--iCarView : ICarView
 -iModel : IModel
 +CarController(ICarView, IModel) : void
 -bindListeners() : void
@@ -192,8 +191,8 @@ CarView *--> JSpinner
 
 
 
-Model ..> Timer
-Model *--> TimerListener
+Model *--> Timer
+Model ..> TimerListener
 
 ActionListener <|.. TimerListener
 
@@ -285,3 +284,6 @@ DrawedCar *--> Point
 DrawedCar o--> Car
 
 CarController *--> Car
+
+
+-iCarView : ICarView
