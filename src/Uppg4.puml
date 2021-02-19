@@ -58,7 +58,7 @@ IModel <--* CarController
 class CarController {
 -iModel : IModel
 +CarController(ICarView, IModel) : void
--bindListeners() : void
+-bindListeners(ICarView) : void
 -gasAll(int) : void
 -brakeAll(int) : void
 -startEngineAll() : void

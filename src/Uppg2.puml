@@ -60,6 +60,7 @@ class DrawedCar {
 package Swing {
 class Point{
 }
+package Swing {
 class JSpinner{}
 class JPanel{}
 class JButton {}
