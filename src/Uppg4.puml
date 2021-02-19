@@ -27,7 +27,7 @@ class Model{
 -boardWidth : double
 -boardLength : double
 -cars : List<Car>
--Signal : Signal
+-signal : Signal
 -updateModel() : void
 -isOutOfBounds(Car) : boolean
 -bounceOffWall(Car) : void
@@ -101,12 +101,20 @@ class DrawPanel{
 - bindCars() : void
 }
 
-
+package Swing {
 class JSpinner{}
 class JPanel{}
 class JButton {}
 class JLabel {}
+}
+
 class Timer {}
+class BufferedImage{}
+class Graphics{}
+interface ActionListener
+
+
+
 
 class Volvo240 {
 -{static} trimFactor : double
@@ -131,7 +139,7 @@ class Scania {
 #findSpeedFactor() : double
 }
 
-interface ActionListener
+
 
 interface IPaintable {
 +getPosition() : Vector2D
@@ -235,8 +243,7 @@ Signal ..> IPaintable
 
 
 
-class BufferedImage{}
-class Graphics{}
+
 
 @enduml
 Application *--> ICarView
