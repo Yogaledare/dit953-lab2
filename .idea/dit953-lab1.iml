@@ -11,6 +11,6 @@
     <orderEntry type="library" name="junit:junit:4.13.1" level="project" />
     <orderEntry type="library" name="javafx" level="application" />
     <orderEntry type="library" name="JavaFX-11" level="application" />
-    <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" name="lib" level="application" />
   </component>
 </module>
