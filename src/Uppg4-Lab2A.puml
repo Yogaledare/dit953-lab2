@@ -27,11 +27,11 @@ class Model{
 -boardWidth : double
 -boardLength : double
 -cars : List<Car>
--signal : Signal
+-observers : ObserverHandler
 -updateModel() : void
 -isOutOfBounds(Car) : boolean
 -bounceOffWall(Car) : void
-+getSignal() : Signal
++getObservers() : ObserverHandler
 }
 
 Model *--> Car
@@ -87,7 +87,7 @@ class CarView {
 - startButton : JButton
 - stopButton : JButton
 - gasAmount : int
-+ CarView(String, Signal)
++ CarView(String, ObserverHandler)
 - paintCars(List<IPaintable>) : void
 - initComponents() : void
 }
@@ -227,7 +227,7 @@ interface Observer{
 
 Observer *-> IPaintable
 
-class Signal{
+class ObserverHandler{
 - subscribers : List<Observer>
 + addSubscriber(Observer) : void
 + removeSubscriber(Observer) : void
@@ -235,11 +235,11 @@ class Signal{
 }
 
 Observer <|.. CarView
-Model *--> Signal
+Model *--> ObserverHandler
 
 
-Signal *--> Observer
-Signal ..> IPaintable
+ObserverHandler *--> Observer
+ObserverHandler ..> IPaintable
 
 
 
