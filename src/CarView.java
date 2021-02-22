@@ -46,7 +46,7 @@ public class CarView extends JFrame{
     }
 
     // Sets everything in place and fits everything
-    // TODO: Take a good look and make sure you understand how these methods and components work
+
     private void initComponents(String title) {
 
         this.setTitle(title);
@@ -170,6 +170,32 @@ public class CarView extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+
+
+    @Override
+    public void setGasButtonActionListener(ActionListener listener) {
+        gasButton.addActionListener(listener);
+    }
+
+    @Override
+    public void setBrakeButtonActionListener(ActionListener listener) {
+        brakeButton.addActionListener(listener);
+    }
+
+    @Override
+    public void setStartButtonActionListener(ActionListener listener) {
+        startButton.addActionListener(listener);
+    }
+
+    @Override
+    public void setStopButtonActionListener(ActionListener listener) {
+        stopButton.addActionListener(listener);
+    }
+
+    @Override
+    public void setTurboOnButtonActionListener(ActionListener listener) {
+        turboOnButton.addActionListener(listener);
+    }
 
     public void setTurboOnButtonActionListener(ActionListener actionListener) {
         turboOnButton.addActionListener(actionListener);

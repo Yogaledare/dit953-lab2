@@ -16,6 +16,7 @@ interface ICarView{
 +setTurboOffButtonActionListener(ActionListener) : void
 +setLiftRedButtonActionListener(ActionListener) : void
 +setLowerRedButtonActionListener(ActionListener) : void
++setSpinnerChangeListener(ChangeListener) : void
 }
 
 ICarView <|.. CarView
@@ -46,8 +47,8 @@ interface IModel{
 +lower(Car) : void
 +setTurboOn(Car) : void
 +setTurboOff(Car) : void
-+subscribe(Observer) : void
-+unsubscribe(Observer) : void
++subscribe(PaintObserver) : void
++unsubscribe(PaintObserver) : void
 }
 
 IModel  <|.. Model
@@ -221,24 +222,24 @@ Vehicle *--> Vector2D
 
 Vehicle <|-- Car
 
-interface Observer{
+interface PaintObserver{
 + actOnPublish(List<? extends IPaintable>) : void
 }
 
-Observer *-> IPaintable
+PaintObserver *-> IPaintable
 
 class ObserverHandler{
-- subscribers : List<Observer>
-+ addSubscriber(Observer) : void
-+ removeSubscriber(Observer) : void
+- subscribers : List<PaintObserver>
++ addSubscriber(PaintObserver) : void
++ removeSubscriber(PaintObserver) : void
 + publish(List<? extends IPaintable>) : void
 }
 
-Observer <|.. CarView
+PaintObserver <|.. CarView
 Model *--> ObserverHandler
 
 
-ObserverHandler *--> Observer
+ObserverHandler *--> PaintObserver
 ObserverHandler ..> IPaintable
 
 
