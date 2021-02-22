@@ -11,7 +11,7 @@ import java.awt.*;
 /**
  * An abstract class representing a generic vehicle.
  */
-public abstract class Vehicle implements Movable{
+public abstract class Vehicle implements Movable {
 
     /**
      * Current speed valid interval from 0 to Engine power
@@ -128,7 +128,7 @@ public abstract class Vehicle implements Movable{
     public void gas(double amount/*, double speedFactor*/) {
         incrementSpeed(Vector2D.clamp(amount, 0, 1), findSpeedFactor());
         // out text for debug only
-        System.out.println("Gas: " + amount );
+//        System.out.println("Gas: " + amount );
     }
 
     /**
@@ -144,6 +144,7 @@ public abstract class Vehicle implements Movable{
 
     /**
      * returns true if vehicle is moving.
+     *
      * @return true if vehicle is moving.
      */
     public boolean isMoving() {
@@ -177,16 +178,6 @@ public abstract class Vehicle implements Movable{
     }
 
     /**
-     * Turns the vehicle 180 degrees.
-     */
-    public void turnAround() {
-        if (engineOn) {
-            direction = direction.rotateCC(-Math.PI);
-        }
-    }
-
-
-    /**
      * Returns the direction vector of the vehicle.
      *
      * @return the direction vector of the vehicle
@@ -197,7 +188,8 @@ public abstract class Vehicle implements Movable{
 
     /**
      * Returns x and y coordinate of Vehicle
-      * @return Vector2D(x, y)
+     *
+     * @return Vector2D(x, y)
      */
     public Vector2D getPosition() {
         return position;
@@ -205,6 +197,7 @@ public abstract class Vehicle implements Movable{
 
     /**
      * Vehicle width
+     *
      * @return width of the vehicle
      */
     public double getWidth() {
@@ -213,6 +206,7 @@ public abstract class Vehicle implements Movable{
 
     /**
      * Vehicle length
+     *
      * @return length of the vehicle
      */
     public double getLength() {
@@ -221,6 +215,7 @@ public abstract class Vehicle implements Movable{
 
     /**
      * Set position of vehicle
+     *
      * @param position sets the coordinates of the vehicle.
      */
     public void setPosition(Vector2D position) {
@@ -229,6 +224,7 @@ public abstract class Vehicle implements Movable{
 
     /**
      * Set current direction of the vehicle.
+     *
      * @param direction set a direction of length 1 in Vector2D.
      */
     public void setDirection(Vector2D direction) {
@@ -237,6 +233,7 @@ public abstract class Vehicle implements Movable{
 
     /**
      * Abstract method for calculating speed factor.
+     *
      * @return the speed factor of the veheicle.
      */
     protected abstract double findSpeedFactor();
