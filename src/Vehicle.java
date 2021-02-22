@@ -178,6 +178,16 @@ public abstract class Vehicle implements Movable {
     }
 
     /**
+     * Turns the vehicle 180 degrees.
+     */
+    public void turnAround() {
+        if (engineOn) {
+            direction = direction.rotateCC(-Math.PI);
+        }
+    }
+
+
+    /**
      * Returns the direction vector of the vehicle.
      *
      * @return the direction vector of the vehicle
