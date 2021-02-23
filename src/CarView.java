@@ -43,7 +43,9 @@ public class CarView extends JFrame implements ICarView, PaintObserver {
 
     @Override
     public void actOnPublish(List<? extends IPaintable> paintables) {
-        drawPanel.paintCars(paintables);
+        //drawPanel.paintCars(paintables);
+        drawPanel.setList(paintables);
+        drawPanel.repaint();
     }
 
     // Sets everything in place and fits everything

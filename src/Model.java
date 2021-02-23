@@ -5,7 +5,7 @@ import java.util.List;
 import javax.swing.Timer;
 
 public class Model implements IModel {
-    private int delay = 33;
+    private int delay = 50;
     private Timer timer = new Timer(delay, new TimerListener());
 
     int boardWidth = 800;

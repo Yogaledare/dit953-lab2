@@ -15,6 +15,7 @@ public class DrawPanel extends JPanel{
 
 
     private final Map<String, BufferedImage> images = new HashMap<>();
+    private final List<IPaintable> paintables = new ArrayList<>();
 
     // Initializes the panel and reads the images
     public DrawPanel(int x, int y) {
@@ -43,6 +44,13 @@ public class DrawPanel extends JPanel{
         return images.get(name);
     }
 
+
+    public void setList(List<? extends IPaintable> paintables){
+        this.paintables.clear();
+        this.paintables.addAll(paintables);
+    }
+
+    /*
     public void paintCars(List<? extends IPaintable> paintables){
         Graphics graphics = getGraphics();
         super.paintComponent(graphics);
@@ -53,14 +61,20 @@ public class DrawPanel extends JPanel{
             graphics.drawImage(image, (int)pos.getX(), (int)pos.getY(), null);
         }
     }
+     */
 
     // This method is called each time the panel updates/refreshes/repaints itself
 
-    /*@Override
+    @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        for (IPaintable paintable : paintables) {
+            Vector2D pos = paintable.getPosition();
+            BufferedImage image = images.get(paintable.getModelName());
+            g.drawImage(image, (int)pos.getX(), (int)pos.getY(), null);
+        }
     }
 
-     */
+
 
 }
