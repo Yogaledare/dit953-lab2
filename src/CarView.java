@@ -17,7 +17,7 @@ public class CarView extends JFrame implements ICarView, PaintObserver {
     private static final int X = 800;
     private static final int Y = 800;
 
-    DrawPanel drawPanel = new DrawPanel(X, Y-240);
+    DrawPanel drawPanel = new DrawPanelPrint(X, Y-240);
 
     JPanel controlPanel = new JPanel();
 
