@@ -6,7 +6,7 @@ import java.awt.*;
  * A movable truck with storage
  * @param <T> the things to store
  */
-public class TransportTruck<T extends Transportable> extends Car implements Transporter<T>, Transportable /*, Model.Transportable, IStorageUnit<T>, AuxPlatform */ {
+public class TransportTruck<T extends Transportable> extends Car implements Transporter<T>, Transportable /*, Model.Model.Transportable, IStorageUnit<T>, AuxPlatform */ {
 
     /**
      * Storage component
@@ -14,7 +14,7 @@ public class TransportTruck<T extends Transportable> extends Car implements Tran
     private final LIFO<T> storage;
 
     /**
-     * Model.Ramp component
+     * Model.Model.Ramp component
      */
     private final Ramp ramp;
 
@@ -42,7 +42,7 @@ public class TransportTruck<T extends Transportable> extends Car implements Tran
         if (ramp.isFullyLowered() && item != this) {
             storage.store(item);
         } else {
-            System.err.println("Model.Ramp is not down!");
+            System.err.println("Model.Model.Ramp is not down!");
         }
     }
 
@@ -52,7 +52,7 @@ public class TransportTruck<T extends Transportable> extends Car implements Tran
      */
     public T remove() {
         if (!ramp.isFullyLowered()) {
-            throw new IllegalStateException("Model.Ramp not fully lowered");
+            throw new IllegalStateException("Model.Model.Ramp not fully lowered");
         }
         return storage.remove();
     }

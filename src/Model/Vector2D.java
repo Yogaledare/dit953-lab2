@@ -64,7 +64,7 @@ public class Vector2D {
 
     @Override
     public String toString() {
-        return "Model.Vector2D{" +
+        return "Model.Model.Vector2D{" +
                 "x=" + x +
                 ", y=" + y +
                 '}';

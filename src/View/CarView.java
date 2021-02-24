@@ -1,9 +1,6 @@
 package View;
 
-import Model.ICarView;
-import Model.IPaintable;
-import Model.ObserverHandler;
-import Model.PaintObserver;
+import Model.*;
 
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
@@ -34,7 +31,7 @@ public class CarView extends JFrame implements ICarView, PaintObserver {
     JButton brakeButton = new JButton("Brake");
     JButton turboOnButton = new JButton("Saab Turbo on");
     JButton turboOffButton = new JButton("Saab Turbo off");
-    JButton liftBedButton = new JButton("Model.Scania Lift Bed");
+    JButton liftBedButton = new JButton("Model.Model.Scania Lift Bed");
     JButton lowerBedButton = new JButton("Lower Lift Bed");
 
     JButton startButton = new JButton("Start all cars");

@@ -3,7 +3,7 @@ package Model;
 import java.awt.*;
 
 /**
- * A class representing a Model.Saab95 car.
+ * A class representing a Model.Model.Saab95 car.
  */
 
 public class Saab95 extends Car implements Transportable, ITurbo {
@@ -14,11 +14,11 @@ public class Saab95 extends Car implements Transportable, ITurbo {
     private boolean turboOn;
 
     /**
-     * Constructs a Model.Saab95 object with (hardcoded) presets for modelName, color, enginePower and nrDoors. Initializes
+     * Constructs a Model.Model.Saab95 object with (hardcoded) presets for modelName, color, enginePower and nrDoors. Initializes
      * turboOn to false.
      */
     public Saab95(double width, double length) {
-        super(100, width, length, "Model.Saab95", Color.red, 2);
+        super(100, width, length, "Model.Model.Saab95", Color.red, 2);
         turboOn = false;
     }
 
@@ -45,8 +45,8 @@ public class Saab95 extends Car implements Transportable, ITurbo {
     }
 
     /**
-     * Returns the turbo factor of the Model.Saab95.
-     * @return the turbo factor of the Model.Saab95
+     * Returns the turbo factor of the Model.Model.Saab95.
+     * @return the turbo factor of the Model.Model.Saab95
      */
     private double findTurboFactor() {
         if (turboOn) return 1.3;
@@ -54,8 +54,8 @@ public class Saab95 extends Car implements Transportable, ITurbo {
     }
 
     /**
-     * Returns the speed factor of the Model.Saab95.
-     * @return the speed factor of the Model.Saab95
+     * Returns the speed factor of the Model.Model.Saab95.
+     * @return the speed factor of the Model.Model.Saab95
      */
     protected double findSpeedFactor() {
         return getEnginePower() * 0.01 * findTurboFactor();

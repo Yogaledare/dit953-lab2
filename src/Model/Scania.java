@@ -8,11 +8,11 @@ import java.awt.*;
 public class Scania extends Car implements Transportable {
 
     /**
-     * Model.Ramp component.
+     * Model.Model.Ramp component.
      */
     private final Ramp platform;
     /**
-     * Constructs a Model.Scania truck object with the specified modelName, color, enginePower, nrDoors, width and length.
+     * Constructs a Model.Model.Scania truck object with the specified modelName, color, enginePower, nrDoors, width and length.
      * The initial position (x, y) and direction (x, y) of the object is set to (0, 0) and (0, 1).
      * @param enginePower the power of the engine.
      * @param width the width of the car.

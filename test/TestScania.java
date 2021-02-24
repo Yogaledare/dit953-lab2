@@ -2,6 +2,8 @@
 
 import org.junit.Before;
 import org.junit.Test;
+import Model.*;
+
 
 import java.awt.*;
 
@@ -13,7 +15,7 @@ public class TestScania {
 
     @Before
     public void setUp() {
-        truck = new Scania(1000, 2, 6, "Model.Scania lastbil", Color.black, 2);
+        truck = new Scania(1000, 2, 6, "Model.Model.Scania lastbil", Color.black, 2);
     }
 
 

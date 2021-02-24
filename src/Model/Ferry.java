@@ -11,12 +11,12 @@ public class Ferry<T extends Transportable> extends Vehicle implements Transport
     private final FIFO<T> storage;
 
     /**
-     * Model.Ramp component
+     * Model.Model.Ramp component
      */
     private final Ramp ramp;
 
     /**
-     * Creates a default Model.Ferry (testing)
+     * Creates a default Model.Model.Ferry (testing)
      */
     public Ferry(){
         super(1000, 5, 15);
@@ -25,7 +25,7 @@ public class Ferry<T extends Transportable> extends Vehicle implements Transport
     }
 
     /**
-     * Creates a Model.Ferry based on some storage
+     * Creates a Model.Model.Ferry based on some storage
      * @param storageUnit already existing storage
      */
     public Ferry(FIFO<T> storageUnit) {
@@ -49,17 +49,17 @@ public class Ferry<T extends Transportable> extends Vehicle implements Transport
     }
 
     /**
-     * Remove something from the Model.Ferry's storage component, how it's removed
+     * Remove something from the Model.Model.Ferry's storage component, how it's removed
      */
     public T remove() {
     if (!ramp.isFullyLowered()) {
-        throw new IllegalStateException("Model.Ramp not fully lowered");
+        throw new IllegalStateException("Model.Model.Ramp not fully lowered");
     }
     return storage.remove();
     }
 
     /**
-     * Gets the size of the Model.Ferry's storage
+     * Gets the size of the Model.Model.Ferry's storage
      * @return the size
      */
     @Override
@@ -92,15 +92,15 @@ public class Ferry<T extends Transportable> extends Vehicle implements Transport
 
 
     /**
-     * Determines the speed factor of the Model.Ferry.
-     * @return the speed factor of the Model.Ferry
+     * Determines the speed factor of the Model.Model.Ferry.
+     * @return the speed factor of the Model.Model.Ferry
      */
     protected double findSpeedFactor() {
         return getEnginePower() * 0.01;
     }
 
     /**
-    * Disables the Model.Ferry to be moved
+    * Disables the Model.Model.Ferry to be moved
     */
     @Override
     public void startEngine() {
