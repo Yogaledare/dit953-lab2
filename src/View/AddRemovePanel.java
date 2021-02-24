@@ -29,7 +29,7 @@ public class AddRemovePanel extends JPanel implements IAddRemovePanel, PaintObse
 
     @Override
     public void actOnPublish(List<? extends IPaintable> paintables) {
-
+        repaint();
     }
 
     @Override
