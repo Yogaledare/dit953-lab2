@@ -1,11 +1,138 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-autonumber
+class Application{
+    {static}+main()
+}
+Application ..> IModel
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+Application ..> DrawPanel
+Application ..> ControlPanel
+Application ..> AddRemovePanel
+Application ..> LoggerPanel
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+Application ..> DrawPanelController
+Application ..> ControlPanelController
+Application ..> AddRemovePanelController
+
+class Model{
+    -timer : Timer
+    -boardWidth : double
+    -boardLength : double
+    -cars : List<Car>
+    -observers : ObserverHandler
+    -updateModel() : void
+    -isOutOfBounds(Car) : boolean
+    -bounceOffWall(Car) : void
+    +getObservers() : ObserverHandler
+}
+Model ..|> IModel
+Model --> ObserverHandler
+
+interface IModel{
+    +startEngine() : void
+    +stopEngine() : void
+    +gas(int) : void
+    +brake(int) : void
+    +raise() : void
+    +lower() : void
+    +setTurboOn() : void
+    +setTurboOff() : void
+    +getObserverHandler() : ObserverHandler
+    +startTimer() : void
+}
+
+class ObserverHandler{
+    - subscribers : List<PaintObserver>
+    + addSubscriber(PaintObserver) : void
+    + removeSubscriber(PaintObserver) : void
+    + publish(List<? extends IPaintable>) : void
+}
+ObserverHandler ..> IPaintable
+ObserverHandler *--> PaintObserver
+
+interface PaintObserver{
+    + actOnPublish(List<? extends IPaintable>) : void
+}
+PaintObserver ..> IPaintable
+
+interface IPaintable {
+    +getPosition() : Vector2D
+    +getModelName() : String
+}
+
+
+
+class CarFrame{
+    panels : List<JPanel>
+}
+CarFrame --> DrawPanel
+CarFrame --> ControlPanel
+CarFrame --> LoggerPanel
+CarFrame --> AddRemovePanel
+
+class DrawPanel{
+    +DrawPanel(ObserverHandler)
+}
+DrawPanel ..|> IDrawPanel
+DrawPanel ..> ObserverHandler
+DrawPanel ..> IPaintable
+
+class ControlPanel{
+    +ControlPanel(ObserverHandler)
+}
+ControlPanel ..|> IControlPanel
+ControlPanel ..> ObserverHandler
+
+class LoggerPanel{
+    +LoggerPanel(ObserverHandler)
+}
+LoggerPanel ..> ObserverHandler
+LoggerPanel ..> IPaintable
+
+class AddRemovePanel{
+    +Addremovepanel(ObserverHandler)
+}
+AddRemovePanel ..|> IAddRemovePanel
+AddRemovePanel ..> ObserverHandler
+
+interface IDrawPanel{
+
+}
+
+interface IControlPanel{
+
+}
+
+interface IAddRemovePanel{
+
+}
+
+class DrawPanelController{
+    +DrawPanelController(IDrawPanel, IModel)
+}
+DrawPanelController ..> IDrawPanel
+DrawPanelController ..> IModel
+
+class ControlPanelController{
+    +ControlPanelController(IControlPanel, IModel)
+}
+ControlPanelController ..> IControlPanel
+ControlPanelController ..> IModel
+
+class AddRemovePanelController{
+    +AddRemovePanelController(IControlPanel, IModel)
+}
+AddRemovePanelController ..> IAddRemovePanel
+AddRemovePanelController ..> IModel
+
+
+
+package Swing {
+    class JSpinner{}
+    class JPanel{}
+    class JButton {}
+    class JLabel {}
+}
+
 @enduml
