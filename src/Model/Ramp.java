@@ -1,3 +1,5 @@
+package Model;
+
 /**
  * Class representing a ramp that can be raised or lowered
  */

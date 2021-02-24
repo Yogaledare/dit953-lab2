@@ -1,4 +1,4 @@
-import java.util.Vector;
+package Model;
 
 /**
  * An implemented class representing a cargo hold

@@ -1,4 +1,4 @@
-import java.util.Objects;
+package Model;
 
 /**
  * A vector class representing immutable vectors in a 2D cartesian coordinate system.
@@ -64,7 +64,7 @@ public class Vector2D {
 
     @Override
     public String toString() {
-        return "Vector2D{" +
+        return "Model.Model.Vector2D{" +
                 "x=" + x +
                 ", y=" + y +
                 '}';

@@ -1,3 +1,5 @@
+package Model;
+
 /**
  * An implemented class representing a cargo hold
  * using the first in first out rules
