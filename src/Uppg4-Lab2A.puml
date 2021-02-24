@@ -39,16 +39,14 @@ Model *--> Car
 
 
 interface IModel{
-+startEngine(Car) : void
-+stopEngine(Car) : void
-+gas(Car) : void
-+brake(Car) : void
-+raise(Car) : void
-+lower(Car) : void
-+setTurboOn(Car) : void
-+setTurboOff(Car) : void
-+subscribe(PaintObserver) : void
-+unsubscribe(PaintObserver) : void
++startEngine() : void
++stopEngine() : void
++gas(int) : void
++brake(int) : void
++raise() : void
++lower() : void
++setTurboOn() : void
++setTurboOff() : void
 }
 
 IModel  <|.. Model
