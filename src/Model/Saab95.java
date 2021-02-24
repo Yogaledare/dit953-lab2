@@ -18,7 +18,7 @@ public class Saab95 extends Car implements Transportable, ITurbo {
      * turboOn to false.
      */
     public Saab95(double width, double length) {
-        super(100, width, length, "Model.Model.Saab95", Color.red, 2);
+        super(100, width, length, "Saab95", Color.red, 2);
         turboOn = false;
     }
 

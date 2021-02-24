@@ -30,9 +30,9 @@ public class DrawPanel extends JPanel{
     }
 
     private void bindCars() {
-        bind("Model.Model.Saab95", "pics/Saab95.jpg");
-        bind("Model.Model.Volvo240", "pics/Volvo240.jpg");
-        bind("Model.Model.Scania", "pics/Scania.jpg");
+        bind("Saab95", "../pics/Saab95.jpg");
+        bind("Volvo240", "../pics/Volvo240.jpg");
+        bind("Scania", "../pics/Scania.jpg");
     }
 
     public void bind(String name, String imageFileName) {

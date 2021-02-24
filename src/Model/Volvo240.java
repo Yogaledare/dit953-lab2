@@ -16,7 +16,7 @@ public class Volvo240 extends Car implements Transportable, ITrim {
      * Constructs a Model.Model.Volvo240 object with (hardcoded) presets for modelName, color, enginePower and nrDoors.
      */
     public Volvo240(double width, double length) {
-        super(100, width, length, "Model.Model.Volvo240", Color.black, 4);
+        super(100, width, length, "Volvo240", Color.black, 4);
     }
 
     /**
