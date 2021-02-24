@@ -1,3 +1,7 @@
+package Model;
+
+import View.IPaintable;
+
 import java.util.List;
 
 public interface PaintObserver {

@@ -1,10 +1,12 @@
+package Model;
+
 import java.awt.*;
 
 /**
- * A class representing a Saab95 car.
+ * A class representing a Model.Model.Saab95 car.
  */
 
-public class Saab95 extends Car implements Transportable, HasTurbo {
+public class Saab95 extends Car implements Transportable, ITurbo {
 
     /**
      * True if turbo is on or not.
@@ -12,7 +14,7 @@ public class Saab95 extends Car implements Transportable, HasTurbo {
     private boolean turboOn;
 
     /**
-     * Constructs a Saab95 object with (hardcoded) presets for modelName, color, enginePower and nrDoors. Initializes
+     * Constructs a Model.Model.Saab95 object with (hardcoded) presets for modelName, color, enginePower and nrDoors. Initializes
      * turboOn to false.
      */
     public Saab95(double width, double length) {
@@ -43,8 +45,8 @@ public class Saab95 extends Car implements Transportable, HasTurbo {
     }
 
     /**
-     * Returns the turbo factor of the Saab95.
-     * @return the turbo factor of the Saab95
+     * Returns the turbo factor of the Model.Model.Saab95.
+     * @return the turbo factor of the Model.Model.Saab95
      */
     private double findTurboFactor() {
         if (turboOn) return 1.3;
@@ -52,8 +54,8 @@ public class Saab95 extends Car implements Transportable, HasTurbo {
     }
 
     /**
-     * Returns the speed factor of the Saab95.
-     * @return the speed factor of the Saab95
+     * Returns the speed factor of the Model.Model.Saab95.
+     * @return the speed factor of the Model.Model.Saab95
      */
     protected double findSpeedFactor() {
         return getEnginePower() * 0.01 * findTurboFactor();

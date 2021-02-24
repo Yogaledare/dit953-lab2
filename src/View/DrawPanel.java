@@ -1,6 +1,7 @@
+package View;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -8,6 +9,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
+import Model.Vector2D;
+
+
 
 // This panel represent the animated part of the view with the car images.
 
@@ -26,9 +30,9 @@ public class DrawPanel extends JPanel{
     }
 
     private void bindCars() {
-        bind("Saab95", "pics/Saab95.jpg");
-        bind("Volvo240", "pics/Volvo240.jpg");
-        bind("Scania", "pics/Scania.jpg");
+        bind("Saab95", "../pics/Saab95.jpg");
+        bind("Volvo240", "../pics/Volvo240.jpg");
+        bind("Scania", "../pics/Scania.jpg");
     }
 
     public void bind(String name, String imageFileName) {
@@ -51,12 +55,12 @@ public class DrawPanel extends JPanel{
     }
 
     /*
-    public void paintCars(List<? extends IPaintable> paintables){
+    public void paintCars(List<? extends View.IPaintable> paintables){
         Graphics graphics = getGraphics();
         super.paintComponent(graphics);
 
-        for (IPaintable paintable : paintables) {
-            Vector2D pos = paintable.getPosition();
+        for (View.IPaintable paintable : paintables) {
+            Model.Model.Vector2D pos = paintable.getPosition();
             BufferedImage image = images.get(paintable.getModelName());
             graphics.drawImage(image, (int)pos.getX(), (int)pos.getY(), null);
         }

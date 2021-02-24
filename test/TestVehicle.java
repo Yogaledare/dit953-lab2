@@ -2,11 +2,7 @@
 
 import org.junit.Before;
 import org.junit.Test;
-
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import Model.*;
 
 
 import static org.junit.Assert.*;

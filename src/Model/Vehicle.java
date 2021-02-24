@@ -1,11 +1,9 @@
-/**
+package Model; /**
  * @author Niklas  Axelsson < name @ student.gu.se>
  * @author vehiclel    Stewart <gusstewca@student.gu.se>
  * @author Marcus  Uppström <gusuppma@student.gu.se>
  * @version 0.1                 (current version number of program)
  */
-
-import java.awt.*;
 
 
 /**
@@ -197,16 +195,16 @@ public abstract class Vehicle implements Movable {
     }
 
     /**
-     * Returns x and y coordinate of Vehicle
+     * Returns x and y coordinate of Model.Model.Vehicle
      *
-     * @return Vector2D(x, y)
+     * @return Model.Model.Vector2D(x, y)
      */
     public Vector2D getPosition() {
         return position;
     }
 
     /**
-     * Vehicle width
+     * Model.Model.Vehicle width
      *
      * @return width of the vehicle
      */
@@ -215,7 +213,7 @@ public abstract class Vehicle implements Movable {
     }
 
     /**
-     * Vehicle length
+     * Model.Model.Vehicle length
      *
      * @return length of the vehicle
      */
@@ -235,7 +233,7 @@ public abstract class Vehicle implements Movable {
     /**
      * Set current direction of the vehicle.
      *
-     * @param direction set a direction of length 1 in Vector2D.
+     * @param direction set a direction of length 1 in Model.Model.Vector2D.
      */
     public void setDirection(Vector2D direction) {
         this.direction = direction;

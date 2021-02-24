@@ -1,8 +1,15 @@
+package Model;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.Timer;
+import Model.*;
+import View.*;
+import Controller.*;
+
+
 
 public class Model implements IModel {
     private int delay = 50;
