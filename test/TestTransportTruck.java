@@ -1,8 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import java.awt.*;
-
 import static org.junit.Assert.*;
 
 public class TestTransportTruck {
@@ -23,7 +21,7 @@ public class TestTransportTruck {
     @Test
     public void loadCarOntoTowTruckAndStartEngineWithoutClosingRamp() {
         towTruck.lowerRamp();
-        // System.out.println("Ramp is down?: " + towTruck.isFullyLowered());
+        // System.out.println("Model.Ramp is down?: " + towTruck.isFullyLowered());
         towTruck.store(new Volvo240(2, 4));
         towTruck.startEngine();
         assertFalse(towTruck.isMoving());
@@ -67,7 +65,7 @@ public class TestTransportTruck {
         towTruck.startEngine();
         towTruck.stopEngine();
         towTruck.lowerRamp();
-        towTruck.remove(); // Car is sent to void!
+        towTruck.remove(); // Model.Car is sent to void!
 
         assertEquals(0, towTruck.getSize());
     }
@@ -86,7 +84,7 @@ public class TestTransportTruck {
             towTruck.raiseRamp();
             towTruck.startEngine();
             towTruck.stopEngine();
-            towTruck.remove(); // Car is sent to void!
+            towTruck.remove(); // Model.Car is sent to void!
         } catch(IllegalStateException ex){
                 assertEquals(1, towTruck.getSize());
         }

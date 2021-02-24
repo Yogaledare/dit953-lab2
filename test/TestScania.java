@@ -13,7 +13,7 @@ public class TestScania {
 
     @Before
     public void setUp() {
-        truck = new Scania(1000, 2, 6, "Scania lastbil", Color.black, 2);
+        truck = new Scania(1000, 2, 6, "Model.Scania lastbil", Color.black, 2);
     }
 
 

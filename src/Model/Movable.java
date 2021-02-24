@@ -1,3 +1,5 @@
+package Model;
+
 /**
  * Interface for a movable object. anything wheel-unit that can move.
  */

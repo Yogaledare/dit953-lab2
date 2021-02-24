@@ -1,3 +1,5 @@
+package Model;
+
 /**
  * Stationary place to store and repair things
  * @param <T> the type of the things to repair

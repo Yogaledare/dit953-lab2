@@ -1,6 +1,8 @@
+import Controller.*;
+import Model.*;
+import View.*;
+
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +22,7 @@ public class Application {
         cars.add(saab95);
 
         // scania
-        Car scania = new Scania(200,3,5, "Scania", Color.WHITE, 2);
+        Car scania = new Scania(200,3,5, "Model.Scania", Color.WHITE, 2);
         scania.setPosition(new Vector2D(200, 0));
         ((Scania)scania).lower(70);
         cars.add(scania);

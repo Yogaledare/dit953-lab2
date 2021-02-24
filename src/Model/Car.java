@@ -1,3 +1,5 @@
+package Model;
+
 import java.awt.*;
 
 /**
@@ -5,7 +7,7 @@ import java.awt.*;
  */
 public abstract class Car extends Vehicle implements Transportable, IPaintable {
     /**
-     * Car model
+     * Model.Car model
      */
     private final String modelName;
 
@@ -33,7 +35,7 @@ public abstract class Car extends Vehicle implements Transportable, IPaintable {
         this.modelName = modelName;
         this.color = color;
         this.nrDoors = nrDoors;
-//        vehicle.setPosition(new Vector2D(0, 0));
+//        vehicle.setPosition(new Model.Vector2D(0, 0));
     }
     /**
      * Creates a representation of a car

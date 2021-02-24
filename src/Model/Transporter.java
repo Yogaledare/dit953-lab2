@@ -1,5 +1,7 @@
+package Model;
+
 /**
- * Transporter interface enables an object to act as a transporter.
+ * Model.Transporter interface enables an object to act as a transporter.
  * @param <T> things to transport
  */
 public interface Transporter<T extends Transportable> {
