@@ -1,7 +1,5 @@
 package Model;
 
-import View.IPaintable;
-
 import java.awt.*;
 
 /**

@@ -1,9 +1,6 @@
 package Model;
 
-import java.util.Collection;
-
 public interface IModel {
-
     void startEngine();
     void stopEngine();
     void gas(int amount);

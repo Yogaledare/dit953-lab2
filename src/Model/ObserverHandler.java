@@ -1,7 +1,5 @@
 package Model;
 
-import View.IPaintable;
-
 import java.util.List;
 import java.util.ArrayList;
 

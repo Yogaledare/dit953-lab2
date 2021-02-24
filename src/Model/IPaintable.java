@@ -1,6 +1,4 @@
-package View;
-
-import Model.Vector2D;
+package Model;
 
 public interface IPaintable {
 

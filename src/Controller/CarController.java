@@ -4,9 +4,6 @@ import Model.ICarView;
 import Model.IModel;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 /*
 * This class represents the Controller part in the MVC pattern.
@@ -16,7 +13,7 @@ import java.util.ArrayList;
 
 public class CarController {
 //    member fields
-    private IModel iModel;
+    private final IModel iModel;
     private int gasAmount;
 
 //    constructor

@@ -1,6 +1,9 @@
 package View;
 
-import Model.*;
+import Model.ICarView;
+import Model.IPaintable;
+import Model.PaintObserver;
+import Model.ObserverHandler;
 
 import javax.swing.*;
 import javax.swing.event.ChangeListener;

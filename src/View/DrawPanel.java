@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
+
+import Model.IPaintable;
 import Model.Vector2D;
 
 
@@ -55,11 +57,11 @@ public class DrawPanel extends JPanel{
     }
 
     /*
-    public void paintCars(List<? extends View.IPaintable> paintables){
+    public void paintCars(List<? extends Model.IPaintable> paintables){
         Graphics graphics = getGraphics();
         super.paintComponent(graphics);
 
-        for (View.IPaintable paintable : paintables) {
+        for (Model.IPaintable paintable : paintables) {
             Model.Model.Vector2D pos = paintable.getPosition();
             BufferedImage image = images.get(paintable.getModelName());
             graphics.drawImage(image, (int)pos.getX(), (int)pos.getY(), null);
