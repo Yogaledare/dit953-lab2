@@ -1,5 +1,6 @@
 package View;
 
+import javax.crypto.BadPaddingException;
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
@@ -11,7 +12,7 @@ public class GasPanel extends JPanel implements IGasPanel {
     JButton gasButton = new JButton("Gas");
     JButton brakeButton = new JButton("Brake");
 
-    public GasPanel() {
+    public GasPanel(int minWidth, int minHeight) {
         SpinnerModel spinnerModel = new SpinnerNumberModel(
                 0,       //initial value
                 0,    //min
@@ -21,7 +22,11 @@ public class GasPanel extends JPanel implements IGasPanel {
         gasSpinner = new JSpinner(spinnerModel);
 
         this.setLayout(new BorderLayout());
+        this.setMinimumSize(new Dimension(minWidth, minHeight));
+        this.setSize(minWidth, minHeight);
         this.add(gasLabel, BorderLayout.PAGE_START);
+        this.add(gasButton, BorderLayout.LINE_START);
+        this.add(brakeButton, BorderLayout.LINE_END);
         this.add(gasSpinner, BorderLayout.PAGE_END);
     }
 

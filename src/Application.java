@@ -37,7 +37,7 @@ public class Application {
 
         List<JPanel> panels = new ArrayList<>();
         panels.add(new DrawPanel(800, 800-240, model.getObserverHandler()));
-        GasPanel gasPanel = new GasPanel();
+        GasPanel gasPanel = new GasPanel(200, 800);
         panels.add(gasPanel);
         ControlPanel controlPanel = new ControlPanel(800);
         panels.add(controlPanel);
