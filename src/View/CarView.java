@@ -103,8 +103,8 @@ public class CarView extends JFrame implements ICarView, PaintObserver {
         gasPanel.setLayout(new BorderLayout());
 //        gasPanel.setAlignmentY(Component.BOTTOM_ALIGNMENT);
 //        gasPanel.setPreferredSize(new Dimension(10,10));
-        gasPanel.add(gasLabel);
-        gasPanel.add(gasSpinner);
+        gasPanel.add(gasLabel, BorderLayout.PAGE_START);
+        gasPanel.add(gasSpinner, BorderLayout.PAGE_END);
 //        Dimension d = gasPanel.getPreferredSize();
 //        d.width = 100;
 //        gasSpinner.setPreferredSize(d);
@@ -171,7 +171,7 @@ public class CarView extends JFrame implements ICarView, PaintObserver {
         Box box2 = Box.createHorizontalBox();
         Box box3 = Box.createHorizontalBox();
 
-        box1.add(gasSpinner);
+        box1.add(gasPanel);
 //        box1.add(Box.createHorizontalGlue());
         box1.add(startButton);
         box2.add(stopButton);
