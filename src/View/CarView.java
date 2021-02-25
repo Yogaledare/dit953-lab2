@@ -100,14 +100,14 @@ public class CarView extends JFrame implements ICarView, PaintObserver {
         gasSpinner = new JSpinner(spinnerModel);
 //        gasSpinner.setPreferredSize();
 
-        gasPanel.setLayout(new BoxLayout(gasPanel, BoxLayout.Y_AXIS));
+        gasPanel.setLayout(new BorderLayout());
 //        gasPanel.setAlignmentY(Component.BOTTOM_ALIGNMENT);
 //        gasPanel.setPreferredSize(new Dimension(10,10));
         gasPanel.add(gasLabel);
         gasPanel.add(gasSpinner);
-        Dimension d = gasPanel.getPreferredSize();
-        d.width = 100;
-        gasSpinner.setPreferredSize(d);
+//        Dimension d = gasPanel.getPreferredSize();
+//        d.width = 100;
+//        gasSpinner.setPreferredSize(d);
 //        gasPanel.add(Box.createVerticalGlue());
 
 
