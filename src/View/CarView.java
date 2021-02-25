@@ -19,7 +19,7 @@ public class CarView extends JFrame implements ICarView, PaintObserver {
     private static final int X = 800;
     private static final int Y = 800;
 
-    DrawPanel drawPanel = new DrawPanelPrint(X, Y-240);
+    DrawPanel drawPanel = new DrawPanel(X, Y-240);
 
     JPanel controlPanel = new JPanel();
 
@@ -38,6 +38,10 @@ public class CarView extends JFrame implements ICarView, PaintObserver {
 
     JButton startButton = new JButton("Start all cars");
     JButton stopButton = new JButton("Stop all cars");
+
+
+    JLabel car1_speed = new JLabel("Car 1: ");
+
 
     // Constructor
     public CarView(String framename, ObserverHandler observerHandler){
@@ -59,9 +63,33 @@ public class CarView extends JFrame implements ICarView, PaintObserver {
         this.setTitle(title);
 //        this.setPreferredSize(new Dimension(X,Y));
 //        this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
-        this.setLayout(new GridBagLayout());
+//        this.setLayout(new GridBagLayout());
+//        JPanel holder = new JPanel();
+//        holder.setLayout(new BoxLayout(holder, BoxLayout.Y_AXIS));
 
-        this.add(drawPanel);
+
+//        this.add(testTarget);
+
+//        this.add(testTarget);
+//        this.add(drawPanel);
+
+        this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.PAGE_AXIS));
+
+        JButton test_1 = new JButton("test_1");
+
+//        JPanel gasPanelHolder = new JPanel();
+//        gasPanelHolder.setLayout(new BoxLayout(gasPanelHolder, BoxLayout.X_AXIS));
+//        gasPanelHolder.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+
+
+
+        JPanel startStop = new JPanel();
+//        startStop.setLayout(new BoxLayout(startStop, BoxLayout.X_AXIS));
+
+        JPanel allCarControls = new JPanel();
+//        allCarControls.setLayout(new BoxLayout(allCarControls, BoxLayout.X_AXIS));
+
 
         SpinnerModel spinnerModel = new SpinnerNumberModel(
                 0,       //initial value
@@ -70,40 +98,95 @@ public class CarView extends JFrame implements ICarView, PaintObserver {
                 1      //step
                 );
         gasSpinner = new JSpinner(spinnerModel);
+//        gasSpinner.setPreferredSize();
 
-        gasPanel.setLayout(new BorderLayout());
-        gasPanel.add(gasLabel, BorderLayout.PAGE_START);
-        gasPanel.add(gasSpinner, BorderLayout.PAGE_END);
+        gasPanel.setLayout(new BoxLayout(gasPanel, BoxLayout.Y_AXIS));
+//        gasPanel.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+//        gasPanel.setPreferredSize(new Dimension(10,10));
+        gasPanel.add(gasLabel);
+        gasPanel.add(gasSpinner);
+        Dimension d = gasPanel.getPreferredSize();
+        d.width = 100;
+        gasSpinner.setPreferredSize(d);
+//        gasPanel.add(Box.createVerticalGlue());
 
-        this.add(gasPanel);
 
-        controlPanel.setLayout(new GridLayout(2,4));
 
+
+//        this.add(gasPanel, new GridBagConstraints(0,1,1,1,0.0,0.0,GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0,0,0,0), 0,0));
+//        gasPanel.setPreferredSize(new Dimension(100, 100));
+
+
+
+//        gasPanel.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+//        test_1.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+//        gasPanelHolder.add(Box.createHorizontalGlue());
+//        box1.add(test_1);
+
+//        controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.LINE_AXIS));
         controlPanel.add(gasButton, 0);
         controlPanel.add(turboOnButton, 1);
         controlPanel.add(liftBedButton, 2);
-        controlPanel.add(brakeButton, 3);
-        controlPanel.add(turboOffButton, 4);
-        controlPanel.add(lowerBedButton, 5);
-        controlPanel.add(testButton, 6);
-        controlPanel.setPreferredSize(new Dimension((X/2)+4, 200));
-        this.add(controlPanel);
+//        controlPanel.add(brakeButton, 3);
+//        controlPanel.add(turboOffButton, 4);
+//        controlPanel.add(lowerBedButton, 5);
+//        controlPanel.add(testButton, 6);
+//        controlPanel.setPreferredSize(new Dimension((X/2)+4, 200));
+//        controlPanel.setPreferredSize(new Dimension(200, 200));
+
+
         controlPanel.setBackground(Color.CYAN);
+
+//        box2.add(controlPanel);
+
+//        box2.add(Box.createHorizontalGlue());
 
         startButton.setBackground(Color.blue);
         startButton.setForeground(Color.green);
-        startButton.setPreferredSize(new Dimension(X/5-15,200));
-        this.add(startButton);
+//        startButton.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+//        startButton.setPreferredSize(new Dimension(X/5-15,200));
+//        box3.add(startButton);
 
         stopButton.setBackground(Color.red);
         stopButton.setForeground(Color.black);
-        stopButton.setPreferredSize(new Dimension(X/5-15,200));
-        this.add(stopButton);
+//        stopButton.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+//        stopButton.setPreferredSize(new Dimension(X/5-15,200));
+//        box3.add(stopButton);
 
-        testBigButton.setBackground(Color.red);
-        testBigButton.setForeground(Color.black);
-        testBigButton.setPreferredSize(new Dimension(X/5-15,200));
-        this.add(testBigButton);
+//        box1.setAlignmentX(Component.LEFT_ALIGNMENT);
+//        box2.setAlignmentX(Component.RIGHT_ALIGNMENT);
+//        box3.setAlignmentX(Component.LEFT_ALIGNMENT);
+//        box3.add(Box.createHorizontalGlue());
+
+
+
+//        this.add(holder);
+
+
+//        gasPanelHolder.add(Box.createHorizontalGlue());
+//        allCarControls.add(Box.createHorizontalGlue());
+//        startStop.add(Box.createHorizontalGlue());
+
+        Box box1 = Box.createHorizontalBox();
+        Box box2 = Box.createHorizontalBox();
+        Box box3 = Box.createHorizontalBox();
+
+        box1.add(gasSpinner);
+//        box1.add(Box.createHorizontalGlue());
+        box1.add(startButton);
+        box2.add(stopButton);
+        box2.add(gasButton);
+        box2.add(brakeButton);
+        box2.add(turboOnButton);
+        box2.add(turboOffButton);
+        box2.add(Box.createHorizontalGlue());
+
+
+        this.add(box1);
+        this.add(box2);
+//        this.add(box3);
+//        this.add(Box.createVerticalGlue());
+//        this.add(Box.createVerticalGlue());
 
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();

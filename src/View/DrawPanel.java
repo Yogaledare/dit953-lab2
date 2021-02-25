@@ -25,6 +25,8 @@ public class DrawPanel extends JPanel{
     public DrawPanel(int x, int y) {
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
+        this.setMinimumSize(new Dimension(x, y)); // fixing the min size
+        this.setMaximumSize(new Dimension(x, y)); // fixing the min size
         this.setBackground(Color.green);
         bindCars();
     }
