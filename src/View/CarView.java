@@ -26,6 +26,7 @@ public class CarView extends JFrame implements ICarView, PaintObserver {
     JPanel gasPanel = new JPanel();
     JSpinner gasSpinner = new JSpinner();
     JLabel gasLabel = new JLabel("Amount of gas");
+    JButton testBigButton = new JButton("test 2");
 
     JButton gasButton = new JButton("Gas");
     JButton brakeButton = new JButton("Brake");
@@ -56,8 +57,9 @@ public class CarView extends JFrame implements ICarView, PaintObserver {
     private void initComponents(String title) {
 
         this.setTitle(title);
-        this.setPreferredSize(new Dimension(X,Y));
-        this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
+//        this.setPreferredSize(new Dimension(X,Y));
+//        this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        this.setLayout(new GridBagLayout());
 
         this.add(drawPanel);
 
@@ -97,6 +99,11 @@ public class CarView extends JFrame implements ICarView, PaintObserver {
         stopButton.setForeground(Color.black);
         stopButton.setPreferredSize(new Dimension(X/5-15,200));
         this.add(stopButton);
+
+        testBigButton.setBackground(Color.red);
+        testBigButton.setForeground(Color.black);
+        testBigButton.setPreferredSize(new Dimension(X/5-15,200));
+        this.add(testBigButton);
 
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();
