@@ -11,9 +11,9 @@ Application ..> ControlPanel
 Application ..> AddRemovePanel
 Application ..> LoggerPanel
 
-Application ..> DrawPanelController
-Application ..> ControlPanelController
-Application ..> AddRemovePanelController
+IDrawPanel <.. Application
+IControlPanel <.. Application
+IAddRemovePanel <.. Application
 
 class Model{
     -timer : Timer
@@ -74,15 +74,16 @@ CarFrame --> AddRemovePanel
 class DrawPanel{
     +DrawPanel(ObserverHandler)
 }
-DrawPanel ..|> IDrawPanel
 DrawPanel ..> ObserverHandler
 DrawPanel ..> IPaintable
+DrawPanel ..|> IDrawPanel
 
 class ControlPanel{
     +ControlPanel(ObserverHandler)
 }
-ControlPanel ..|> IControlPanel
 ControlPanel ..> ObserverHandler
+ControlPanel --|> JPanel
+ControlPanel ..|> IControlPanel
 
 class LoggerPanel{
     +LoggerPanel(ObserverHandler)
@@ -90,11 +91,12 @@ class LoggerPanel{
 LoggerPanel ..> ObserverHandler
 LoggerPanel ..> IPaintable
 
+
 class AddRemovePanel{
     +Addremovepanel(ObserverHandler)
 }
-AddRemovePanel ..|> IAddRemovePanel
 AddRemovePanel ..> ObserverHandler
+Addremovepanel ..|> IAddRemovePanel
 
 interface IDrawPanel{
 
@@ -109,22 +111,25 @@ interface IAddRemovePanel{
 }
 
 class DrawPanelController{
+    -model : IModel
     +DrawPanelController(IDrawPanel, IModel)
 }
 DrawPanelController ..> IDrawPanel
-DrawPanelController ..> IModel
+DrawPanelController --> IModel
 
 class ControlPanelController{
+    -model : IModel
     +ControlPanelController(IControlPanel, IModel)
 }
 ControlPanelController ..> IControlPanel
-ControlPanelController ..> IModel
+ControlPanelController --> IModel
 
 class AddRemovePanelController{
+    -model : IModel
     +AddRemovePanelController(IControlPanel, IModel)
 }
 AddRemovePanelController ..> IAddRemovePanel
-AddRemovePanelController ..> IModel
+AddRemovePanelController --> IModel
 
 
 
@@ -133,6 +138,7 @@ package Swing {
     class JPanel{}
     class JButton {}
     class JLabel {}
+    class JFrame {}
 }
 
 @enduml
