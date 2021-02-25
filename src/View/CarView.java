@@ -25,7 +25,7 @@ public class CarView extends JFrame implements ICarView, PaintObserver {
 
     JPanel gasPanel = new JPanel();
     JSpinner gasSpinner = new JSpinner();
-    JLabel gasLabel = new JLabel("Amount of gas");
+    JLabel gasLabel = new JLabel("Gas");
     JButton testBigButton = new JButton("test 2");
 
     JButton gasButton = new JButton("Gas");
@@ -98,12 +98,28 @@ public class CarView extends JFrame implements ICarView, PaintObserver {
                 1      //step
                 );
         gasSpinner = new JSpinner(spinnerModel);
-//        gasSpinner.setPreferredSize();
+        Dimension d = gasSpinner.getPreferredSize();
+        d.width = 130;
+        gasSpinner.setMinimumSize(d);
+        gasSpinner.setMaximumSize(d);
+//        Dimension s = gasLabel.getPreferredSize();
+//        s.width = d.width;
+//        gasLabel.setMinimumSize(s);
+//        gasLabel.setMaximumSize(s);
+//        Dimension a = gasPanel.getPreferredSize();
+//        a.width = d.width;
+//        a.height = d.height + s.height;
+//        gasPanel.setMinimumSize(a);
+//        gasPanel.setMaximumSize(a);
+
 
         gasPanel.setLayout(new BoxLayout(gasPanel, BoxLayout.Y_AXIS));
 //        gasPanel.setAlignmentY(Component.BOTTOM_ALIGNMENT);
 //        gasPanel.setPreferredSize(new Dimension(10,10));
-        gasPanel.add(gasLabel, BorderLayout.PAGE_START);
+//        Box tempBox = Box.createHorizontalBox();
+//        tempBox.add(gasLabel, BorderLayout.PAGE_START);
+//        tempBox.add(Box.createHorizontalGlue());
+        gasPanel.add(gasLabel);
         gasPanel.add(gasSpinner, BorderLayout.PAGE_END);
         gasPanel.setBackground(Color.gray);
 //        Dimension d = gasPanel.getPreferredSize();
@@ -180,6 +196,7 @@ public class CarView extends JFrame implements ICarView, PaintObserver {
         box1.add(drawPanel);
 //        box1.add(Box.createHorizontalGlue());
         box1.add(startButton);
+        box1.add(Box.createHorizontalGlue());
         box2.add(stopButton);
         box2.add(gasButton);
         box2.add(brakeButton);
