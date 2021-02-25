@@ -1,5 +1,6 @@
 package Model;
 
+import View.ILoggable;
 import View.IPaintable;
 
 import java.awt.*;
@@ -7,7 +8,7 @@ import java.awt.*;
 /**
  * The car component representing car features
  */
-public abstract class Car extends Vehicle implements Transportable, IPaintable {
+public abstract class Car extends Vehicle implements Transportable, IPaintable, ILoggable {
     /**
      * Model.Model.Car model
      */

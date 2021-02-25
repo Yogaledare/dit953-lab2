@@ -2,6 +2,8 @@ package Controller;
 
 import Model.ICarView;
 import Model.IModel;
+import View.IControlPanel;
+import View.IGasPanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

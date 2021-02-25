@@ -1,11 +1,6 @@
 package View;
-
-import Model.*;
-
 import javax.swing.*;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.util.List;
 
 /**
@@ -19,9 +14,8 @@ public class CarView extends JFrame implements ICarView, PaintObserver {
     private static final int X = 800;
     private static final int Y = 800;
 
-    DrawPanel drawPanel = new DrawPanelPrint(X, Y-240);
+    private List<JPanel> panels;
 
-    JPanel controlPanel = new JPanel();
 
     JPanel gasPanel = new JPanel();
     JSpinner gasSpinner = new JSpinner();
@@ -59,51 +53,16 @@ public class CarView extends JFrame implements ICarView, PaintObserver {
         this.setTitle(title);
 //        this.setPreferredSize(new Dimension(X,Y));
 //        this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
-        this.setLayout(new GridBagLayout());
 
-        this.add(drawPanel);
+        this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.LINE_AXIS));
 
-        SpinnerModel spinnerModel = new SpinnerNumberModel(
-                0,       //initial value
-                0,    //min
-                100,  //max
-                1      //step
-                );
-        gasSpinner = new JSpinner(spinnerModel);
-
-        gasPanel.setLayout(new BorderLayout());
-        gasPanel.add(gasLabel, BorderLayout.PAGE_START);
-        gasPanel.add(gasSpinner, BorderLayout.PAGE_END);
-
-        this.add(gasPanel);
-
-        controlPanel.setLayout(new GridLayout(2,4));
-
-        controlPanel.add(gasButton, 0);
-        controlPanel.add(turboOnButton, 1);
-        controlPanel.add(liftBedButton, 2);
-        controlPanel.add(brakeButton, 3);
-        controlPanel.add(turboOffButton, 4);
-        controlPanel.add(lowerBedButton, 5);
-        controlPanel.add(testButton, 6);
-        controlPanel.setPreferredSize(new Dimension((X/2)+4, 200));
-        this.add(controlPanel);
-        controlPanel.setBackground(Color.CYAN);
-
-        startButton.setBackground(Color.blue);
-        startButton.setForeground(Color.green);
-        startButton.setPreferredSize(new Dimension(X/5-15,200));
-        this.add(startButton);
-
-        stopButton.setBackground(Color.red);
-        stopButton.setForeground(Color.black);
-        stopButton.setPreferredSize(new Dimension(X/5-15,200));
-        this.add(stopButton);
-
+        panels.forEach(this::add);
+/*
         testBigButton.setBackground(Color.red);
         testBigButton.setForeground(Color.black);
         testBigButton.setPreferredSize(new Dimension(X/5-15,200));
         this.add(testBigButton);
+*/
 
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();

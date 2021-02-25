@@ -1,19 +1,11 @@
 package View;
-
-import Model.*;
-
-import javax.imageio.ImageIO;
+import Model.IAddRemovePanel;
+import Model.PaintObserver;
+import Model.ObserverHandler;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-
 
 // This panel represent the animated part of the view with the car images.
 

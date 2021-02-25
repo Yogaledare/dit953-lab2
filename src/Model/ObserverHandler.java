@@ -21,4 +21,8 @@ public class ObserverHandler {
             observer.actOnPublish(paintables);
         }
     }
+
+    public int getSize() {
+        return subscribers.size();
+    }
 }

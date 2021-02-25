@@ -27,12 +27,27 @@ public class Application {
         ((Scania)scania).lower(70);
         cars.add(scania);
 
-
         // Create MVC
         IModel model = new Model(cars);
-        ICarView view = new CarView("CarSim 2.0", model.getObserverHandler());
-        CarController cc = new CarController(view, model);
+        //ICarView view = new CarView("CarSim 2.0", model.getObserverHandler());
 
+
+
+
+        List<JPanel> panels = new ArrayList<>();
+        panels.add(new DrawPanel(800, 800-240, model.getObserverHandler()));
+        GasPanel gasPanel = new GasPanel();
+        panels.add(gasPanel);
+        ControlPanel controlPanel = new ControlPanel(800);
+        panels.add(controlPanel);
+        panels.add(new LoggerPanel(model.getLoggerHandler()));
+
+        CarView view = new CarView(800, 800, "CarSim 2.0", panels);
+
+        GasController gasController = new GasController(gasPanel, model);
+        ControllPanelController cPC = new ControllPanelController(controlPanel, model);
+
+        //CarController cc = new CarController(view, model);
 
         // Start the timer
         model.startTimer();
