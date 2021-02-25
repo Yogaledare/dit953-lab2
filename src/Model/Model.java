@@ -21,7 +21,7 @@ public class Model implements IModel {
     List<Car> cars;
 
     ObserverHandler observerHandler = new ObserverHandler();
-    LoggerHandler loggerHandler = new LoggerHandler();
+    EventHandler<EventObserver<ILoggable>, ILoggable> loggerHandler = new EventHandler<EventObserver<ILoggable>, ILoggable>();
 
     public Model(List<Car> cars) {
         this.cars = cars;
@@ -134,5 +134,5 @@ public class Model implements IModel {
     public ObserverHandler getObserverHandler() {
         return observerHandler;
     }
-    public LoggerHandler getLoggerHandler(){ return loggerHandler; }
+    public EventHandler<EventObserver<ILoggable>, ILoggable> getLoggerHandler(){ return loggerHandler; }
 }

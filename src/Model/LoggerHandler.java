@@ -9,18 +9,19 @@ import java.util.List;
 
 
 public class LoggerHandler {
-    private List<LoggerObserver> subscribers = new ArrayList<>();
+//     private List<LoggerObserver> subscribers = new ArrayList<>();
+    private List<EventObserver<ILoggable>> subscribers = new ArrayList<>();
 
-    public void addSubscriber(LoggerObserver observer){
+    public void addSubscriber(EventObserver<ILoggable> observer){
         subscribers.add(observer);
     }
 
-    public void removeSubscriber(LoggerObserver observer){
+    public void removeSubscriber(EventObserver<ILoggable> observer){
         subscribers.remove(observer);
     }
 
     public void publish(List<? extends ILoggable> loggables){
-        for (LoggerObserver observer : subscribers) {
+        for (EventObserver<ILoggable> observer : subscribers) {
             observer.actOnPublish(loggables);
         }
     }

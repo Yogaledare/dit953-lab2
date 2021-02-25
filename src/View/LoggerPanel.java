@@ -1,5 +1,7 @@
 package View;
 
+import Model.EventHandler;
+import Model.EventObserver;
 import Model.LoggerObserver;
 import Model.LoggerHandler;
 
@@ -9,13 +11,13 @@ import java.util.List;
 
 // This panel prints car and velocity.
 // for each car a new label is created.
-public class LoggerPanel extends JPanel implements LoggerObserver {
+public class LoggerPanel extends JPanel implements EventObserver<ILoggable> {
     // private List<ILoggable> loggables = new ArrayList<>();
 //    JPanel panel = new JPanel(new GridLayout(0, 1));
     JTextArea jTextArea = new JTextArea("<Car> : <speed>");
 
     // Initializes the panel and reads the images
-    public LoggerPanel(LoggerHandler handler) {
+    public LoggerPanel(EventHandler<EventObserver<ILoggable>,ILoggable> handler) {
         handler.addSubscriber(this);
 //        String res = generateCarSpeeds();
 //        label.setText(res);
