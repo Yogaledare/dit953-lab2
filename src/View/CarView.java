@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
+
 /**
  * This class represents the full view of the MVC pattern of your car simulator.
  * It initializes with being center on the screen and attaching it's controller in it's state.
@@ -10,44 +11,38 @@ import java.util.List;
  * each of it's components.
  **/
 
-public class CarView extends JFrame implements ICarView, PaintObserver {
-    private static final int X = 800;
-    private static final int Y = 800;
+public class CarView extends JFrame {
+    private static int X;
+    private static int Y;
 
     private List<JPanel> panels;
 
 
-    JPanel gasPanel = new JPanel();
-    JSpinner gasSpinner = new JSpinner();
-    JLabel gasLabel = new JLabel("Amount of gas");
-    JButton testBigButton = new JButton("test 2");
-
-    JButton gasButton = new JButton("Gas");
-    JButton brakeButton = new JButton("Brake");
-    JButton turboOnButton = new JButton("Saab Turbo on");
-    JButton turboOffButton = new JButton("Saab Turbo off");
-    JButton liftBedButton = new JButton("Model.Model.Scania Lift Bed");
-    JButton lowerBedButton = new JButton("Lower Lift Bed");
-    JButton testButton = new JButton("Testbutton");
-
-    JButton startButton = new JButton("Start all cars");
-    JButton stopButton = new JButton("Stop all cars");
+    //JButton testBigButton = new JButton("test 2");
 
     // Constructor
-    public CarView(String framename, ObserverHandler observerHandler){
-        initComponents(framename);
-        observerHandler.addSubscriber(this);
+    public CarView(String frameName){
+        initComponents(frameName);
+
     }
 
+    public CarView(int x, int y, String frameName, List<JPanel> panels){
+        X = x;
+        Y = y;
+        this.panels = panels;
+        initComponents(frameName);
+    }
+
+    /*
     @Override
     public void actOnPublish(List<? extends IPaintable> paintables) {
         //drawPanel.paintCars(paintables);
         drawPanel.setList(paintables);
         drawPanel.repaint();
     }
+    */
 
     // Sets everything in place and fits everything
-
     private void initComponents(String title) {
 
         this.setTitle(title);
@@ -75,52 +70,5 @@ public class CarView extends JFrame implements ICarView, PaintObserver {
         this.setVisible(true);
         // Make sure the frame exits when "x" is pressed
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
-
-
-
-    @Override
-    public void setGasButtonActionListener(ActionListener listener) {
-        gasButton.addActionListener(listener);
-    }
-
-    @Override
-    public void setBrakeButtonActionListener(ActionListener listener) {
-        brakeButton.addActionListener(listener);
-    }
-
-    @Override
-    public void setStartButtonActionListener(ActionListener listener) {
-        startButton.addActionListener(listener);
-    }
-
-    @Override
-    public void setStopButtonActionListener(ActionListener listener) {
-        stopButton.addActionListener(listener);
-    }
-
-    @Override
-    public void setTurboOnButtonActionListener(ActionListener listener) {
-        turboOnButton.addActionListener(listener);
-    }
-
-    @Override
-    public void setTurboOffButtonActionListener(ActionListener listener) {
-        turboOffButton.addActionListener(listener);
-    }
-
-    @Override
-    public void setLiftBedButtonActionListener(ActionListener listener) {
-        liftBedButton.addActionListener(listener);
-    }
-
-    @Override
-    public void setLowerBedButtonActionListener(ActionListener listener) {
-        lowerBedButton.addActionListener(listener);
-    }
-
-    @Override
-    public void setSpinnerChangeListener(ChangeListener listener) {
-        gasSpinner.addChangeListener(listener);
     }
 }

@@ -13,6 +13,7 @@ public interface IModel {
     void setTurboOn();
     void setTurboOff();
     ObserverHandler getObserverHandler();
+    LoggerHandler getLoggerHandler();
     void startTimer();
 
 }

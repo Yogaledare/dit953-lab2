@@ -1,6 +1,7 @@
 package View;
 
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -9,20 +10,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
+
+import Model.ObserverHandler;
+import Model.PaintObserver;
 import Model.Vector2D;
 
 
 
 // This panel represent the animated part of the view with the car images.
 
-public class DrawPanel extends JPanel{
+public class DrawPanel extends JPanel implements PaintObserver {
 
 
     private final Map<String, BufferedImage> images = new HashMap<>();
     private final List<IPaintable> paintables = new ArrayList<>();
 
     // Initializes the panel and reads the images
-    public DrawPanel(int x, int y) {
+    public DrawPanel(int x, int y, ObserverHandler handler) {
+        handler.addSubscriber(this);
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.green);
@@ -48,6 +53,11 @@ public class DrawPanel extends JPanel{
         return images.get(name);
     }
 
+    @Override
+    public void actOnPublish(List<? extends IPaintable> paintables) {
+        setList(paintables);
+        repaint();
+    }
 
     public void setList(List<? extends IPaintable> paintables){
         this.paintables.clear();
@@ -74,11 +84,8 @@ public class DrawPanel extends JPanel{
         super.paintComponent(g);
         for (IPaintable paintable : paintables) {
             Vector2D pos = paintable.getPosition();
-            BufferedImage image = images.get(paintable.getModelName());
+            BufferedImage image = get(paintable.getModelName());
             g.drawImage(image, (int)pos.getX(), (int)pos.getY(), null);
         }
     }
-
-
-
 }
