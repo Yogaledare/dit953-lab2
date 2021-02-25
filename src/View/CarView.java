@@ -189,6 +189,8 @@ public class CarView extends JFrame implements ICarView, PaintObserver {
         Box box3 = Box.createHorizontalBox();
         Box box4 = Box.createHorizontalBox();
 
+        JComponent testComponent = new JSlider();
+
         box1.setBackground(Color.red);
         box2.setBackground(Color.orange);
         box3.setBackground(Color.yellow);
@@ -214,6 +216,7 @@ public class CarView extends JFrame implements ICarView, PaintObserver {
         this.add(box2);
         this.add(box3);
         this.add(box4);
+        this.add(testComponent);
 //        this.add(Box.createVerticalGlue());
 //        this.add(Box.createVerticalGlue());
 
