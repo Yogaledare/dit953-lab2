@@ -4,21 +4,32 @@ import Model.EventHandler;
 import Model.EventObserver;
 import javax.swing.*;
 import java.text.DecimalFormat;
-import java.util.Arrays;
 import java.util.List;
 
-// This panel prints car and velocity.
-// for each car a new label is created.
+/**
+ * LoggerPanel creates an JTextArea and
+ * prints each car model and speed in format
+ * CarModel : Speed, each car on a separate row.
+ */
 public class LoggerPanel extends JPanel implements EventObserver<ILoggable> {
-    JTextArea jTextArea = new JTextArea("<Car> : <speed>");
-    JLabel[] jLabels = new JLabel[10];
-    // Initializes the panel and reads the images
+    /**
+     * Local variables
+     */
+    JTextArea jTextArea = new JTextArea("<Car> : <speed>"); // dummy text
+
+    /**
+     * Initialize the panel "JTextArea", and listen to ILoggable changes from EventObserver.
+     * @param handler where to spy for changes.
+     */
     public LoggerPanel(EventHandler<EventObserver<ILoggable>,ILoggable> handler) {
         handler.addSubscriber(this);
         this.add(jTextArea);
     }
 
-
+    /**
+     * EventHandler tells us there is a change - then we do an update.
+     * @param loggable, for each ILoggable object we update the view with new values.
+     */
     @Override
     public void actOnPublish(List<? extends ILoggable> loggable) {
         StringBuilder res = new StringBuilder();
