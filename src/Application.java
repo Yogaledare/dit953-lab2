@@ -36,11 +36,12 @@ public class Application {
         IModel model = new Model(cars);
         //ICarView view = new CarView("CarSim 2.0", model.getObserverHandler());
 
+        // First view is a full-blow MVC,
+        // includes a car-world, controls, speed-log
         makeView1(model);
 
+        // Second view includes car-controls only
         makeView2(model);
-
-
 
         // Start the timer
         model.startTimer();
@@ -70,17 +71,13 @@ public class Application {
 
     private static void makeView2(IModel m) {
         List<JPanel> panels = new ArrayList<>();
-        DrawPanel drawPanel = new DrawPanel(800, 800-240, m.getPaintHandler());
 
         GasPanel gasPanel = new GasPanel();
         ControlPanel controlPanel = new ControlPanel(800);
 
-        CarView view = new CarView("CarSim 3.0");
+        CarView view = new CarView("Control 2.0");
 
-        view.addUIElement(drawPanel);
-        view.startNewRow();
         view.addUIElement(gasPanel);
-        view.startNewRow();
         view.addUIElement(controlPanel);
 
 
