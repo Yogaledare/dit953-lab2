@@ -1,8 +1,7 @@
 package Model;
 
 import View.ILoggable;
-
-import java.util.Collection;
+import View.IPaintable;
 
 public interface IModel {
 
@@ -14,8 +13,8 @@ public interface IModel {
     void lower();
     void setTurboOn();
     void setTurboOff();
-    ObserverHandler getObserverHandler();
-    EventHandler<EventObserver<ILoggable>,ILoggable> getLoggerHandler();
+    EventHandler<EventObserver<IPaintable>,IPaintable> getPaintHandler();
+    EventHandler<EventObserver<ILoggable>,ILoggable> getLogHandler();
     void startTimer();
 
 }

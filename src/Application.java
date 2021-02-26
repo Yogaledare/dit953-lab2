@@ -36,7 +36,7 @@ public class Application {
 
 
         List<JPanel> panels = new ArrayList<>();
-        DrawPanel drawPanel = new DrawPanel(800, 800-240, model.getObserverHandler());
+        DrawPanel drawPanel = new DrawPanel(800, 800-240, model.getPaintHandler());
 //        panels.add(new DrawPanel(800, 800-240, model.getObserverHandler()));
 //        GasPanel gasPanel = new GasPanel(200, 800);
         GasPanel gasPanel = new GasPanel();
@@ -44,7 +44,7 @@ public class Application {
         ControlPanel controlPanel = new ControlPanel(800);
 //        panels.add(controlPanel);
 //        panels.add(new LoggerPanel(model.getLoggerHandler()));
-        LoggerPanel loggerPanel = new LoggerPanel(model.getLoggerHandler());
+        LoggerPanel loggerPanel = new LoggerPanel(model.getLogHandler());
 
         CarView view = new CarView("CarSim 2.0");
 

@@ -11,22 +11,19 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 
-import Model.ObserverHandler;
-import Model.PaintObserver;
-import Model.Vector2D;
-
+import Model.*;
 
 
 // This panel represent the animated part of the view with the car images.
 
-public class DrawPanel extends JPanel implements PaintObserver {
+public class DrawPanel extends JPanel implements EventObserver<IPaintable> {
 
 
     private final Map<String, BufferedImage> images = new HashMap<>();
     private final List<IPaintable> paintables = new ArrayList<>();
 
     // Initializes the panel and reads the images
-    public DrawPanel(int x, int y, ObserverHandler handler) {
+    public DrawPanel(int x, int y, EventHandler<EventObserver<IPaintable>,IPaintable> handler) {
         handler.addSubscriber(this);
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));

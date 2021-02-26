@@ -5,9 +5,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.Timer;
-import Model.*;
 import View.*;
-import Controller.*;
+
 
 
 
@@ -20,8 +19,8 @@ public class Model implements IModel {
 
     List<Car> cars;
 
-    ObserverHandler observerHandler = new ObserverHandler();
-    EventHandler<EventObserver<ILoggable>, ILoggable> loggerHandler = new EventHandler<EventObserver<ILoggable>, ILoggable>();
+    EventHandler<EventObserver<IPaintable>,IPaintable> paintHander = new EventHandler<EventObserver<IPaintable>,IPaintable>();
+    EventHandler<EventObserver<ILoggable>, ILoggable> logHandler = new EventHandler<EventObserver<ILoggable>, ILoggable>();
 
     public Model(List<Car> cars) {
         this.cars = cars;
@@ -53,8 +52,8 @@ public class Model implements IModel {
                     car.turnAround();
                 }
             }
-            observerHandler.publish(cars);
-            loggerHandler.publish(cars);
+            paintHander.publish(cars);
+            logHandler.publish(cars);
         }
     }
 
@@ -129,10 +128,11 @@ public class Model implements IModel {
             }
         }
     }
+    @Override
+    public EventHandler<EventObserver<IPaintable>, IPaintable> getPaintHandler() {
+        return paintHander;
+    }
 
     @Override
-    public ObserverHandler getObserverHandler() {
-        return observerHandler;
-    }
-    public EventHandler<EventObserver<ILoggable>, ILoggable> getLoggerHandler(){ return loggerHandler; }
+    public EventHandler<EventObserver<ILoggable>, ILoggable> getLogHandler(){ return logHandler; }
 }
