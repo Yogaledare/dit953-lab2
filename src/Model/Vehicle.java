@@ -31,17 +31,17 @@ public abstract class Vehicle implements Movable {
     private Vector2D position;
 
     /**
-     * width of the vehicle
+     * width of the vehicle in meter.
      */
     private final double width;
 
     /**
-     * length of the vehicle
+     * length of the vehicle in meter.
      */
     private final double length;
 
     /**
-     * true if engine is on.
+     * State of the engine.
      */
     private boolean engineOn;
 
@@ -81,6 +81,7 @@ public abstract class Vehicle implements Movable {
 
     /**
      * Starts the vehicle by setting currentSpeed to 0.1.
+     * Change state of engine to on.
      */
     public void startEngine() {
         if (!engineOn)
@@ -90,6 +91,7 @@ public abstract class Vehicle implements Movable {
 
     /**
      * Stops the vehicle by setting currentSpeed to 0.
+     * change state of engine to off.
      */
     public void stopEngine() {
         engineOn = false;
@@ -114,6 +116,7 @@ public abstract class Vehicle implements Movable {
      * @param amount how much the speed should decrease for every move.
      */
     private void decrementSpeed(double amount, double speedFactor) {
+        if (engineOn)
         currentSpeed = Vector2D.clamp(getCurrentSpeed() - speedFactor * amount, 0, enginePower);
     }
 
