@@ -10,8 +10,7 @@ public interface IModel {
     void lower();
     void setTurboOn();
     void setTurboOff();
-    EventHandler<EventObserver<IPaintable>,IPaintable> getPaintHandler();
-    EventHandler<EventObserver<ILoggable>,ILoggable> getLogHandler();
+    EventHandler<Car> getHandler();
     void startTimer();
 
 }
