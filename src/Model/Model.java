@@ -19,7 +19,7 @@ public class Model implements IModel {
 
     List<Car> cars;
 
-    EventHandler<EventObserver<IPaintable>,IPaintable> paintHander = new EventHandler<EventObserver<IPaintable>,IPaintable>();
+    EventHandler<EventObserver<IPaintable>,IPaintable> paintHandler = new EventHandler<EventObserver<IPaintable>,IPaintable>();
     EventHandler<EventObserver<ILoggable>, ILoggable> logHandler = new EventHandler<EventObserver<ILoggable>, ILoggable>();
 
     public Model(List<Car> cars) {
@@ -52,7 +52,7 @@ public class Model implements IModel {
                     car.turnAround();
                 }
             }
-            paintHander.publish(cars);
+            paintHandler.publish(cars);
             logHandler.publish(cars);
         }
     }
@@ -130,7 +130,7 @@ public class Model implements IModel {
     }
     @Override
     public EventHandler<EventObserver<IPaintable>, IPaintable> getPaintHandler() {
-        return paintHander;
+        return paintHandler;
     }
 
     @Override

@@ -1,9 +1,9 @@
 package Model;
 
-        import java.util.List;
-        import java.util.ArrayList;
+import java.util.List;
+import java.util.ArrayList;
 
-public class EventHandler<T extends EventObserver, I > {
+public class EventHandler<T extends EventObserver<I>, I > {
     private final List<T> subscribers = new ArrayList<>();
 
     /**
