@@ -1,7 +1,6 @@
 package View;
 
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -17,8 +16,6 @@ import Model.*;
 // This panel represent the animated part of the view with the car images.
 
 public class DrawPanel extends JPanel implements EventObserver<IPaintable> {
-
-
     private final Map<String, BufferedImage> images = new HashMap<>();
     private final List<IPaintable> paintables = new ArrayList<>();
 
@@ -62,19 +59,6 @@ public class DrawPanel extends JPanel implements EventObserver<IPaintable> {
         this.paintables.clear();
         this.paintables.addAll(paintables);
     }
-
-    /*
-    public void paintCars(List<? extends View.IPaintable> paintables){
-        Graphics graphics = getGraphics();
-        super.paintComponent(graphics);
-
-        for (View.IPaintable paintable : paintables) {
-            Model.Model.Vector2D pos = paintable.getPosition();
-            BufferedImage image = images.get(paintable.getModelName());
-            graphics.drawImage(image, (int)pos.getX(), (int)pos.getY(), null);
-        }
-    }
-     */
 
     // This method is called each time the panel updates/refreshes/repaints itself
 

@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class GasPanel extends JPanel implements IGasPanel {
-    JSpinner gasSpinner = new JSpinner();
+    JSpinner gasSpinner;
     JLabel gasLabel = new JLabel("Gas");
     JButton gasButton = new JButton("Gas");
     JButton brakeButton = new JButton("Brake");
@@ -39,10 +39,10 @@ public class GasPanel extends JPanel implements IGasPanel {
 
     }
 
-
-    public void setGasSpinnerChangeListener(ChangeListener listener) {
-        gasSpinner.addChangeListener(listener);
-    }
+//     typo ?
+//     public void setGasSpinnerChangeListener(ChangeListener listener) {
+//        gasSpinner.addChangeListener(listener);
+//     }
 
     @Override
     public void setSpinnerChangeListener(ChangeListener listener) {

@@ -8,8 +8,8 @@ import java.util.List;
 
 /**
  * LoggerPanel creates an JTextArea and
- * prints each car model and speed in format
- * CarModel : Speed, each car on a separate row.
+ * prints each car model and speed in format "CarModel : Speed"
+ * each car on a separate row.
  */
 public class LoggerPanel extends JPanel implements EventObserver<ILoggable> {
     /**

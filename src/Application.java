@@ -74,12 +74,14 @@ public class Application {
 
         GasPanel gasPanel = new GasPanel();
         ControlPanel controlPanel = new ControlPanel(800);
+        AddRemovePanel addRemovePanel = new AddRemovePanel();
 
         CarView view = new CarView("Control 2.0");
 
         view.addUIElement(gasPanel);
+        view.addUIElement(addRemovePanel);
+        view.addUIRow();
         view.addUIElement(controlPanel);
-
 
         GasController gasController = new GasController(gasPanel, m);
         ControllPanelController cPC = new ControllPanelController(controlPanel, m);

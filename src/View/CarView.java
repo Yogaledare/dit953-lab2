@@ -65,6 +65,9 @@ public class CarView extends JFrame {
 
     }
 
+    public void addUIRow() {
+        startNewRow();
+    }
 
 }
 
