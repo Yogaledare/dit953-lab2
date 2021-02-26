@@ -66,7 +66,7 @@ public class Application {
 
 
         GasController gasController = new GasController(gasPanel, m);
-        ControllPanelController cPC = new ControllPanelController(controlPanel, m);
+        ControlPanelController cPC = new ControlPanelController(controlPanel, m);
     }
 
     private static void makeView2(IModel m) {
@@ -84,7 +84,7 @@ public class Application {
         view.addUIElement(controlPanel);
 
         GasController gasController = new GasController(gasPanel, m);
-        ControllPanelController cPC = new ControllPanelController(controlPanel, m);
+        ControlPanelController cPC = new ControlPanelController(controlPanel, m);
     }
 
 
