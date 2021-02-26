@@ -4,8 +4,7 @@ import Model.IModel;
 import View.IGasPanel;
 
 import javax.swing.*;
-import javax.swing.event.ChangeListener;
-import java.awt.event.ActionListener;
+
 
 public class GasController {
     private int gasAmount;

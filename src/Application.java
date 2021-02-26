@@ -85,6 +85,7 @@ public class Application {
 
         GasController gasController = new GasController(gasPanel, m);
         ControlPanelController cPC = new ControlPanelController(controlPanel, m);
+        AddRemoveContoller aRC = new AddRemoveContoller(addRemovePanel);
     }
 
 
