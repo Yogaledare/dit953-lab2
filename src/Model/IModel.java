@@ -1,8 +1,5 @@
 package Model;
 
-import View.ILoggable;
-import View.IPaintable;
-
 public interface IModel {
 
     void startEngine();

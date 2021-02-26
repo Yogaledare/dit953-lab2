@@ -49,12 +49,12 @@ public class Application {
 
     private static void makeView1(IModel m) {
         List<JPanel> panels = new ArrayList<>();
-        DrawPanel drawPanel = new DrawPanel(800, 800-240, m.getPaintHandler());
+        DrawPanel drawPanel = new DrawPanel(800, 800-240, m.getHandler());
 
         GasPanel gasPanel = new GasPanel();
         ControlPanel controlPanel = new ControlPanel(800);
 
-        LoggerPanel loggerPanel = new LoggerPanel(m.getLogHandler());
+        LoggerPanel loggerPanel = new LoggerPanel(m.getHandler());
         CarView view = new CarView("CarSim 3.0");
 
         view.addUIElement(drawPanel);

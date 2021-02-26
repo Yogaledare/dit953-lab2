@@ -8,7 +8,7 @@ import java.util.Deque;
  *
  * @param <T> The type stored in the container, LIFO or FIFO
  */
-public abstract class Container<T extends Transportable> /*implements Model.Model.Transporter<T>*/ {
+public abstract class Container<T extends Transportable> /*implements Transporter<T>*/ {
     private final int capacity;
     private final double maxWidth;
     private final double maxLength;

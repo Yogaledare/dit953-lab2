@@ -1,7 +1,7 @@
 package View;
 
-import Model.EventHandler;
-import Model.EventObserver;
+import Observer.EventHandler;
+import Observer.EventObserver;
 import javax.swing.*;
 import java.text.DecimalFormat;
 import java.util.List;
@@ -18,16 +18,16 @@ public class LoggerPanel extends JPanel implements EventObserver<ILoggable> {
     JTextArea jTextArea = new JTextArea("<Car> : <speed>"); // dummy text
 
     /**
-     * Initialize the panel "JTextArea", and listen to ILoggable changes from EventObserver.
+     * Initialize the panel "JTextArea", and listen to ILoggable changes from Observer.EventObserver.
      * @param handler where to spy for changes.
      */
-    public LoggerPanel(EventHandler<EventObserver<ILoggable>,ILoggable> handler) {
+    public LoggerPanel(EventHandler<ILoggable> handler) {
         handler.addSubscriber(this);
         this.add(jTextArea);
     }
 
     /**
-     * EventHandler tells us there is a change - then we do an update.
+     * Observer.EventHandler tells us there is a change - then we do an update.
      * @param loggable, for each ILoggable object we update the view with new values.
      */
     @Override
@@ -36,7 +36,8 @@ public class LoggerPanel extends JPanel implements EventObserver<ILoggable> {
         DecimalFormat df = new DecimalFormat("###.#");
 
         for (ILoggable e : loggable) {
-            res.append(e.getModelName()).append(" : ").append(df.format(e.getCurrentSpeed())).append("\n");
+
+            res.append(e.getName()).append(" : ").append(df.format(e.getSpeed())).append("\n");
         }
         jTextArea.setText(res.toString());
     }

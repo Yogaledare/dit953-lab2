@@ -5,10 +5,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.Timer;
-import View.*;
-
-
-
 
 public class Model implements IModel {
     private int delay = 50;
@@ -17,13 +13,25 @@ public class Model implements IModel {
     int boardWidth = 800;
     int boardHeight = 800;
 
-    List<Car> cars;
+    List<Car>     cars;
+    List<ITurbo>  carsWithTurbo;
+    List<ITrim>   carsWithTrim;
 
-    EventHandler<EventObserver<IPaintable>,IPaintable> paintHandler = new EventHandler<EventObserver<IPaintable>,IPaintable>();
-    EventHandler<EventObserver<ILoggable>, ILoggable> logHandler = new EventHandler<EventObserver<ILoggable>, ILoggable>();
+    EventHandler<Car> handler = new EventHandler<Car>();
 
     public Model(List<Car> cars) {
         this.cars = cars;
+
+        // Hilfe! instanceof.. how to remove this ?
+        for (Car c : cars ) {
+            if (c instanceof ITurbo) {
+                carsWithTurbo.add((ITurbo) c);
+            }
+
+            if (c instanceof ITrim) {
+                carsWithTrim.add((ITrim) c);
+            }
+        }
     }
 
     public Model() {
@@ -52,8 +60,8 @@ public class Model implements IModel {
                     car.turnAround();
                 }
             }
-            paintHandler.publish(cars);
-            logHandler.publish(cars);
+            handler.publish(cars);
+            // logHandler.publish((List<? extends ILoggable>) cars);
         }
     }
 
@@ -128,11 +136,10 @@ public class Model implements IModel {
             }
         }
     }
-    @Override
-    public EventHandler<EventObserver<IPaintable>, IPaintable> getPaintHandler() {
-        return paintHandler;
-    }
 
     @Override
-    public EventHandler<EventObserver<ILoggable>, ILoggable> getLogHandler(){ return logHandler; }
+    public EventHandler<Car> getHandler() {
+        return handler;
+    }
+
 }
