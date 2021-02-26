@@ -144,10 +144,10 @@ public class CarView extends JFrame implements ICarView, PaintObserver {
         controlPanel.add(gasButton, 0);
         controlPanel.add(turboOnButton, 1);
         controlPanel.add(liftBedButton, 2);
-//        controlPanel.add(brakeButton, 3);
-//        controlPanel.add(turboOffButton, 4);
-//        controlPanel.add(lowerBedButton, 5);
-//        controlPanel.add(testButton, 6);
+        controlPanel.add(brakeButton, 3);
+        controlPanel.add(turboOffButton, 4);
+        controlPanel.add(lowerBedButton, 5);
+        controlPanel.add(testButton, 6);
 //        controlPanel.setPreferredSize(new Dimension((X/2)+4, 200));
 //        controlPanel.setPreferredSize(new Dimension(200, 200));
 
@@ -199,8 +199,8 @@ public class CarView extends JFrame implements ICarView, PaintObserver {
 //        box1.add(Box.createHorizontalGlue());
         box1.add(startButton);
         box1.add(Box.createHorizontalGlue());
-        box2.add(stopButton);
-        box2.add(gasButton);
+//        box2.add(stopButton);
+//        box2.add(gasButton);
         box2.add(brakeButton);
         box2.add(turboOnButton);
         box2.add(turboOffButton);
@@ -211,11 +211,15 @@ public class CarView extends JFrame implements ICarView, PaintObserver {
         box4.add(gasPanel);
         box4.add(Box.createHorizontalGlue());
 
+        box2.add(controlPanel);
 
+        box1.add(box2);
         this.add(box1);
-        this.add(box2);
+//        this.add(box2);
         this.add(box3);
         this.add(box4);
+//        this.add(box2);
+        this.add(testComponent);
         this.add(testComponent);
 //        this.add(Box.createVerticalGlue());
 //        this.add(Box.createVerticalGlue());
