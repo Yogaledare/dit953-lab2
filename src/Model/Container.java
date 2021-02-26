@@ -6,7 +6,7 @@ import java.util.Deque;
 /**
  * An abstract class representing a cargo hold
  *
- * @param <T> The type stored in the container
+ * @param <T> The type stored in the container, LIFO or FIFO
  */
 public abstract class Container<T extends Transportable> /*implements Model.Model.Transporter<T>*/ {
     private final int capacity;
