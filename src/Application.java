@@ -7,6 +7,10 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This is the main application.
+ * hardcoded arguments exists in this class only.
+ */
 public class Application {
 
     public static void main(String[] args) {
@@ -32,21 +36,25 @@ public class Application {
         IModel model = new Model(cars);
         //ICarView view = new CarView("CarSim 2.0", model.getObserverHandler());
 
+        makeView1(model);
+
+        makeView2(model);
 
 
 
+        // Start the timer
+        model.startTimer();
+    }
+
+    private static void makeView1(IModel m) {
         List<JPanel> panels = new ArrayList<>();
-        DrawPanel drawPanel = new DrawPanel(800, 800-240, model.getPaintHandler());
-//        panels.add(new DrawPanel(800, 800-240, model.getObserverHandler()));
-//        GasPanel gasPanel = new GasPanel(200, 800);
-        GasPanel gasPanel = new GasPanel();
-//        panels.add(gasPanel);
-        ControlPanel controlPanel = new ControlPanel(800);
-//        panels.add(controlPanel);
-//        panels.add(new LoggerPanel(model.getLoggerHandler()));
-        LoggerPanel loggerPanel = new LoggerPanel(model.getLogHandler());
+        DrawPanel drawPanel = new DrawPanel(800, 800-240, m.getPaintHandler());
 
-        CarView view = new CarView("CarSim 2.0");
+        GasPanel gasPanel = new GasPanel();
+        ControlPanel controlPanel = new ControlPanel(800);
+
+        LoggerPanel loggerPanel = new LoggerPanel(m.getLogHandler());
+        CarView view = new CarView("CarSim 3.0");
 
         view.addUIElement(drawPanel);
         view.addUIElement(loggerPanel);
@@ -56,15 +64,29 @@ public class Application {
         view.addUIElement(controlPanel);
 
 
-//        CarView view = new CarView(800, 800, "CarSim 2.0", panels);
-
-        GasController gasController = new GasController(gasPanel, model);
-        ControllPanelController cPC = new ControllPanelController(controlPanel, model);
-
-        //CarController cc = new CarController(view, model);
-
-        // Start the timer
-        model.startTimer();
+        GasController gasController = new GasController(gasPanel, m);
+        ControllPanelController cPC = new ControllPanelController(controlPanel, m);
     }
+
+    private static void makeView2(IModel m) {
+        List<JPanel> panels = new ArrayList<>();
+        DrawPanel drawPanel = new DrawPanel(800, 800-240, m.getPaintHandler());
+
+        GasPanel gasPanel = new GasPanel();
+        ControlPanel controlPanel = new ControlPanel(800);
+
+        CarView view = new CarView("CarSim 3.0");
+
+        view.addUIElement(drawPanel);
+        view.startNewRow();
+        view.addUIElement(gasPanel);
+        view.startNewRow();
+        view.addUIElement(controlPanel);
+
+
+        GasController gasController = new GasController(gasPanel, m);
+        ControllPanelController cPC = new ControllPanelController(controlPanel, m);
+    }
+
 
 }
