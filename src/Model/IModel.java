@@ -1,5 +1,5 @@
 package Model;
-
+import Observer.EventHandler;
 public interface IModel {
 
     void startEngine();

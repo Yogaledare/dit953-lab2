@@ -35,9 +35,7 @@ public class CarView extends JFrame {
         // Make sure the frame exits when "x" is pressed
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
-//        initComponents(frameName);
-
+        //initComponents(frameName);
     }
 
 
@@ -62,7 +60,6 @@ public class CarView extends JFrame {
 
     public void startNewRow() {
         UIElements.add(new ArrayList<>());
-
     }
 
     public void addUIRow() {
@@ -70,9 +67,6 @@ public class CarView extends JFrame {
     }
 
 }
-
-
-
 
 //    public CarView(int x, int y, String frameName, List<JPanel> panels){
 //        X = x;

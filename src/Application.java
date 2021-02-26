@@ -15,26 +15,26 @@ public class Application {
 
     public static void main(String[] args) {
         List<Car> cars = new ArrayList<>();
-
+        List<ITurbo> turbos = new ArrayList<>();
         // volvo
-        Car volvo = new Volvo240(2,3);
+        Volvo240 volvo = new Volvo240(2,3);
         volvo.setPosition(new Vector2D(0, 0));
         cars.add(volvo);
 
         // saab
-        Car saab95 = new Saab95(2,3);
+        Saab95 saab95 = new Saab95(2,3);
         saab95.setPosition(new Vector2D(100, 0));
         cars.add(saab95);
+        turbos.add(saab95);
 
         // scania
-        Car scania = new Scania(80,3,5, "Scania", Color.WHITE, 2);
+        Scania scania = new Scania(80,3,5, "Scania", Color.WHITE, 2);
         scania.setPosition(new Vector2D(200, 0));
-        ((Scania)scania).lower(70);
+        scania.lower(70);
         cars.add(scania);
 
         // Create MVC
-        IModel model = new Model(cars);
-        //ICarView view = new CarView("CarSim 2.0", model.getObserverHandler());
+        IModel model = new Model(cars, turbos);
 
         // First view is a full-blow MVC,
         // includes a car-world, controls, speed-log
@@ -48,13 +48,25 @@ public class Application {
     }
 
     private static void makeView1(IModel m) {
-        List<JPanel> panels = new ArrayList<>();
-        DrawPanel drawPanel = new DrawPanel(800, 800-240, m.getHandler());
 
+        // Class between model and view
+        CarReciever reciever = new CarReciever(m.getHandler());
+
+        List<JPanel> panels = new ArrayList<>();
+
+        // The panel where the cars are drawn
+        DrawPanel drawPanel = new DrawPanel(800, 800-240, reciever.getPaintHandler());
+
+        // The panel for accelerating/decelerating the cars
         GasPanel gasPanel = new GasPanel();
+
+        // The panel for controlling the cars
         ControlPanel controlPanel = new ControlPanel(800);
 
-        LoggerPanel loggerPanel = new LoggerPanel(m.getHandler());
+        // The Logger panel
+        LoggerPanel loggerPanel = new LoggerPanel(reciever.getLoggHandler());
+
+        // The actual window
         CarView view = new CarView("CarSim 3.0");
 
         view.addUIElement(drawPanel);
@@ -64,7 +76,7 @@ public class Application {
         view.startNewRow();
         view.addUIElement(controlPanel);
 
-
+        // Controllers
         GasController gasController = new GasController(gasPanel, m);
         ControlPanelController cPC = new ControlPanelController(controlPanel, m);
     }

@@ -11,17 +11,19 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import Model.*;
+import Observer.EventHandler;
+import Observer.EventObserver;
 
 
 // This panel represent the animated part of the view with the car images.
 
-public class DrawPanel extends JPanel {
+public class DrawPanel extends JPanel implements EventObserver<IPaintable> {
     private final Map<String, BufferedImage> images = new HashMap<>();
     private final List<IPaintable> paintables = new ArrayList<>();
 
     // Initializes the panel and reads the images
-    public DrawPanel(int x, int y) {
-        //handler.addSubscriber(this);
+    public DrawPanel(int x, int y, EventHandler<IPaintable> handler) {
+        handler.addSubscriber(this);
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setMinimumSize(new Dimension(x, y));
@@ -49,13 +51,11 @@ public class DrawPanel extends JPanel {
         return images.get(name);
     }
 
-    /*
     @Override
     public void actOnPublish(List<? extends IPaintable> paintables) {
         setList(paintables);
         repaint();
     }
-     */
 
     public void setList(List<? extends IPaintable> paintables){
         this.paintables.clear();

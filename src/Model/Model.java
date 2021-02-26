@@ -1,5 +1,7 @@
 package Model;
 
+import Observer.EventHandler;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -15,14 +17,14 @@ public class Model implements IModel {
 
     List<Car>     cars;
     List<ITurbo>  carsWithTurbo;
-    List<ITrim>   carsWithTrim;
 
     EventHandler<Car> handler = new EventHandler<Car>();
 
-    public Model(List<Car> cars) {
+    public Model(List<Car> cars, List<ITurbo> turbos) {
         this.cars = cars;
-
+        this.carsWithTurbo = turbos;
         // Hilfe! instanceof.. how to remove this ?
+        /*
         for (Car c : cars ) {
             if (c instanceof ITurbo) {
                 carsWithTurbo.add((ITurbo) c);
@@ -32,6 +34,7 @@ public class Model implements IModel {
                 carsWithTrim.add((ITrim) c);
             }
         }
+        */
     }
 
     public Model() {
@@ -119,21 +122,15 @@ public class Model implements IModel {
 
     @Override
     public void setTurboOn() {
-        for (Car e : cars) {
-            try {
-                ((Saab95) e).setTurboOn();
-            } catch (Exception ignored) {
-            }
+        for (ITurbo turbo : carsWithTurbo) {
+            turbo.setTurboOn();
         }
     }
 
     @Override
     public void setTurboOff() {
-        for (Car e : cars) {
-            try {
-                ((Saab95) e).setTurboOff();
-            } catch (Exception ignored) {
-            }
+        for (ITurbo turbo : carsWithTurbo) {
+            turbo.setTurboOff();
         }
     }
 

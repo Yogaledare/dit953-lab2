@@ -13,8 +13,12 @@ public class CarReciever implements EventObserver<Car> {
     private List<JComponent> paintableSubscribers;
     private List<JComponent> loggableSubscribers;
 
-    private EventHandler<IPaintable> paintHandler = new EventHandler<>();
-    private EventHandler<ILoggable> loggHandler = new EventHandler<>();
+    private final EventHandler<IPaintable> paintHandler = new EventHandler<>();
+    private final EventHandler<ILoggable> loggHandler = new EventHandler<>();
+
+    public CarReciever(EventHandler<Car> handler){
+        handler.addSubscriber(this);
+    }
 
     @Override
     public void actOnPublish(List<? extends Car> cars) {
@@ -24,26 +28,15 @@ public class CarReciever implements EventObserver<Car> {
             paintables.add(new PaintableWrapper(car));
             loggables.add(new LoggerWrapper(car));
         }
-
-        //draw.publish(paintables);
-        //log.publish(loggables);
+        paintHandler.publish(paintables);
+        loggHandler.publish(loggables);
     }
 
-
-    public void addPaintableSubscriber(JComponent subscriber) {
-        paintableSubscribers.add(subscriber);
+    public EventHandler<IPaintable> getPaintHandler(){
+        return paintHandler;
     }
 
-    public void addLoggableSubscriber(JComponent subscriber) {
-        loggableSubscribers.add(subscriber);
+    public EventHandler<ILoggable> getLoggHandler(){
+        return loggHandler;
     }
-
-
-
-    public void notifySubscribers () {
-        for (JComponent paintableSubscriber : paintableSubscribers) {
-
-        }
-    }
-
 }

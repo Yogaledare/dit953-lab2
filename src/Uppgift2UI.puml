@@ -5,15 +5,13 @@ class Application{
     {static}+main()
 }
 Application ..> IModel
+Application ..> CarFrame
 
 Application ..> DrawPanel
-Application ..> ControlPanel
-Application ..> AddRemovePanel
+Application ..> IControlPanel
+Application ..> IAddRemovePanel
 Application ..> LoggerPanel
 
-IDrawPanel <.. Application
-IControlPanel <.. Application
-IAddRemovePanel <.. Application
 
 class Model{
     -timer : Timer
@@ -42,94 +40,70 @@ interface IModel{
     +startTimer() : void
 }
 
-class ObserverHandler{
-    - subscribers : List<PaintObserver>
-    + addSubscriber(PaintObserver) : void
-    + removeSubscriber(PaintObserver) : void
-    + publish(List<? extends IPaintable>) : void
+class ObserverHandler<T>{
+    - subscribers : List<PaintObserver<T>>
+    + addSubscriber(PaintObserver<T>) : void
+    + removeSubscriber(PaintObserver<T>) : void
+    + publish(List<? extends T>) : void
 }
-ObserverHandler ..> IPaintable
-ObserverHandler *--> PaintObserver
+ObserverHandler *--> Observer
 
-interface PaintObserver{
-    + actOnPublish(List<? extends IPaintable>) : void
+interface Observer<T>{
+    + actOnPublish(List<? extends T>) : void
 }
-PaintObserver ..> IPaintable
-
-interface IPaintable {
-    +getPosition() : Vector2D
-    +getModelName() : String
-}
-
-
 
 class CarFrame{
     panels : List<JPanel>
 }
-CarFrame --> DrawPanel
-CarFrame --> ControlPanel
-CarFrame --> LoggerPanel
-CarFrame --> AddRemovePanel
+
 
 class DrawPanel{
     +DrawPanel(ObserverHandler)
 }
 DrawPanel ..> ObserverHandler
-DrawPanel ..> IPaintable
-DrawPanel ..|> IDrawPanel
 
 class ControlPanel{
     +ControlPanel(ObserverHandler)
 }
 ControlPanel ..> ObserverHandler
-ControlPanel --|> JPanel
-ControlPanel ..|> IControlPanel
+IControlPanel <|.. ControlPanel
 
 class LoggerPanel{
     +LoggerPanel(ObserverHandler)
 }
 LoggerPanel ..> ObserverHandler
-LoggerPanel ..> IPaintable
 
 
 class AddRemovePanel{
     +Addremovepanel(ObserverHandler)
 }
 AddRemovePanel ..> ObserverHandler
-Addremovepanel ..|> IAddRemovePanel
-
-interface IDrawPanel{
-
-}
+IAddRemovePanel <|.. AddRemovePanel
 
 interface IControlPanel{
-
+    setStartButtonActionListener(ActionListener listener) : void
+    setStopButtonActionListener(ActionListener listener) : void
+    setTurboOnButtonActionListener(ActionListener listener) : void
+    setTurboOffButtonActionListener(ActionListener listener) : void
+    setLiftBedButtonActionListener(ActionListener listener) : void
+    setLowerBedButtonActionListener(ActionListener listener) : void
 }
 
-interface IAddRemovePanel{
-
+interface IAddRemovePanel {
+    addCarButtonActionListener(ActionListener listener) : void
+    removeCarButtonActionListener(ActionListener listener) : void
 }
-
-class DrawPanelController{
-    -model : IModel
-    +DrawPanelController(IDrawPanel, IModel)
-}
-DrawPanelController ..> IDrawPanel
-DrawPanelController --> IModel
 
 class ControlPanelController{
-    -model : IModel
     +ControlPanelController(IControlPanel, IModel)
 }
 ControlPanelController ..> IControlPanel
-ControlPanelController --> IModel
+ControlPanelController ..> IModel
 
 class AddRemovePanelController{
-    -model : IModel
-    +AddRemovePanelController(IControlPanel, IModel)
+    +AddRemovePanelController(IAddRemovePanel, IModel)
 }
 AddRemovePanelController ..> IAddRemovePanel
-AddRemovePanelController --> IModel
 
 
 
