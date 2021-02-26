@@ -1,6 +1,5 @@
 package View;
 
-import javax.crypto.BadPaddingException;
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
@@ -8,11 +7,12 @@ import java.awt.event.ActionListener;
 
 public class GasPanel extends JPanel implements IGasPanel {
     JSpinner gasSpinner = new JSpinner();
-    JLabel gasLabel = new JLabel("Amount of gas");
+    JLabel gasLabel = new JLabel("Gas");
     JButton gasButton = new JButton("Gas");
     JButton brakeButton = new JButton("Brake");
+    JPanel gasSpinnerGroup = new JPanel();
 
-    public GasPanel(int minWidth, int minHeight) {
+    public GasPanel(/*int minWidth, int minHeight*/) {
         SpinnerModel spinnerModel = new SpinnerNumberModel(
                 0,       //initial value
                 0,    //min
@@ -20,15 +20,25 @@ public class GasPanel extends JPanel implements IGasPanel {
                 1      //step
         );
         gasSpinner = new JSpinner(spinnerModel);
+//        Dimension d = gasSpinner.getPreferredSize();
+        gasSpinner.setMinimumSize(gasSpinner.getPreferredSize());
+        gasSpinner.setMaximumSize(gasSpinner.getPreferredSize());
 
-        this.setLayout(new BorderLayout());
-        this.setMinimumSize(new Dimension(minWidth, minHeight));
-        this.setSize(minWidth, minHeight);
-        this.add(gasLabel, BorderLayout.PAGE_START);
+
+        this.setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
+//        this.setMinimumSize(new Dimension(minWidth, minHeight));
+//        this.setSize(minWidth, minHeight);
+        gasSpinnerGroup.setLayout(new BoxLayout(gasSpinnerGroup, BoxLayout.PAGE_AXIS));
+        gasSpinnerGroup.add(gasLabel);
+        gasSpinnerGroup.add(gasSpinner);
+//        gasSpinnerGroup.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+        this.add(gasSpinnerGroup);
+        this.add(Box.createHorizontalStrut(5));
         this.add(gasButton, BorderLayout.LINE_START);
         this.add(brakeButton, BorderLayout.LINE_END);
-        this.add(gasSpinner, BorderLayout.PAGE_END);
+
     }
+
 
     public void setGasSpinnerChangeListener(ChangeListener listener) {
         gasSpinner.addChangeListener(listener);

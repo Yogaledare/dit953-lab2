@@ -30,6 +30,8 @@ public class DrawPanel extends JPanel implements PaintObserver {
         handler.addSubscriber(this);
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
+        this.setMinimumSize(new Dimension(x, y));
+        this.setMaximumSize(new Dimension(x, y));
         this.setBackground(Color.green);
         bindCars();
     }

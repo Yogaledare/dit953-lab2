@@ -18,25 +18,31 @@ public class ControlPanel extends JPanel implements IControlPanel {
     JButton stopButton = new JButton("Stop all cars");
 
     public ControlPanel(int X){
-        this.setLayout(new GridLayout(2,4));
-//        this.add(gasButton, 0);
-        this.add(turboOnButton, 0);
-        this.add(liftBedButton, 1);
-//        this.add(brakeButton, 3);
-        this.add(turboOffButton, 2);
-        this.add(lowerBedButton, 3);
+        this.setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
+//        this.add(gasButton);
+        this.add(turboOnButton);
+        this.add(Box.createHorizontalStrut(5));
+        this.add(turboOffButton);
+        this.add(Box.createHorizontalStrut(5));
+//        this.add(brakeButton);
+        this.add(liftBedButton);
+        this.add(Box.createHorizontalStrut(5));
+        this.add(lowerBedButton);
+        this.add(Box.createHorizontalStrut(5));
 
-        this.setPreferredSize(new Dimension((X/2)+4, 200));
-        this.setBackground(Color.CYAN);
+//        this.setPreferredSize(new Dimension((X/2)+4, 200));
+//        this.setBackground(Color.CYAN);
 
         startButton.setBackground(Color.blue);
         startButton.setForeground(Color.green);
-        startButton.setPreferredSize(new Dimension(X/5-15,200));
+//        startButton.setPreferredSize(new Dimension(X/5-15,200));
         this.add(startButton);
+        this.add(Box.createHorizontalStrut(5));
+
 
         stopButton.setBackground(Color.red);
         stopButton.setForeground(Color.black);
-        stopButton.setPreferredSize(new Dimension(X/5-15,200));
+//        stopButton.setPreferredSize(new Dimension(X/5-15,200));
         this.add(stopButton);
     }
 

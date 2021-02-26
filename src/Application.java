@@ -36,14 +36,27 @@ public class Application {
 
 
         List<JPanel> panels = new ArrayList<>();
-        panels.add(new DrawPanel(800, 800-240, model.getObserverHandler()));
-        GasPanel gasPanel = new GasPanel(200, 800);
-        panels.add(gasPanel);
+        DrawPanel drawPanel = new DrawPanel(800, 800-240, model.getObserverHandler());
+//        panels.add(new DrawPanel(800, 800-240, model.getObserverHandler()));
+//        GasPanel gasPanel = new GasPanel(200, 800);
+        GasPanel gasPanel = new GasPanel();
+//        panels.add(gasPanel);
         ControlPanel controlPanel = new ControlPanel(800);
-        panels.add(controlPanel);
-        panels.add(new LoggerPanel(model.getLoggerHandler()));
+//        panels.add(controlPanel);
+//        panels.add(new LoggerPanel(model.getLoggerHandler()));
+        LoggerPanel loggerPanel = new LoggerPanel(model.getLoggerHandler());
 
-        CarView view = new CarView(800, 800, "CarSim 2.0", panels);
+        CarView view = new CarView("CarSim 2.0");
+
+        view.addUIElement(drawPanel);
+        view.addUIElement(loggerPanel);
+        view.startNewRow();
+        view.addUIElement(gasPanel);
+        view.startNewRow();
+        view.addUIElement(controlPanel);
+
+
+//        CarView view = new CarView(800, 800, "CarSim 2.0", panels);
 
         GasController gasController = new GasController(gasPanel, model);
         ControllPanelController cPC = new ControllPanelController(controlPanel, model);
