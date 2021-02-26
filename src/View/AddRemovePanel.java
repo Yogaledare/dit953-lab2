@@ -1,13 +1,12 @@
 package View;
-import Model.EventHandler;
-import Model.EventObserver;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.List;
 
-// This panel represent the animated part of the view with the car images.
+/**
+ * Creates two buttons, one to add a random car,
+ * and a second button to remove the latest added car.
+ */
 
 public class AddRemovePanel extends JPanel implements IAddRemovePanel {
     JButton addButton = new JButton("Add Car");
