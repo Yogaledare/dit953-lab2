@@ -22,8 +22,8 @@ public class DrawPanel extends JPanel implements EventObserver<IPaintable> {
     private final List<IPaintable> paintables = new ArrayList<>();
 
     // Initializes the panel and reads the images
-    public DrawPanel(int x, int y, EventSource<IPaintable> handler) {
-        handler.addSubscriber(this);
+    public DrawPanel(int x, int y, EventSource<IPaintable> source) {
+        source.addSubscriber(this);
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setMinimumSize(new Dimension(x, y));
@@ -52,7 +52,7 @@ public class DrawPanel extends JPanel implements EventObserver<IPaintable> {
     }
 
     @Override
-    public void actOnPublish(List<? extends IPaintable> paintables) {
+    public void actOnPublish(List</*? extends */IPaintable> paintables) {
         setList(paintables);
         repaint();
     }

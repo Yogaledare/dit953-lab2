@@ -19,10 +19,10 @@ public class LoggerPanel extends JPanel implements EventObserver<ILoggable> {
 
     /**
      * Initialize the panel "JTextArea", and listen to ILoggable changes from Observer.EventObserver.
-     * @param handler where to spy for changes.
+     * @param source where to spy for changes.
      */
-    public LoggerPanel(EventSource<ILoggable> handler) {
-        handler.addSubscriber(this);
+    public LoggerPanel(EventSource<ILoggable> source) {
+        source.addSubscriber(this);
         this.add(jTextArea);
     }
 
@@ -31,7 +31,7 @@ public class LoggerPanel extends JPanel implements EventObserver<ILoggable> {
      * @param loggable, for each ILoggable object we update the view with new values.
      */
     @Override
-    public void actOnPublish(List<? extends ILoggable> loggable) {
+    public void actOnPublish(List</*? extends */ILoggable> loggable) {
         StringBuilder res = new StringBuilder();
         DecimalFormat df = new DecimalFormat("###.#");
 

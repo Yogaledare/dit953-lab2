@@ -20,7 +20,7 @@ public class CarReciever implements EventObserver<Car> {
     }
 
     @Override
-    public void actOnPublish(List<? extends Car> cars) {
+    public void actOnPublish(List</*? extends */Car> cars) {
         List<IPaintable> paintables = new ArrayList<>();
         List<ILoggable> loggables = new ArrayList<>();
         for (Car car : cars) {
