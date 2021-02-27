@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import Model.*;
-import Observer.EventHandler;
+import Observer.EventSource;
 import Observer.EventObserver;
 
 
@@ -22,7 +22,7 @@ public class DrawPanel extends JPanel implements EventObserver<IPaintable> {
     private final List<IPaintable> paintables = new ArrayList<>();
 
     // Initializes the panel and reads the images
-    public DrawPanel(int x, int y, EventHandler<IPaintable> handler) {
+    public DrawPanel(int x, int y, EventSource<IPaintable> handler) {
         handler.addSubscriber(this);
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));

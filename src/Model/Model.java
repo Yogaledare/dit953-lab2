@@ -1,6 +1,6 @@
 package Model;
 
-import Observer.EventHandler;
+import Observer.EventSource;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,7 +18,7 @@ public class Model implements IModel {
     List<Car>     cars;
     List<ITurbo>  carsWithTurbo;
 
-    EventHandler<Car> handler = new EventHandler<Car>();
+    EventSource<Car> modelUpdatedEvent = new EventSource<Car>();
 
     public Model(List<Car> cars, List<ITurbo> turbos) {
         this.cars = cars;
@@ -63,7 +63,7 @@ public class Model implements IModel {
                     car.turnAround();
                 }
             }
-            handler.publish(cars);
+            modelUpdatedEvent.publish(cars);
             // logHandler.publish((List<? extends ILoggable>) cars);
         }
     }
@@ -135,8 +135,8 @@ public class Model implements IModel {
     }
 
     @Override
-    public EventHandler<Car> getHandler() {
-        return handler;
+    public EventSource<Car> getModelUpdatedEvent() {
+        return modelUpdatedEvent;
     }
 
 }

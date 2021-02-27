@@ -1,5 +1,5 @@
 package Model;
-import Observer.EventHandler;
+import Observer.EventSource;
 public interface IModel {
 
     void startEngine();
@@ -10,7 +10,7 @@ public interface IModel {
     void lower();
     void setTurboOn();
     void setTurboOff();
-    EventHandler<Car> getHandler();
+    EventSource<Car> getModelUpdatedEvent();
     void startTimer();
 
 }

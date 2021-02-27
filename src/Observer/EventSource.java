@@ -3,7 +3,7 @@ package Observer;
 import java.util.List;
 import java.util.ArrayList;
 
-public class EventHandler<T> {
+public class EventSource<T> {
     private final List<EventObserver<T>> subscribers = new ArrayList<>();
 
     /**
@@ -16,8 +16,8 @@ public class EventHandler<T> {
     }
 
     /**
-     * Unsubscribe from an observable object.
-     * @param observer to which unsubscribe from.
+     * Remove an observer from subscribers.
+     * @param observer the observer to remove.
      */
     public void removeSubscriber(EventObserver<T> observer){
         subscribers.remove(observer);

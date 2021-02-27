@@ -26,6 +26,7 @@ public class GasPanel extends JPanel implements IGasPanel {
 
 
         this.setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
+//        this.setLayout(new BoxLayout(new GridLayout(2,5)));
 //        this.setMinimumSize(new Dimension(minWidth, minHeight));
 //        this.setSize(minWidth, minHeight);
         gasSpinnerGroup.setLayout(new BoxLayout(gasSpinnerGroup, BoxLayout.PAGE_AXIS));

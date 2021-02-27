@@ -1,22 +1,21 @@
 package View;
 
 import Observer.EventObserver;
-import Observer.EventHandler;
+import Observer.EventSource;
 import Model.Car;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.*;
 
 public class CarReciever implements EventObserver<Car> {
 
-    private List<JComponent> paintableSubscribers;
-    private List<JComponent> loggableSubscribers;
+//    private List<JComponent> paintableSubscribers;
+//    private List<JComponent> loggableSubscribers;
 
-    private final EventHandler<IPaintable> paintHandler = new EventHandler<>();
-    private final EventHandler<ILoggable> loggHandler = new EventHandler<>();
+    private final EventSource<IPaintable> paintHandler = new EventSource<>();
+    private final EventSource<ILoggable> loggHandler = new EventSource<>();
 
-    public CarReciever(EventHandler<Car> handler){
+    public CarReciever(EventSource<Car> handler){
         handler.addSubscriber(this);
     }
 
@@ -32,11 +31,11 @@ public class CarReciever implements EventObserver<Car> {
         loggHandler.publish(loggables);
     }
 
-    public EventHandler<IPaintable> getPaintHandler(){
+    public EventSource<IPaintable> getPaintHandler(){
         return paintHandler;
     }
 
-    public EventHandler<ILoggable> getLoggHandler(){
+    public EventSource<ILoggable> getLoggHandler(){
         return loggHandler;
     }
 }

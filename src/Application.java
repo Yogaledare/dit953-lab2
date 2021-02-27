@@ -50,7 +50,7 @@ public class Application {
     private static void makeView1(IModel m) {
 
         // Class between model and view
-        CarReciever reciever = new CarReciever(m.getHandler());
+        CarReciever reciever = new CarReciever(m.getModelUpdatedEvent());
 
         List<JPanel> panels = new ArrayList<>();
 
@@ -72,9 +72,9 @@ public class Application {
         view.addUIElement(drawPanel);
         view.addUIElement(loggerPanel);
         view.startNewRow();
-        view.addUIElement(gasPanel);
-        view.startNewRow();
         view.addUIElement(controlPanel);
+        view.startNewRow();
+        view.addUIElement(gasPanel);
 
         // Controllers
         GasController gasController = new GasController(gasPanel, m);

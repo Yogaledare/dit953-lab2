@@ -1,6 +1,6 @@
 package View;
 
-import Observer.EventHandler;
+import Observer.EventSource;
 import Observer.EventObserver;
 import javax.swing.*;
 import java.text.DecimalFormat;
@@ -21,7 +21,7 @@ public class LoggerPanel extends JPanel implements EventObserver<ILoggable> {
      * Initialize the panel "JTextArea", and listen to ILoggable changes from Observer.EventObserver.
      * @param handler where to spy for changes.
      */
-    public LoggerPanel(EventHandler<ILoggable> handler) {
+    public LoggerPanel(EventSource<ILoggable> handler) {
         handler.addSubscriber(this);
         this.add(jTextArea);
     }
