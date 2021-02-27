@@ -15,8 +15,8 @@ public class CarReciever implements EventObserver<Car> {
     private final EventSource<IPaintable> paintHandler = new EventSource<>();
     private final EventSource<ILoggable> loggHandler = new EventSource<>();
 
-    public CarReciever(EventSource<Car> handler){
-        handler.addSubscriber(this);
+    public CarReciever(EventSource<Car> modelUpdatedEvent){
+        modelUpdatedEvent.addSubscriber(this);
     }
 
     @Override
