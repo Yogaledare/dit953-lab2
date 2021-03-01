@@ -11,11 +11,11 @@ import static org.junit.Assert.*;
 
 
 public class TestScania {
-    Scania truck;
+    IRamp truck;
 
     @Before
     public void setUp() {
-        truck = new Scania(1000, 2, 6, "Model.Model.Scania lastbil", Color.black, 2);
+        truck = CarFactory.createScania(new Vector2D(0, 0));
     }
 
 
@@ -38,7 +38,6 @@ public class TestScania {
            och lastbilen ska inte kunna köra om flaket är uppfällt.
          */
 
-        truck.setPosition(new Vector2D(1, 1));
         truck.raise(70); // set ramp to 70 degree
         truck.startEngine();  // try start engine.
         truck.gas(1.0);

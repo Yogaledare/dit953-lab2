@@ -1,5 +1,5 @@
 package Model; /**
- * @author Niklas  Axelsson < name @ student.gu.se>
+ * @author Niklas  Axelsson <gusaxenia@student.gu.se>
  * @author vehiclel    Stewart <gusstewca@student.gu.se>
  * @author Marcus  Uppström <gusuppma@student.gu.se>
  * @version 0.1                 (current version number of program)
@@ -191,7 +191,7 @@ public abstract class Vehicle implements IMovable {
      * @return the direction vector of the vehicle
      */
     public Vector2D getDirection() {
-        return direction;
+        return new Vector2D(direction);
     }
 
     /**
@@ -200,7 +200,7 @@ public abstract class Vehicle implements IMovable {
      * @return Model.Model.Vector2D(x, y)
      */
     public Vector2D getPosition() {
-        return position;
+        return new Vector2D(position);
     }
 
     /**
@@ -226,17 +226,18 @@ public abstract class Vehicle implements IMovable {
      *
      * @param position sets the coordinates of the vehicle.
      */
+
     public void setPosition(Vector2D position) {
-        this.position = position;
+        this.position = new Vector2D(position);
     }
 
-    /**
+     /**
      * Set current direction of the vehicle.
      *
      * @param direction set a direction of length 1 in Model.Model.Vector2D.
      */
     public void setDirection(Vector2D direction) {
-        this.direction = direction;
+        this.direction = new Vector2D(direction);
     }
 
     /**

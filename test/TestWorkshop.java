@@ -18,8 +18,8 @@ public class TestWorkshop {
         entranceDirection = new Vector2D(1,0);
         bilia = new Workshop<Volvo240>(20, 3, 6, location, entranceDirection);
 
-        volvo240 = new Volvo240(2,5);
-        saab95 = new Saab95(2,5);
+        volvo240 = new Volvo240(2, 5);
+        saab95 = new Saab95(2, 5);
     }
 
 

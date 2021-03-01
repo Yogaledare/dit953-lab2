@@ -6,5 +6,6 @@ public interface IRamp extends IMovable{
 
     public void raise(double amount);
 
+    boolean isFullyRaised();
 
 }

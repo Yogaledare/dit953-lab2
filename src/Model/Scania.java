@@ -35,7 +35,6 @@ public class Scania extends Car implements IRamp {
      */
     public void raise(double amount) {
         if (!isMoving()) {
-
             platform.raise(amount);
         }
     }

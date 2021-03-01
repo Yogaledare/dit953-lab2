@@ -26,6 +26,11 @@ public class Vector2D {
         this.y = y;
     }
 
+    public Vector2D(Vector2D vector2D){
+        this.x = vector2D.x;
+        this.y = vector2D.y;
+    }
+
     /**
      * Returns a (new) sum vector resulting from adding the current vector and another vector (other).
      *

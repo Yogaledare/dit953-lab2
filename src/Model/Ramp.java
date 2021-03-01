@@ -17,6 +17,8 @@ public class Ramp {
      */
     private final double rampSpeed;
 
+    IRampState state = new RampLoweredState(this);
+
     /**
      * Constructs a ramp that can be open/closed
      * @param maxAngle Maximum allowed angle of the ramp
@@ -26,6 +28,10 @@ public class Ramp {
         this.maxAngle = maxAngle;
         rampAngle = maxAngle;
         rampSpeed = speed;
+    }
+
+    public void setState(IRampState state){
+        this.state = state;
     }
 
     public void lower(double amount){
