@@ -14,15 +14,10 @@ public class Scania extends Car implements Transportable {
     /**
      * Constructs a Model.Model.Scania truck object with the specified modelName, color, enginePower, nrDoors, width and length.
      * The initial position (x, y) and direction (x, y) of the object is set to (0, 0) and (0, 1).
-     * @param enginePower the power of the engine.
-     * @param width the width of the car.
-     * @param length the length of the car.
-     * @param modelName the model name of the car.
-     * @param color the color of the car.
-     * @param nrDoors the number of doors of the car.
+     * @param position Init Scania with startup position.
      */
-    public Scania(double enginePower, double width, double length, String modelName, Color color, int nrDoors) {
-        super(enginePower, width, length, modelName, color, nrDoors, new Vector2D(0, 0));
+    Scania(Vector2D position) {
+        super(80, 3, 7, "Scania", Color.blue, 2, position);
         platform = new Ramp(70, 1);
     }
 

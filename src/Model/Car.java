@@ -5,7 +5,7 @@ import java.awt.*;
 /**
  * The car component representing car features
  */
-public abstract class Car extends Vehicle implements Transportable /*, IPaintable, ILoggable*/ {
+public abstract class Car extends Vehicle implements ITransportable {
     /**
      * Car model
      */

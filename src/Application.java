@@ -14,11 +14,10 @@ import java.util.List;
 public class Application {
 
     public static void main(String[] args) {
-        List<Car> cars = new ArrayList<>();
+        List<IMovable> cars = new ArrayList<>();
         List<ITurbo> turbos = new ArrayList<>();
         // volvo
-        Volvo240 volvo = new Volvo240(2,3);
-        volvo.setPosition(new Vector2D(0, 0));
+        IMovable volvo = CarFactory.createVolvo240(new Vector2D(0, 0));
         cars.add(volvo);
 
         // saab
@@ -28,8 +27,7 @@ public class Application {
         turbos.add(saab95);
 
         // scania
-        Scania scania = new Scania(80,3,5, "Scania", Color.WHITE, 2);
-        scania.setPosition(new Vector2D(200, 0));
+        IRamp scania = CarFactory.createScania(new Vector2D(200, 0));
         scania.lower(70);
         cars.add(scania);
 
@@ -97,7 +95,7 @@ public class Application {
 
         GasController gasController = new GasController(gasPanel, m);
         ControlPanelController cPC = new ControlPanelController(controlPanel, m);
-        AddRemoveContoller aRC = new AddRemoveContoller(addRemovePanel);
+        AddRemoveContoller aRC = new AddRemoveContoller(addRemovePanel, m);
     }
 
 

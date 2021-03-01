@@ -7,7 +7,7 @@ import Model.*;
 
 public class TestWorkshop {
     Workshop<Volvo240> bilia;
-    Workshop<Transportable> alisWorkshop;
+    Workshop<ITransportable> alisWorkshop;
     Volvo240 volvo240;
     Saab95 saab95;
     Vector2D location;
@@ -51,7 +51,7 @@ public class TestWorkshop {
         alisWorkshop = new Workshop<>(5, 3, 5, location, entranceDirection);
         alisWorkshop.store(saab95);
         alisWorkshop.store(volvo240);
-        Transportable returnCar;
+        ITransportable returnCar;
 
         returnCar = alisWorkshop.remove();
         // System.out.println(returnCar.getModelName());

@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import javax.swing.Timer;
 
 public class Model implements IModel {
@@ -15,10 +16,11 @@ public class Model implements IModel {
     int boardWidth = 800;
     int boardHeight = 800;
 
-    List<Car>     cars;
-    List<ITurbo>  carsWithTurbo;
+    List<IMovable> cars;
+    List<ITurbo>   carsWithTurbo;
+    List<IRamp>    carsWithRamp;
 
-    EventSource<Car> modelUpdatedEvent = new EventSource<Car>();
+    EventSource<IMovable> modelUpdatedEvent = new EventSource<>();
 
     public Model(List<Car> cars, List<ITurbo> turbos) {
         this.cars = cars;
@@ -47,7 +49,7 @@ public class Model implements IModel {
     }
 
     void updateModel() {
-        for (Car e : cars) {
+        for (IMovable e : cars) {
             e.move();
         }
     }
@@ -57,10 +59,11 @@ public class Model implements IModel {
      * */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            for (Car car : cars) {
+            for (IMovable car : cars) {
                 car.move();
                 if (isOutOfBounds(car)) {
-                    car.turnAround();
+                    car.turnRight();
+                    car.turnRight();
                 }
             }
             modelUpdatedEvent.publish(cars);
@@ -68,7 +71,7 @@ public class Model implements IModel {
         }
     }
 
-    boolean isOutOfBounds(Car car) {
+    boolean isOutOfBounds(IMovable car) {
         int y = (int) car.getPosition().getY();
         return y > 500 || y < 0;
     }
@@ -76,7 +79,7 @@ public class Model implements IModel {
 
     @Override
     public void startEngine() {
-        for (Car e : cars) {
+        for (IMovable e : cars) {
             e.startEngine();
         }
     }
@@ -135,7 +138,7 @@ public class Model implements IModel {
     }
 
     @Override
-    public EventSource<Car> getModelUpdatedEvent() {
+    public EventSource<IMovable> getModelUpdatedEvent() {
         return modelUpdatedEvent;
     }
 

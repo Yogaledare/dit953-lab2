@@ -1,5 +1,6 @@
 package View;
 
+import Model.IMovable;
 import Observer.EventObserver;
 import Observer.EventSource;
 import Model.Car;
@@ -15,15 +16,18 @@ public class CarReciever implements EventObserver<Car> {
     private final EventSource<IPaintable> paintUpdatedEvent = new EventSource<>();
     private final EventSource<ILoggable> loggUpdatedEvent = new EventSource<>();
 
-    public CarReciever(EventSource<Car> modelUpdatedEvent){
+    private final EventSource<IPaintable> paintUpdatedEvent = new EventSource<>();
+    private final EventSource<ILoggable> loggUpdatedEvent = new EventSource<>();
+
+    public CarReciever(EventSource<IMovable> modelUpdatedEvent){
         modelUpdatedEvent.addSubscriber(this);
     }
 
     @Override
-    public void actOnPublish(List</*? extends */Car> cars) {
+    public void actOnPublish(List</*? extends */IMovable> cars) {
         List<IPaintable> paintables = new ArrayList<>();
         List<ILoggable> loggables = new ArrayList<>();
-        for (Car car : cars) {
+        for (IMovable car : cars) {
             paintables.add(new PaintableWrapper(car));
             loggables.add(new LoggerWrapper(car));
         }

@@ -6,7 +6,7 @@ import java.awt.*;
  * A class representing a Model.Model.Saab95 car.
  */
 
-public class Saab95 extends Car implements Transportable, ITurbo {
+public class Saab95 extends Car implements ITurbo {
 
     /**
      * True if turbo is on or not.
@@ -17,8 +17,8 @@ public class Saab95 extends Car implements Transportable, ITurbo {
      * Constructs a Model.Model.Saab95 object with (hardcoded) presets for modelName, color, enginePower and nrDoors. Initializes
      * turboOn to false.
      */
-    public Saab95(double width, double length) {
-        super(100, width, length, "Saab95", Color.red, 2);
+    Saab95(Vector2D position) {
+        super(100, 2, 5, "Saab95", Color.red, 4, position);
         turboOn = false;
     }
 

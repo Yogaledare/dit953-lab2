@@ -5,7 +5,7 @@ import java.awt.*;
 /**
  * A class representing a Model.Model.Volvo240 car.
  */
-public class Volvo240 extends Car implements Transportable, ITrim {
+public class Volvo240 extends Car implements ITrim {
 
     /**
      * Trim factor, multiplier for speed factor
@@ -15,8 +15,8 @@ public class Volvo240 extends Car implements Transportable, ITrim {
     /**
      * Constructs a Model.Model.Volvo240 object with (hardcoded) presets for modelName, color, enginePower and nrDoors.
      */
-    public Volvo240(double width, double length) {
-        super(100, width, length, "Volvo240", Color.black, 4);
+    Volvo240(Vector2D position) {
+        super(100, 2, 5, "Volvo240", Color.black, 4, position);
     }
 
     /**

@@ -1,14 +1,15 @@
 package View;
 
 import Model.Car;
+import Model.IMovable;
 
 public class LoggerWrapper implements ILoggable {
 //    private final double speed;
 //    private final String name;
 
-    private final Car car;
+    private final IMovable car;
 
-    public LoggerWrapper(Car car){
+    public LoggerWrapper(IMovable car){
 
         this.car = car;
 //        speed = car.getCurrentSpeed();

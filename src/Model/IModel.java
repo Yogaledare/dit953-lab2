@@ -10,7 +10,7 @@ public interface IModel {
     void lower();
     void setTurboOn();
     void setTurboOff();
-    EventSource<Car> getModelUpdatedEvent();
+    EventSource<IMovable> getModelUpdatedEvent();
     void startTimer();
 
 }

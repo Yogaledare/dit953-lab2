@@ -8,7 +8,7 @@ import java.util.Deque;
  *
  * @param <T> The type stored in the container, LIFO or FIFO
  */
-public abstract class Container<T extends Transportable> /*implements Transporter<T>*/ {
+public abstract class Container<T extends ITransportable> /*implements Transporter<T>*/ {
     private final int capacity;
     private final double maxWidth;
     private final double maxLength;
@@ -77,7 +77,7 @@ public abstract class Container<T extends Transportable> /*implements Transporte
     public void relocate(Vector2D position, Vector2D direction) {
         this.position = position;
         this.direction = direction;
-        for (Transportable item : holder) {
+        for (ITransportable item : holder) {
             item.setPosition(position);
             item.setDirection(direction);
         }

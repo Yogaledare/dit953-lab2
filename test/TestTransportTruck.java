@@ -6,7 +6,7 @@ import Model.*;
 
 
 public class TestTransportTruck {
-    TransportTruck<Transportable> towTruck;
+    TransportTruck<ITransportable> towTruck;
 
     @Before
     public void setUp() {

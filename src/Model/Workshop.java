@@ -4,7 +4,7 @@ package Model;
  * Stationary place to store and repair things
  * @param <T> the type of the things to repair
  */
-public class Workshop<T extends Transportable> /*implements IStorageUnit<T>*/ {
+public class Workshop<T extends ITransportable> /*implements IStorageUnit<T>*/ {
 
     /**
      * Storage component
@@ -20,7 +20,7 @@ public class Workshop<T extends Transportable> /*implements IStorageUnit<T>*/ {
      * @param entranceDirection Where is the garage door pointing
      */
     public Workshop(int capacity, double maxWidth, double maxLength, Vector2D workshopLocation, Vector2D entranceDirection) {
-        storage = new LIFO<>(capacity, maxWidth, maxLength, 2, workshopLocation, entranceDirection, 10);
+        storage = new LIFO<T>(capacity, maxWidth, maxLength, 2, workshopLocation, entranceDirection, 10);
     }
 
     /**

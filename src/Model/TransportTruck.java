@@ -6,7 +6,7 @@ import java.awt.*;
  * A movable truck with storage
  * @param <T> the things to store
  */
-public class TransportTruck<T extends Transportable> extends Car implements Transporter<T>, Transportable /*, Model.Model.Transportable, IStorageUnit<T>, AuxPlatform */ {
+public class TransportTruck<T extends ITransportable> extends Car implements ITransporter<T>, ITransportable /*, Model.Model.Transportable, IStorageUnit<T>, AuxPlatform */ {
 
     /**
      * Storage component
@@ -30,7 +30,7 @@ public class TransportTruck<T extends Transportable> extends Car implements Tran
      */
     public TransportTruck(double enginePower, double width, double length, int capacity, double maxW, double maxL) {
         super(enginePower, width, length, "Transport Truck", Color.red, 2);
-        storage = new LIFO<>(capacity, maxW, maxL, 2, getPosition(), getDirection(), getLength());
+        storage = new LIFO<T>(capacity, maxW, maxL, 2, getPosition(), getDirection(), getLength());
         ramp = new Ramp(70, 1);
     }
 

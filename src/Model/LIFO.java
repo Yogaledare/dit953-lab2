@@ -6,7 +6,7 @@ package Model;
  *
  * @param <T> The type stored in the container
  */
-public class LIFO<T extends Transportable> extends Container<T> {
+public class LIFO<T extends ITransportable> extends Container<T> {
 
     public LIFO(int capacity, double maxWidth, double maxLength, double pickUpRange, Vector2D position, Vector2D direction, double length) {
         super(capacity, maxWidth, maxLength, pickUpRange, position, direction, length);

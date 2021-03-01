@@ -4,7 +4,7 @@ package Model;
  * A movable ferry able to transport things
  * @param <T> the things to transport
  */
-public class Ferry<T extends Transportable> extends Vehicle implements Transporter<T> {
+public class Ferry<T extends ITransportable> extends Vehicle implements ITransporter<T> {
     /**
      * storage component
      */
