@@ -61,8 +61,15 @@ public interface IMovable {
      */
     Vector2D getPosition();
 
-
+    /**
+     *
+     * @return
+     */
     String getModelName();
 
+    /**
+     *
+     * @return
+     */
     double getCurrentSpeed();
 }

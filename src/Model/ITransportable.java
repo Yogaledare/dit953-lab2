@@ -1,7 +1,7 @@
 package Model;
 
 /**
- * Model.Model.Transportable interface enables an object to be transported, i.e. loaded into a container.
+ * Transportable interface enables an object to be transported, i.e. loaded into a container.
  */
 public interface ITransportable {
     void setDirection(Vector2D direction);

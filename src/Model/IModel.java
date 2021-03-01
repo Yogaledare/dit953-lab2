@@ -1,7 +1,7 @@
 package Model;
 import Observer.EventSource;
-public interface IModel {
 
+public interface IModel {
     void startEngine();
     void stopEngine();
     void gas(int amount);

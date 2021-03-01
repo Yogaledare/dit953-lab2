@@ -8,7 +8,7 @@ class Application{
     ramps : List<IRamp>
 }
 
-package Controller {
+package controller {
     class AddRemoveController{
         +AddRemoveController(IAddRemovePanel, IModel)
     }
@@ -26,7 +26,9 @@ package Controller {
     }
 }
 
-package Model {
+package model {
+
+
     class Car{
         -modelName : String
         +getModelName() : String
@@ -87,7 +89,9 @@ package Model {
 
     class Ramp{}
     class Saab95{}
-    class Scania{}
+    class Scania{
+        -ramp : Ramp
+    }
     class TransportTruck{}
     class Vector2D{}
     class Vehicle{}
@@ -96,20 +100,21 @@ package Model {
 
 }
 
-package Observer {
-    class EventSource<T>{
+package observer {
+    class EventSource {
         - subscribers : List<EventObserver<T>>
         + addSubscriber(EventObserver<T>) : void
         + removeSubscriber(EventObserver<T>) : void
         + publish(List<? extends T>) : void
     }
 
-    interface Observer<T>{
+    interface EventObserver {
         + actOnPublish(List<? extends T>) : void
     }
 }
 
-package View {
+package view {
+
     class AddRemovePanel{
         +Addremovepanel(EventSource)
     }
@@ -163,17 +168,12 @@ package Swing {
     class JFrame {}
 }
 
-Application ..> IModel
-Application ...> DrawPanel
-Application ...> IControlPanel
-Application ...> IAddRemovePanel
-Application ...> LoggerPanel
-Application ....> ITurbo
-Application ..> IMovable
-Application ....> IRamp
+Application ...> IModel
+Application *..> CarFactory
 
-AddRemovePanelController ...> IAddRemovePanel
-AddRemovePanelController ...> IModel
+
+AddRemoveController ...> IAddRemovePanel
+AddRemoveController ...> IModel
 
 CarController ...> ICarView
 CarController ...> IModel
@@ -195,55 +195,48 @@ IRamp ---|> IMovable
 ITrim ---|> IMovable
 ITurbo ---|> IMovable
 
-Model ..|> IModel
-Model --> EventSource
+Model ....|> IModel
+Model ----> EventSource
 
-Saab95 ..|> ITurbo
-Saab95 --> Car
-Saab95 ..> CarFactory
+Saab95 ...|> ITurbo
+Saab95 ---> Car
+Saab95 ...> CarFactory
 
-Scania ..|> IRamp
-Scania --> Car
-Scania ..> CarFactory
+Scania ...|> IRamp
+Scania ---> Car
+Scania ...> CarFactory
 
 Vehicle ..|> IMovable
 
-Volvo240 ..|> ITrim
-Volvo240 --> Car
-Volvo240 ..> CarFactory
+Volvo240 ...|> ITrim
+Volvo240 ---> Car
+Volvo240 ...> CarFactory
 
-EventSource *..> EventObserver
+EventSource *...> EventObserver
 
-AddRemovePanel ---> JPanel
+
 AddRemovePanel ..|> IAddRemovePanel
 
-CarReciever ..|> EventObserver
+CarReciever ...|> EventObserver
 
-CarView ---> JFrame
 CarView *...> JComponent
 
-ControlPanel ---> JPanel
+
 ControlPanel ...|> IControlPanel
 
-DrawPanel ---> JPanel
-DrawPanel ...> EventObserver
+DrawPanel ....> EventObserver
 
-GasPanel --> JPanel
+
 GasPanel ..|> IGasPanel
 
 
-LoggerPanel --> JPanel
-LoggerPanel ..> EventObserver
+LoggerPanel ...> EventObserver
 
 LoggerWrapper ...|> ILoggable
 LoggerWrapper *...> IMovable
 
 PaintableWrapper ...|> IPaintable
 PaintableWrapper ...> IMovable
-
-
-
-
 
 
 

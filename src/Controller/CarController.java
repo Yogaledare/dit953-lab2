@@ -21,7 +21,9 @@ public class CarController {
     private IModel iModel;
     private int gasAmount;
 
-//    constructor
+/**
+ * Constructor
+  */
     public CarController(ICarView iCarView, IModel iModel) {
         this.iModel = iModel;
         this.gasAmount = 0;

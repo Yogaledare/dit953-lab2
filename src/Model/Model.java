@@ -153,12 +153,13 @@ public class Model implements IModel {
 
     public void removeCar() {
         int i = cars.size();
-        try {
-            cars.remove(i-1);
-        } catch (Exception ex){
-
+        IMovable removedCar = cars.remove(i-1);
+        for (ITurbo tryRemoveTurbo : carsWithTurbo) {
+            carsWithTurbo.remove(removedCar);
         }
-
+        for (IRamp tryRemoveRamp : carsWithRamp) {
+            carsWithRamp.remove(removedCar);
+        }
 
     }
 }

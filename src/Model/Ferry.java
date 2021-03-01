@@ -11,12 +11,12 @@ public class Ferry<T extends ITransportable> extends Vehicle implements ITranspo
     private final FIFO<T> storage;
 
     /**
-     * Model.Model.Ramp component
+     * Ramp component
      */
     private final Ramp ramp;
 
     /**
-     * Creates a default Model.Model.Ferry (testing)
+     * Creates a default Ferry (testing)
      */
     public Ferry(){
         super(1000, 5, 15);
@@ -25,7 +25,7 @@ public class Ferry<T extends ITransportable> extends Vehicle implements ITranspo
     }
 
     /**
-     * Creates a Model.Model.Ferry based on some storage
+     * Creates a Ferry based on some storage
      * @param storageUnit already existing storage
      */
     public Ferry(FIFO<T> storageUnit) {
@@ -49,7 +49,7 @@ public class Ferry<T extends ITransportable> extends Vehicle implements ITranspo
     }
 
     /**
-     * Remove something from the Model.Model.Ferry's storage component, how it's removed
+     * Remove something from the Ferry's storage component, how it's removed
      */
     public T remove() {
     if (!ramp.isFullyLowered()) {
@@ -59,7 +59,7 @@ public class Ferry<T extends ITransportable> extends Vehicle implements ITranspo
     }
 
     /**
-     * Gets the size of the Model.Model.Ferry's storage
+     * Gets the size of the Ferry's storage
      * @return the size
      */
     @Override
@@ -68,7 +68,6 @@ public class Ferry<T extends ITransportable> extends Vehicle implements ITranspo
     }
 
     // ------ MOVABLE --------
-
 
     /**
      * Raise loading platform.
@@ -100,7 +99,7 @@ public class Ferry<T extends ITransportable> extends Vehicle implements ITranspo
     }
 
     /**
-    * Disables the Model.Model.Ferry to be moved
+    * Disables the Ferry to be moved
     */
     @Override
     public void startEngine() {
@@ -108,11 +107,22 @@ public class Ferry<T extends ITransportable> extends Vehicle implements ITranspo
             super.startEngine();
     }
 
+    /**
+     * Move the ferry
+     */
     @Override
     public void move() {
         super.move();
         storage.relocate(getPosition(), getDirection());
     }
 
+    /**
+     * Get Ship name
+     * @return the modelname of the ship
+     */
+    @Override
+    public String getModelName() {
+        return "Kaj & Börje";
+    }
 }
 
