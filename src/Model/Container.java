@@ -53,7 +53,7 @@ public abstract class Container<T extends ITransportable> /*implements Transport
             throw new IllegalArgumentException("Item too far away");
         }
         holder.addLast(item);
-        item.setPosition(position);
+        item.getCarried(position, direction);
     }
 
     /**
@@ -65,7 +65,7 @@ public abstract class Container<T extends ITransportable> /*implements Transport
         T item = findItemToRemove();
         Vector2D offset = findOffset();
         Vector2D unloadedPosition = item.getPosition().plus(offset);
-        item.setPosition(unloadedPosition);
+        item.getCarried(unloadedPosition, direction);
         return item;
     }
 
@@ -74,14 +74,25 @@ public abstract class Container<T extends ITransportable> /*implements Transport
      * @param position the current positions of the holder parent.
      * @param direction the current orientataion of the holder parent
      */
-    public void relocate(Vector2D position, Vector2D direction) {
+/*    public void relocate(Vector2D position, Vector2D direction) {
         this.position = position;
         this.direction = direction;
         for (ITransportable item : holder) {
             item.setPosition(position);
             item.setDirection(direction);
         }
+    }*/
+
+    public void getCarried(Vector2D position, Vector2D direction) {
+        this.position = position;
+        this.direction = direction;
+        for (ITransportable item : holder) {
+            getCarried(position, direction);
+        }
+
     }
+
+
 
     /**
      * FindItemToRemove finds which object to remove, depending on Model.Model.LIFO or Model.Model.FIFO
