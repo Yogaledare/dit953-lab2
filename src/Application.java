@@ -55,7 +55,7 @@ public class Application {
         List<JPanel> panels = new ArrayList<>();
 
         // The panel where the cars are drawn
-        DrawPanel drawPanel = new DrawPanel(800, 800-240, reciever.getPaintHandler());
+        DrawPanel drawPanel = new DrawPanel(800, 800-240, reciever.getPaintUpdatedEvent());
 
         // The panel for accelerating/decelerating the cars
         GasPanel gasPanel = new GasPanel();
@@ -64,7 +64,7 @@ public class Application {
         ControlPanel controlPanel = new ControlPanel(800);
 
         // The Logger panel
-        LoggerPanel loggerPanel = new LoggerPanel(reciever.getLoggHandler());
+        LoggerPanel loggerPanel = new LoggerPanel(reciever.getLoggUpdatedEvent());
 
         // The actual window
         CarView view = new CarView("CarSim 3.0");

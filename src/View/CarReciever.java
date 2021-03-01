@@ -12,8 +12,8 @@ public class CarReciever implements EventObserver<Car> {
 //    private List<JComponent> paintableSubscribers;
 //    private List<JComponent> loggableSubscribers;
 
-    private final EventSource<IPaintable> paintHandler = new EventSource<>();
-    private final EventSource<ILoggable> loggHandler = new EventSource<>();
+    private final EventSource<IPaintable> paintUpdatedEvent = new EventSource<>();
+    private final EventSource<ILoggable> loggUpdatedEvent = new EventSource<>();
 
     public CarReciever(EventSource<Car> modelUpdatedEvent){
         modelUpdatedEvent.addSubscriber(this);
@@ -27,15 +27,15 @@ public class CarReciever implements EventObserver<Car> {
             paintables.add(new PaintableWrapper(car));
             loggables.add(new LoggerWrapper(car));
         }
-        paintHandler.publish(paintables);
-        loggHandler.publish(loggables);
+        paintUpdatedEvent.publish(paintables);
+        loggUpdatedEvent.publish(loggables);
     }
 
-    public EventSource<IPaintable> getPaintHandler(){
-        return paintHandler;
+    public EventSource<IPaintable> getPaintUpdatedEvent(){
+        return paintUpdatedEvent;
     }
 
-    public EventSource<ILoggable> getLoggHandler(){
-        return loggHandler;
+    public EventSource<ILoggable> getLoggUpdatedEvent(){
+        return loggUpdatedEvent;
     }
 }

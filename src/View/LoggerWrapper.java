@@ -3,21 +3,25 @@ package View;
 import Model.Car;
 
 public class LoggerWrapper implements ILoggable {
-    private final double speed;
-    private final String name;
+//    private final double speed;
+//    private final String name;
+
+    private final Car car;
 
     public LoggerWrapper(Car car){
-        speed = car.getCurrentSpeed();
-        name = car.getModelName();
+
+        this.car = car;
+//        speed = car.getCurrentSpeed();
+//        name = car.getModelName();
     }
 
     @Override
     public double getSpeed(){
-        return speed;
+        return car.getCurrentSpeed();
     }
 
     @Override
     public String getName(){
-        return name;
+        return car.getModelName();
     }
 }

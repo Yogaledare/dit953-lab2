@@ -4,21 +4,25 @@ import Model.Vector2D;
 
 public class PaintableWrapper implements IPaintable{
 
-    private final String name;
-    private final Vector2D pos;
+//    private final String name;
+//    private final Vector2D pos;
+
+    private Car car;
 
     public PaintableWrapper(Car car){
-        name = car.getModelName();
-        pos = car.getPosition();
+
+        this.car = car;
+//        name = car.getModelName();
+//        pos = car.getPosition();
     }
 
     @Override
     public String getName(){
-        return name;
+        return car.getModelName();
     }
 
     @Override
     public Vector2D getPosition(){
-        return pos;
+        return car.getPosition();
     }
 }
