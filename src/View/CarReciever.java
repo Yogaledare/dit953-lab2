@@ -8,13 +8,7 @@ import Model.Car;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CarReciever implements EventObserver<Car> {
-
-//    private List<JComponent> paintableSubscribers;
-//    private List<JComponent> loggableSubscribers;
-
-    private final EventSource<IPaintable> paintUpdatedEvent = new EventSource<>();
-    private final EventSource<ILoggable> loggUpdatedEvent = new EventSource<>();
+public class CarReciever implements EventObserver<IMovable> {
 
     private final EventSource<IPaintable> paintUpdatedEvent = new EventSource<>();
     private final EventSource<ILoggable> loggUpdatedEvent = new EventSource<>();

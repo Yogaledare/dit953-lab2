@@ -8,6 +8,9 @@ public interface ITransportable {
     Vector2D getDirection();
     void setPosition(Vector2D position);
     Vector2D getPosition();
+
+    void getCarried(Vector2D position, Vector2D direction);
+
     double getWidth();
     double getLength();
 }
