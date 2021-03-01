@@ -3,109 +3,157 @@
 
 class Application{
     {static}+main()
-}
-Application ..> IModel
-Application ..> CarFrame
-
-Application ..> DrawPanel
-Application ..> IControlPanel
-Application ..> IAddRemovePanel
-Application ..> LoggerPanel
-
-
-class Model{
-    -timer : Timer
-    -boardWidth : double
-    -boardLength : double
-    -cars : List<Car>
-    -observers : ObserverHandler
-    -updateModel() : void
-    -isOutOfBounds(Car) : boolean
-    -bounceOffWall(Car) : void
-    +getObservers() : ObserverHandler
-}
-Model ..|> IModel
-Model --> ObserverHandler
-
-interface IModel{
-    +startEngine() : void
-    +stopEngine() : void
-    +gas(int) : void
-    +brake(int) : void
-    +raise() : void
-    +lower() : void
-    +setTurboOn() : void
-    +setTurboOff() : void
-    +getObserverHandler() : ObserverHandler
-    +startTimer() : void
+    cars : List<IMovable>
+    turbos : List<ITurbo>
+    ramps : List<IRamp>
 }
 
-class ObserverHandler<T>{
-    - subscribers : List<PaintObserver<T>>
-    + addSubscriber(PaintObserver<T>) : void
-    + removeSubscriber(PaintObserver<T>) : void
-    + publish(List<? extends T>) : void
-}
-ObserverHandler *--> Observer
+package Controller {
+    class AddRemoveController{
+        +AddRemoveController(IAddRemovePanel, IModel)
+    }
 
-interface Observer<T>{
-    + actOnPublish(List<? extends T>) : void
-}
+    class CarController {
+        +CarController(ICarView, IModel)
+    }
 
-class CarFrame{
-    panels : List<JPanel>
-}
+    class ControlPanelController{
+        +ControlPanelController(IControlPanel, IModel)
+    }
 
-
-class DrawPanel{
-    +DrawPanel(ObserverHandler)
-}
-DrawPanel ..> ObserverHandler
-
-class ControlPanel{
-    +ControlPanel(ObserverHandler)
-}
-ControlPanel ..> ObserverHandler
-IControlPanel <|.. ControlPanel
-
-class LoggerPanel{
-    +LoggerPanel(ObserverHandler)
-}
-LoggerPanel ..> ObserverHandler
-
-
-class AddRemovePanel{
-    +Addremovepanel(ObserverHandler)
-}
-AddRemovePanel ..> ObserverHandler
-IAddRemovePanel <|.. AddRemovePanel
-
-interface IControlPanel{
-    setStartButtonActionListener(ActionListener listener) : void
-    setStopButtonActionListener(ActionListener listener) : void
-    setTurboOnButtonActionListener(ActionListener listener) : void
-    setTurboOffButtonActionListener(ActionListener listener) : void
-    setLiftBedButtonActionListener(ActionListener listener) : void
-    setLowerBedButtonActionListener(ActionListener listener) : void
+    class GasController{
+        +GasController(IGasPanel, IModel)
+    }
 }
 
-interface IAddRemovePanel {
-    addCarButtonActionListener(ActionListener listener) : void
-    removeCarButtonActionListener(ActionListener listener) : void
+package Model {
+    class Car{
+        -modelName : String
+        +getModelName() : String
+    }
+
+    class CarFactory{
+        createVolvo240(Vector2D) : IMovable
+        createSaab95(Vector2D) : ITurbo
+        createScania(Vector2D) : IRamp
+    }
+
+    class Container{}
+
+    class Ferry{}
+
+    class FIFO{}
+
+    interface ICarView{
+        setGasButtonActionListener(ActionListener) : void
+        setBrakeButtonActionListener(ActionListener) : void
+    }
+
+    interface IModel{
+        +startEngine() : void
+        +stopEngine() : void
+        +gas(int) : void
+        +brake(int) : void
+        +raise() : void
+        +lower() : void
+        +setTurboOn() : void
+        +setTurboOff() : void
+        +EventSource<IMovable>() : getModelUpdateEvent()
+        +startTimer() : void
+        +addCar() : void
+        +removeCar() : void
+    }
+
+    interface IMovable{}
+    interface IRamp{}
+    interface ITransportable{}
+    interface ITransporter{}
+    interface ITrim{}
+    interface ITurbo{}
+
+    class LIFO{}
+
+    class Model{
+        -timer : Timer
+        -boardWidth : double
+        -boardLength : double
+        -cars : List<Car>
+        -observers : EventSource
+        -updateModel() : void
+        -isOutOfBounds(Car) : boolean
+        -bounceOffWall(Car) : void
+        +getObservers() : EventSource
+    }
+
+    class Ramp{}
+    class Saab95{}
+    class Scania{}
+    class TransportTruck{}
+    class Vector2D{}
+    class Vehicle{}
+    class Volvo240{}
+    class Workshop{}
+
 }
 
-class ControlPanelController{
-    +ControlPanelController(IControlPanel, IModel)
+package Observer {
+    class EventSource<T>{
+        - subscribers : List<EventObserver<T>>
+        + addSubscriber(EventObserver<T>) : void
+        + removeSubscriber(EventObserver<T>) : void
+        + publish(List<? extends T>) : void
+    }
+
+    interface Observer<T>{
+        + actOnPublish(List<? extends T>) : void
+    }
 }
-ControlPanelController ..> IControlPanel
-ControlPanelController ..> IModel
 
-class AddRemovePanelController{
-    +AddRemovePanelController(IAddRemovePanel, IModel)
+package View {
+    class AddRemovePanel{
+        +Addremovepanel(EventSource)
+    }
+
+    class CarReciever{}
+
+
+    class CarView{
+        panels : List<JPanel>
+    }
+
+    class ControlPanel{}
+
+    class DrawPanel{
+        +DrawPanel(EventSource)
+    }
+
+    class GasPanel{}
+
+    interface IAddRemovePanel {
+        addCarButtonActionListener(ActionListener listener) : void
+        removeCarButtonActionListener(ActionListener listener) : void
+    }
+
+    interface IControlPanel{
+        setStartButtonActionListener(ActionListener listener) : void
+        setStopButtonActionListener(ActionListener listener) : void
+        setTurboOnButtonActionListener(ActionListener listener) : void
+        setTurboOffButtonActionListener(ActionListener listener) : void
+        setLiftBedButtonActionListener(ActionListener listener) : void
+        setLowerBedButtonActionListener(ActionListener listener) : void
+    }
+
+    interface IGasPanel{}
+    interface ILoggable{}
+    interface IPaintable{}
+
+    class LoggerPanel{
+        +LoggerPanel(EventSource)
+    }
+
+    class LoggerWrapper{}
+    class PaintableWrapper{}
 }
-AddRemovePanelController ..> IAddRemovePanel
-
-
 
 package Swing {
     class JSpinner{}
@@ -114,5 +162,89 @@ package Swing {
     class JLabel {}
     class JFrame {}
 }
+
+Application ..> IModel
+Application ...> DrawPanel
+Application ...> IControlPanel
+Application ...> IAddRemovePanel
+Application ...> LoggerPanel
+Application ....> ITurbo
+Application ..> IMovable
+Application ....> IRamp
+
+AddRemovePanelController ...> IAddRemovePanel
+AddRemovePanelController ...> IModel
+
+CarController ...> ICarView
+CarController ...> IModel
+
+ControlPanelController ...> IControlPanel
+ControlPanelController ...> IModel
+
+GasController ...> IGasPanel
+GasController ...> IModel
+
+Car --> Vehicle
+Car ...|> ITransportable
+
+CarFactory ..> IMovable
+CarFactory ..> ITurbo
+CarFactory ..> IRamp
+
+IRamp ---|> IMovable
+ITrim ---|> IMovable
+ITurbo ---|> IMovable
+
+Model ..|> IModel
+Model --> EventSource
+
+Saab95 ..|> ITurbo
+Saab95 --> Car
+Saab95 ..> CarFactory
+
+Scania ..|> IRamp
+Scania --> Car
+Scania ..> CarFactory
+
+Vehicle ..|> IMovable
+
+Volvo240 ..|> ITrim
+Volvo240 --> Car
+Volvo240 ..> CarFactory
+
+EventSource *..> EventObserver
+
+AddRemovePanel ---> JPanel
+AddRemovePanel ..|> IAddRemovePanel
+
+CarReciever ..|> EventObserver
+
+CarView ---> JFrame
+CarView *...> JComponent
+
+ControlPanel ---> JPanel
+ControlPanel ...|> IControlPanel
+
+DrawPanel ---> JPanel
+DrawPanel ...> EventObserver
+
+GasPanel --> JPanel
+GasPanel ..|> IGasPanel
+
+
+LoggerPanel --> JPanel
+LoggerPanel ..> EventObserver
+
+LoggerWrapper ...|> ILoggable
+LoggerWrapper *...> IMovable
+
+PaintableWrapper ...|> IPaintable
+PaintableWrapper ...> IMovable
+
+
+
+
+
+
 
 @enduml
