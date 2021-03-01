@@ -11,6 +11,12 @@ public interface IMovable {
      */
     void move();
 
+
+    /**
+     * Turns the movable object 180 degree.
+     */
+    void turnAround();
+
     /**
      * Turns the object left.
      */
@@ -20,6 +26,7 @@ public interface IMovable {
      * Turns the object right.
      */
     void turnRight();
+
 
     /**
      * Gas amount, between [0,1]
@@ -48,4 +55,14 @@ public interface IMovable {
      * Stop engine.
      */
     void stopEngine();
+
+    /**
+     * Returns current position
+     */
+    Vector2D getPosition();
+
+
+    String getModelName();
+
+    double getCurrentSpeed();
 }

@@ -16,13 +16,14 @@ public class Application {
     public static void main(String[] args) {
         List<IMovable> cars = new ArrayList<>();
         List<ITurbo> turbos = new ArrayList<>();
+        List<IRamp> ramps = new ArrayList<>();
+
         // volvo
         IMovable volvo = CarFactory.createVolvo240(new Vector2D(0, 0));
         cars.add(volvo);
 
         // saab
-        Saab95 saab95 = new Saab95(2,3);
-        saab95.setPosition(new Vector2D(100, 0));
+        ITurbo saab95 = CarFactory.createSaab95(new Vector2D(100, 0));
         cars.add(saab95);
         turbos.add(saab95);
 
@@ -30,6 +31,7 @@ public class Application {
         IRamp scania = CarFactory.createScania(new Vector2D(200, 0));
         scania.lower(70);
         cars.add(scania);
+        ramps.add(scania);
 
         // Create MVC
         IModel model = new Model(cars, turbos);

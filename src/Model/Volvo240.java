@@ -3,7 +3,7 @@ package Model;
 import java.awt.*;
 
 /**
- * A class representing a Model.Model.Volvo240 car.
+ * A class representing a Volvo240 car.
  */
 public class Volvo240 extends Car implements ITrim {
 

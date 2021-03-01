@@ -178,15 +178,12 @@ public abstract class Vehicle implements IMovable {
         }
     }
 
-    /**
-     * Turns the vehicle 180 degrees.
-     */
+    //
     public void turnAround() {
         if (engineOn) {
             direction = direction.rotateCC(-Math.PI);
         }
     }
-
 
     /**
      * Returns the direction vector of the vehicle.
@@ -248,5 +245,7 @@ public abstract class Vehicle implements IMovable {
      * @return the speed factor of the veheicle.
      */
     protected abstract double findSpeedFactor();
+
+
 }
 

@@ -12,5 +12,6 @@ public interface IModel {
     void setTurboOff();
     EventSource<IMovable> getModelUpdatedEvent();
     void startTimer();
-
+    void addCar();
+    void removeCar();
 }

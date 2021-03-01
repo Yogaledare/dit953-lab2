@@ -93,5 +93,20 @@ public abstract class Car extends Vehicle implements ITransportable {
      */
     public int getNoOfDoors() { return this.nrDoors; }
 
+
+    @Override
+    protected double findSpeedFactor() {
+        return 0;
+    }
+
+
+
+
+/*    @Override
+    public void getCarried(Model.Vector2D position, Model.Vector2D direction) {
+        this.setPosition(position);
+        this.getDirection(direction);
+
+    }*/
 }
 

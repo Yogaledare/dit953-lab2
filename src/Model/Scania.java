@@ -5,10 +5,10 @@ import java.awt.*;
 /**
  * A movable truck with a movable ramp
  */
-public class Scania extends Car implements Transportable {
+public class Scania extends Car implements IRamp {
 
     /**
-     * Model.Model.Ramp component.
+     * Ramp component.
      */
     private final Ramp platform;
     /**
