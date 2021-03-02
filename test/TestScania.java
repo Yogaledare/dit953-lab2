@@ -5,13 +5,11 @@ import org.junit.Test;
 import Model.*;
 
 
-import java.awt.*;
-
 import static org.junit.Assert.*;
 
 
 public class TestScania {
-    IRamp truck;
+    IRampVehicle truck;
 
     @Before
     public void setUp() {

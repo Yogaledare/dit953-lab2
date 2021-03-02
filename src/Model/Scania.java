@@ -5,7 +5,7 @@ import java.awt.*;
 /**
  * A movable truck with a movable ramp
  */
-public class Scania extends Car implements IRamp {
+public class Scania extends Car implements IRampVehicle {
 
     /**
      * Ramp component.

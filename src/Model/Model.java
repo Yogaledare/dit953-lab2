@@ -16,19 +16,19 @@ public class Model implements IModel {
     int boardWidth = 800;
     int boardHeight = 800;
 
-    List<IMovable> cars;
-    List<ITurbo>   carsWithTurbo;
-    List<IRamp>    carsWithRamp;
+    List<IVehicle> cars;
+    List<ITurboVehicle>   carsWithTurbo;
+    List<IRampVehicle>    carsWithRamp;
 
-    EventSource<IMovable> modelUpdatedEvent = new EventSource<>();
+    EventSource<IVehicle> modelUpdatedEvent = new EventSource<>();
 
-    public Model(List<IMovable> cars, List<ITurbo> turbos, List<IRamp> ramps) {
+    public Model(List<IVehicle> cars, List<ITurboVehicle> turbos, List<IRampVehicle> ramps) {
         this(cars, turbos);
         this.carsWithRamp = ramps;
 
     }
 
-    public Model(List<IMovable> cars, List<ITurbo> turbos) {
+    public Model(List<IVehicle> cars, List<ITurboVehicle> turbos) {
         this.cars = cars;
         this.carsWithTurbo = turbos;
     }
@@ -43,7 +43,7 @@ public class Model implements IModel {
     }
 
     void updateModel() {
-        for (IMovable e : cars) {
+        for (IVehicle e : cars) {
             e.move();
         }
     }
@@ -53,7 +53,7 @@ public class Model implements IModel {
      * */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            for (IMovable car : cars) {
+            for (IVehicle car : cars) {
                 car.move();
                 if (isOutOfBounds(car)) {
                     car.turnRight();
@@ -65,7 +65,7 @@ public class Model implements IModel {
         }
     }
 
-    boolean isOutOfBounds(IMovable car) {
+    boolean isOutOfBounds(IVehicle car) {
         int y = (int) car.getPosition().getY();
         return y > 500 || y < 0;
     }
@@ -73,61 +73,61 @@ public class Model implements IModel {
 
     @Override
     public void startEngine() {
-        for (IMovable e : cars) {
+        for (IVehicle e : cars) {
             e.startEngine();
         }
     }
 
     @Override
     public void stopEngine() {
-        for (IMovable e : cars)
+        for (IVehicle e : cars)
             e.stopEngine();
     }
 
     @Override
     public void gas(int amount) {
-        for (IMovable e : cars) {
+        for (IVehicle e : cars) {
             e.gas(amount);
         }
     }
 
     @Override
     public void brake(int amount) {
-        for (IMovable e : cars) {
+        for (IVehicle e : cars) {
             e.brake(amount);
         }
     }
 
     @Override
     public void raise() {
-        for (IRamp e : carsWithRamp) {
+        for (IRampVehicle e : carsWithRamp) {
             e.raise(10);
         }
     }
 
     @Override
     public void lower() {
-        for (IRamp e : carsWithRamp) {
+        for (IRampVehicle e : carsWithRamp) {
           e.lower(10);
         }
     }
 
     @Override
     public void setTurboOn() {
-        for (ITurbo turbo : carsWithTurbo) {
+        for (ITurboVehicle turbo : carsWithTurbo) {
             turbo.setTurboOn();
         }
     }
 
     @Override
     public void setTurboOff() {
-        for (ITurbo turbo : carsWithTurbo) {
+        for (ITurboVehicle turbo : carsWithTurbo) {
             turbo.setTurboOff();
         }
     }
 
     @Override
-    public EventSource<IMovable> getModelUpdatedEvent() {
+    public EventSource<IVehicle> getModelUpdatedEvent() {
         return modelUpdatedEvent;
     }
 
@@ -139,11 +139,11 @@ public class Model implements IModel {
             case 0:
                 cars.add(CarFactory.createVolvo240(new Vector2D(x, 0)));
             case 1:
-                ITurbo saab = CarFactory.createSaab95(new Vector2D(x, 0));
+                ITurboVehicle saab = CarFactory.createSaab95(new Vector2D(x, 0));
                 cars.add(saab);
                 carsWithTurbo.add(saab);
             case 2:
-                IRamp scania = CarFactory.createScania(new Vector2D(x, 0));
+                IRampVehicle scania = CarFactory.createScania(new Vector2D(x, 0));
                 cars.add(scania);
                 carsWithRamp.add(scania);
             default:
@@ -153,11 +153,11 @@ public class Model implements IModel {
 
     public void removeCar() {
         int i = cars.size();
-        IMovable removedCar = cars.remove(i-1);
-        for (ITurbo tryRemoveTurbo : carsWithTurbo) {
+        IVehicle removedCar = cars.remove(i-1);
+        for (ITurboVehicle tryRemoveTurbo : carsWithTurbo) {
             carsWithTurbo.remove(removedCar);
         }
-        for (IRamp tryRemoveRamp : carsWithRamp) {
+        for (IRampVehicle tryRemoveRamp : carsWithRamp) {
             carsWithRamp.remove(removedCar);
         }
 

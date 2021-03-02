@@ -3,7 +3,6 @@ import Model.*;
 import View.*;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,21 +13,21 @@ import java.util.List;
 public class Application {
 
     public static void main(String[] args) {
-        List<IMovable> cars = new ArrayList<>();
-        List<ITurbo> turbos = new ArrayList<>();
-        List<IRamp> ramps = new ArrayList<>();
+        List<IVehicle> cars = new ArrayList<>();
+        List<ITurboVehicle> turbos = new ArrayList<>();
+        List<IRampVehicle> ramps = new ArrayList<>();
 
         // volvo
-        IMovable volvo = CarFactory.createVolvo240(new Vector2D(0, 0));
+        IVehicle volvo = CarFactory.createVolvo240(new Vector2D(0, 0));
         cars.add(volvo);
 
         // saab
-        ITurbo saab95 = CarFactory.createSaab95(new Vector2D(100, 0));
+        ITurboVehicle saab95 = CarFactory.createSaab95(new Vector2D(100, 0));
         cars.add(saab95);
         turbos.add(saab95);
 
         // scania
-        IRamp scania = CarFactory.createScania(new Vector2D(200, 0));
+        IRampVehicle scania = CarFactory.createScania(new Vector2D(200, 0));
         scania.lower(70);
         cars.add(scania);
         ramps.add(scania);

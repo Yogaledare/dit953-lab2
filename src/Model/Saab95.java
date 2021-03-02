@@ -6,7 +6,7 @@ import java.awt.*;
  * A class representing a Model.Model.Saab95 car.
  */
 
-public class Saab95 extends Car implements ITurbo {
+public class Saab95 extends Car implements ITurboVehicle {
 
     /**
      * True if turbo is on or not.

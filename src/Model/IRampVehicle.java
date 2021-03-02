@@ -1,6 +1,6 @@
 package Model;
 
-public interface IRamp extends IMovable{
+public interface IRampVehicle extends IVehicle {
 
     public void lower(double amount);
 

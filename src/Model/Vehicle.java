@@ -9,7 +9,7 @@ package Model; /**
 /**
  * An abstract class representing a generic vehicle.
  */
-public abstract class Vehicle implements IMovable {
+public abstract class Vehicle implements IVehicle {
 
     /**
      * Current speed valid interval from 0 to Engine power
