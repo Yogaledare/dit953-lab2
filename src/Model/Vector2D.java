@@ -3,7 +3,7 @@ package Model;
 /**
  * A vector class representing immutable vectors in a 2D cartesian coordinate system.
  */
-public class Vector2D {
+public final class Vector2D {
 
     /**
      * x coordinate
