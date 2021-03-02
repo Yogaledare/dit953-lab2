@@ -113,7 +113,7 @@ public class Ferry<T extends ITransportable> extends Vehicle implements ITranspo
     @Override
     public void move() {
         super.move();
-        storage.relocate(getPosition(), getDirection());
+        storage.getCarried(getPosition(), getDirection());
     }
 
     /**
