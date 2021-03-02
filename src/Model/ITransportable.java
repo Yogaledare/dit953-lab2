@@ -5,17 +5,19 @@ package Model;
  */
 public interface ITransportable {
 
+    double getWidth();
+    double getLength();
+
+    Vector2D getPosition();
+
     void getCarried(Vector2D position, Vector2D direction);
 
 }
 
 
-//    double getWidth();
-//    double getLength();
 
 
 //    Vector2D getDirection();
-//    Vector2D getPosition();
 
 //    void setDirection(Vector2D direction);
 //    void setPosition(Vector2D position);
