@@ -9,13 +9,13 @@ import static org.junit.Assert.*;
 
 public class TestVehicle {
 
-    Saab95 saab95;
-    Volvo240 volvo240;
+    ITurboVehicle saab95;
+    IVehicle volvo240;
 
     @Before
     public void setup() {
-        saab95 = new Saab95(2, 5);
-        volvo240 = new Volvo240(2, 4);
+        saab95 = CarFactory.createSaab95(new Vector2D(2, 5));/* Saab95(2, 5);*/
+        volvo240 = CarFactory.createVolvo240(new Vector2D(2, 4));/* Volvo240(2, 4);*/
     }
 
     @Test
@@ -33,6 +33,9 @@ public class TestVehicle {
         Vector2D target = new Vector2D(0.0, 1.1);
         assertTrue(target.equals(saab95.getPosition()));
     }
+}
+
+/*
 
     @Test
     public void turnLeftOnce() {
@@ -131,4 +134,4 @@ public class TestVehicle {
         }
     }
 
-}
+}*/
