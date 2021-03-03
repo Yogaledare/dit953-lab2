@@ -12,8 +12,10 @@ public class RampVehicle extends Car implements IRampVehicle {
     final State state;
     final Ramp ramp;
 
-    public Model.IRampVehicle() {
-
+    public IRampVehicle(State state, Ramp ramp) {
+        super();
+        this.state = state;
+        this.ramp = ramp;
 
     }
 
