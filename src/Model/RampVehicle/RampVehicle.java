@@ -1,6 +1,9 @@
 package Model.RampVehicle;
 
 import Model.Car;
+import Model.Vector2D;
+
+import java.awt.*;
 
 public class RampVehicle extends Car implements IRampVehicle {
 
@@ -12,14 +15,28 @@ public class RampVehicle extends Car implements IRampVehicle {
     final State state;
     final Ramp ramp;
 
-    public IRampVehicle(State state, Ramp ramp) {
-        super();
+    public RampVehicle(Vector2D position, State state, Ramp ramp) {
+        super(80, 3, 7, "Scania", Color.blue, 2, position);
         this.state = state;
         this.ramp = ramp;
 
     }
 
+    @Override
+    public IRampVehicle move() {
 
+    }
+
+
+    @Override
+    public IRampVehicle raise() {
+        return null;
+    }
+
+    @Override
+    public IRampVehicle lower() {
+        return null;
+    }
 
 
 
