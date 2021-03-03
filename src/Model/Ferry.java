@@ -20,8 +20,8 @@ public class Ferry<T extends ITransportable> extends Vehicle implements ITranspo
     /**
      * Creates a default Ferry (testing)
      */
-    public Ferry(){
-        super(1000, 5, 15);
+    public Ferry(Vector2D position, Vector2D direction, double currentSpeed, boolean engineOn){
+        super(position, direction, currentSpeed, engineOn, 1000, 8, 15);
         storage = new FIFO<T>(10, 1, 1, 2, getPosition(), getDirection(), getLength());
         ramp = new Ramp(70, 1);
     }
@@ -30,10 +30,16 @@ public class Ferry<T extends ITransportable> extends Vehicle implements ITranspo
      * Creates a Ferry based on some storage
      * @param storageUnit already existing storage
      */
-    public Ferry(FIFO<T> storageUnit) {
-        super(1000, 5, 15);
+    public Ferry(Vector2D position, Vector2D direction, double currentSpeed, boolean engineOn, FIFO<T> storageUnit, Ramp ramp) {
+        super(position, direction, currentSpeed, engineOn, 1000, 5, 15);
         this.storage = storageUnit;
-        ramp = new Ramp(70, 1);
+        this.ramp = ramp;
+    }
+
+    public Ferry(Ferry<T> ferry){
+        super(ferry.getPosition(), ferry.getDirection(), ferry.getCurrentSpeed(), ferry.isEngineOn(), 1000, 8, 15);
+        this.storage = ferry.storage;
+        this.ramp = ferry.ramp;
     }
 
     // ------ STORABLE --------
@@ -104,18 +110,72 @@ public class Ferry<T extends ITransportable> extends Vehicle implements ITranspo
     * Disables the Ferry to be moved
     */
     @Override
-    public void startEngine() {
-        if(ramp.isFullyRaised())
-            super.startEngine();
+    public IVehicle startEngine() {
+        if(ramp.isFullyRaised()) {
+            double speed = 0;
+            if(!isEngineOn())
+                speed = 0.1;
+            return new Ferry<T>(getPosition(), getDirection(), speed, true, storage, ramp);
+        }
+        return new Ferry<T>(this);
+    }
+
+    @Override
+    public IVehicle stopEngine(){
+        return new Ferry<T>(getPosition(), getDirection(), 0, false, storage, ramp);
+    }
+
+    @Override
+    IVehicle incrementSpeed(double amount, double speedFactor){
+        if(isEngineOn()){
+            double newSpeed = Vector2D.clamp(getCurrentSpeed() + speedFactor * amount, 0, getEnginePower());
+            return new Ferry<T>(getPosition(), getDirection(), newSpeed, isEngineOn(), storage, ramp);
+        }
+        return new Ferry<T>(this);
+    }
+
+    @Override
+    IVehicle decrementSpeed(double amount, double speedFactor){
+        if(isEngineOn()){
+            double newSpeed = Vector2D.clamp(getCurrentSpeed() - speedFactor * amount, 0, getEnginePower());
+            return new Ferry<T>(getPosition(), getDirection(), newSpeed, isEngineOn(), storage, ramp);
+        }
+        return new Ferry<T>(this);
     }
 
     /**
      * Move the ferry
      */
     @Override
-    public void move() {
-        super.move();
+    public IVehicle move(){
+        Vector2D step = getDirection().multiplyByScalar(getCurrentSpeed());
+        Vector2D newPos = getPosition().plus(step);
         storage.getCarried(getPosition(), getDirection());
+        return new Ferry<T>(newPos, getDirection(), getCurrentSpeed(), isEngineOn(), storage, ramp);
+    }
+
+    @Override
+    public IVehicle turnLeft(){
+        Vector2D dir = getDirection();
+        if(isEngineOn())
+            dir = getDirection().rotateCC(Math.PI / 2);
+        return new Ferry<T>(getPosition(), dir, getCurrentSpeed(), isEngineOn(), storage, ramp);
+    }
+
+    @Override
+    public IVehicle turnRight(){
+        Vector2D dir = getDirection();
+        if(isEngineOn())
+            dir = getDirection().rotateCC(-Math.PI / 2);
+        return new Ferry<T>(getPosition(), dir, getCurrentSpeed(), isEngineOn(), storage, ramp);
+    }
+
+    @Override
+    public IVehicle turnAround(){
+        Vector2D dir = getDirection();
+        if(isEngineOn())
+            dir = getDirection().rotateCC(-Math.PI);
+        return new Ferry<T>(getPosition(), dir, getCurrentSpeed(), isEngineOn(), storage, ramp);
     }
 
     /**

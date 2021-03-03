@@ -118,6 +118,7 @@ public class TransportTruck<T extends ITransportable> extends Car implements ITr
                 speed = 0.1;
             return new TransportTruck<T>(getPosition(), getDirection(), speed, true, storage, ramp);
         }
+        return new TransportTruck<T>(this);
     }
 
     @Override
