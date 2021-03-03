@@ -17,7 +17,7 @@ public class Ramp {
      */
     private final double rampSpeed;
 
-    IRampState state = new RampLoweredState(this);
+    IRampState state = new RampVehicleStateOffDown(this);
 
     /**
      * Constructs a ramp that can be open/closed

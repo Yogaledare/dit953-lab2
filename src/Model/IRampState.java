@@ -1,3 +1,4 @@
+/*
 package Model;
 
 public interface IRampState {
@@ -6,6 +7,7 @@ public interface IRampState {
     void lower(double amount);
     void raise(double amount);
 }
+*/
 
 
 

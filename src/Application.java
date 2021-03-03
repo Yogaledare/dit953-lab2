@@ -36,7 +36,6 @@ public class Application {
         IModel model = new Model(cars, turbos);
 
         // First view is a full-blow MVC,
-        // includes a car-world, controls, speed-log
         makeView1(model);
 
         // Second view includes car-controls only

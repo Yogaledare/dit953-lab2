@@ -44,7 +44,7 @@ public interface IVehicle {
      * If speed > 0 then its moving.
      * @return true if currentspeed > 0
      */
-    boolean isMoving();
+//    boolean isMoving();
 
     /**
      * Start engine.

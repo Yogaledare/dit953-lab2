@@ -1,6 +1,6 @@
 package Model; /**
  * @author Niklas  Axelsson <gusaxenia@student.gu.se>
- * @author vehiclel    Stewart <gusstewca@student.gu.se>
+ * @author Carl    Stewart  <gusstewca@student.gu.se>
  * @author Marcus  Uppström <gusuppma@student.gu.se>
  * @version 0.1                 (current version number of program)
  */
@@ -43,7 +43,9 @@ public abstract class Vehicle implements IVehicle {
     /**
      * State of the engine.
      */
-    private boolean engineOn;
+//    private boolean engineOn;
+
+    private IVehicleState state;
 
     /**
      * Constructs a vehicle object with the specified modelYear, color, enginePower and nrDoors.
@@ -57,46 +59,113 @@ public abstract class Vehicle implements IVehicle {
         this.position = new Vector2D(0, 0);
         this.width = width;
         this.length = length;
-        stopEngine();
+        this.state = new VehicleStateOff();
+//        stopEngine();
     }
 
-    /**
-     * Returns the enginePower of the vehicle.
-     *
-     * @return the enginePower of the vehicle
-     */
-    public double getEnginePower() {
-        return enginePower;
-    }
-
-
-    /**
-     * Returns the current speed of the vehicle. The speed has a value between 0 and the enginePower of the vehicle.
-     *
-     * @return the current speed of the vehicle.
-     */
-    public double getCurrentSpeed() {
-        return currentSpeed;
-    }
 
     /**
      * Starts the vehicle by setting currentSpeed to 0.1.
-     * Change state of engine to on.
+     * Change state of vehicle to engine on.
      */
     public void startEngine() {
-        if (!engineOn)
-            currentSpeed = 0.1;
-        engineOn = true;
+        state.startEngine(this);
     }
 
     /**
-     * Stops the vehicle by setting currentSpeed to 0.
-     * change state of engine to off.
+     * Stops the vehicle by setting its speed to 0 and change state of vehicle to engine off.
      */
     public void stopEngine() {
-        engineOn = false;
-        currentSpeed = 0;
+        state.stopEngine(this);
     }
+
+    /**
+     * Increases the speed of the vehicle if it is in a state where the engine is on.
+     * @param amount a value between 0 and 1 representing how much the gas is pressed.
+     *               If a value outside [0,1] is given, the value is clamped to [0,1].
+     */
+    public void gas(double amount) {
+        state.gas(this, amount);
+    }
+
+
+    /**
+     * Decreases the speed of the vehicle if it is in moving state.
+     * @param amount a value between 0 and 1 representing how much the brake is pressed.
+     *               If a value outside [0,1] is given, the value is clamped to [0,1].
+     */
+    public void brake(double amount) {
+        state.brake(this, amount);
+    }
+
+    /**
+     * Turns the vehicle 90 degrees to the left.
+     */
+    public void turnLeft() {
+        state.turnLeft(this);
+    }
+
+    /**
+     * Turns the vehicle 90 degrees to the right.
+     */
+    public void turnRight() {
+        state.turnRight(this);
+    }
+
+    /**
+     * Turns the vehicle 180 degrees around.
+     */
+    public void turnAround() {
+        state.turnLeft(this);
+        state.turnLeft(this);
+    }
+
+    /**
+     * Moves the vehicle in its current direction by length = currentSpeed.
+     */
+    public void move() {
+        state.move(this);
+    }
+
+
+
+    public void respondToStateRequestMove() {
+        Vector2D step = direction.multiplyByScalar(currentSpeed);
+        position = position.plus(step);
+    }
+
+    public void respondToStateRequestTurnLeft() {
+        direction = direction.rotateCC(Math.PI / 2);
+    }
+
+    public void respondToStateRequestTurnRight() {
+        direction = direction.rotateCC(-Math.PI / 2);
+    }
+
+    public void respondToStateRequestTurnOnEngine() {
+        state = new VehicleStateOnStopped();
+    }
+
+    public void respondToStateRequestTurnOffEngine() {
+        this.currentSpeed = 0;
+        state = new VehicleStateOff();
+    }
+
+    public void respondToStateRequestGas(double amount) {
+        if (currentSpeed <= 0) {
+            state = new VehicleStateOnMoving();
+        }
+        incrementSpeed(Vector2D.clamp(amount, 0, 1), findSpeedFactor());
+    }
+
+    public void respondToStateRequestBrake(double amount) {
+        decrementSpeed(Vector2D.clamp(amount, 0, 1), findSpeedFactor());
+        if (currentSpeed <= 0) {
+            state = new VehicleStateOnStopped();
+        }
+    }
+
+
 
     /**
      * Increases the speed of the vehicle by the speed factor of the vehicle times a scale factor (amount).
@@ -105,8 +174,7 @@ public abstract class Vehicle implements IVehicle {
      * @param amount how much the speed should increase for every move.
      */
     private void incrementSpeed(double amount, double speedFactor) {
-        if (engineOn)
-            currentSpeed = Vector2D.clamp(getCurrentSpeed() + speedFactor * amount, 0, enginePower);
+        currentSpeed = Vector2D.clamp(getCurrentSpeed() + speedFactor * amount, 0, enginePower);
     }
 
     /**
@@ -116,74 +184,18 @@ public abstract class Vehicle implements IVehicle {
      * @param amount how much the speed should decrease for every move.
      */
     private void decrementSpeed(double amount, double speedFactor) {
-        if (engineOn)
         currentSpeed = Vector2D.clamp(getCurrentSpeed() - speedFactor * amount, 0, enginePower);
     }
 
     /**
-     * Increases the speed of the vehicle by calling incrementSpeed with amount as argument.
-     * Amount is clamped to the interval [0, 1].
+     * Abstract method for calculating speed factor.
      *
-     * @param amount a value between 0 and 1 representing how much the gas is pressed
+     * @return the speed factor of the veheicle.
      */
-    public void gas(double amount/*, double speedFactor*/) {
-        incrementSpeed(Vector2D.clamp(amount, 0, 1), findSpeedFactor());
-        // out text for debug only
-//        System.out.println("Gas: " + amount );
-    }
+    protected abstract double findSpeedFactor();
 
-    /**
-     * Decreases the speed of the vehicle by calling decrementSpeed with amount as argument.
-     * Amount is clamped to the interval [0, 1].
-     *
-     * @param amount a value between 0 and 1 representing how much the brake is pressed
-     */
 
-    public void brake(double amount/*, double speedFactor*/) {
-        decrementSpeed(Vector2D.clamp(amount, 0, 1), findSpeedFactor());
-    }
 
-    /**
-     * returns true if vehicle is moving.
-     *
-     * @return true if vehicle is moving.
-     */
-    public boolean isMoving() {
-        return currentSpeed > 0;
-    }
-
-    /**
-     * Moves the vehicle in its current direction by length = currentSpeed.
-     */
-    public void move() {
-        Vector2D step = direction.multiplyByScalar(currentSpeed);
-        position = position.plus(step);
-    }
-
-    /**
-     * Turns the vehicle 90 degrees to the left.
-     */
-    public void turnLeft() {
-        if (engineOn) {
-            direction = direction.rotateCC(Math.PI / 2);
-        }
-    }
-
-    /**
-     * Turns the vehicle 90 degrees to the right.
-     */
-    public void turnRight() {
-        if (engineOn) {
-            direction = direction.rotateCC(-Math.PI / 2);
-        }
-    }
-
-    //
-    public void turnAround() {
-        if (engineOn) {
-            direction = direction.rotateCC(-Math.PI);
-        }
-    }
 
     /**
      * Returns the direction vector of the vehicle.
@@ -222,6 +234,25 @@ public abstract class Vehicle implements IVehicle {
     }
 
     /**
+     * Returns the enginePower of the vehicle.
+     *
+     * @return the enginePower of the vehicle
+     */
+    public double getEnginePower() {
+        return enginePower;
+    }
+
+
+    /**
+     * Returns the current speed of the vehicle. The speed has a value between 0 and the enginePower of the vehicle.
+     *
+     * @return the current speed of the vehicle.
+     */
+    public double getCurrentSpeed() {
+        return currentSpeed;
+    }
+
+    /**
      * Set position of vehicle
      *
      * @param position sets the coordinates of the vehicle.
@@ -240,13 +271,32 @@ public abstract class Vehicle implements IVehicle {
         this.direction = new Vector2D(direction);
     }
 
-    /**
-     * Abstract method for calculating speed factor.
-     *
-     * @return the speed factor of the veheicle.
-     */
-    protected abstract double findSpeedFactor();
 
 
 }
+
+
+
+//        incrementSpeed(Vector2D.clamp(amount, 0, 1), findSpeedFactor());
+// out text for debug only
+//        System.out.println("Gas: " + amount );
+
+/*
+ *//**
+ * returns true if vehicle is moving.
+ *
+ * @return true if vehicle is moving.
+ *//*
+    public boolean isMoving() {
+        return currentSpeed > 0;
+    }*/
+
+
+
+
+
+/*    public void respondToStateRequestGasFromStopped(double amount) {
+        state = new VehicleStateOnMoving();
+        incrementSpeed(Vector2D.clamp(amount, 0, 1), findSpeedFactor());
+    }*/
 
