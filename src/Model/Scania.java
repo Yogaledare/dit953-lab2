@@ -2,29 +2,32 @@ package Model;
 
 import Model.Ramp.IRampState;
 import Model.Ramp.Ramp;
-import Model.Ramp.RampDrivingState;
-import Model.Ramp.RampLoweredState;
+import Model.Ramp.*;
 
 import java.awt.*;
 
 /**
  * A movable truck with a movable ramp
  */
-public class Scania extends Car implements IRampVehicle {
+public class Scania extends Car implements IRampVehicle, IRampVehicleStateRequestHandler {
 
     /**
      * Ramp component.
      */
     private final Ramp platform;
 
+    private final IRampState state;
+
+
     /**
      * Constructs a Scania truck object with the specified modelName, color, enginePower, nrDoors, width and length.
      * The initial position (x, y) and direction (x, y) of the object is set to (0, 0) and (0, 1).
      * @param position Init Scania with startup position.
      */
-    Scania(Vector2D position) {
-        super(80, 3, 7, "Scania", Color.blue, 2, position);
-        platform = new Ramp(70, 1);
+    Scania(Vector2D position, Vector2D direction, double currentSpeed, boolean engineOn, IRampState state, Ramp platform) {
+        super(position, direction, currentSpeed, engineOn, 80, 3, 7, "Scania", Color.blue, 2);
+        this.platform = platform;
+        this.state = state;
     }
 
 

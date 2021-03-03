@@ -1,6 +1,6 @@
 package Model.Ramp;
 
-import Model.Model;
+import Model.*;
 
 public interface IRampState {
 

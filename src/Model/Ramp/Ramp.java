@@ -19,7 +19,7 @@ public class Ramp {
      */
     private final double rampSpeed;
 
-    IRampState state = new RampLoweredState(this);
+//    IRampState state = new RampLoweredState(this);
 
     public Ramp(Ramp r ) {
         this.rampSpeed = r.rampSpeed;
@@ -38,12 +38,13 @@ public class Ramp {
         rampSpeed = speed;
     }
 
-    public void setState(IRampState state){
-        this.state = state;
-    }
-    public IRampState getState(){
-        return state;
-    }
+//    public void setState(IRampState state){
+//        this.state = state;
+//    }
+//
+//    public IRampState getState(){
+//        return state;
+//    }
 
     public void lower(double amount){
         rampAngle = Vector2D.clamp(rampAngle -= amount, 0, maxAngle);

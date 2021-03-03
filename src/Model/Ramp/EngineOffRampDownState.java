@@ -2,7 +2,7 @@ package Model.Ramp;
 
 import Model.IRampVehicleStateRequestHandler;
 
-public class RampMiddleState implements IRampState{
+public class EngineOffRampDownState implements IRampState {
 
 
     @Override
@@ -12,6 +12,7 @@ public class RampMiddleState implements IRampState{
 
     @Override
     public void startEngine(IRampVehicleStateRequestHandler context) {
+        context.respondToStateRequestTurnOnEngine();
 
     }
 
@@ -42,7 +43,7 @@ public class RampMiddleState implements IRampState{
 
     @Override
     public void lower(IRampVehicleStateRequestHandler context, double amount) {
-        context.respondToStateRequestLower(amount);
+
     }
 
     @Override
@@ -50,47 +51,4 @@ public class RampMiddleState implements IRampState{
         context.respondToStateRequestRaise(amount);
     }
 }
-
-
-
-/*   public RampMiddleState(Ramp ramp) {
-        super(ramp);
-    }
-
-    @Override
-    public void startEngine() {
-
-    }
-
-    @Override
-    public void stopEngine() {
-
-    }
-
-    @Override
-    public void gas() {
-
-    }
-
-    @Override
-    public void brake() {
-
-    }
-
-    @Override
-    public void lower(double amount) {
-        ramp.lower(amount);
-        if(ramp.isFullyLowered()){
-            ramp.setState(new RampLoweredState(ramp));
-        }
-    }
-
-    @Override
-    public void raise(double amount) {
-        ramp.raise(amount);
-        if(ramp.isFullyRaised()){
-            ramp.setState(new RampRaisedState(ramp));
-        }
-    }*/
-
 
