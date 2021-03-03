@@ -1,8 +1,8 @@
-package Model;
+package Model.Ramp;
 
-public class RampMiddleState extends RampState implements IRampState{
+public class RampLoweredState extends RampState implements IRampState{
 
-    public RampMiddleState(Ramp ramp) {
+    public RampLoweredState(Ramp ramp) {
         super(ramp);
     }
 
@@ -13,21 +13,17 @@ public class RampMiddleState extends RampState implements IRampState{
 
     @Override
     public boolean canStart() {
-        return false;
+        return true;
     }
-
 
     @Override
     public void lower(double amount) {
-        ramp.lower(amount);
-        if(ramp.isFullyLowered()){
-
-        }
+        ramp.lower(0);
     }
 
     @Override
     public void raise(double amount) {
-
+        ramp.raise(amount);
+        ramp.setState(new RampMiddleState(ramp));
     }
-
 }

@@ -1,5 +1,5 @@
-package Model;
-
+package Model.Ramp;
+import Model.Vector2D;
 /**
  * Class representing a ramp that can be raised or lowered
  */
@@ -32,6 +32,9 @@ public class Ramp {
 
     public void setState(IRampState state){
         this.state = state;
+    }
+    public IRampState getState(){
+        return state;
     }
 
     public void lower(double amount){

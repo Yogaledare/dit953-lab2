@@ -25,7 +25,7 @@ public class TestTransportTruck {
     @Test
     public void loadCarOntoTowTruckAndStartEngineWithoutClosingRamp() {
         towTruck.lowerRamp();
-        // System.out.println("Model.Model.Ramp is down?: " + towTruck.isFullyLowered());
+        // System.out.println("Model.Model.Ramp.Ramp is down?: " + towTruck.isFullyLowered());
         towTruck.store(new Volvo240(2, 4));
         towTruck.startEngine();
         assertFalse(towTruck.isMoving());

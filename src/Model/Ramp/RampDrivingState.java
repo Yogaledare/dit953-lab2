@@ -1,14 +1,13 @@
-package Model;
+package Model.Ramp;
 
-public class RampLoweredState extends RampState implements IRampState{
-
-    public RampLoweredState(Ramp ramp) {
+public class RampDrivingState extends RampState implements IRampState{
+    public RampDrivingState(Ramp ramp) {
         super(ramp);
     }
 
     @Override
     public boolean canMove() {
-        return false;
+        return true;
     }
 
     @Override
@@ -18,11 +17,11 @@ public class RampLoweredState extends RampState implements IRampState{
 
     @Override
     public void lower(double amount) {
-        return;
+        ramp.lower(0);
     }
 
     @Override
     public void raise(double amount) {
-
+        ramp.raise(0);
     }
 }

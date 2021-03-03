@@ -1,4 +1,6 @@
-package Model;
+package Model.Ramp;
+
+import Model.Model;
 
 public interface IRampState {
     boolean canMove();

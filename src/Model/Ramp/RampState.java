@@ -1,4 +1,4 @@
-package Model;
+package Model.Ramp;
 
 public abstract class RampState {
     protected final Ramp ramp;

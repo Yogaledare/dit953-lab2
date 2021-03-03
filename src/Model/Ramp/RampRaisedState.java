@@ -1,4 +1,4 @@
-package Model;
+package Model.Ramp;
 
 public class RampRaisedState extends RampState implements IRampState{
 
@@ -18,11 +18,12 @@ public class RampRaisedState extends RampState implements IRampState{
 
     @Override
     public void lower(double amount) {
-        return;
+        ramp.lower(amount);
+        ramp.setState(new RampMiddleState(ramp));
     }
 
     @Override
     public void raise(double amount) {
-        return;
+        ramp.raise(0);
     }
 }

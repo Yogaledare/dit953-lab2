@@ -1,5 +1,7 @@
 package Model;
 
+import Model.Ramp.Ramp;
+
 import java.awt.*;
 
 /**
@@ -14,7 +16,7 @@ public class TransportTruck<T extends ITransportable> extends Car implements ITr
     private final LIFO<T> storage;
 
     /**
-     * Model.Model.Ramp component
+     * Model.Model.Ramp.Ramp component
      */
     private final Ramp ramp;
 
@@ -42,7 +44,7 @@ public class TransportTruck<T extends ITransportable> extends Car implements ITr
         if (ramp.isFullyLowered() && item != this) {
             storage.store(item);
         } else {
-            System.err.println("Model.Model.Ramp is not down!");
+            System.err.println("Model.Model.Ramp.Ramp is not down!");
         }
     }
 
@@ -52,7 +54,7 @@ public class TransportTruck<T extends ITransportable> extends Car implements ITr
      */
     public T remove() {
         if (!ramp.isFullyLowered()) {
-            throw new IllegalStateException("Model.Model.Ramp not fully lowered");
+            throw new IllegalStateException("Model.Model.Ramp.Ramp not fully lowered");
         }
         return storage.remove();
     }
