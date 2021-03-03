@@ -30,6 +30,16 @@ public class Scania extends Car implements IRampVehicle, IRampVehicleStateReques
         this.state = state;
     }
 
+    Scania(Scania scania){
+        super(scania.getPosition(), scania.getDirection(), scania.getCurrentSpeed(), scania.isEngineOn(),
+                80, 3, 7, "Scania", Color.blue, 2);
+        platform = scania.getPlatform();
+        state = scania.getState();
+    }
+
+    Scania(Vector2D position, Vector2D direction, double currentSpeed, boolean engineOn) {
+
+    }
 
     /**
      * Returns the speed factor of the truck.

@@ -9,36 +9,36 @@ public interface IVehicle {
     /**
      * Moves the object.
      */
-    void move();
+    IVehicle move();
 
 
     /**
      * Turns the movable object 180 degree.
      */
-    void turnAround();
+    IVehicle turnAround();
 
     /**
      * Turns the object left.
      */
-    void turnLeft();
+    IVehicle turnLeft();
 
     /**
      * Turns the object right.
      */
-    void turnRight();
+    IVehicle turnRight();
 
 
     /**
      * Gas amount, between [0,1]
      * @param amount how much to accelerate.
      */
-    void gas(double amount);
+    IVehicle gas(double amount);
 
     /**
      * break amount, between [0,1]
      * @param amount how much to deaccelerate
      */
-    void brake(double amount);
+    IVehicle brake(double amount);
 
     /**
      * If speed > 0 then its moving.
@@ -49,12 +49,12 @@ public interface IVehicle {
     /**
      * Start engine.
      */
-    void startEngine();
+    IVehicle startEngine();
 
     /**
      * Stop engine.
      */
-    void stopEngine();
+    IVehicle stopEngine();
 
     /**
      * Returns current position

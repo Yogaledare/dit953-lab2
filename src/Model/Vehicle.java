@@ -14,7 +14,7 @@ public abstract class Vehicle implements IVehicle {
     /**
      * Current speed valid interval from 0 to Engine power
      */
-    private double currentSpeed;
+    private final double currentSpeed;
 
     /**
      * Engine power affects top speed, acceleration and deceleration
@@ -24,11 +24,11 @@ public abstract class Vehicle implements IVehicle {
     /**
      * Direction vector of the vehicle
      */
-    private Vector2D direction;
+    private final Vector2D direction;
     /**
      * Position vector of the vehicle
      */
-    private Vector2D position;
+    private final Vector2D position;
 
     /**
      * width of the vehicle in meter.
@@ -43,7 +43,7 @@ public abstract class Vehicle implements IVehicle {
     /**
      * State of the engine.
      */
-    private boolean engineOn;
+    private final boolean engineOn;
 
     /**
      * Constructs a vehicle object with the specified modelYear, color, enginePower and nrDoors.
@@ -51,13 +51,19 @@ public abstract class Vehicle implements IVehicle {
      *
      * @param enginePower the engine power of the vehicle
      */
-    public Vehicle(double enginePower, double width, double length) {
+    public Vehicle(Vector2D position, Vector2D direction, double currentSpeed,
+                   boolean engineOn, double enginePower, double width, double length) {
         this.enginePower = enginePower;
-        this.direction = new Vector2D(0, 1);
-        this.position = new Vector2D(0, 0);
+        this.position = position;
+        this.direction = direction;
         this.width = width;
         this.length = length;
-        stopEngine();
+        this.engineOn = engineOn;
+        this.currentSpeed = currentSpeed;
+    }
+
+    protected boolean isEngineOn() {
+        return engineOn;
     }
 
     /**
@@ -83,20 +89,26 @@ public abstract class Vehicle implements IVehicle {
      * Starts the vehicle by setting currentSpeed to 0.1.
      * Change state of engine to on.
      */
+    /*
     public void startEngine() {
         if (!engineOn)
             currentSpeed = 0.1;
         engineOn = true;
     }
+     */
+    public abstract IVehicle startEngine();
 
     /**
      * Stops the vehicle by setting currentSpeed to 0.
      * change state of engine to off.
      */
+    /*
     public void stopEngine() {
         engineOn = false;
         currentSpeed = 0;
     }
+     */
+    public abstract IVehicle stopEngine();
 
     /**
      * Increases the speed of the vehicle by the speed factor of the vehicle times a scale factor (amount).
@@ -104,32 +116,34 @@ public abstract class Vehicle implements IVehicle {
      *
      * @param amount how much the speed should increase for every move.
      */
+    /*
     private void incrementSpeed(double amount, double speedFactor) {
         if (engineOn)
             currentSpeed = Vector2D.clamp(getCurrentSpeed() + speedFactor * amount, 0, enginePower);
     }
-
+     */
+    abstract IVehicle incrementSpeed(double amount, double speedFactor);
     /**
      * Decreases the speed of the vehicle by the speed factor of the vehicle times a scale factor (amount).
      * The speed can not go below 0.
      *
      * @param amount how much the speed should decrease for every move.
      */
+    /*
     private void decrementSpeed(double amount, double speedFactor) {
         if (engineOn)
         currentSpeed = Vector2D.clamp(getCurrentSpeed() - speedFactor * amount, 0, enginePower);
     }
-
+     */
+    abstract IVehicle decrementSpeed(double amount, double speedFactor);
     /**
      * Increases the speed of the vehicle by calling incrementSpeed with amount as argument.
      * Amount is clamped to the interval [0, 1].
      *
      * @param amount a value between 0 and 1 representing how much the gas is pressed
      */
-    public void gas(double amount/*, double speedFactor*/) {
-        incrementSpeed(Vector2D.clamp(amount, 0, 1), findSpeedFactor());
-        // out text for debug only
-//        System.out.println("Gas: " + amount );
+    public IVehicle gas(double amount) {
+        return incrementSpeed(Vector2D.clamp(amount, 0, 1), findSpeedFactor());
     }
 
     /**
@@ -139,8 +153,8 @@ public abstract class Vehicle implements IVehicle {
      * @param amount a value between 0 and 1 representing how much the brake is pressed
      */
 
-    public void brake(double amount/*, double speedFactor*/) {
-        decrementSpeed(Vector2D.clamp(amount, 0, 1), findSpeedFactor());
+    public IVehicle brake(double amount) {
+        return decrementSpeed(Vector2D.clamp(amount, 0, 1), findSpeedFactor());
     }
 
     /**
@@ -155,35 +169,46 @@ public abstract class Vehicle implements IVehicle {
     /**
      * Moves the vehicle in its current direction by length = currentSpeed.
      */
+    /*
     public void move() {
         Vector2D step = direction.multiplyByScalar(currentSpeed);
         position = position.plus(step);
     }
+    */
+    public abstract IVehicle move();
 
     /**
      * Turns the vehicle 90 degrees to the left.
      */
+    /*
     public void turnLeft() {
         if (engineOn) {
             direction = direction.rotateCC(Math.PI / 2);
         }
     }
+    */
+    public abstract IVehicle turnLeft();
 
     /**
      * Turns the vehicle 90 degrees to the right.
      */
+    /*
     public void turnRight() {
         if (engineOn) {
             direction = direction.rotateCC(-Math.PI / 2);
         }
     }
+     */
+    public abstract IVehicle turnRight();
 
-    //
+    /*
     public void turnAround() {
         if (engineOn) {
             direction = direction.rotateCC(-Math.PI);
         }
     }
+     */
+    public abstract IVehicle turnAround();
 
     /**
      * Returns the direction vector of the vehicle.
@@ -226,19 +251,22 @@ public abstract class Vehicle implements IVehicle {
      *
      * @param position sets the coordinates of the vehicle.
      */
-
+    /*
     public void setPosition(Vector2D position) {
         this.position = new Vector2D(position);
     }
+    */
 
      /**
      * Set current direction of the vehicle.
      *
      * @param direction set a direction of length 1 in Model.Model.Vector2D.
      */
+    /*
     public void setDirection(Vector2D direction) {
         this.direction = new Vector2D(direction);
     }
+    */
 
     /**
      * Abstract method for calculating speed factor.

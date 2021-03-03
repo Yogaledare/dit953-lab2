@@ -23,19 +23,30 @@ public class TransportTruck<T extends ITransportable> extends Car implements ITr
     /**
      * Constructs a Transport truck with the specified enginePower, width length, capacity and max dimensions for
      * the stored units (witdth and length).
-     * @param enginePower the engine power of the truck.
-     * @param width the width of the truck.
-     * @param length the length of the truck.
      * @param capacity the storage capacity (in units) of the truck.
      * @param maxW max width of a stored item.
      * @param maxL max length of a stored item.
      */
-    public TransportTruck(double enginePower, double width, double length, int capacity, double maxW, double maxL) {
-        super(enginePower, width, length, "Transport Truck", Color.red, 2);
+    public TransportTruck(Vector2D position, Vector2D direction, double currentSpeed, boolean engineOn, int capacity, double maxW, double maxL) {
+        super(position, direction, currentSpeed, engineOn,
+                120, 4, 10, "Transport Truck", Color.pink, 2);
         storage = new LIFO<T>(capacity, maxW, maxL, 2, getPosition(), getDirection(), getLength());
         ramp = new Ramp(70, 1);
     }
 
+    public TransportTruck(Vector2D position, Vector2D direction, double currentSpeed, boolean engineOn, LIFO<T> storage, Ramp ramp) {
+        super(position, direction, currentSpeed, engineOn,
+                120, 4, 10, "Transport Truck", Color.pink, 2);
+        this.storage = storage;
+        this.ramp = ramp;
+    }
+
+    public TransportTruck(TransportTruck<T> truck){
+        super(truck.getPosition(), truck.getDirection(), truck.getCurrentSpeed(), truck.isEngineOn(),
+                120, 4, 10, "Transport Truck", Color.pink, 2);
+        storage = truck.storage;
+        ramp = truck.ramp;
+    }
 
     /**
      * Add an item to the storage.
@@ -100,10 +111,18 @@ public class TransportTruck<T extends ITransportable> extends Car implements ITr
      * Starts the truck by setting its speed to 0.1.
      */
     @Override
-    public void startEngine() {
+    public IVehicle startEngine() {
         if (ramp.isFullyRaised()) {
-            super.startEngine();
+            double speed = 0;
+            if(!isEngineOn())
+                speed = 0.1;
+            return new TransportTruck<T>(getPosition(), getDirection(), speed, true, storage, ramp);
         }
+    }
+
+    @Override
+    public IVehicle stopEngine(){
+        return new TransportTruck<T>(getPosition(), getDirection(), 0, false, storage, ramp);
     }
 
     /**
@@ -123,9 +142,29 @@ public class TransportTruck<T extends ITransportable> extends Car implements ITr
     }
 
     @Override
-    public void move() {
-        super.move();
+    IVehicle incrementSpeed(double amount, double speedFactor){
+        if(isEngineOn()){
+            double newSpeed = Vector2D.clamp(getCurrentSpeed() + speedFactor * amount, 0, getEnginePower());
+            return new TransportTruck<T>(getPosition(), getDirection(), newSpeed, isEngineOn(), storage, ramp);
+        }
+        return new TransportTruck<T>(this);
+    }
+
+    @Override
+    IVehicle decrementSpeed(double amount, double speedFactor){
+        if(isEngineOn()){
+            double newSpeed = Vector2D.clamp(getCurrentSpeed() - speedFactor * amount, 0, getEnginePower());
+            return new TransportTruck<T>(getPosition(), getDirection(), newSpeed, isEngineOn(), storage, ramp);
+        }
+        return new TransportTruck<T>(this);
+    }
+
+    @Override
+    public IVehicle move(){
+        Vector2D step = getDirection().multiplyByScalar(getCurrentSpeed());
+        Vector2D newPos = getPosition().plus(step);
         storage.getCarried(getPosition(), getDirection());
+        return new TransportTruck<T>(newPos, getDirection(), getCurrentSpeed(), isEngineOn(), storage, ramp);
     }
 
     @Override
@@ -133,6 +172,29 @@ public class TransportTruck<T extends ITransportable> extends Car implements ITr
         this.setPosition(position);
         this.setDirection(direction);
         storage.getCarried(position, direction);
+    }
 
+    @Override
+    public IVehicle turnLeft(){
+        Vector2D dir = getDirection();
+        if(isEngineOn())
+            dir = getDirection().rotateCC(Math.PI / 2);
+        return new TransportTruck<T>(getPosition(), dir, getCurrentSpeed(), isEngineOn(), storage, ramp);
+    }
+
+    @Override
+    public IVehicle turnRight(){
+        Vector2D dir = getDirection();
+        if(isEngineOn())
+            dir = getDirection().rotateCC(-Math.PI / 2);
+        return new TransportTruck<T>(getPosition(), dir, getCurrentSpeed(), isEngineOn(), storage, ramp);
+    }
+
+    @Override
+    public IVehicle turnAround(){
+        Vector2D dir = getDirection();
+        if(isEngineOn())
+            dir = getDirection().rotateCC(-Math.PI);
+        return new TransportTruck<T>(getPosition(), dir, getCurrentSpeed(), isEngineOn(), storage, ramp);
     }
 }

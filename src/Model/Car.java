@@ -14,7 +14,7 @@ public abstract class Car extends Vehicle implements ITransportable {
     /**
      * Color of car
      */
-    private Color color;
+    private final Color color;
 
     /**
      * Number of doors the car has
@@ -31,12 +31,12 @@ public abstract class Car extends Vehicle implements ITransportable {
      * @param nrDoors How many doors the car has
      */
     public Car(double enginePower, double width, double length, String modelName, Color color, int nrDoors){
-        super(enginePower, width, length);
+        super(new Vector2D(0, 0), new Vector2D(0, 0), enginePower, width, length);
         this.modelName = modelName;
         this.color = color;
         this.nrDoors = nrDoors;
-//        vehicle.setPosition(new Model.Model.Vector2D(0, 0));
     }
+
     /**
      * Creates a representation of a car
      * @param enginePower How powerful the car is
@@ -47,12 +47,13 @@ public abstract class Car extends Vehicle implements ITransportable {
      * @param nrDoors How many doors the car has
      * @param pos Where to place the car
      */
-    public Car(double enginePower, double width, double length, String modelName, Color color, int nrDoors, Vector2D pos){
-        super(enginePower, width, length);
+    public Car(Vector2D pos, Vector2D dir, double currentSpeed, boolean engineOn,
+               double enginePower, double width, double length, String modelName,
+               Color color, int nrDoors){
+        super(pos, dir, currentSpeed, engineOn, enginePower, width, length);
         this.modelName = modelName;
         this.color = color;
         this.nrDoors = nrDoors;
-        setPosition(pos);
     }
 
     /**
@@ -75,9 +76,10 @@ public abstract class Car extends Vehicle implements ITransportable {
      * Sets the color of car.
      * @param clr the new color of the car
      */
-    public void setColor(Color clr) {
+    /*public void setColor(Color clr) {
         color = clr;
     }
+     */
 
     /**
      * Returns the modelName of the car.
@@ -104,7 +106,6 @@ public abstract class Car extends Vehicle implements ITransportable {
         this.setPosition(position);
         this.setDirection(direction);
     }
-
 
 }
 
