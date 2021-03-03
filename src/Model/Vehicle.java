@@ -195,7 +195,7 @@ public abstract class Vehicle implements IVehicle {
     }
 
     /**
-     * Returns x and y coordinate of Model.Model.Vehicle
+     * Returns x and y coordinate of Vehicle
      *
      * @return Model.Model.Vector2D(x, y)
      */
@@ -204,7 +204,7 @@ public abstract class Vehicle implements IVehicle {
     }
 
     /**
-     * Model.Model.Vehicle width
+     * Vehicle width
      *
      * @return width of the vehicle
      */
@@ -213,7 +213,7 @@ public abstract class Vehicle implements IVehicle {
     }
 
     /**
-     * Model.Model.Vehicle length
+     * Vehicle length
      *
      * @return length of the vehicle
      */

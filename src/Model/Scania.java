@@ -12,7 +12,7 @@ public class Scania extends Car implements IRampVehicle {
      */
     private final Ramp platform;
     /**
-     * Constructs a Model.Model.Scania truck object with the specified modelName, color, enginePower, nrDoors, width and length.
+     * Constructs a Scania truck object with the specified modelName, color, enginePower, nrDoors, width and length.
      * The initial position (x, y) and direction (x, y) of the object is set to (0, 0) and (0, 1).
      * @param position Init Scania with startup position.
      */

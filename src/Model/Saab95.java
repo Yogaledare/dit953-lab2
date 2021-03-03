@@ -3,7 +3,7 @@ package Model;
 import java.awt.*;
 
 /**
- * A class representing a Model.Model.Saab95 car.
+ * A class representing a Saab95 car.
  */
 
 public class Saab95 extends Car implements ITurboVehicle {
@@ -14,7 +14,7 @@ public class Saab95 extends Car implements ITurboVehicle {
     private boolean turboOn;
 
     /**
-     * Constructs a Model.Model.Saab95 object with (hardcoded) presets for modelName, color, enginePower and nrDoors. Initializes
+     * Constructs a Saab95 object with (hardcoded) presets for modelName, color, enginePower and nrDoors. Initializes
      * turboOn to false.
      */
     Saab95(Vector2D position) {
