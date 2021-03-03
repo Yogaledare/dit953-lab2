@@ -18,16 +18,16 @@ public class Application {
         List<IRampVehicle> ramps = new ArrayList<>();
 
         // volvo
-        IVehicle volvo = CarFactory.createVolvo240(new Vector2D(0, 0));
+        IVehicle volvo = CarFactory.createVolvo240(new Vector2D(0, 0), new Vector2D(0, 0), 0, false);
         cars.add(volvo);
 
         // saab
-        ITurboVehicle saab95 = CarFactory.createSaab95(new Vector2D(100, 0));
+        ITurboVehicle saab95 = CarFactory.createSaab95(new Vector2D(100, 0), new Vector2D(0, 0), 0, false, true);
         cars.add(saab95);
         turbos.add(saab95);
 
         // scania
-        IRampVehicle scania = CarFactory.createScania(new Vector2D(200, 0));
+        IRampVehicle scania = CarFactory.createScania(new Vector2D(200, 0), new Vector2D(0, 0), 0, false);
         scania.lower(70);
         cars.add(scania);
         ramps.add(scania);
