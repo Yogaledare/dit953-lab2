@@ -1,6 +1,7 @@
 package Model.RampVehicle;
 
 import Model.Car;
+import Model.IVehicle;
 import Model.Vector2D;
 
 import java.awt.*;
@@ -23,7 +24,7 @@ public class RampVehicle extends Car implements IRampVehicle {
     }
 
     @Override
-    public IRampVehicle move() {
+    public IVehicle move() {
 
     }
 
