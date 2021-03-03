@@ -122,7 +122,7 @@ public abstract class Vehicle implements IVehicle {
             currentSpeed = Vector2D.clamp(getCurrentSpeed() + speedFactor * amount, 0, enginePower);
     }
      */
-    abstract IVehicle incrementSpeed(double amount, double speedFactor);
+    protected abstract IVehicle incrementSpeed(double amount, double speedFactor);
     /**
      * Decreases the speed of the vehicle by the speed factor of the vehicle times a scale factor (amount).
      * The speed can not go below 0.
@@ -135,7 +135,7 @@ public abstract class Vehicle implements IVehicle {
         currentSpeed = Vector2D.clamp(getCurrentSpeed() - speedFactor * amount, 0, enginePower);
     }
      */
-    abstract IVehicle decrementSpeed(double amount, double speedFactor);
+    protected abstract IVehicle decrementSpeed(double amount, double speedFactor);
     /**
      * Increases the speed of the vehicle by calling incrementSpeed with amount as argument.
      * Amount is clamped to the interval [0, 1].

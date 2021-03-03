@@ -98,7 +98,7 @@ public class Scania extends Car implements IRampVehicle, IRampVehicleStateReques
     }
 
     @Override
-    IVehicle incrementSpeed(double amount, double speedFactor) {
+    protected IVehicle incrementSpeed(double amount, double speedFactor) {
         if(isEngineOn()){
             double newSpeed = Vector2D.clamp(getCurrentSpeed() + speedFactor * amount, 0, getEnginePower());
             return new Scania(getPosition(), getDirection(), newSpeed, isEngineOn(), getState(), getPlatform());

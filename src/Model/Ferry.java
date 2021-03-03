@@ -126,7 +126,7 @@ public class Ferry<T extends ITransportable> extends Vehicle implements ITranspo
     }
 
     @Override
-    IVehicle incrementSpeed(double amount, double speedFactor){
+    protected IVehicle incrementSpeed(double amount, double speedFactor){
         if(isEngineOn()){
             double newSpeed = Vector2D.clamp(getCurrentSpeed() + speedFactor * amount, 0, getEnginePower());
             return new Ferry<T>(getPosition(), getDirection(), newSpeed, isEngineOn(), storage, ramp);
@@ -135,7 +135,7 @@ public class Ferry<T extends ITransportable> extends Vehicle implements ITranspo
     }
 
     @Override
-    IVehicle decrementSpeed(double amount, double speedFactor){
+    protected IVehicle decrementSpeed(double amount, double speedFactor){
         if(isEngineOn()){
             double newSpeed = Vector2D.clamp(getCurrentSpeed() - speedFactor * amount, 0, getEnginePower());
             return new Ferry<T>(getPosition(), getDirection(), newSpeed, isEngineOn(), storage, ramp);

@@ -20,8 +20,8 @@ public abstract class Car extends Vehicle implements ITransportable {
      * Number of doors the car has
      */
     private final int nrDoors;
-
-    /**
+/*
+    *//**
      * Creates a representation of a car
      * @param enginePower How powerful the car is
      * @param width How wide the car is
@@ -29,13 +29,13 @@ public abstract class Car extends Vehicle implements ITransportable {
      * @param modelName The name of the car
      * @param color The color of the car
      * @param nrDoors How many doors the car has
-     */
+     *//*
     public Car(double enginePower, double width, double length, String modelName, Color color, int nrDoors){
         super(new Vector2D(0, 0), new Vector2D(0, 0), enginePower, width, length);
         this.modelName = modelName;
         this.color = color;
         this.nrDoors = nrDoors;
-    }
+    }*/
 
     /**
      * Creates a representation of a car
