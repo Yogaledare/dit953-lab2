@@ -7,23 +7,47 @@ public class RampLoweredState extends RampState implements IRampState{
     }
 
     @Override
-    public boolean canMove() {
-        return false;
+    public void move() {
+
     }
 
     @Override
-    public boolean canStart() {
-        return true;
+    public void startEngine() {
+
+    }
+
+    @Override
+    public void stopEngine() {
+
+    }
+
+    @Override
+    public void gas() {
+
+    }
+
+    @Override
+    public void brake() {
+
+    }
+
+    @Override
+    public void turnLeft() {
+
+    }
+
+    @Override
+    public void turnRight() {
+
     }
 
     @Override
     public void lower(double amount) {
-        ramp.lower(0);
+        ramp.lower(amount);
     }
 
     @Override
     public void raise(double amount) {
         ramp.raise(amount);
-        ramp.setState(new RampMiddleState(ramp));
     }
 }

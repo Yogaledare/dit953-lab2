@@ -1,5 +1,7 @@
 package Model;
 
+import Model.Ramp.Ramp;
+
 /**
  * A movable ferry able to transport things
  * @param <T> the things to transport

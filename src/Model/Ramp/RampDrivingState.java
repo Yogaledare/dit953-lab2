@@ -1,27 +1,55 @@
 package Model.Ramp;
 
-public class RampDrivingState extends RampState implements IRampState{
+public class RampDrivingState extends RampState implements IRampState {
     public RampDrivingState(Ramp ramp) {
         super(ramp);
     }
 
     @Override
-    public boolean canMove() {
-        return true;
+    public void move() {
+        this.move();
     }
 
     @Override
-    public boolean canStart() {
-        return true;
+    public void startEngine() {
+        this.startEngine();
+
+    }
+
+    @Override
+    public void stopEngine() {
+        this.stopEngine();
+    }
+
+    @Override
+    public void gas() {
+        this.gas();
+    }
+
+    @Override
+    public void brake() {
+        this.brake();
+    }
+
+    @Override
+    public void turnLeft() {
+        this.turnLeft();
+    }
+
+    @Override
+    public void turnRight() {
+        this.turnRight();
     }
 
     @Override
     public void lower(double amount) {
-        ramp.lower(0);
+        // not possible to change ramp when car is moving.
+        // ramp.lower(0);
     }
 
     @Override
     public void raise(double amount) {
-        ramp.raise(0);
+        // not possible to change ramp when car is moving.
+        // ramp.raise(0);
     }
 }

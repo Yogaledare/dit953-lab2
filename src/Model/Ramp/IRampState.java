@@ -3,11 +3,22 @@ package Model.Ramp;
 import Model.Model;
 
 public interface IRampState {
-    boolean canMove();
-    boolean canStart();
-    void lower(double amount);
-    void raise(double amount);
+
+    void move(IRampVehicleStateRequestHandler context);
+
+    void startEngine(IRampVehicleStateRequestHandler context);
+    void stopEngine(IRampVehicleStateRequestHandler context);
+
+    void gas(IRampVehicleStateRequestHandler context, double amount);
+    void brake(IRampVehicleStateRequestHandler context, double amount);
+
+    void turnLeft(IRampVehicleStateRequestHandler context);
+    void turnRight(IRampVehicleStateRequestHandler context);
+
+    void lower(IRampVehicleStateRequestHandler context, double amount);
+    void raise(IRampVehicleStateRequestHandler context, double amount);
 }
+
 
 
 

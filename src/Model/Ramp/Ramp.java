@@ -3,7 +3,9 @@ import Model.Vector2D;
 /**
  * Class representing a ramp that can be raised or lowered
  */
+
 public class Ramp {
+
     /**
      * Maximum allowed angle of the ramp
      */
@@ -18,6 +20,12 @@ public class Ramp {
     private final double rampSpeed;
 
     IRampState state = new RampLoweredState(this);
+
+    public Ramp(Ramp r ) {
+        this.rampSpeed = r.rampSpeed;
+        this.rampAngle = r.rampAngle;
+        this.maxAngle = r.maxAngle;
+    }
 
     /**
      * Constructs a ramp that can be open/closed
