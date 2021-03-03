@@ -30,15 +30,17 @@ public class Scania extends Car implements IRampVehicle, IRampVehicleStateReques
         this.state = state;
     }
 
+    Scania(Vector2D position, Vector2D direction, double currentSpeed, boolean engineOn) {
+        super(position, direction, currentSpeed, engineOn, 80, 3, 7, "Scania", Color.blue, 2);
+        this.platform = new Ramp(70, 1);
+        this.state = new EngineOffRampDownState();
+    }
+
     Scania(Scania scania){
         super(scania.getPosition(), scania.getDirection(), scania.getCurrentSpeed(), scania.isEngineOn(),
                 80, 3, 7, "Scania", Color.blue, 2);
         platform = scania.getPlatform();
         state = scania.getState();
-    }
-
-    Scania(Vector2D position, Vector2D direction, double currentSpeed, boolean engineOn) {
-
     }
 
     /**
