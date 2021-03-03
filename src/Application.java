@@ -33,7 +33,7 @@ public class Application {
         ramps.add(scania);
 
         // Create MVC
-        IModel model = new Model(cars, turbos);
+        IModel model = new Model(cars, turbos, ramps);
 
         // First view is a full-blow MVC,
         // includes a car-world, controls, speed-log
