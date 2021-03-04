@@ -40,11 +40,6 @@ public interface IVehicle extends ICarable{
      */
     IVehicle brake(double amount);
 
-    /**
-     * If speed > 0 then its moving.
-     * @return true if currentspeed > 0
-     */
-    boolean isMoving();
 
     /**
      * Start engine.
@@ -55,6 +50,14 @@ public interface IVehicle extends ICarable{
      * Stop engine.
      */
     IVehicle stopEngine();
+
+    /**
+     * If speed > 0 then its moving.
+     * @return true if currentspeed > 0
+     */
+    boolean isMoving();
+
+
 
     /**
      * Returns current position

@@ -1,37 +1,46 @@
 package Model.RampVehicle;
 
-import Model.IVehicle;
-import Model.Ramp.Ramp;
+import Model.Ramp;
 
 public class RaisedRampState extends State {
 
     @Override
-    IVehicle startEngine(RampVehicle context) {
+    IRampVehicle startEngine(Scania context) {
         return context;
     }
 
     @Override
-    IVehicle stopEngine(RampVehicle context) {
+    IRampVehicle stopEngine(Scania context) {
         return context;
     }
 
     @Override
-    IVehicle move(RampVehicle context) {
+    IRampVehicle move(Scania context) {
         return context;
     }
 
     @Override
-    IVehicle turnLeft(RampVehicle context) {
+    IRampVehicle turnLeft(Scania context) {
         return context;
     }
 
     @Override
-    IVehicle turnRight(RampVehicle context) {
+    IRampVehicle turnRight(Scania context) {
         return context;
     }
 
     @Override
-    IVehicle turnAround(RampVehicle context) {
+    IRampVehicle turnAround(Scania context) {
+        return context;
+    }
+
+    @Override
+    IRampVehicle gas(Scania context, double amount) {
+        return context;
+    }
+
+    @Override
+    IRampVehicle brake(Scania context, double amount) {
         return context;
     }
 
@@ -39,6 +48,7 @@ public class RaisedRampState extends State {
     boolean isEngineOn() {
         return false;
     }
+
 
     @Override
     IRampVehicle raise(Scania context, double amount) {
@@ -58,16 +68,20 @@ public class RaisedRampState extends State {
         }
     }
 
-    @Override
-    IVehicle incrementSpeed(RampVehicle context, double amount, double speedFactor) {
+
+
+}
+
+
+/*    @Override
+    IRampVehicle incrementSpeed(RampVehicle context, double amount, double speedFactor) {
         return context;
     }
 
     @Override
-    IVehicle decrementSpeed(RampVehicle context, double amount, double speedFactor) {
+    IRampVehicle decrementSpeed(RampVehicle context, double amount, double speedFactor) {
         return context;
-    }
-}
+    }*/
 
 
 

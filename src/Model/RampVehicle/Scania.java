@@ -8,10 +8,6 @@ import java.awt.*;
 
 public class Scania extends Car implements IRampVehicle {
 
-//    final State engineOnState = new EngineOnState(this);
-//    final State engineOffLoweredRampState = new EngineOffLoweredRampState(this);
-//    final State raisedRampState = new RaisedRampState(this);
-
     final State state;
     final Ramp ramp;
 
@@ -24,6 +20,15 @@ public class Scania extends Car implements IRampVehicle {
         this.ramp = ramp;
     }
 
+    @Override
+    protected double getIncrementedSpeed(double amount, double speedFactor) {
+        return super.getIncrementedSpeed(amount, speedFactor);
+    }
+
+    @Override
+    protected double getDecrementSpeed(double amount, double speedFactor) {
+        return super.getDecrementSpeed(amount, speedFactor);
+    }
 
     @Override
     protected double findSpeedFactor() {
@@ -31,32 +36,30 @@ public class Scania extends Car implements IRampVehicle {
     }
 
     @Override
-    public IVehicle startEngine() {
-        return state.startEngine(this);
-    }
+    public IRampVehicle startEngine() { return state.startEngine(this); }
 
     @Override
-    public IVehicle stopEngine() {
+    public IRampVehicle stopEngine() {
         return state.stopEngine(this);
     }
 
     @Override
-    public IVehicle move() {
+    public IRampVehicle move() {
         return state.move(this);
     }
 
     @Override
-    public IVehicle turnLeft() {
+    public IRampVehicle turnLeft() {
         return state.turnLeft(this);
     }
 
     @Override
-    public IVehicle turnRight() {
+    public IRampVehicle turnRight() {
         return state.turnRight(this);
     }
 
     @Override
-    public IVehicle turnAround() {
+    public IRampVehicle turnAround() {
         return state.turnAround(this);
     }
 
@@ -71,21 +74,37 @@ public class Scania extends Car implements IRampVehicle {
     }
 
     @Override
+    public IRampVehicle gas(double amount) {
+        return state.gas(this, amount);
+    }
+
+    @Override
+    public IRampVehicle brake(double amount) {
+        return state.brake(this, amount);
+    }
+
+    @Override
     public boolean isEngineOn() {
         return state.isEngineOn();
     }
 
-    @Override
-    protected IVehicle incrementSpeed(double amount, double speedFactor) {
+
+}
+
+
+
+
+
+/*    @Override
+    protected IRampVehicle incrementSpeed(double amount, double speedFactor) {
         return state.incrementSpeed(this, amount, speedFactor);
     }
 
     @Override
-    protected IVehicle decrementSpeed(double amount, double speedFactor) {
+    protected IRampVehicle decrementSpeed(double amount, double speedFactor) {
         return state.decrementSpeed(this, amount, speedFactor);
-    }
+    }*/
 
-}
 
 
 /*    public RampVehicle(RampVehicle rampVehicle) {

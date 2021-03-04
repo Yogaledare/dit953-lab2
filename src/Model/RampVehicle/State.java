@@ -4,23 +4,24 @@ package Model.RampVehicle;
 public abstract class State {
 
 
-    abstract IVehicle startEngine(RampVehicle context);
+    abstract IRampVehicle startEngine(Scania context);
 
-    abstract IVehicle stopEngine(RampVehicle context);
+    abstract IRampVehicle stopEngine(Scania context);
 
-    abstract IVehicle move(RampVehicle context);
+    abstract IRampVehicle move(Scania context);
 
-    abstract IVehicle turnLeft(RampVehicle context);
+    abstract IRampVehicle turnLeft(Scania context);
 
-    abstract IVehicle turnRight(RampVehicle context);
+    abstract IRampVehicle turnRight(Scania context);
 
-    abstract IVehicle turnAround(RampVehicle context);
+    abstract IRampVehicle turnAround(Scania context);
+
+    abstract IRampVehicle gas(Scania context, double amount);
+
+    abstract IRampVehicle brake(Scania context, double amount);
 
     abstract boolean isEngineOn();
 
-    abstract IVehicle incrementSpeed(RampVehicle context, double amount, double speedFactor);
-
-    abstract IVehicle decrementSpeed(RampVehicle context, double amount, double speedFactor);
 
     abstract IRampVehicle raise(Scania context, double amount);
 

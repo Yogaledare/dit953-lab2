@@ -1,37 +1,46 @@
 package Model.RampVehicle;
 
-import Model.IVehicle;
-import Model.Ramp.Ramp;
+import Model.Ramp;
 
 public class EngineOffLoweredRampState extends State {
 
     @Override
-    IVehicle startEngine(RampVehicle context) {
-        return new RampVehicle(context.getPosition(), context.getDirection(), 0, new EngineOnState(), context.ramp);
+    IRampVehicle startEngine(Scania context) {
+        return new Scania(context.getPosition(), context.getDirection(), 0, new EngineOnState(), context.ramp);
     }
 
     @Override
-    IVehicle stopEngine(RampVehicle context) {
+    IRampVehicle stopEngine(Scania context) {
         return context;
     }
 
     @Override
-    IVehicle move(RampVehicle context) {
+    IRampVehicle move(Scania context) {
         return context;
     }
 
     @Override
-    IVehicle turnLeft(RampVehicle context) {
+    IRampVehicle turnLeft(Scania context) {
         return context;
     }
 
     @Override
-    IVehicle turnRight(RampVehicle context) {
+    IRampVehicle turnRight(Scania context) {
         return context;
     }
 
     @Override
-    IVehicle turnAround(RampVehicle context) {
+    IRampVehicle turnAround(Scania context) {
+        return context;
+    }
+
+    @Override
+    IRampVehicle gas(Scania context, double amount) {
+        return context;
+    }
+
+    @Override
+    IRampVehicle brake(Scania context, double amount) {
         return context;
     }
 
@@ -39,6 +48,7 @@ public class EngineOffLoweredRampState extends State {
     boolean isEngineOn() {
         return false;
     }
+
 
     @Override
     IRampVehicle raise(Scania context, double amount) {
@@ -56,18 +66,22 @@ public class EngineOffLoweredRampState extends State {
         return context;
     }
 
-    @Override
-    IVehicle incrementSpeed(RampVehicle context, double amount, double speedFactor) {
-        return context;
-    }
 
-    @Override
-    IVehicle decrementSpeed(RampVehicle context, double amount, double speedFactor) {
-        return context;
-    }
 
 
 }
+
+
+/*    @Override
+    IRampVehicle incrementSpeed(RampVehicle context, double amount, double speedFactor) {
+        return context;
+    }
+
+    @Override
+    IRampVehicle decrementSpeed(RampVehicle context, double amount, double speedFactor) {
+        return context;
+    }*/
+
 
 
 /*

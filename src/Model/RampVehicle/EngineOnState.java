@@ -1,47 +1,64 @@
 package Model.RampVehicle;
 
-import Model.IVehicle;
 import Model.Vector2D;
 
 public class EngineOnState extends State {
 
     @Override
-    IVehicle startEngine(RampVehicle context) {
+    IRampVehicle startEngine(Scania context) {
         return context;
     }
 
     @Override
-    IVehicle stopEngine(RampVehicle context) {
-        return new RampVehicle(context.getPosition(), context.getDirection(), 0, new EngineOffLoweredRampState(), context.ramp);
+    IRampVehicle stopEngine(Scania context) {
+        return new Scania(context.getPosition(), context.getDirection(), 0, new EngineOffLoweredRampState(), context.ramp);
     }
 
     @Override
-    IVehicle move(RampVehicle context) {
+    IRampVehicle move(Scania context) {
         Vector2D step = context.getDirection().multiplyByScalar(context.getCurrentSpeed());
         Vector2D newPos = context.getPosition().plus(step);
         return new Scania(newPos, context.getDirection(), context.getCurrentSpeed(), context.state, context.ramp);
     }
 
     @Override
-    IVehicle turnLeft(RampVehicle context) {
+    IRampVehicle turnLeft(Scania context) {
         Vector2D currentDirection = context.getDirection();
         Vector2D newDirection = currentDirection.rotateCC(Math.PI / 2);
         return new Scania(context.getPosition(), newDirection, context.getCurrentSpeed(), context.state, context.ramp);
     }
 
     @Override
-    IVehicle turnRight(RampVehicle context) {
+    IRampVehicle turnRight(Scania context) {
         Vector2D currentDirection = context.getDirection();
         Vector2D newDirection = currentDirection.rotateCC(-Math.PI / 2);
         return new Scania(context.getPosition(), newDirection, context.getCurrentSpeed(), context.state, context.ramp);
     }
 
     @Override
-    IVehicle turnAround(RampVehicle context) {
+    IRampVehicle turnAround(Scania context) {
         Vector2D currentDirection = context.getDirection();
         Vector2D newDirection = currentDirection.rotateCC(Math.PI );
         return new Scania(context.getPosition(), newDirection, context.getCurrentSpeed(), context.state, context.ramp);
     }
+
+    @Override
+    IRampVehicle gas(Scania context, double amount) {
+        double newSpeed = context.getIncrementedSpeed(amount, context.findSpeedFactor());
+        return new Scania(context.getPosition(), context.getDirection(), newSpeed, context.state, context.ramp);
+    }
+
+    @Override
+    IRampVehicle brake(Scania context, double amount) {
+        double newSpeed = context.getDecrementSpeed(amount, context.findSpeedFactor());
+        return new Scania(context.getPosition(), context.getDirection(), newSpeed, context.state, context.ramp);
+    }
+
+        @Override
+        boolean isEngineOn() {
+            return true;
+        }
+
 
     @Override
     IRampVehicle raise(Scania context, double amount) {
@@ -53,20 +70,22 @@ public class EngineOnState extends State {
         return context;
     }
 
-    @Override
-    boolean isEngineOn() {
-        return true;
-    }
 
-    @Override
-    IVehicle incrementSpeed(RampVehicle context, double amount, double speedFactor) {
+
+
+}
+
+
+
+/*    @Override
+    IRampVehicle incrementSpeed(RampVehicle context, double amount, double speedFactor) {
         double newSpeed = Vector2D.clamp(context.getCurrentSpeed() + speedFactor * amount, 0, context.getEnginePower());
         return new RampVehicle(context.getPosition(), context.getDirection(), newSpeed, context.state, context.ramp);
     }
 
     @Override
-    IVehicle decrementSpeed(RampVehicle context, double amount, double speedFactor) {
+    IRampVehicle decrementSpeed(RampVehicle context, double amount, double speedFactor) {
         double newSpeed = Vector2D.clamp(context.getCurrentSpeed() - speedFactor * amount, 0, context.getEnginePower());
         return new RampVehicle(context.getPosition(), context.getDirection(), newSpeed, context.state, context.ramp);
-    }
-}
+    }*/
+
