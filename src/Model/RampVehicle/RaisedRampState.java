@@ -1,6 +1,7 @@
 package Model.RampVehicle;
 
 import Model.Ramp;
+import Model.IRampVehicle;
 
 public class RaisedRampState extends State {
 

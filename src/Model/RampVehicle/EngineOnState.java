@@ -1,6 +1,7 @@
 package Model.RampVehicle;
 
 import Model.Vector2D;
+import Model.IRampVehicle;
 
 public class EngineOnState extends State {
 

@@ -7,5 +7,7 @@ public interface ITransportable {
     double getWidth();
     double getLength();
     Vector2D getPosition();
-    void getCarried(Vector2D position, Vector2D direction);
+//    void getCarried(Vector2D position, Vector2D direction);
+    <K extends ITransportable> ITransportable follow(ITransporter<K> transporter);
+
 }

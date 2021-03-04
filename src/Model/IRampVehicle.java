@@ -3,7 +3,7 @@ import Model.ICarable;
 
 public interface IRampVehicle extends ICarable {
 
-    boolean isFullyRaised();
+//     boolean isFullyRaised();
 
     IRampVehicle move();
 

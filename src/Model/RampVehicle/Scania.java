@@ -1,5 +1,6 @@
 package Model.RampVehicle;
 
+
 import Model.*;
 
 import java.awt.*;
@@ -72,6 +73,16 @@ public class Scania extends Car implements IRampVehicle {
     }
 
     @Override
+    public IRampVehicle gas(double amount) {
+        return state.gas(this, amount);
+    }
+
+    @Override
+    public IRampVehicle brake(double amount) {
+        return state.brake(this, amount);
+    }
+
+    @Override
     public boolean isEngineOn() {
         return state.isEngineOn();
     }
@@ -81,6 +92,21 @@ public class Scania extends Car implements IRampVehicle {
         return null;
     }
 }
+
+
+
+
+
+/*    @Override
+    protected IRampVehicle incrementSpeed(double amount, double speedFactor) {
+        return state.incrementSpeed(this, amount, speedFactor);
+    }
+
+    @Override
+    protected IRampVehicle decrementSpeed(double amount, double speedFactor) {
+        return state.decrementSpeed(this, amount, speedFactor);
+    }*/
+
 
 
 /*    public RampVehicle(RampVehicle rampVehicle) {

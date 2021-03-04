@@ -1,5 +1,6 @@
 package Model.RampVehicle;
 
+import Model.IRampVehicle;
 
 public abstract class State {
 
