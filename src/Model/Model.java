@@ -137,20 +137,20 @@ public class Model implements IModel {
         int x = cars.size() * 100;
         switch(i){
             case 0:
-                cars.add(CarFactory.createVolvo240(new Vector2D(x, 0)));
+                cars.add(CarFactory.createVolvo240(new Vector2D(x, 0), new Vector2D(0, 0), 0, false));
                 break;
             case 1:
-                ITurboVehicle saab = CarFactory.createSaab95(new Vector2D(x, 0));
+                ITurboVehicle saab = CarFactory.createSaab95(new Vector2D(x, 0), new Vector2D(0, 0), 0, false, true);
                 cars.add(saab);
                 carsWithTurbo.add(saab);
                 break;
             case 2:
-                IRampVehicle scania = CarFactory.createScania(new Vector2D(x, 0));
+                IRampVehicle scania = CarFactory.createScania(new Vector2D(x, 0), new Vector2D(0, 0), 0, false);
                 cars.add(scania);
                 carsWithRamp.add(scania);
                 break;
             default:
-                cars.add(CarFactory.createVolvo240(new Vector2D(x, 0)));
+                cars.add(CarFactory.createVolvo240(new Vector2D(x, 0), new Vector2D(0, 0), 0, false));
         }
     }
 
