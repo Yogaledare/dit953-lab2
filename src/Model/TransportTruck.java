@@ -203,4 +203,12 @@ public class TransportTruck<T extends ITransportable> extends Car implements ITr
             dir = getDirection().rotateCC(-Math.PI);
         return new TransportTruck<T>(getPosition(), dir, getCurrentSpeed(), isEngineOn(), storage, ramp);
     }
+
+    @Override
+    public <T extends ITransportable> T follow(ITransporter<T> transporter) {
+        storage.follow(transporter);
+        // uppdatera storage med ny pos.
+
+        return null;
+    }
 }

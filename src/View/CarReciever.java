@@ -1,5 +1,6 @@
 package View;
 
+import Model.ICarable;
 import Model.IVehicle;
 import Observer.EventObserver;
 import Observer.EventSource;
@@ -7,20 +8,20 @@ import Observer.EventSource;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CarReciever implements EventObserver<IVehicle> {
+public class CarReciever implements EventObserver<ICarable> {
 
     private final EventSource<IPaintable> paintUpdatedEvent = new EventSource<>();
     private final EventSource<ILoggable> loggUpdatedEvent = new EventSource<>();
 
-    public CarReciever(EventSource<IVehicle> modelUpdatedEvent){
+    public CarReciever(EventSource<ICarable> modelUpdatedEvent){
         modelUpdatedEvent.addSubscriber(this);
     }
 
     @Override
-    public void actOnPublish(List</*? extends */IVehicle> cars) {
+    public void actOnPublish(List<ICarable> cars) {
         List<IPaintable> paintables = new ArrayList<>();
         List<ILoggable> loggables = new ArrayList<>();
-        for (IVehicle car : cars) {
+        for (ICarable car : cars) {
             paintables.add(new PaintableWrapper(car));
             loggables.add(new LoggerWrapper(car));
         }

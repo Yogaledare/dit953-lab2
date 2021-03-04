@@ -10,7 +10,7 @@ public interface IModel {
     void lower();
     void setTurboOn();
     void setTurboOff();
-    EventSource<IVehicle> getModelUpdatedEvent();
+    EventSource<ICarable> getModelUpdatedEvent();
     void startTimer();
     void addCar();
     void removeCar();

@@ -56,6 +56,13 @@ public abstract class Car extends Vehicle implements ITransportable {
         this.nrDoors = nrDoors;
     }
 
+    public Car(Car car){
+        super(car.getPosition(), car.getDirection(), car.getCurrentSpeed(), car.isEngineOn(), car.getEnginePower(), car.getWidth(), car.getLength());
+        this.modelName = car.modelName;
+        this.color = car.color;
+        this.nrDoors = car.nrDoors;
+    }
+
     /**
      * Returns the number of doors of the car.
      * @return the number of doors of the car

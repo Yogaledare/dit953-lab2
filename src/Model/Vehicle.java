@@ -62,7 +62,7 @@ public abstract class Vehicle {
         this.currentSpeed = currentSpeed;
     }
 
-    protected boolean isEngineOn() {
+    public boolean isEngineOn() {
         return engineOn;
     }
 

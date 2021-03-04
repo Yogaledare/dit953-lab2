@@ -5,6 +5,10 @@ import View.*;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import java.util.HashMap;
+import java.util.Iterator;
 
 /**
  * This is the main application.
@@ -25,13 +29,15 @@ public class Application {
         // saab
         ITurboVehicle saab95 = CarFactory.createSaab95(new Vector2D(100, 0), new Vector2D(0, 0), 0, false, true);
         // cars.add(saab95);
-        turbos.add(saab95);
+        turbos.put(key, saab95);
+        allCars.put(key++, saab95);
 
         // scania
-        IRampVehicle scania = CarFactory.createScania(new Vector2D(200, 0), new Vector2D(0, 0), 0, false);
+        IRampVehicle scania = CarFactory.createScania(new Vector2D(200, 0), new Vector2D(0, 0), 0);
         scania.lower(70);
         // cars.add(scania);
-        ramps.add(scania);
+        ramps.put(key, scania);
+        allCars.put(key++, scania);
 
         // Create MVC
         IModel model = new Model(allCars,cars , turbos, ramps);
@@ -51,8 +57,6 @@ public class Application {
 
         // Class between model and view
         CarReciever reciever = new CarReciever(m.getModelUpdatedEvent());
-
-        List<JPanel> panels = new ArrayList<>();
 
         // The panel where the cars are drawn
         DrawPanel drawPanel = new DrawPanel(800, 800-240, reciever.getPaintUpdatedEvent());

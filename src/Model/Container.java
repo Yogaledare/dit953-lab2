@@ -69,29 +69,6 @@ public abstract class Container<T extends ITransportable> /*implements Transport
         return item;
     }
 
-    /**
-     * relocate updates stored items vectors.
-     * @param position the current positions of the holder parent.
-     * @param direction the current orientataion of the holder parent
-     */
-/*    public void relocate(Vector2D position, Vector2D direction) {
-        this.position = position;
-        this.direction = direction;
-        for (ITransportable item : holder) {
-            item.setPosition(position);
-            item.setDirection(direction);
-        }
-    }*/
-
-    public void getCarried(Vector2D position, Vector2D direction) {
-        this.position = position;
-        this.direction = direction;
-        for (ITransportable item : holder) {
-            getCarried(position, direction);
-        }
-
-    }
-
 
 
     /**

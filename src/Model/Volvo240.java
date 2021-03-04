@@ -5,7 +5,7 @@ import java.awt.*;
 /**
  * A class representing a Volvo240 car.
  */
-public class Volvo240 extends Car implements ITrim, IVehicle {
+public class Volvo240 extends Car implements ITrim {
 
 
     /**
@@ -35,7 +35,7 @@ public class Volvo240 extends Car implements ITrim, IVehicle {
     }
 
     @Override
-    public IVehicle startEngine(){
+    public ITrim startEngine(){
         double speed = 0;
         if(!isEngineOn())
             speed = 0.1;
@@ -43,33 +43,33 @@ public class Volvo240 extends Car implements ITrim, IVehicle {
     }
 
     @Override
-    public IVehicle stopEngine(){
+    public ITrim stopEngine(){
         return new Volvo240(getPosition(), getDirection(), 0, false);
     }
 
     @Override
-    public IVehicle gas(double amount) {
+    public ITrim gas(double amount) {
         return new Volvo240(getPosition(), getDirection(),
                 getIncrementedSpeed(Vector2D.clamp(amount, 0, 1), findSpeedFactor()),
                 isEngineOn());
     }
 
     @Override
-    public IVehicle brake(double amount) {
+    public ITrim brake(double amount) {
         return new Volvo240(getPosition(), getDirection(),
                 getDecrementSpeed(Vector2D.clamp(amount, 0, 1), findSpeedFactor()),
                 isEngineOn());
     }
 
     @Override
-    public IVehicle move(){
+    public ITrim move(){
         Vector2D step = getDirection().multiplyByScalar(getCurrentSpeed());
         Vector2D newPos = getPosition().plus(step);
         return new Volvo240(newPos, getDirection(), getCurrentSpeed(), isEngineOn());
     }
 
     @Override
-    public IVehicle turnLeft(){
+    public ITrim turnLeft(){
         Vector2D dir = getDirection();
         if(isEngineOn())
             dir = getDirection().rotateCC(Math.PI / 2);
@@ -77,7 +77,7 @@ public class Volvo240 extends Car implements ITrim, IVehicle {
     }
 
     @Override
-    public IVehicle turnRight(){
+    public ITrim turnRight(){
         Vector2D dir = getDirection();
         if(isEngineOn())
             dir = getDirection().rotateCC(-Math.PI / 2);
@@ -85,12 +85,16 @@ public class Volvo240 extends Car implements ITrim, IVehicle {
     }
 
     @Override
-    public IVehicle turnAround(){
+    public ITrim turnAround(){
         Vector2D dir = getDirection();
         if(isEngineOn())
             dir = getDirection().rotateCC(-Math.PI);
         return new Volvo240(getPosition(), dir, getCurrentSpeed(), isEngineOn());
     }
 
+    @Override
+    public <T extends ITransportable> T follow(ITransporter<T> transporter) {
+        return null;
+    }
 }
 

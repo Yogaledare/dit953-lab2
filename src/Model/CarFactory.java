@@ -5,7 +5,7 @@ import Model.RampVehicle.Scania;
 import Model.RampVehicle.State;
 
 public class CarFactory {
-    public static IVehicle createVolvo240(Vector2D position, Vector2D direction, double speed, boolean engineOn){
+    public static ITrim createVolvo240(Vector2D position, Vector2D direction, double speed, boolean engineOn){
         return new Volvo240(position, direction, speed, engineOn);
     }
 

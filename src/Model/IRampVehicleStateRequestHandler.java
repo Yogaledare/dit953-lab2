@@ -1,4 +1,5 @@
 package Model;
+import Model.RampVehicle.State;
 
 public interface IRampVehicleStateRequestHandler {
 
@@ -11,6 +12,6 @@ public interface IRampVehicleStateRequestHandler {
     IRampVehicle respondToStateRequestBrake(double amount);
     IRampVehicle respondToStateRequestLower(double amount);
     IRampVehicle respondToStateRequestRaise(double amount);
-    IRampVehicle setState(IRampState state);
+    IRampVehicle setState(State state);
 
 }

@@ -9,8 +9,11 @@ public interface ICarable {
      */
     boolean isMoving();
 
+
     ICarable move();
     ICarable turnAround();
+    ICarable turnRight();
+    ICarable turnLeft();
     ICarable startEngine();
     ICarable stopEngine();
     ICarable gas(double amount);

@@ -1,15 +1,12 @@
 package View;
-import Model.IVehicle;
+import Model.ICarable;
 import Model.Vector2D;
 
 public class PaintableWrapper implements IPaintable{
 
-//    private final String name;
-//    private final Vector2D pos;
+    private final ICarable car;
 
-    private IVehicle car;
-
-    public PaintableWrapper(IVehicle car){
+    public PaintableWrapper(ICarable car){
 
         this.car = car;
 //        name = car.getModelName();

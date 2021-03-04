@@ -12,7 +12,7 @@ public class GasPanel extends JPanel implements IGasPanel {
     JButton brakeButton = new JButton("Brake");
     JPanel gasSpinnerGroup = new JPanel();
 
-    public GasPanel(/*int minWidth, int minHeight*/) {
+    public GasPanel() {
         SpinnerModel spinnerModel = new SpinnerNumberModel(
                 0,       //initial value
                 0,    //min
