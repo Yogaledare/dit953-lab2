@@ -9,9 +9,9 @@ import java.awt.*;
 
 public class RampVehicle extends Car implements IRampVehicle {
 
-    State engineOnState = new EngineOnState(this);
-    State engineOffLoweredRampState = new EngineOffLoweredRampState(this);
-    State raisedRampState = new RaisedRampState(this);
+//    final State engineOnState = new EngineOnState(this);
+//    final State engineOffLoweredRampState = new EngineOffLoweredRampState(this);
+//    final State raisedRampState = new RaisedRampState(this);
 
     final State state;
     final Ramp ramp;
@@ -33,42 +33,42 @@ public class RampVehicle extends Car implements IRampVehicle {
 
     @Override
     public IVehicle startEngine() {
-        return state.startEngine();
+        return state.startEngine(this);
     }
 
     @Override
     public IVehicle stopEngine() {
-        return state.stopEngine();
+        return state.stopEngine(this);
     }
 
     @Override
     public IVehicle move() {
-        return state.move();
+        return state.move(this);
     }
 
     @Override
     public IVehicle turnLeft() {
-        return state.turnLeft();
+        return state.turnLeft(this);
     }
 
     @Override
     public IVehicle turnRight() {
-        return state.turnRight();
+        return state.turnRight(this);
     }
 
     @Override
     public IVehicle turnAround() {
-        return state.turnAround();
+        return state.turnAround(this);
     }
 
     @Override
     public IRampVehicle raise(double amount) {
-        return state.raise(amount);
+        return state.raise(this, amount);
     }
 
     @Override
     public IRampVehicle lower(double amount) {
-        return state.lower(amount);
+        return state.lower(this, amount);
     }
 
     @Override
@@ -78,12 +78,12 @@ public class RampVehicle extends Car implements IRampVehicle {
 
     @Override
     protected IVehicle incrementSpeed(double amount, double speedFactor) {
-        return state.incrementSpeed(amount, speedFactor);
+        return state.incrementSpeed(this, amount, speedFactor);
     }
 
     @Override
     protected IVehicle decrementSpeed(double amount, double speedFactor) {
-        return state.decrementSpeed(amount, speedFactor);
+        return state.decrementSpeed(this, amount, speedFactor);
     }
 
 }

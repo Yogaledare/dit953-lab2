@@ -5,33 +5,33 @@ import Model.Ramp.Ramp;
 
 public abstract class State {
 
-    RampVehicle context;
+//    RampVehicle context;
+//
+//    public State(RampVehicle context) {
+//        this.context = context;
+//    }
 
-    public State(RampVehicle context) {
-        this.context = context;
-    }
+    abstract IVehicle startEngine(RampVehicle context);
 
-    abstract IVehicle startEngine();
+    abstract IVehicle stopEngine(RampVehicle context);
 
-    abstract IVehicle stopEngine();
+    abstract IVehicle move(RampVehicle context);
 
-    abstract IVehicle move();
+    abstract IVehicle turnLeft(RampVehicle context);
 
-    abstract IVehicle turnLeft();
+    abstract IVehicle turnRight(RampVehicle context);
 
-    abstract IVehicle turnRight();
-
-    abstract IVehicle turnAround();
+    abstract IVehicle turnAround(RampVehicle context);
 
     abstract boolean isEngineOn();
 
-    abstract IVehicle incrementSpeed(double amount, double speedFactor);
+    abstract IVehicle incrementSpeed(RampVehicle context, double amount, double speedFactor);
 
-    abstract IVehicle decrementSpeed(double amount, double speedFactor);
+    abstract IVehicle decrementSpeed(RampVehicle context, double amount, double speedFactor);
 
-    abstract IRampVehicle raise(double amount);
+    abstract IRampVehicle raise(RampVehicle context, double amount);
 
-    abstract IRampVehicle lower(double amount);
+    abstract IRampVehicle lower(RampVehicle context, double amount);
 }
 
 /*

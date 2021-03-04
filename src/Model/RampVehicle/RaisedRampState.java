@@ -5,37 +5,33 @@ import Model.Ramp.Ramp;
 
 public class RaisedRampState extends State {
 
-    public RaisedRampState(RampVehicle context) {
-        super(context);
-    }
-
     @Override
-    IVehicle startEngine() {
+    IVehicle startEngine(RampVehicle context) {
         return context;
     }
 
     @Override
-    IVehicle stopEngine() {
+    IVehicle stopEngine(RampVehicle context) {
         return context;
     }
 
     @Override
-    IVehicle move() {
+    IVehicle move(RampVehicle context) {
         return context;
     }
 
     @Override
-    IVehicle turnLeft() {
+    IVehicle turnLeft(RampVehicle context) {
         return context;
     }
 
     @Override
-    IVehicle turnRight() {
+    IVehicle turnRight(RampVehicle context) {
         return context;
     }
 
     @Override
-    IVehicle turnAround() {
+    IVehicle turnAround(RampVehicle context) {
         return context;
     }
 
@@ -45,30 +41,30 @@ public class RaisedRampState extends State {
     }
 
     @Override
-    IRampVehicle raise(double amount) {
+    IRampVehicle raise(RampVehicle context, double amount) {
         Ramp raisedRamp = new Ramp(context.ramp);
         raisedRamp.raise(amount);
-        return new RampVehicle(context.getPosition(), context.getDirection(), 0, context.raisedRampState, raisedRamp);
+        return new RampVehicle(context.getPosition(), context.getDirection(), 0, new RaisedRampState(), raisedRamp);
     }
 
     @Override
-    IRampVehicle lower(double amount) {
+    IRampVehicle lower(RampVehicle context, double amount) {
         Ramp loweredRamp = new Ramp(context.ramp);
         loweredRamp.raise(amount);
         if (loweredRamp.isFullyLowered()) { // om rampen efter flyttning är helt nere
-            return new RampVehicle(context.getPosition(), context.getDirection(), 0, context.engineOffLoweredRampState, loweredRamp);
+            return new RampVehicle(context.getPosition(), context.getDirection(), 0, new EngineOffLoweredRampState(), loweredRamp);
         } else {
-            return new RampVehicle(context.getPosition(), context.getDirection(), 0, context.raisedRampState, loweredRamp);
+            return new RampVehicle(context.getPosition(), context.getDirection(), 0, new RaisedRampState(), loweredRamp);
         }
     }
 
     @Override
-    IVehicle incrementSpeed(double amount, double speedFactor) {
+    IVehicle incrementSpeed(RampVehicle context, double amount, double speedFactor) {
         return context;
     }
 
     @Override
-    IVehicle decrementSpeed(double amount, double speedFactor) {
+    IVehicle decrementSpeed(RampVehicle context, double amount, double speedFactor) {
         return context;
     }
 }

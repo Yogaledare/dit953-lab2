@@ -5,37 +5,33 @@ import Model.Ramp.Ramp;
 
 public class EngineOffLoweredRampState extends State {
 
-    public EngineOffLoweredRampState(RampVehicle context) {
-        super(context);
+    @Override
+    IVehicle startEngine(RampVehicle context) {
+        return new RampVehicle(context.getPosition(), context.getDirection(), 0, new EngineOnState(), context.ramp);
     }
 
     @Override
-    IVehicle startEngine() {
-        return new RampVehicle(context.getPosition(), context.getDirection(), 0, context.engineOnState, context.ramp);
-    }
-
-    @Override
-    IVehicle stopEngine() {
+    IVehicle stopEngine(RampVehicle context) {
         return context;
     }
 
     @Override
-    IVehicle move() {
+    IVehicle move(RampVehicle context) {
         return context;
     }
 
     @Override
-    IVehicle turnLeft() {
+    IVehicle turnLeft(RampVehicle context) {
         return context;
     }
 
     @Override
-    IVehicle turnRight() {
+    IVehicle turnRight(RampVehicle context) {
         return context;
     }
 
     @Override
-    IVehicle turnAround() {
+    IVehicle turnAround(RampVehicle context) {
         return context;
     }
 
@@ -45,28 +41,28 @@ public class EngineOffLoweredRampState extends State {
     }
 
     @Override
-    IRampVehicle raise(double amount) {
+    IRampVehicle raise(RampVehicle context, double amount) {
         Ramp raisedRamp = new Ramp(context.ramp);
         raisedRamp.raise(amount);
         if (raisedRamp.isFullyLowered()) { // om rampen fortfarande är helt nere. amount var 0
             return context;
         } else {
-            return new RampVehicle(context.getPosition(), context.getDirection(), 0, context.raisedRampState, raisedRamp);
+            return new RampVehicle(context.getPosition(), context.getDirection(), 0, new RaisedRampState(), raisedRamp);
         }
     }
 
     @Override
-    IRampVehicle lower(double amount) {
+    IRampVehicle lower(RampVehicle context, double amount) {
         return context;
     }
 
     @Override
-    IVehicle incrementSpeed(double amount, double speedFactor) {
+    IVehicle incrementSpeed(RampVehicle context, double amount, double speedFactor) {
         return context;
     }
 
     @Override
-    IVehicle decrementSpeed(double amount, double speedFactor) {
+    IVehicle decrementSpeed(RampVehicle context, double amount, double speedFactor) {
         return context;
     }
 
