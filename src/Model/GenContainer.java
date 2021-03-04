@@ -110,18 +110,18 @@ public class GenContainer<T extends ITransportable> implements ITransporter<T>, 
     //    @Override
 //    public <T extends ITransportable> T follow(ITransporter<T> transporter) {
 
-    public <K extends ITransportable> ITransportable follow(ITransporter<K> transporter) {
+    public ITransportable follow(ITransporter<ITransportable> transporter) {
         Vector2D newPosition = transporter.getPosition();
 
-
-        for (ITransportable item : holder) {
-            item.follow(transporter);
+        Deque<ITransportable> temp = new ArrayDeque<>(holder);
+        Deque<ITransportable> newDeque = new ArrayDeque<>();
+        while (!temp.isEmpty()) {
+            ITransportable item = temp.removeLast();
+            item = item.follow(transporter);
+            newDeque.add(item);
         }
 
-
-
-
-        return new GenContainer<T>(
-                capacity, maxWidth, maxLength, pickUpRange, newPosition, direction, length, width, holder);
+        return new GenContainer<>(
+                capacity, maxWidth, maxLength, pickUpRange, newPosition, direction, length, width, newDeque);
     }
 }

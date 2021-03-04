@@ -65,10 +65,31 @@ public abstract class Container<T extends ITransportable> /*implements Transport
         T item = findItemToRemove();
         Vector2D offset = findOffset();
         Vector2D unloadedPosition = item.getPosition().plus(offset);
-        // vill vi verkligen ha follow på ett item som skall "ejectas" ?
-        // item.follow(this);
-
+        item.getCarried(unloadedPosition, direction);
         return item;
+    }
+
+    /**
+     * relocate updates stored items vectors.
+     * @param position the current positions of the holder parent.
+     * @param direction the current orientataion of the holder parent
+     */
+/*    public void relocate(Vector2D position, Vector2D direction) {
+        this.position = position;
+        this.direction = direction;
+        for (ITransportable item : holder) {
+            item.setPosition(position);
+            item.setDirection(direction);
+        }
+    }*/
+
+    public void getCarried(Vector2D position, Vector2D direction) {
+        this.position = position;
+        this.direction = direction;
+        for (ITransportable item : holder) {
+            getCarried(position, direction);
+        }
+
     }
 
 
