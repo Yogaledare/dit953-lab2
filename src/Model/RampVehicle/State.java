@@ -29,6 +29,14 @@ public abstract class State {
 
     abstract IVehicle decrementSpeed(double amount, double speedFactor);
 
+    abstract IRampVehicle raise(double amount);
+
+    abstract IRampVehicle lower(double amount);
+}
+
+/*
+
+
     IRampVehicle raise(double amount) {
         Ramp raisedRamp = new Ramp(context.ramp);
         raisedRamp.raise(amount);
@@ -49,10 +57,8 @@ public abstract class State {
         }
     }
 
-}
 
-
-
+    */
 
 
 

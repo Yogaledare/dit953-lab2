@@ -1,6 +1,7 @@
 package Model.RampVehicle;
 
 import Model.IVehicle;
+import Model.Ramp.Ramp;
 
 public class RaisedRampState extends State {
 
@@ -44,6 +45,24 @@ public class RaisedRampState extends State {
     }
 
     @Override
+    IRampVehicle raise(double amount) {
+        Ramp raisedRamp = new Ramp(context.ramp);
+        raisedRamp.raise(amount);
+        return new RampVehicle(context.getPosition(), context.getDirection(), 0, context.raisedRampState, raisedRamp);
+    }
+
+    @Override
+    IRampVehicle lower(double amount) {
+        Ramp loweredRamp = new Ramp(context.ramp);
+        loweredRamp.raise(amount);
+        if (loweredRamp.isFullyLowered()) { // om rampen efter flyttning är helt nere
+            return new RampVehicle(context.getPosition(), context.getDirection(), 0, context.engineOffLoweredRampState, loweredRamp);
+        } else {
+            return new RampVehicle(context.getPosition(), context.getDirection(), 0, context.raisedRampState, loweredRamp);
+        }
+    }
+
+    @Override
     IVehicle incrementSpeed(double amount, double speedFactor) {
         return context;
     }
@@ -53,5 +72,34 @@ public class RaisedRampState extends State {
         return context;
     }
 }
+
+
+
+/*
+
+
+    IRampVehicle raise(double amount) {
+        Ramp raisedRamp = new Ramp(context.ramp);
+        raisedRamp.raise(amount);
+        if (raisedRamp.isFullyLowered()) { // om rampen fortfarande är helt nere. amount var 0
+            return new RampVehicle(context.getPosition(), context.getDirection(), 0, context.engineOffLoweredRampState, raisedRamp);
+        } else  {
+            return new RampVehicle(context.getPosition(), context.getDirection(), 0, context.raisedRampState, raisedRamp);
+        }
+    }
+
+    IRampVehicle lower(double amount) {
+        Ramp loweredRamp = new Ramp(context.ramp);
+        loweredRamp.raise(amount);
+        if (loweredRamp.isFullyLowered()) { // om rampen efter flyttning är helt nere
+            return new RampVehicle(context.getPosition(), context.getDirection(), 0, context.engineOffLoweredRampState, loweredRamp);
+        } else {
+            return new RampVehicle(context.getPosition(), context.getDirection(), 0, context.raisedRampState, loweredRamp);
+        }
+    }
+
+
+    */
+
 
 
