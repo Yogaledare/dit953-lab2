@@ -17,14 +17,16 @@ import java.util.Iterator;
 public class Application {
 
     public static void main(String[] args) {
-        List<ICarable> allCars = new ArrayList<>();
-        List<IVehicle> cars = new ArrayList<>();
-        List<ITurboVehicle> turbos = new ArrayList<>();
-        List<IRampVehicle> ramps = new ArrayList<>();
+        Map<Integer, ICarable> allCars = new HashMap<>();
+        Map<Integer,ITrim> cars = new HashMap<>();
+        Map<Integer,ITurboVehicle> turbos = new HashMap<>();
+        Map<Integer,IRampVehicle> ramps = new HashMap<>();
 
+        Integer key = 0;
         // volvo
-        IVehicle volvo = CarFactory.createVolvo240(new Vector2D(0, 0), new Vector2D(0, 0), 0, false);
-        cars.add(volvo);
+        ITrim volvo = CarFactory.createVolvo240(new Vector2D(0, 0), new Vector2D(0, 0), 0, false);
+        cars.put(key, volvo);
+        allCars.put(key++, volvo);
 
         // saab
         ITurboVehicle saab95 = CarFactory.createSaab95(new Vector2D(100, 0), new Vector2D(0, 0), 0, false, true);

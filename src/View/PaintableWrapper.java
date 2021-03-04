@@ -9,8 +9,7 @@ public class PaintableWrapper implements IPaintable{
     public PaintableWrapper(ICarable car){
 
         this.car = car;
-//        name = car.getModelName();
-//        pos = car.getPosition();
+
     }
 
     @Override

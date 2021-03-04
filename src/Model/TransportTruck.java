@@ -14,7 +14,7 @@ public class TransportTruck<T extends ITransportable> extends Car implements ITr
     private final LIFO<T> storage;
 
     /**
-     * Model.Model.Ramp.Ramp component
+     * Ramp component
      */
     private final Ramp ramp;
 
@@ -53,7 +53,7 @@ public class TransportTruck<T extends ITransportable> extends Car implements ITr
         if (ramp.isFullyLowered() && item != this) {
             storage.store(item);
         } else {
-            System.err.println("Model.Model.Ramp.Ramp is not down!");
+            System.err.println("Ramp is not down!");
         }
     }
 
@@ -63,7 +63,7 @@ public class TransportTruck<T extends ITransportable> extends Car implements ITr
      */
     public T remove() {
         if (!ramp.isFullyLowered()) {
-            throw new IllegalStateException("Model.Model.Ramp.Ramp not fully lowered");
+            throw new IllegalStateException("Ramp not fully lowered");
         }
         return storage.remove();
     }
@@ -125,13 +125,13 @@ public class TransportTruck<T extends ITransportable> extends Car implements ITr
     }
 
     @Override
-    public void lower(double amount) {
-
+    public IRampVehicle lower(double amount) {
+        return this.lower(amount);
     }
 
     @Override
-    public void raise(double amount) {
-
+    public IRampVehicle raise(double amount) {
+        return this.raise(amount);
     }
 
     /**
@@ -158,13 +158,13 @@ public class TransportTruck<T extends ITransportable> extends Car implements ITr
         return new TransportTruck<T>(newPos, getDirection(), getCurrentSpeed(), isEngineOn(), storage, ramp);
     }
 
-    @Override
-    public void getCarried(Vector2D position, Vector2D direction) {
-
-        // this.setPosition(position);
-        // this.setDirection(direction);
-        storage.getCarried(position, direction);
-    }
+//    @Override
+//    public void getCarried(Vector2D position, Vector2D direction) {
+//
+//        // this.setPosition(position);
+//        // this.setDirection(direction);
+//        storage.getCarried(position, direction);
+//    }
 
     @Override
     public IRampVehicle turnLeft(){

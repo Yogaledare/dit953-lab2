@@ -3,10 +3,17 @@ package Model;
 import Observer.EventSource;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import javax.swing.Timer;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Model implements IModel {
     private final int delay = 50;
@@ -38,6 +45,7 @@ public class Model implements IModel {
         this.carsWithTurbo = turbos;
     }
 
+
     public Model() {
         carMap = new HashMap<>();
 
@@ -53,7 +61,8 @@ public class Model implements IModel {
 
     /* Each step the TimerListener moves all the cars in the list and tells the
      * view to update its images. Change this method to your needs.
-     * */
+     *
+     */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent event) {
 
@@ -162,23 +171,25 @@ public class Model implements IModel {
     public void addCar() {
         Random r = new Random();
         int i = r.nextInt(3);
-        int x = allCars.size() * 100;
-        switch(i){
-            case 0:
-                cars.add(CarFactory.createVolvo240(new Vector2D(x, 0), new Vector2D(0, 0), 0, false));
-                break;
-            case 1:
+        int x = carMap.size() * 100;
+        switch (i) {
+            case 0 -> {
+                ITrim volvo = CarFactory.createVolvo240(new Vector2D(x, 0), new Vector2D(0, 0), 0, false);
+                carMap.put(volvo.hashCode(), volvo);
+                trimCars.put(volvo.hashCode(), volvo);
+            }
+            case 1 -> {
                 ITurboVehicle saab = CarFactory.createSaab95(new Vector2D(x, 0), new Vector2D(0, 0), 0, false, true);
-                // cars.add(saab);
-                carsWithTurbo.add(saab);
-                break;
-            case 2:
-                IRampVehicle scania = CarFactory.createScania(new Vector2D(x, 0), new Vector2D(0, 0), 0, false);
-                // cars.add(scania);
-                carsWithRamp.add(scania);
-                break;
-//            default:
-//                cars.add(CarFactory.createVolvo240(new Vector2D(x, 0), new Vector2D(0, 0), 0, false));
+                carMap.put(saab.hashCode(), saab);
+                carsWithTurbo.put(saab.hashCode(), saab);
+
+            }
+            case 2 -> {
+                IRampVehicle scania = CarFactory.createScania(new Vector2D(x, 0), new Vector2D(0, 0), 0);
+                carMap.put(scania.hashCode(), scania);
+                carsWithRamp.put(scania.hashCode(), scania);
+
+            }
         }
     }
 
@@ -203,4 +214,5 @@ public class Model implements IModel {
         }
          */
     }
+
 }

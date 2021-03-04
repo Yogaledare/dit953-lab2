@@ -31,7 +31,7 @@ public class LoggerPanel extends JPanel implements EventObserver<ILoggable> {
      * @param loggable, for each ILoggable object we update the view with new values.
      */
     @Override
-    public void actOnPublish(List</*? extends */ILoggable> loggable) {
+    public void actOnPublish(List<ILoggable> loggable) {
         StringBuilder res = new StringBuilder();
         DecimalFormat df = new DecimalFormat("###.#");
 

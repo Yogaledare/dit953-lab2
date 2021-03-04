@@ -21,15 +21,15 @@ public abstract class Car extends Vehicle implements ITransportable {
      */
     private final int nrDoors;
 /*
-    *//**
-     * Creates a representation of a car
-     * @param enginePower How powerful the car is
-     * @param width How wide the car is
-     * @param length How long the car is
-     * @param modelName The name of the car
-     * @param color The color of the car
-     * @param nrDoors How many doors the car has
-     *//*
+//    *//**
+//     * Creates a representation of a car
+//     * @param enginePower How powerful the car is
+//     * @param width How wide the car is
+//     * @param length How long the car is
+//     * @param modelName The name of the car
+//     * @param color The color of the car
+//     * @param nrDoors How many doors the car has
+//     *//*
     public Car(double enginePower, double width, double length, String modelName, Color color, int nrDoors){
         super(new Vector2D(0, 0), new Vector2D(0, 0), enginePower, width, length);
         this.modelName = modelName;
@@ -79,10 +79,10 @@ public abstract class Car extends Vehicle implements ITransportable {
         return color;
     }
 
-    /**
-     * Sets the color of car.
-     * @param clr the new color of the car
-     */
+//    /**
+//     * Sets the color of car.
+//     * @param clr the new color of the car
+//     */
     /*public void setColor(Color clr) {
         color = clr;
     }
@@ -110,11 +110,16 @@ public abstract class Car extends Vehicle implements ITransportable {
         return 0;
     }*/
 
+//    @Override
+//    public void getCarried(Vector2D position, Vector2D direction) {
+//        //this.setPosition(position);
+//        //this.setDirection(direction);
+//        //TODO: what do?
+//    }
+
     @Override
-    public void getCarried(Vector2D position, Vector2D direction) {
-        //this.setPosition(position);
-        //this.setDirection(direction);
-        //TODO: what do?
+    public <T extends ITransportable> T follow(ITransporter<T> transporter){
+        return null;
     }
 
 }

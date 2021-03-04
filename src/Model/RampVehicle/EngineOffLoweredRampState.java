@@ -1,6 +1,8 @@
 package Model.RampVehicle;
 
 import Model.Ramp;
+import Model.IRampVehicle;
+
 
 public class EngineOffLoweredRampState extends State {
 

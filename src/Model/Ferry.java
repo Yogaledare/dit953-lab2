@@ -4,7 +4,7 @@ package Model;
  * A movable ferry able to transport things
  * @param <T> the things to transport
  */
-public class Ferry<T extends ITransportable> extends Vehicle implements ITransporter<T>, IRampVehicle {
+public class Ferry<T extends ITransportable> extends Vehicle implements ITransporter<T>, ITransportable, IRampVehicle {
 
     /**
      * storage component
@@ -188,6 +188,13 @@ public class Ferry<T extends ITransportable> extends Vehicle implements ITranspo
             dir = getDirection().rotateCC(-Math.PI);
         return new Ferry<T>(getPosition(), dir, getCurrentSpeed(), isEngineOn(), storage, ramp);
     }
+
+    Override
+    public <T extends ITransportable> T follow(ITransporter<T> transporter) {
+        storage.follow(this);
+        return null;
+    }
+
 
 }
 
