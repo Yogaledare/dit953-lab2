@@ -1,12 +1,11 @@
 package Model;
 
-import javax.crypto.spec.IvParameterSpec;
 import java.awt.*;
 
 /**
  * A class representing a Volvo240 car.
  */
-public class Volvo240 extends Car implements ITrim {
+public class Volvo240 extends Car implements ITrim, IVehicle {
 
 
     /**
@@ -49,21 +48,17 @@ public class Volvo240 extends Car implements ITrim {
     }
 
     @Override
-    protected IVehicle incrementSpeed(double amount, double speedFactor){
-        if(isEngineOn()){
-            double newSpeed = Vector2D.clamp(getCurrentSpeed() + speedFactor * amount, 0, getEnginePower());
-            return new Volvo240(getPosition(), getDirection(), newSpeed, isEngineOn());
-        }
-        return new Volvo240(this);
+    public IVehicle gas(double amount) {
+        return new Volvo240(getPosition(), getDirection(),
+                getIncrementedSpeed(Vector2D.clamp(amount, 0, 1), findSpeedFactor()),
+                isEngineOn());
     }
 
     @Override
-    protected IVehicle decrementSpeed(double amount, double speedFactor){
-        if(isEngineOn()){
-            double newSpeed = Vector2D.clamp(getCurrentSpeed() - speedFactor * amount, 0, getEnginePower());
-            return new Volvo240(getPosition(), getDirection(), newSpeed, isEngineOn());
-        }
-        return new Volvo240(this);
+    public IVehicle brake(double amount) {
+        return new Volvo240(getPosition(), getDirection(),
+                getDecrementSpeed(Vector2D.clamp(amount, 0, 1), findSpeedFactor()),
+                isEngineOn());
     }
 
     @Override

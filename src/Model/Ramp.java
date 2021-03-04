@@ -1,5 +1,5 @@
-package Model.Ramp;
-import Model.Vector2D;
+package Model;
+
 /**
  * Class representing a ramp that can be raised or lowered
  */

@@ -41,20 +41,20 @@ public class RaisedRampState extends State {
     }
 
     @Override
-    IRampVehicle raise(RampVehicle context, double amount) {
+    IRampVehicle raise(Scania context, double amount) {
         Ramp raisedRamp = new Ramp(context.ramp);
         raisedRamp.raise(amount);
-        return new RampVehicle(context.getPosition(), context.getDirection(), 0, new RaisedRampState(), raisedRamp);
+        return new Scania(context.getPosition(), context.getDirection(), 0, new RaisedRampState(), raisedRamp);
     }
 
     @Override
-    IRampVehicle lower(RampVehicle context, double amount) {
+    IRampVehicle lower(Scania context, double amount) {
         Ramp loweredRamp = new Ramp(context.ramp);
         loweredRamp.raise(amount);
         if (loweredRamp.isFullyLowered()) { // om rampen efter flyttning är helt nere
-            return new RampVehicle(context.getPosition(), context.getDirection(), 0, new EngineOffLoweredRampState(), loweredRamp);
+            return new Scania(context.getPosition(), context.getDirection(), 0, new EngineOffLoweredRampState(), loweredRamp);
         } else {
-            return new RampVehicle(context.getPosition(), context.getDirection(), 0, new RaisedRampState(), loweredRamp);
+            return new Scania(context.getPosition(), context.getDirection(), 0, new RaisedRampState(), loweredRamp);
         }
     }
 

@@ -11,7 +11,7 @@ public class Saab95 extends Car implements ITurboVehicle {
     /**
      * True if turbo is on or not.
      */
-    private boolean turboOn;
+    private final boolean turboOn;
 
     /**
      * Constructs a Saab95 object with (hardcoded) presets for modelName, color, enginePower and nrDoors. Initializes
@@ -70,7 +70,7 @@ public class Saab95 extends Car implements ITurboVehicle {
     }
 
     @Override
-    public IVehicle startEngine(){
+    public ITurboVehicle startEngine(){
         double speed = 0;
         if(!isEngineOn())
             speed = 0.1;
@@ -78,36 +78,18 @@ public class Saab95 extends Car implements ITurboVehicle {
     }
 
     @Override
-    public IVehicle stopEngine(){
+    public ITurboVehicle stopEngine(){
         return new Saab95(getPosition(), getDirection(), 0, false, getTurboOn());
     }
 
-    @Override
-    protected IVehicle incrementSpeed(double amount, double speedFactor){
-        if(isEngineOn()){
-            double newSpeed = Vector2D.clamp(getCurrentSpeed() + speedFactor * amount, 0, getEnginePower());
-            return new Saab95(getPosition(), getDirection(), newSpeed, isEngineOn(), getTurboOn());
-        }
-        return new Saab95(this);
-    }
-
-    @Override
-    protected IVehicle decrementSpeed(double amount, double speedFactor){
-        if(isEngineOn()){
-            double newSpeed = Vector2D.clamp(getCurrentSpeed() - speedFactor * amount, 0, getEnginePower());
-            return new Saab95(getPosition(), getDirection(), newSpeed, isEngineOn(), getTurboOn());
-        }
-        return new Saab95(this);
-    }
-
-    public IVehicle move(){
+    public ITurboVehicle move(){
         Vector2D step = getDirection().multiplyByScalar(getCurrentSpeed());
         Vector2D newPos = getPosition().plus(step);
         return new Saab95(newPos, getDirection(), getCurrentSpeed(), isEngineOn(), getTurboOn());
     }
 
     @Override
-    public IVehicle turnLeft(){
+    public ITurboVehicle turnLeft(){
         Vector2D dir = getDirection();
         if(isEngineOn())
             dir = getDirection().rotateCC(Math.PI / 2);
@@ -115,7 +97,7 @@ public class Saab95 extends Car implements ITurboVehicle {
     }
 
     @Override
-    public IVehicle turnRight(){
+    public ITurboVehicle turnRight(){
         Vector2D dir = getDirection();
         if(isEngineOn())
             dir = getDirection().rotateCC(-Math.PI / 2);
@@ -123,7 +105,21 @@ public class Saab95 extends Car implements ITurboVehicle {
     }
 
     @Override
-    public IVehicle turnAround(){
+    public ITurboVehicle gas(double amount) {
+        return new Saab95(getPosition(), getDirection(),
+                getIncrementedSpeed(Vector2D.clamp(amount, 0, 1), findSpeedFactor()) ,
+                isEngineOn(), turboOn);
+    }
+
+    @Override
+    public ITurboVehicle brake(double amount) {
+        return new Saab95(getPosition(), getDirection(),
+                getDecrementSpeed(Vector2D.clamp(amount, 0, 1), findSpeedFactor()),
+                isEngineOn(), turboOn);
+    }
+
+    @Override
+    public ITurboVehicle turnAround(){
         Vector2D dir = getDirection();
         if(isEngineOn())
             dir = getDirection().rotateCC(-Math.PI);

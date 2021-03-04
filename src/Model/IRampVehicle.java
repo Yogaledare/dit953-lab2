@@ -1,6 +1,6 @@
 package Model;
 
-public interface IRampVehicle extends IVehicle {
+public interface IRampVehicle {
 
     public void lower(double amount);
 
@@ -8,6 +8,13 @@ public interface IRampVehicle extends IVehicle {
 
     boolean isFullyRaised();
 
-
+    IRampVehicle move();
+    IRampVehicle turnAround();
+    IRampVehicle turnLeft();
+    IRampVehicle turnRight();
+    IRampVehicle gas(double amount);
+    IRampVehicle brake(double amount);
+    IRampVehicle startEngine();
+    IRampVehicle stopEngine();
 
 }

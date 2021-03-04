@@ -105,8 +105,9 @@ public abstract class Car extends Vehicle implements ITransportable {
 
     @Override
     public void getCarried(Vector2D position, Vector2D direction) {
-        this.setPosition(position);
-        this.setDirection(direction);
+        //this.setPosition(position);
+        //this.setDirection(direction);
+        //TODO: what do?
     }
 
 }

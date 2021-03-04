@@ -6,7 +6,8 @@ import Model.Ramp.Ramp;
  * A movable ferry able to transport things
  * @param <T> the things to transport
  */
-public class Ferry<T extends ITransportable> extends Vehicle implements ITransporter<T> {
+public class Ferry<T extends ITransportable> extends Vehicle implements ITransporter<T>, IRampVehicle {
+
     /**
      * storage component
      */
@@ -126,21 +127,18 @@ public class Ferry<T extends ITransportable> extends Vehicle implements ITranspo
     }
 
     @Override
-    protected IVehicle incrementSpeed(double amount, double speedFactor){
-        if(isEngineOn()){
-            double newSpeed = Vector2D.clamp(getCurrentSpeed() + speedFactor * amount, 0, getEnginePower());
-            return new Ferry<T>(getPosition(), getDirection(), newSpeed, isEngineOn(), storage, ramp);
-        }
-        return new Ferry<T>(this);
+    public void lower(double amount) {
+
     }
 
     @Override
-    protected IVehicle decrementSpeed(double amount, double speedFactor){
-        if(isEngineOn()){
-            double newSpeed = Vector2D.clamp(getCurrentSpeed() - speedFactor * amount, 0, getEnginePower());
-            return new Ferry<T>(getPosition(), getDirection(), newSpeed, isEngineOn(), storage, ramp);
-        }
-        return new Ferry<T>(this);
+    public void raise(double amount) {
+
+    }
+
+    @Override
+    public boolean isFullyRaised() {
+        return false;
     }
 
     /**
@@ -168,6 +166,20 @@ public class Ferry<T extends ITransportable> extends Vehicle implements ITranspo
         if(isEngineOn())
             dir = getDirection().rotateCC(-Math.PI / 2);
         return new Ferry<T>(getPosition(), dir, getCurrentSpeed(), isEngineOn(), storage, ramp);
+    }
+
+    @Override
+    public IRampVehicle gas(double amount) {
+        return new Ferry<T>(getPosition(), getDirection(),
+                getIncrementedSpeed(Vector2D.clamp(amount, 0, 1), findSpeedFactor()),
+                isEngineOn(), storage, ramp);
+    }
+
+    @Override
+    public IRampVehicle brake(double amount) {
+        return new Ferry<T>(getPosition(), getDirection(),
+                getDecrementSpeed(Vector2D.clamp(amount, 0, 1), findSpeedFactor()),
+                isEngineOn(), storage, ramp);
     }
 
     @Override

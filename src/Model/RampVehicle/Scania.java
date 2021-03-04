@@ -1,13 +1,12 @@
 package Model.RampVehicle;
 
 import Model.Car;
-import Model.IVehicle;
-import Model.Ramp.Ramp;
+import Model.Ramp;
 import Model.Vector2D;
 
 import java.awt.*;
 
-public class RampVehicle extends Car implements IRampVehicle {
+public class Scania extends Car implements IRampVehicle {
 
 //    final State engineOnState = new EngineOnState(this);
 //    final State engineOffLoweredRampState = new EngineOffLoweredRampState(this);
@@ -16,7 +15,7 @@ public class RampVehicle extends Car implements IRampVehicle {
     final State state;
     final Ramp ramp;
 
-    public RampVehicle(Vector2D position, Vector2D direction, double speed, State state, Ramp ramp) {
+    public Scania(Vector2D position, Vector2D direction, double speed, State state, Ramp ramp) {
         super(
                 position, direction,
                 speed, state.isEngineOn(),

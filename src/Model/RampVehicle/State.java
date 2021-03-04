@@ -29,9 +29,9 @@ public abstract class State {
 
     abstract IVehicle decrementSpeed(RampVehicle context, double amount, double speedFactor);
 
-    abstract IRampVehicle raise(RampVehicle context, double amount);
+    abstract IRampVehicle raise(Scania context, double amount);
 
-    abstract IRampVehicle lower(RampVehicle context, double amount);
+    abstract IRampVehicle lower(Scania context, double amount);
 }
 
 /*

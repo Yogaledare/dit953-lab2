@@ -1,7 +1,5 @@
 package Model;
 
-import Model.Ramp.IRampState;
-
 public interface IRampVehicleStateRequestHandler {
 
     IRampVehicle respondToStateRequestMove();

@@ -19,37 +19,37 @@ public class EngineOnState extends State {
     IVehicle move(RampVehicle context) {
         Vector2D step = context.getDirection().multiplyByScalar(context.getCurrentSpeed());
         Vector2D newPos = context.getPosition().plus(step);
-        return new RampVehicle(newPos, context.getDirection(), context.getCurrentSpeed(), context.state, context.ramp);
+        return new Scania(newPos, context.getDirection(), context.getCurrentSpeed(), context.state, context.ramp);
     }
 
     @Override
     IVehicle turnLeft(RampVehicle context) {
         Vector2D currentDirection = context.getDirection();
         Vector2D newDirection = currentDirection.rotateCC(Math.PI / 2);
-        return new RampVehicle(context.getPosition(), newDirection, context.getCurrentSpeed(), context.state, context.ramp);
+        return new Scania(context.getPosition(), newDirection, context.getCurrentSpeed(), context.state, context.ramp);
     }
 
     @Override
     IVehicle turnRight(RampVehicle context) {
         Vector2D currentDirection = context.getDirection();
         Vector2D newDirection = currentDirection.rotateCC(-Math.PI / 2);
-        return new RampVehicle(context.getPosition(), newDirection, context.getCurrentSpeed(), context.state, context.ramp);
+        return new Scania(context.getPosition(), newDirection, context.getCurrentSpeed(), context.state, context.ramp);
     }
 
     @Override
     IVehicle turnAround(RampVehicle context) {
         Vector2D currentDirection = context.getDirection();
         Vector2D newDirection = currentDirection.rotateCC(Math.PI );
-        return new RampVehicle(context.getPosition(), newDirection, context.getCurrentSpeed(), context.state, context.ramp);
+        return new Scania(context.getPosition(), newDirection, context.getCurrentSpeed(), context.state, context.ramp);
     }
 
     @Override
-    IRampVehicle raise(RampVehicle context, double amount) {
+    IRampVehicle raise(Scania context, double amount) {
         return context;
     }
 
     @Override
-    IRampVehicle lower(RampVehicle context, double amount) {
+    IRampVehicle lower(Scania context, double amount) {
         return context;
     }
 

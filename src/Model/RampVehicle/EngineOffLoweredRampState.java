@@ -41,18 +41,18 @@ public class EngineOffLoweredRampState extends State {
     }
 
     @Override
-    IRampVehicle raise(RampVehicle context, double amount) {
+    IRampVehicle raise(Scania context, double amount) {
         Ramp raisedRamp = new Ramp(context.ramp);
         raisedRamp.raise(amount);
         if (raisedRamp.isFullyLowered()) { // om rampen fortfarande är helt nere. amount var 0
             return context;
         } else {
-            return new RampVehicle(context.getPosition(), context.getDirection(), 0, new RaisedRampState(), raisedRamp);
+            return new Scania(context.getPosition(), context.getDirection(), 0, new RaisedRampState(), raisedRamp);
         }
     }
 
     @Override
-    IRampVehicle lower(RampVehicle context, double amount) {
+    IRampVehicle lower(Scania context, double amount) {
         return context;
     }
 

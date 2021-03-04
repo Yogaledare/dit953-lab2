@@ -1,14 +1,12 @@
 package Model;
 
-import Model.Ramp.Ramp;
-
 import java.awt.*;
 
 /**
  * A movable truck with storage
  * @param <T> the things to store
  */
-public class TransportTruck<T extends ITransportable> extends Car implements ITransporter<T>, ITransportable /*, Model.Model.Transportable, IStorageUnit<T>, AuxPlatform */ {
+public class TransportTruck<T extends ITransportable> extends Car implements ITransporter<T>, ITransportable, IRampVehicle {
 
     /**
      * Storage component
@@ -111,7 +109,7 @@ public class TransportTruck<T extends ITransportable> extends Car implements ITr
      * Starts the truck by setting its speed to 0.1.
      */
     @Override
-    public IVehicle startEngine() {
+    public IRampVehicle startEngine() {
         if (ramp.isFullyRaised()) {
             double speed = 0;
             if(!isEngineOn())
@@ -122,8 +120,18 @@ public class TransportTruck<T extends ITransportable> extends Car implements ITr
     }
 
     @Override
-    public IVehicle stopEngine(){
+    public IRampVehicle stopEngine(){
         return new TransportTruck<T>(getPosition(), getDirection(), 0, false, storage, ramp);
+    }
+
+    @Override
+    public void lower(double amount) {
+
+    }
+
+    @Override
+    public void raise(double amount) {
+
     }
 
     /**
@@ -143,25 +151,7 @@ public class TransportTruck<T extends ITransportable> extends Car implements ITr
     }
 
     @Override
-    protected IVehicle incrementSpeed(double amount, double speedFactor){
-        if(isEngineOn()){
-            double newSpeed = Vector2D.clamp(getCurrentSpeed() + speedFactor * amount, 0, getEnginePower());
-            return new TransportTruck<T>(getPosition(), getDirection(), newSpeed, isEngineOn(), storage, ramp);
-        }
-        return new TransportTruck<T>(this);
-    }
-
-    @Override
-    protected IVehicle decrementSpeed(double amount, double speedFactor){
-        if(isEngineOn()){
-            double newSpeed = Vector2D.clamp(getCurrentSpeed() - speedFactor * amount, 0, getEnginePower());
-            return new TransportTruck<T>(getPosition(), getDirection(), newSpeed, isEngineOn(), storage, ramp);
-        }
-        return new TransportTruck<T>(this);
-    }
-
-    @Override
-    public IVehicle move(){
+    public IRampVehicle move(){
         Vector2D step = getDirection().multiplyByScalar(getCurrentSpeed());
         Vector2D newPos = getPosition().plus(step);
         storage.getCarried(getPosition(), getDirection());
@@ -176,7 +166,7 @@ public class TransportTruck<T extends ITransportable> extends Car implements ITr
     }
 
     @Override
-    public IVehicle turnLeft(){
+    public IRampVehicle turnLeft(){
         Vector2D dir = getDirection();
         if(isEngineOn())
             dir = getDirection().rotateCC(Math.PI / 2);
@@ -184,7 +174,7 @@ public class TransportTruck<T extends ITransportable> extends Car implements ITr
     }
 
     @Override
-    public IVehicle turnRight(){
+    public IRampVehicle turnRight(){
         Vector2D dir = getDirection();
         if(isEngineOn())
             dir = getDirection().rotateCC(-Math.PI / 2);
@@ -192,7 +182,21 @@ public class TransportTruck<T extends ITransportable> extends Car implements ITr
     }
 
     @Override
-    public IVehicle turnAround(){
+    public IRampVehicle gas(double amount) {
+        return new TransportTruck<T>(getPosition(), getDirection(),
+                getIncrementedSpeed(Vector2D.clamp(amount, 0, 1), findSpeedFactor()),
+                isEngineOn(), storage, ramp);
+    }
+
+    @Override
+    public IRampVehicle brake(double amount) {
+        return new TransportTruck<T>(getPosition(), getDirection(),
+                getDecrementSpeed(Vector2D.clamp(amount, 0, 1), findSpeedFactor()),
+                isEngineOn(), storage, ramp);
+    }
+
+    @Override
+    public IRampVehicle turnAround(){
         Vector2D dir = getDirection();
         if(isEngineOn())
             dir = getDirection().rotateCC(-Math.PI);

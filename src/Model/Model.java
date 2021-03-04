@@ -52,13 +52,11 @@ public class Model implements IModel {
      * view to update its images. Change this method to your needs.
      * */
     private class TimerListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            for (IVehicle car : cars) {
-                car.move();
-                if (isOutOfBounds(car)) {
-                    car.turnRight();
-                    car.turnRight();
-                }
+        public void actionPerformed(ActionEvent event) {
+            for (var e : allCars) {
+                e.move();
+                if (isOutOfBounds(e))
+                    e.turnAround();
             }
             modelUpdatedEvent.publish(cars);
             // logHandler.publish((List<? extends ILoggable>) cars);

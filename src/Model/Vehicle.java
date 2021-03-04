@@ -9,7 +9,7 @@ package Model; /**
 /**
  * An abstract class representing a generic vehicle.
  */
-public abstract class Vehicle implements IVehicle {
+public abstract class Vehicle {
 
     /**
      * Current speed valid interval from 0 to Engine power
@@ -96,7 +96,7 @@ public abstract class Vehicle implements IVehicle {
         engineOn = true;
     }
      */
-    public abstract IVehicle startEngine();
+    //public abstract IVehicle startEngine();
 
     /**
      * Stops the vehicle by setting currentSpeed to 0.
@@ -108,7 +108,7 @@ public abstract class Vehicle implements IVehicle {
         currentSpeed = 0;
     }
      */
-    public abstract IVehicle stopEngine();
+    //public abstract IVehicle stopEngine();
 
     /**
      * Increases the speed of the vehicle by the speed factor of the vehicle times a scale factor (amount).
@@ -122,7 +122,13 @@ public abstract class Vehicle implements IVehicle {
             currentSpeed = Vector2D.clamp(getCurrentSpeed() + speedFactor * amount, 0, enginePower);
     }
      */
-    protected abstract IVehicle incrementSpeed(double amount, double speedFactor);
+    //protected abstract IVehicle incrementSpeed(double amount, double speedFactor);
+    protected double getIncrementedSpeed(double amount, double speedFactor){
+      if(engineOn){
+          return Vector2D.clamp(currentSpeed + speedFactor * amount, 0, enginePower);
+      }
+      return currentSpeed;
+    }
     /**
      * Decreases the speed of the vehicle by the speed factor of the vehicle times a scale factor (amount).
      * The speed can not go below 0.
@@ -135,27 +141,35 @@ public abstract class Vehicle implements IVehicle {
         currentSpeed = Vector2D.clamp(getCurrentSpeed() - speedFactor * amount, 0, enginePower);
     }
      */
-    protected abstract IVehicle decrementSpeed(double amount, double speedFactor);
+    //protected abstract IVehicle decrementSpeed(double amount, double speedFactor);
+    protected double getDecrementSpeed(double amount, double speedFactor){
+        if(engineOn)
+            return Vector2D.clamp(currentSpeed - speedFactor * amount, 0, enginePower);
+        return currentSpeed;
+    }
     /**
      * Increases the speed of the vehicle by calling incrementSpeed with amount as argument.
      * Amount is clamped to the interval [0, 1].
      *
      * @param amount a value between 0 and 1 representing how much the gas is pressed
      */
+    /*
     public IVehicle gas(double amount) {
+
         return incrementSpeed(Vector2D.clamp(amount, 0, 1), findSpeedFactor());
     }
-
+    */
     /**
      * Decreases the speed of the vehicle by calling decrementSpeed with amount as argument.
      * Amount is clamped to the interval [0, 1].
      *
      * @param amount a value between 0 and 1 representing how much the brake is pressed
      */
-
+    /*
     public IVehicle brake(double amount) {
         return decrementSpeed(Vector2D.clamp(amount, 0, 1), findSpeedFactor());
     }
+     */
 
     /**
      * returns true if vehicle is moving.
@@ -175,7 +189,7 @@ public abstract class Vehicle implements IVehicle {
         position = position.plus(step);
     }
     */
-    public abstract IVehicle move();
+    //public abstract IVehicle move();
 
     /**
      * Turns the vehicle 90 degrees to the left.
@@ -187,7 +201,7 @@ public abstract class Vehicle implements IVehicle {
         }
     }
     */
-    public abstract IVehicle turnLeft();
+    //public abstract IVehicle turnLeft();
 
     /**
      * Turns the vehicle 90 degrees to the right.
@@ -199,7 +213,7 @@ public abstract class Vehicle implements IVehicle {
         }
     }
      */
-    public abstract IVehicle turnRight();
+    //public abstract IVehicle turnRight();
 
     /*
     public void turnAround() {
@@ -208,7 +222,7 @@ public abstract class Vehicle implements IVehicle {
         }
     }
      */
-    public abstract IVehicle turnAround();
+    //public abstract IVehicle turnAround();
 
     /**
      * Returns the direction vector of the vehicle.
