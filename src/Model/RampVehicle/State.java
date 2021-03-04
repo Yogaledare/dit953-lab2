@@ -1,15 +1,8 @@
 package Model.RampVehicle;
 
-import Model.IVehicle;
-import Model.Ramp.Ramp;
 
 public abstract class State {
 
-//    RampVehicle context;
-//
-//    public State(RampVehicle context) {
-//        this.context = context;
-//    }
 
     abstract IVehicle startEngine(RampVehicle context);
 

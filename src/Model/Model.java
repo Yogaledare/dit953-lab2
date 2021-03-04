@@ -1,7 +1,6 @@
 package Model;
 
 import Observer.EventSource;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -16,25 +15,29 @@ public class Model implements IModel {
     int boardWidth = 800;
     int boardHeight = 800;
 
-    List<IVehicle> cars;
+    List<ICarable>        allCars;
+    List<IVehicle>        cars;
     List<ITurboVehicle>   carsWithTurbo;
     List<IRampVehicle>    carsWithRamp;
 
     EventSource<IVehicle> modelUpdatedEvent = new EventSource<>();
 
-    public Model(List<IVehicle> cars, List<ITurboVehicle> turbos, List<IRampVehicle> ramps) {
-        this(cars, turbos);
+    public Model(List<ICarable> allCars, List<IVehicle> cars, List<ITurboVehicle> turbos, List<IRampVehicle> ramps) {
+        this(allCars, cars, turbos);
         this.carsWithRamp = ramps;
 
     }
 
-    public Model(List<IVehicle> cars, List<ITurboVehicle> turbos) {
+    public Model(List<ICarable> allCars, List<IVehicle> cars, List<ITurboVehicle> turbos) {
+        this.allCars = allCars;
         this.cars = cars;
         this.carsWithTurbo = turbos;
     }
 
     public Model() {
+        allCars = new ArrayList<>();
         cars = new ArrayList<>();
+
     }
 
     @Override
@@ -43,7 +46,7 @@ public class Model implements IModel {
     }
 
     void updateModel() {
-        for (IVehicle e : cars) {
+        for (var e : allCars) {
             e.move();
         }
     }
@@ -63,7 +66,7 @@ public class Model implements IModel {
         }
     }
 
-    boolean isOutOfBounds(IVehicle car) {
+    boolean isOutOfBounds(ICarable car) {
         int y = (int) car.getPosition().getY();
         return y > 500 || y < 0;
     }
@@ -71,55 +74,57 @@ public class Model implements IModel {
 
     @Override
     public void startEngine() {
-        for (IVehicle e : cars) {
+        for (var e : allCars)
             e.startEngine();
-        }
+
     }
 
     @Override
     public void stopEngine() {
-        for (IVehicle e : cars)
+        for (var e : allCars)
             e.stopEngine();
+
+
     }
 
     @Override
     public void gas(int amount) {
-        for (IVehicle e : cars) {
+        for (var e : allCars)
             e.gas(amount);
-        }
+
     }
 
     @Override
     public void brake(int amount) {
-        for (IVehicle e : cars) {
+        for (var e : allCars)
             e.brake(amount);
-        }
+
     }
 
     @Override
     public void raise() {
-        for (IRampVehicle e : carsWithRamp) {
+        for (var e : carsWithRamp) {
             e.raise(10);
         }
     }
 
     @Override
     public void lower() {
-        for (IRampVehicle e : carsWithRamp) {
+        for (var e : carsWithRamp) {
           e.lower(10);
         }
     }
 
     @Override
     public void setTurboOn() {
-        for (ITurboVehicle turbo : carsWithTurbo) {
+        for (var turbo : carsWithTurbo) {
             turbo.setTurboOn();
         }
     }
 
     @Override
     public void setTurboOff() {
-        for (ITurboVehicle turbo : carsWithTurbo) {
+        for (var turbo : carsWithTurbo) {
             turbo.setTurboOff();
         }
     }
@@ -132,28 +137,43 @@ public class Model implements IModel {
     public void addCar() {
         Random r = new Random();
         int i = r.nextInt(3);
-        int x = cars.size() * 100;
+        int x = allCars.size() * 100;
         switch(i){
             case 0:
                 cars.add(CarFactory.createVolvo240(new Vector2D(x, 0), new Vector2D(0, 0), 0, false));
                 break;
             case 1:
                 ITurboVehicle saab = CarFactory.createSaab95(new Vector2D(x, 0), new Vector2D(0, 0), 0, false, true);
-                cars.add(saab);
+                // cars.add(saab);
                 carsWithTurbo.add(saab);
                 break;
             case 2:
                 IRampVehicle scania = CarFactory.createScania(new Vector2D(x, 0), new Vector2D(0, 0), 0, false);
-                cars.add(scania);
+                // cars.add(scania);
                 carsWithRamp.add(scania);
                 break;
-            default:
-                cars.add(CarFactory.createVolvo240(new Vector2D(x, 0), new Vector2D(0, 0), 0, false));
+//            default:
+//                cars.add(CarFactory.createVolvo240(new Vector2D(x, 0), new Vector2D(0, 0), 0, false));
         }
     }
 
     public void removeCar() {
-        int i = cars.size();
-        cars.remove(i-1);
+        Random r = new Random();
+        int i = r.nextInt(3);
+
+        switch (i) {
+            case 0:
+                cars.remove(cars.size()-1);
+                break;
+            case 1:
+                carsWithTurbo.remove(carsWithTurbo.size()-1);
+                break;
+            case 2:
+                carsWithRamp.remove(carsWithRamp.size()-1);
+                break;
+
+
+        }
+
     }
 }

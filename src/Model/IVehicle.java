@@ -3,7 +3,7 @@ package Model;
 /**
  * Interface for a movable object. anything wheel-unit that can move.
  */
-public interface IVehicle {
+public interface IVehicle extends ICarable{
 
 
     /**

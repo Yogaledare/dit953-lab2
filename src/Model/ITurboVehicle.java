@@ -1,7 +1,7 @@
 package Model;
 
 /**
- * Model.Model.ITurbo is a interface to add a turbo to a Model.Model.Car.
+ * ITurbo is a interface to add a turbo to a Car.
  */
 public interface ITurboVehicle extends ICarable {
     ITurboVehicle setTurboOn();

@@ -160,8 +160,9 @@ public class TransportTruck<T extends ITransportable> extends Car implements ITr
 
     @Override
     public void getCarried(Vector2D position, Vector2D direction) {
-        this.setPosition(position);
-        this.setDirection(direction);
+
+        // this.setPosition(position);
+        // this.setDirection(direction);
         storage.getCarried(position, direction);
     }
 

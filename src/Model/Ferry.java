@@ -1,7 +1,5 @@
 package Model;
 
-import Model.Ramp.Ramp;
-
 /**
  * A movable ferry able to transport things
  * @param <T> the things to transport
@@ -21,10 +19,11 @@ public class Ferry<T extends ITransportable> extends Vehicle implements ITranspo
     /**
      * Creates a default Ferry (testing)
      */
-    public Ferry(Vector2D position, Vector2D direction, double currentSpeed, boolean engineOn){
+    public Ferry(Vector2D position, Vector2D direction, double currentSpeed, boolean engineOn) {
         super(position, direction, currentSpeed, engineOn, 1000, 8, 15);
         storage = new FIFO<T>(10, 1, 1, 2, getPosition(), getDirection(), getLength());
         ramp = new Ramp(70, 1);
+
     }
 
     /**
@@ -111,7 +110,7 @@ public class Ferry<T extends ITransportable> extends Vehicle implements ITranspo
     * Disables the Ferry to be moved
     */
     @Override
-    public IVehicle startEngine() {
+    public IRampVehicle startEngine() {
         if(ramp.isFullyRaised()) {
             double speed = 0;
             if(!isEngineOn())
@@ -122,7 +121,7 @@ public class Ferry<T extends ITransportable> extends Vehicle implements ITranspo
     }
 
     @Override
-    public IVehicle stopEngine(){
+    public IRampVehicle stopEngine(){
         return new Ferry<T>(getPosition(), getDirection(), 0, false, storage, ramp);
     }
 
@@ -145,7 +144,7 @@ public class Ferry<T extends ITransportable> extends Vehicle implements ITranspo
      * Move the ferry
      */
     @Override
-    public IVehicle move(){
+    public IRampVehicle move(){
         Vector2D step = getDirection().multiplyByScalar(getCurrentSpeed());
         Vector2D newPos = getPosition().plus(step);
         storage.getCarried(getPosition(), getDirection());
@@ -153,7 +152,7 @@ public class Ferry<T extends ITransportable> extends Vehicle implements ITranspo
     }
 
     @Override
-    public IVehicle turnLeft(){
+    public IRampVehicle turnLeft(){
         Vector2D dir = getDirection();
         if(isEngineOn())
             dir = getDirection().rotateCC(Math.PI / 2);
@@ -161,7 +160,7 @@ public class Ferry<T extends ITransportable> extends Vehicle implements ITranspo
     }
 
     @Override
-    public IVehicle turnRight(){
+    public IRampVehicle turnRight(){
         Vector2D dir = getDirection();
         if(isEngineOn())
             dir = getDirection().rotateCC(-Math.PI / 2);
@@ -183,20 +182,12 @@ public class Ferry<T extends ITransportable> extends Vehicle implements ITranspo
     }
 
     @Override
-    public IVehicle turnAround(){
+    public IRampVehicle turnAround(){
         Vector2D dir = getDirection();
         if(isEngineOn())
             dir = getDirection().rotateCC(-Math.PI);
         return new Ferry<T>(getPosition(), dir, getCurrentSpeed(), isEngineOn(), storage, ramp);
     }
 
-    /**
-     * Get Ship name
-     * @return the modelname of the ship
-     */
-    @Override
-    public String getModelName() {
-        return "Kaj & Börje";
-    }
 }
 

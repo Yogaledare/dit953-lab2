@@ -1,6 +1,8 @@
 package Model;
 
-import Model.Ramp.IRampState;
+import Model.RampVehicle.EngineOffLoweredRampState;
+import Model.RampVehicle.Scania;
+import Model.RampVehicle.State;
 
 public class CarFactory {
     public static IVehicle createVolvo240(Vector2D position, Vector2D direction, double speed, boolean engineOn){
@@ -11,7 +13,8 @@ public class CarFactory {
         return new Saab95(position, direction, speed, engineOn, turboOn);
     }
 
-    public static IRampVehicle createScania(Vector2D position, Vector2D direction, double speed, boolean engineOn){
-        return new Scania(position, direction, speed, engineOn);
+    public static IRampVehicle createScania(Vector2D position, Vector2D direction, double speed) {
+        return new Scania(position, direction, speed, new EngineOffLoweredRampState(), new Ramp(70, 1));
+
     }
 }
