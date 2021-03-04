@@ -97,9 +97,11 @@ public abstract class Car extends Vehicle implements ITransportable {
 
 
     @Override
-    protected double findSpeedFactor() {
+    protected abstract double findSpeedFactor();
+
+    /* {
         return 0;
-    }
+    }*/
 
     @Override
     public void getCarried(Vector2D position, Vector2D direction) {

@@ -1,12 +1,15 @@
 package Model.RampVehicle;
 
-public interface IRampVehicle {
+import Model.IVehicle;
+
+public interface IRampVehicle extends IVehicle {
 
 
-    IRampVehicle raise();
+    IRampVehicle raise(double amount);
 
-    IRampVehicle lower();
+    IRampVehicle lower(double amount);
 
+    boolean isEngineOn();
 
 
 

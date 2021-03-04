@@ -61,6 +61,8 @@ public interface IVehicle {
      */
     Vector2D getPosition();
 
+
+    Vector2D getDirection();
     /**
      *
      * @return
@@ -72,4 +74,6 @@ public interface IVehicle {
      * @return
      */
     double getCurrentSpeed();
+
+
 }
