@@ -8,31 +8,15 @@ import java.util.Deque;
  *
  * @param <T> The type stored in the container, LIFO or FIFO
  */
-public abstract class Container<T extends ITransportable> implements ITransporter<T>, ITransportable {
+public abstract class Container<T extends ITransportable> /*implements Transporter<T>*/ {
     private final int capacity;
     private final double maxWidth;
     private final double maxLength;
     protected final double pickUpRange;
-    private final Vector2D position;
-    protected final Vector2D direction;
+    private Vector2D position;
+    protected Vector2D direction;
     protected final Deque<T> holder;
-    protected final double length;
-    protected final double width;
-
-
-
-    public Container(int capacity, double maxWidth, double maxLength, double pickUpRange,
-                     Vector2D position, Vector2D direction, double length, double width, Deque<T> holder) {
-        this.capacity = capacity;
-        this.maxWidth = maxWidth;
-        this.maxLength = maxLength;
-        this.pickUpRange = pickUpRange;
-        this.position = position;
-        this.direction = direction;
-        this.length = length;
-        this.width = width;
-        this.holder = holder;
-    }
+    protected double length;
 
     /**
      * @param capacity  The maximum capacity
@@ -40,10 +24,7 @@ public abstract class Container<T extends ITransportable> implements ITransporte
      * @param maxLength The maximum length of items stored
      */
     public Container(int capacity, double maxWidth, double maxLength, double pickUpRange,
-                     Vector2D position, Vector2D direction, double length, double width) {
-
-        this(capacity, maxWidth, maxLength, pickUpRange, position, direction, length, width, new ArrayDeque<>(capacity));
-        /*
+                     Vector2D position, Vector2D direction, double length) {
         this.capacity = capacity;
         this.maxWidth = maxWidth;
         this.maxLength = maxLength;
@@ -51,19 +32,14 @@ public abstract class Container<T extends ITransportable> implements ITransporte
         this.position = position;
         this.direction = direction;
         this.length = length;
-        this.width = width;
-        this.holder = new ArrayDeque<>(capacity);*/
+        this.holder = new ArrayDeque<>(capacity);
     }
-
-
-
 
     /**
      * Store an item into holder.
      * @param item is the item to be stored.
      */
     public void store(T item) {
-        Deque<T> newDeque = new ArrayDeque<>(holder);
         if (holder.size() >= capacity) {
             throw new IllegalStateException("Model.Model.Container full");
         }
@@ -76,9 +52,8 @@ public abstract class Container<T extends ITransportable> implements ITransporte
         if (item.getPosition().distanceTo(position) > (length / 2) + pickUpRange) {
             throw new IllegalArgumentException("Item too far away");
         }
-        newDeque.addLast(item);
-        item.follow(this);
-//        return new Container<T>(capacity, maxWidth, maxLength, pickUpRange, position, direction, length, width, newDeque);
+        holder.addLast(item);
+        item.getCarried(position, direction);
     }
 
     /**
@@ -126,62 +101,6 @@ public abstract class Container<T extends ITransportable> implements ITransporte
         return capacity;
     }
 
-
-
-
-    @Override
-    public Vector2D getPosition() {
-        return position;
-    }
-
-    @Override
-    public Vector2D getDirection() {
-        return direction;
-    }
-
-
-
-    @Override
-    public double getWidth() {
-        return 0;
-    }
-
-    @Override
-    public double getLength() {
-        return 0;
-    }
-
-    @Override
-    public <T extends ITransportable> T follow(ITransporter<T> transporter) {
-        return null;
-    }
 }
-
-
-/**
- * relocate updates stored items vectors.
- * @param position the current positions of the holder parent.
- * @param direction the current orientataion of the holder parent
- */
-/*    public void relocate(Vector2D position, Vector2D direction) {
-        this.position = position;
-        this.direction = direction;
-        for (ITransportable item : holder) {
-            item.setPosition(position);
-            item.setDirection(direction);
-        }
-    }*/
-
-/*
-    public void getCarried(Vector2D position, Vector2D direction) {
-        this.position = position;
-        this.direction = direction;
-        for (ITransportable item : holder) {
-            getCarried(position, direction);
-        }
-    }
-*/
-
-
 
 

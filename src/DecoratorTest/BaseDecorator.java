@@ -1,19 +1,11 @@
 package DecoratorTest;
 
-import Model.Car;
 import Model.Vector2D;
-
-import java.awt.*;
-
-/*(Vector2D pos, Vector2D dir, double currentSpeed, boolean engineOn,double enginePower,
-   double width, double length, String modelName,Color color, int nrDoors)
- */
 
 abstract class BaseDecorator implements ICar {
     private final ICar otherCar;
 
     BaseDecorator(ICar iCar){
-        super(iCar.getPosition(), iCar.getDirection(), iCar.getCurrentSpeed(), , );
         otherCar = iCar;
     }
 

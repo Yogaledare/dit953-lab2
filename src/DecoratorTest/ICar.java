@@ -14,6 +14,7 @@ interface ICar {
     ICar brake(double amount);
     ICar startEngine();
     ICar stopEngine();
+    double findSpeedFactor();
 
     // Ramp
     ICar raise(double amount);
@@ -24,6 +25,7 @@ interface ICar {
     ICar turboOff();
 
     // Misc
+    boolean isEngineOn();
     boolean isMoving();
     Vector2D getPosition();
     Vector2D getDirection();

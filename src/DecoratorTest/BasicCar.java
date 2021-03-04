@@ -1,6 +1,8 @@
 package DecoratorTest;
 
 import Model.Car;
+import Model.ITransportable;
+import Model.ITransporter;
 import Model.Vector2D;
 
 import java.awt.*;
@@ -93,7 +95,7 @@ public class BasicCar extends Car implements ICar {
 
     @Override
     public ICar lower(double amount) {
-        return return new BasicCar(this);
+        return new BasicCar(this);
     }
 
     @Override
@@ -107,7 +109,8 @@ public class BasicCar extends Car implements ICar {
     }
 
     @Override
-    protected double findSpeedFactor() {
+    public double findSpeedFactor() {
         return 1;
     }
+
 }
