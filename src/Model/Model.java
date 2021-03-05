@@ -259,19 +259,30 @@ public class Model implements IModel {
     public void removeCar() {
         Random r = new Random();
         int i = r.nextInt(3);
-        if (sumCars().size() == 0) { return; }
+        if (sumCars().size() == 0) return;
 
         switch(i){
             case 0 -> {
+                if(carsWithTrim.size() < 1) {
+                    removeCar();
+                    break;
+                }
                 int indexToRemove = r.nextInt(carsWithTrim.size());
-                if(indexToRemove == 0) return;
                 carsWithTrim.remove(indexToRemove);
             }
             case 1 -> {
+                if(carsWithTurbo.size() < 1) {
+                    removeCar();
+                    break;
+                }
                 int indexToRemove = r.nextInt(carsWithTurbo.size());
                 carsWithTurbo.remove(indexToRemove);
             }
             case 2 -> {
+                if(carsWithRamp.size() < 1) {
+                    removeCar();
+                    break;
+                }
                 int indexToRemove = r.nextInt(carsWithRamp.size());
                 carsWithRamp.remove(indexToRemove);
             }
