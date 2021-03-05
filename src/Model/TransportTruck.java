@@ -1,8 +1,6 @@
 package Model;
 
 import java.awt.*;
-import java.util.ArrayDeque;
-import java.util.Deque;
 
 /**
  * A movable truck with storage
@@ -156,8 +154,8 @@ public class TransportTruck<T extends ITransportable> extends Car implements ITr
     public IRampVehicle move(){
         Vector2D step = getDirection().multiplyByScalar(getCurrentSpeed());
         Vector2D newPos = getPosition().plus(step);
-        storage.carryElements(this);
-        return new TransportTruck<T>(newPos, getDirection(), getCurrentSpeed(), isEngineOn(), storage, ramp);
+        storage.carryElementsTo(getPosition(), getDirection());
+        return new TransportTruck<T>(newPos, getDirection(), getCurrentSpeed(), isEngineOn(), new LIFO<T>(storage), ramp);
     }
 
 //    @Override
@@ -208,16 +206,15 @@ public class TransportTruck<T extends ITransportable> extends Car implements ITr
 
     @Override
     public ITransportable getCarriedTo(Vector2D position, Vector2D direction) {
-
-
+        storage.carryElementsTo(position, direction);
         return new TransportTruck<T>(position, direction, getCurrentSpeed(), isEngineOn(), new LIFO<T>(storage), new Ramp(ramp));
     }
 
-    @Override
+/*    @Override
     public <K extends ITransportable> ITransportable follow(ITransporter<K> iTransporter) {
         Vector2D newPosition = iTransporter.getPosition();
         Vector2D newDirection = iTransporter.getDirection();
-        storage.carryElements(iTransporter);
+        storage.carryElementsTo(iTransporter);
         return new TransportTruck<T>(newPosition, newDirection, getCurrentSpeed(), isEngineOn(), storage, ramp);
-    }
+    }*/
 }

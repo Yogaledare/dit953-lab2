@@ -8,7 +8,7 @@ import java.util.Deque;
  *
  * @param <T> The type stored in the container, LIFO or FIFO
  */
-public abstract class Container<T extends ITransportable> implements ITransporter<T> {
+public abstract class Container<T extends ITransportable> /*implements ITransporter<T>*/ {
     private final int capacity;
     private final double maxWidth;
     private final double maxLength;
@@ -73,15 +73,15 @@ public abstract class Container<T extends ITransportable> implements ITransporte
 
 
 
-    public <K extends ITransportable> void carryElements(ITransporter<K> iTransporter) {
-        this.position = iTransporter.getPosition();
-        this.direction = iTransporter.getDirection();
+    public <K extends ITransportable> void carryElementsTo(/*ITransporter<K> iTransporter*/Vector2D position, Vector2D direction) {
+        this.position = position;
+        this.direction = direction;
 
         Deque<T> temp = new ArrayDeque<>();
 
         while (!holder.isEmpty()) {
             T item = holder.removeFirst();
-            item = (T) item.follow(iTransporter);
+            item = (T) item.getCarriedTo(position, direction);
             temp.add(item);
         }
 
@@ -90,6 +90,22 @@ public abstract class Container<T extends ITransportable> implements ITransporte
         }
 
     }
+
+
+    /**
+     * FindItemToRemove finds which object to remove, depending on Model.Model.LIFO or Model.Model.FIFO
+     * @return type of container class.
+     */
+    protected abstract T findItemToRemove();
+
+    /**
+     * findOffset to decide if the "direction" T should be Model.Model.FIFO or Model.Model.LIFO.
+     * @return type of container class
+     */
+    protected abstract Vector2D findOffset();
+
+
+
 
     public double getMaxWidth() {
         return maxWidth;
@@ -107,17 +123,14 @@ public abstract class Container<T extends ITransportable> implements ITransporte
         return length;
     }
 
-    /**
-     * FindItemToRemove finds which object to remove, depending on Model.Model.LIFO or Model.Model.FIFO
-     * @return type of container class.
-     */
-    protected abstract T findItemToRemove();
+    public Vector2D getPosition() {
+        return new Vector2D(position);
+    }
 
-    /**
-     * findOffset to decide if the "direction" T should be Model.Model.FIFO or Model.Model.LIFO.
-     * @return type of container class
-     */
-    protected abstract Vector2D findOffset();
+
+    public Vector2D getDirection() {
+        return new Vector2D(direction);
+    }
 
     /**
      * Amount of objects in holder.
@@ -125,16 +138,6 @@ public abstract class Container<T extends ITransportable> implements ITransporte
      */
     public int getSize() {
         return holder.size();
-    }
-
-    @Override
-    public Vector2D getPosition() {
-        return new Vector2D(position);
-    }
-
-    @Override
-    public Vector2D getDirection() {
-        return new Vector2D(direction);
     }
 
     /**

@@ -131,10 +131,10 @@ public class Saab95 extends Car implements ITurboVehicle {
         return new Saab95(position, direction, getCurrentSpeed(), isEngineOn(), isTurboOn());
     }
 
-    @Override
+/*    @Override
     public <T extends ITransportable> ITransportable follow(ITransporter<T> transporter) {
         return new Saab95(transporter.getPosition(), transporter.getDirection(), 0, isEngineOn(), isTurboOn());
 
-    }
+    }*/
 }
 
