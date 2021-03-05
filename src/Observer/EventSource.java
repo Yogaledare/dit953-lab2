@@ -26,8 +26,9 @@ public class EventSource<T> {
     /**
      * Notifies all observers that a event occurred.
      * @param publisher, all objects that inherits the interface
+     * @param publisher
      */
-    public void publish(Collection<T> publisher){
+    public void publish(Collection<? extends T> publisher){
         for (EventObserver<T> observer : subscribers) {
             observer.actOnPublish(publisher);
         }

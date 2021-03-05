@@ -50,7 +50,7 @@ public class DrawPanel extends JPanel implements EventObserver<IPaintable> {
     }
 
     @Override
-    public void actOnPublish(Collection</*? extends */IPaintable> paintables) {
+    public void actOnPublish(Collection<? extends IPaintable> paintables) {
         setList(paintables);
         repaint();
     }

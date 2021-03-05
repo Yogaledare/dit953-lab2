@@ -15,10 +15,6 @@ import java.util.List;
  **/
 
 public class CarView extends JFrame {
-//    private static int X;
-//    private static int Y;
-
-//    private List<JPanel> panels;
 
 
     private final List<List<Component>> UIElements = new ArrayList<>();

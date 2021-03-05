@@ -5,7 +5,6 @@ import Observer.EventObserver;
 import javax.swing.*;
 import java.text.DecimalFormat;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * LoggerPanel creates an JTextArea and
@@ -30,9 +29,10 @@ public class LoggerPanel extends JPanel implements EventObserver<ILoggable> {
     /**
      * Observer.EventHandler tells us there is a change - then we do an update.
      * @param loggable, for each ILoggable object we update the view with new values.
+     * @param loggable
      */
     @Override
-    public void actOnPublish(Collection<ILoggable> loggable) {
+    public void actOnPublish(Collection<? extends ILoggable> loggable) {
         StringBuilder res = new StringBuilder();
         DecimalFormat df = new DecimalFormat("###.#");
 
