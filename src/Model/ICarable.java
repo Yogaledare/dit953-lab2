@@ -9,6 +9,7 @@ public interface ICarable {
      */
     boolean isMoving();
 
+/*
 
     ICarable move();
     ICarable turnAround();
@@ -18,6 +19,7 @@ public interface ICarable {
     ICarable stopEngine();
     ICarable gas(double amount);
     ICarable brake(double amount);
+*/
 
 
     /**
