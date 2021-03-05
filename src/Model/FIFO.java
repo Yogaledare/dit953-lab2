@@ -11,6 +11,11 @@ public class FIFO<T extends ITransportable> extends Container<T> {
         super(capacity, maxWidth, maxLength, pickUpRange, position, direction, length);
     }
 
+    public FIFO(FIFO<T> fifo) {
+        super(fifo.getCapacity(), fifo.getMaxWidth(), fifo.getMaxLength(),fifo.getPickUpRange(),
+                fifo.getPosition(), fifo.getDirection(), fifo.getLength());
+    }
+
     /**
      * Returns the item to be removed
      * @return the item to be removed

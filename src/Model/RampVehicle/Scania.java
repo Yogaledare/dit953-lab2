@@ -19,6 +19,10 @@ public class Scania extends Car implements IRampVehicle {
         this.ramp = ramp;
     }
 
+/*    public Scania(Scania scania) {
+        this(scania.getPosition(), scania.getDirection(), scania.getCurrentSpeed(), scania.state, new Ramp(scania.ramp));
+    }*/
+
     @Override
     protected double getIncrementedSpeed(double amount, double speedFactor) {
         return super.getIncrementedSpeed(amount, speedFactor);
@@ -88,8 +92,13 @@ public class Scania extends Car implements IRampVehicle {
     }
 
     @Override
-    public <T extends ITransportable> T follow(ITransporter<T> transporter) {
-        return null;
+    public ITransportable getCarriedTo(Vector2D position, Vector2D direction) {
+        return new Scania(position, direction, getCurrentSpeed(), state, new Ramp(ramp));
+    }
+
+    @Override
+    public <T extends ITransportable> ITransportable follow(ITransporter<T> transporter) {
+        return new Scania(transporter.getPosition(), transporter.getDirection(), getCurrentSpeed(), state, new Ramp(ramp));
     }
 }
 

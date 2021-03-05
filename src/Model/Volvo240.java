@@ -93,8 +93,13 @@ public class Volvo240 extends Car implements ITrim {
     }
 
     @Override
-    public <T extends ITransportable> T follow(ITransporter<T> transporter) {
-        return null;
+    public ITransportable getCarriedTo(Vector2D position, Vector2D direction) {
+        return new Volvo240(position, direction, getCurrentSpeed(), isEngineOn());
+    }
+
+    @Override
+    public <T extends ITransportable> ITransportable follow(ITransporter<T> transporter) {
+        return new Volvo240(transporter.getPosition(), transporter.getDirection(), getCurrentSpeed(), isEngineOn());
     }
 }
 

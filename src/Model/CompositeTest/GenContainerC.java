@@ -1,3 +1,4 @@
+/*
 package Model.CompositeTest;
 
 import java.util.ArrayDeque;
@@ -36,16 +37,19 @@ public class GenContainerC<T extends ITransportable> implements ITransporter<T>,
         this.holder = holder;
     }
 
-    /**
+    */
+/**
      * @param capacity  The maximum capacity
      * @param maxWidth  The maximum width of items stored
      * @param maxLength The maximum length of items stored
-     */
+     *//*
+
     public GenContainer(int capacity, double maxWidth, double maxLength, double pickUpRange,
                         Vector2D position, Vector2D direction, double length, double width) {
 
         this(capacity, maxWidth, maxLength, pickUpRange, position, direction, length, width, new ArrayDeque<>(capacity));
-        /*
+        */
+/*
         this.capacity = capacity;
         this.maxWidth = maxWidth;
         this.maxLength = maxLength;
@@ -54,7 +58,8 @@ public class GenContainerC<T extends ITransportable> implements ITransporter<T>,
         this.direction = direction;
         this.length = length;
         this.width = width;
-        this.holder = new ArrayDeque<>(capacity);*/
+        this.holder = new ArrayDeque<>(capacity);*//*
+
     }
 
 
@@ -130,3 +135,4 @@ public class GenContainerC<T extends ITransportable> implements ITransporter<T>,
                 capacity, maxWidth, maxLength, pickUpRange, newPosition, direction, length, width, newDeque);
     }
 }
+*/

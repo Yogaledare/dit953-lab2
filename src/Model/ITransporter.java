@@ -8,4 +8,6 @@ public interface ITransporter<T extends ITransportable> {
     void store(T item);
     T remove();
     int getSize();
+    Vector2D getPosition();
+    Vector2D getDirection();
 }

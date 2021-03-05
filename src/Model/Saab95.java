@@ -48,7 +48,7 @@ public class Saab95 extends Car implements ITurboVehicle {
      * Returns the value of turboOn.
      * @return the value of turboOn
      */
-    public boolean getTurboOn() {
+    public boolean isTurboOn() {
         return turboOn;
     }
 
@@ -74,18 +74,18 @@ public class Saab95 extends Car implements ITurboVehicle {
         double speed = 0;
         if(!isEngineOn())
             speed = 0.1;
-        return new Saab95(getPosition(), getDirection(), speed, true, getTurboOn());
+        return new Saab95(getPosition(), getDirection(), speed, true, isTurboOn());
     }
 
     @Override
     public ITurboVehicle stopEngine(){
-        return new Saab95(getPosition(), getDirection(), 0, false, getTurboOn());
+        return new Saab95(getPosition(), getDirection(), 0, false, isTurboOn());
     }
 
     public ITurboVehicle move(){
         Vector2D step = getDirection().multiplyByScalar(getCurrentSpeed());
         Vector2D newPos = getPosition().plus(step);
-        return new Saab95(newPos, getDirection(), getCurrentSpeed(), isEngineOn(), getTurboOn());
+        return new Saab95(newPos, getDirection(), getCurrentSpeed(), isEngineOn(), isTurboOn());
     }
 
     @Override
@@ -93,7 +93,7 @@ public class Saab95 extends Car implements ITurboVehicle {
         Vector2D dir = getDirection();
         if(isEngineOn())
             dir = getDirection().rotateCC(Math.PI / 2);
-        return new Saab95(getPosition(), dir, getCurrentSpeed(), isEngineOn(), getTurboOn());
+        return new Saab95(getPosition(), dir, getCurrentSpeed(), isEngineOn(), isTurboOn());
     }
 
     @Override
@@ -101,7 +101,7 @@ public class Saab95 extends Car implements ITurboVehicle {
         Vector2D dir = getDirection();
         if(isEngineOn())
             dir = getDirection().rotateCC(-Math.PI / 2);
-        return new Saab95(getPosition(), dir, getCurrentSpeed(), isEngineOn(), getTurboOn());
+        return new Saab95(getPosition(), dir, getCurrentSpeed(), isEngineOn(), isTurboOn());
     }
 
     @Override
@@ -123,8 +123,18 @@ public class Saab95 extends Car implements ITurboVehicle {
         Vector2D dir = getDirection();
         if(isEngineOn())
             dir = getDirection().rotateCC(-Math.PI);
-        return new Saab95(getPosition(), dir, getCurrentSpeed(), isEngineOn(), getTurboOn());
+        return new Saab95(getPosition(), dir, getCurrentSpeed(), isEngineOn(), isTurboOn());
     }
 
+    @Override
+    public ITransportable getCarriedTo(Vector2D position, Vector2D direction) {
+        return new Saab95(position, direction, getCurrentSpeed(), isEngineOn(), isTurboOn());
+    }
+
+    @Override
+    public <T extends ITransportable> ITransportable follow(ITransporter<T> transporter) {
+        return new Saab95(transporter.getPosition(), transporter.getDirection(), 0, isEngineOn(), isTurboOn());
+
+    }
 }
 

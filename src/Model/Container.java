@@ -8,14 +8,14 @@ import java.util.Deque;
  *
  * @param <T> The type stored in the container, LIFO or FIFO
  */
-public abstract class Container<T extends ITransportable> /*implements Transporter<T>*/ {
+public abstract class Container<T extends ITransportable> implements ITransporter<T> {
     private final int capacity;
     private final double maxWidth;
     private final double maxLength;
     protected final double pickUpRange;
     private Vector2D position;
     protected Vector2D direction;
-    protected final Deque<T> holder;
+    protected Deque<T> holder;
     protected double length;
 
     /**
@@ -35,6 +35,8 @@ public abstract class Container<T extends ITransportable> /*implements Transport
         this.holder = new ArrayDeque<>(capacity);
     }
 
+
+
     /**
      * Store an item into holder.
      * @param item is the item to be stored.
@@ -52,8 +54,8 @@ public abstract class Container<T extends ITransportable> /*implements Transport
         if (item.getPosition().distanceTo(position) > (length / 2) + pickUpRange) {
             throw new IllegalArgumentException("Item too far away");
         }
+        item = (T) item.getCarriedTo(position, direction);
         holder.addLast(item);
-        item.getCarried(position, direction);
     }
 
     /**
@@ -65,34 +67,40 @@ public abstract class Container<T extends ITransportable> /*implements Transport
         T item = findItemToRemove();
         Vector2D offset = findOffset();
         Vector2D unloadedPosition = item.getPosition().plus(offset);
-        item.getCarried(unloadedPosition, direction);
+        item = (T) item.getCarriedTo(unloadedPosition, direction);
         return item;
     }
 
-    /**
-     * relocate updates stored items vectors.
-     * @param position the current positions of the holder parent.
-     * @param direction the current orientataion of the holder parent
-     */
-/*    public void relocate(Vector2D position, Vector2D direction) {
-        this.position = position;
-        this.direction = direction;
-        for (ITransportable item : holder) {
-            item.setPosition(position);
-            item.setDirection(direction);
-        }
-    }*/
 
-    public void getCarried(Vector2D position, Vector2D direction) {
-        this.position = position;
-        this.direction = direction;
-        for (ITransportable item : holder) {
-            getCarried(position, direction);
-        }
 
+    public <K extends ITransportable> void carryElements(ITransporter<K> iTransporter) {
+        this.position = iTransporter.getPosition();
+        this.direction = iTransporter.getDirection();
+
+        Deque<T> newDeque = new ArrayDeque<>();
+
+        while (!holder.isEmpty()) {
+            T item = holder.removeLast();
+            item = (T) item.follow(iTransporter);
+            newDeque.add(item);
+        }
     }
 
+    public double getMaxWidth() {
+        return maxWidth;
+    }
 
+    public double getMaxLength() {
+        return maxLength;
+    }
+
+    public double getPickUpRange() {
+        return pickUpRange;
+    }
+
+    public double getLength() {
+        return length;
+    }
 
     /**
      * FindItemToRemove finds which object to remove, depending on Model.Model.LIFO or Model.Model.FIFO
@@ -114,6 +122,16 @@ public abstract class Container<T extends ITransportable> /*implements Transport
         return holder.size();
     }
 
+    @Override
+    public Vector2D getPosition() {
+        return new Vector2D(position);
+    }
+
+    @Override
+    public Vector2D getDirection() {
+        return new Vector2D(direction);
+    }
+
     /**
      * Amount of object the holder can store.
      * @return the total capacity.
@@ -124,4 +142,50 @@ public abstract class Container<T extends ITransportable> /*implements Transport
 
 }
 
+
+
+/*
+    public Container(Container container) {
+        this.capacity = container.capacity;
+        this.maxWidth = container.maxWidth;
+        this.maxLength = container.maxLength;
+        this.pickUpRange = container.pickUpRange;
+        this.position = container.position;
+        this.direction = container.direction;
+        this.length = container.length;
+        this.holder = container.holder;
+    }
+*/
+
+
+
+
+/**
+ * relocate updates stored items vectors.
+ * @param position the current positions of the holder parent.
+ * @param direction the current orientataion of the holder parent
+ */
+/*    public void relocate(Vector2D position, Vector2D direction) {
+        this.position = position;
+        this.direction = direction;
+        for (ITransportable item : holder) {
+            item.setPosition(position);
+            item.setDirection(direction);
+        }
+    }*/
+
+
+        /*
+        Deque<ITransportable> newDeque = new ArrayDeque<>();
+        while (!temp.isEmpty()) {
+            ITransportable item = temp.removeLast();
+            item = item.follow(transporter);
+            newDeque.add(item);
+        }
+
+
+
+        for (T item : holder) {
+            getCarried(position, direction);
+        }*/
 

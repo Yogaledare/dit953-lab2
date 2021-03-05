@@ -1,6 +1,8 @@
 package Model;
 
 import java.awt.*;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 /**
  * A movable truck with storage
@@ -154,7 +156,7 @@ public class TransportTruck<T extends ITransportable> extends Car implements ITr
     public IRampVehicle move(){
         Vector2D step = getDirection().multiplyByScalar(getCurrentSpeed());
         Vector2D newPos = getPosition().plus(step);
-        storage.getCarried(getPosition(), getDirection());
+        storage.carryElements(this);
         return new TransportTruck<T>(newPos, getDirection(), getCurrentSpeed(), isEngineOn(), storage, ramp);
     }
 
@@ -205,10 +207,15 @@ public class TransportTruck<T extends ITransportable> extends Car implements ITr
     }
 
     @Override
-    public <T extends ITransportable> T follow(ITransporter<T> transporter) {
-        storage.follow(transporter);
-        // uppdatera storage med ny pos.
+    public ITransportable getCarriedTo(Vector2D position, Vector2D direction) {
+        return new TransportTruck<T>(position, direction, getCurrentSpeed(), isEngineOn(), new LIFO<T>(storage), new Ramp(ramp));
+    }
 
-        return null;
+    @Override
+    public <K extends ITransportable> ITransportable follow(ITransporter<K> iTransporter) {
+        Vector2D newPosition = iTransporter.getPosition();
+        Vector2D newDirection = iTransporter.getDirection();
+        storage.carryElements(iTransporter);
+        return new TransportTruck<T>(newPosition, newDirection, getCurrentSpeed(), isEngineOn(), storage, ramp);
     }
 }

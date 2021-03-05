@@ -1,3 +1,4 @@
+/*
 package Model.CompositeTest;
 
 
@@ -5,29 +6,37 @@ import Model.*;
 
 import java.awt.*;
 
+*/
 /**
  * A movable truck with storage
  * @param <T> the things to store
- */
+ *//*
+
 public class TransportTruckC<T extends ITransportable> extends Car implements ITransporter<T>, ITransportable, IRampVehicle {
 
-    /**
+    */
+/**
      * Storage component
-     */
+     *//*
+
     private final LIFO<T> storage;
 
-    /**
+    */
+/**
      * Ramp component
-     */
+     *//*
+
     private final Ramp ramp;
 
-    /**
+    */
+/**
      * Constructs a Transport truck with the specified enginePower, width length, capacity and max dimensions for
      * the stored units (witdth and length).
      * @param capacity the storage capacity (in units) of the truck.
      * @param maxW max width of a stored item.
      * @param maxL max length of a stored item.
-     */
+     *//*
+
     public TransportTruckC(Vector2D position, Vector2D direction, double currentSpeed, boolean engineOn, int capacity, double maxW, double maxL) {
         super(position, direction, currentSpeed, engineOn,
                 120, 4, 10, "Transport Truck", Color.pink, 2);
@@ -49,9 +58,11 @@ public class TransportTruckC<T extends ITransportable> extends Car implements IT
         ramp = truck.ramp;
     }
 
-    /**
+    */
+/**
      * Add an item to the storage.
-     */
+     *//*
+
     public void store(T item) {
         if (ramp.isFullyLowered() && item != this) {
             storage.store(item);
@@ -60,10 +71,12 @@ public class TransportTruckC<T extends ITransportable> extends Car implements IT
         }
     }
 
-    /**
+    */
+/**
      * Remove an item from the storage.
      * @return the removed item.
-     */
+     *//*
+
     public T remove() {
         if (!ramp.isFullyLowered()) {
             throw new IllegalStateException("Ramp not fully lowered");
@@ -71,46 +84,56 @@ public class TransportTruckC<T extends ITransportable> extends Car implements IT
         return storage.remove();
     }
 
-    /**
+    */
+/**
      * Returns the number of stored items.
      * @return the number of stored items.
-     */
+     *//*
+
     @Override
     public int getSize() {
         return storage.getSize();
     }
 
-    /**
+    */
+/**
      * Returns the speed factor of the truck.
      * @return the speed factor of the truck.
-     */
+     *//*
+
     protected double findSpeedFactor() {
         return getEnginePower() * 0.01;
     }
 
-    /**
+    */
+/**
      * Raise loading platform.
      * It's is only possible to raise the ramp when engine is off.
-     */
+     *//*
+
     public void raiseRamp() {
         if (getCurrentSpeed() == 0) {
             ramp.raiseFully();
         }
     }
 
-    /**
+    */
+/**
      * Lower loading platform to ground.
      * It's is only possible to lower the ramp when engine is off.
-     */
+     *//*
+
     public void lowerRamp() {
         if (getCurrentSpeed() == 0) {
             ramp.lowerFully();
         }
     }
 
-    /**
+    */
+/**
      * Starts the truck by setting its speed to 0.1.
-     */
+     *//*
+
     @Override
     public IRampVehicle startEngine() {
         if (ramp.isFullyRaised()) {
@@ -137,18 +160,22 @@ public class TransportTruckC<T extends ITransportable> extends Car implements IT
         return this.raise(amount);
     }
 
-    /**
+    */
+/**
      * Returns true if the ramp is fully raised, false otherwise.
      * @return true if the ramp is fully raised, false otherwise.
-     */
+     *//*
+
     public boolean isFullyRaised() {
         return ramp.isFullyRaised();
     }
 
-    /**
+    */
+/**
      * Returns true if the ramp is fully lowered, false otherwise.
      * @return true if the ramp is fully lowered, false otherwise.
-     */
+     *//*
+
     public boolean isFullyLowered() {
         return ramp.isFullyLowered();
     }
@@ -215,3 +242,4 @@ public class TransportTruckC<T extends ITransportable> extends Car implements IT
         return null;
     }
 }
+*/

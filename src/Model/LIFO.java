@@ -12,6 +12,11 @@ public class LIFO<T extends ITransportable> extends Container<T> {
         super(capacity, maxWidth, maxLength, pickUpRange, position, direction, length);
     }
 
+    public LIFO(LIFO<T> lifo) {
+        super(lifo.getCapacity(), lifo.getMaxWidth(), lifo.getMaxLength(),lifo.getPickUpRange(),
+                lifo.getPosition(), lifo.getDirection(), lifo.getLength());
+    }
+
     /**
      * Returns the item to be removed
      * @return the item to be removed

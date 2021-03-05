@@ -5,6 +5,14 @@ import Model.IRampVehicle;
 
 public class EngineOnState extends State {
 
+   /* public EngineOnState() {
+
+    }
+
+    public EngineOnState(EngineOnState engineOnState) {
+
+    }*/
+
     @Override
     IRampVehicle startEngine(Scania context) {
         return context;

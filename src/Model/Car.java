@@ -117,10 +117,10 @@ public abstract class Car extends Vehicle implements ITransportable {
 //        //TODO: what do?
 //    }
 
-    @Override
-    public <T extends ITransportable> T follow(ITransporter<T> transporter){
-        return null;
-    }
+//    @Override
+//    public <T extends ITransportable> T follow(ITransporter<T> transporter){
+//        return null;
+//    }
 
 }
 
