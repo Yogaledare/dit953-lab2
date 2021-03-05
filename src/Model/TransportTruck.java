@@ -208,6 +208,8 @@ public class TransportTruck<T extends ITransportable> extends Car implements ITr
 
     @Override
     public ITransportable getCarriedTo(Vector2D position, Vector2D direction) {
+
+
         return new TransportTruck<T>(position, direction, getCurrentSpeed(), isEngineOn(), new LIFO<T>(storage), new Ramp(ramp));
     }
 

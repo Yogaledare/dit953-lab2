@@ -77,13 +77,18 @@ public abstract class Container<T extends ITransportable> implements ITransporte
         this.position = iTransporter.getPosition();
         this.direction = iTransporter.getDirection();
 
-        Deque<T> newDeque = new ArrayDeque<>();
+        Deque<T> temp = new ArrayDeque<>();
 
         while (!holder.isEmpty()) {
-            T item = holder.removeLast();
+            T item = holder.removeFirst();
             item = (T) item.follow(iTransporter);
-            newDeque.add(item);
+            temp.add(item);
         }
+
+        while (!temp.isEmpty()) {
+            holder.add(temp.removeFirst());
+        }
+
     }
 
     public double getMaxWidth() {
