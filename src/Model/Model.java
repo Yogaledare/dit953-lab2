@@ -10,11 +10,16 @@ import java.util.*;
 import javax.swing.Timer;
 
 public class Model implements IModel {
+
+    static int carNumber;
+
     private final int delay = 50;
     private final Timer timer = new Timer(delay, new TimerListener());
 
     int boardWidth = 800;
     int boardHeight = 800;
+
+    Map<Integer, Integer> allCars;
 
     // Each car can be once in each map..
     Map<Integer, ITrim> trimCars;
@@ -28,12 +33,24 @@ public class Model implements IModel {
         this(trimCars, turbos);
         this.carsWithRamp = ramps;
         // carMap.getOrDefault(this.hashCode(), null);
+        for (Integer carKey : ramps.keySet()) {
+            this.allCars.put(carNumber++, ramps.get(carKey).hashCode());
+        }
+
     }
 
     public Model(Map<Integer, ITrim> trimCars, Map<Integer, ITurboVehicle> turbos) {
         // this.carMap = allCars;
         this.trimCars = trimCars;
         this.carsWithTurbo = turbos;
+        for (Integer carKey : trimCars.keySet()) {
+            this.allCars.put(carNumber++, trimCars.get(carKey).hashCode());
+        }
+        for (Integer carKey : turbos.keySet()) {
+            this.allCars.put(carNumber++, turbos.get(carKey).hashCode());
+        }
+
+
     }
 
 
@@ -41,6 +58,8 @@ public class Model implements IModel {
         trimCars = new HashMap<>();
         carsWithTurbo = new HashMap<>();
         carsWithRamp = new HashMap<>();
+        allCars = new HashMap<>();
+
     }
 
     @Override
@@ -72,11 +91,8 @@ public class Model implements IModel {
                     carsWithRamp.replace(carKey, carsWithRamp.get(carKey).turnAround());
             }
 
-            List<ICarable> toSend = new ArrayList<ICarable>();
-            toSend.addAll(carsWithTurbo.values());
-            toSend.addAll(carsWithRamp.values());
-            toSend.addAll(trimCars.values());
-            modelUpdatedEvent.publish(toSend);
+
+            modelUpdatedEvent.publish(sumCars());
             //modelUpdatedEvent.publish(carsWithTurbo.values());
             //modelUpdatedEvent.publish(trimCars.values());
         }
@@ -85,6 +101,14 @@ public class Model implements IModel {
     boolean isOutOfBounds(ICarable car) {
         int y = (int) car.getPosition().getY();
         return y > 500 || y < 0;
+    }
+
+    private List<ICarable> sumCars() {
+        List<ICarable> totalCars = new ArrayList<ICarable>();
+        totalCars.addAll(carsWithTurbo.values());
+        totalCars.addAll(carsWithRamp.values());
+        totalCars.addAll(trimCars.values());
+        return totalCars;
     }
 
 
@@ -96,12 +120,22 @@ public class Model implements IModel {
         for (Integer carKey : carsWithTurbo.keySet()) {
             carsWithTurbo.replace(carKey, carsWithTurbo.get(carKey).startEngine());
         }
-
+        for (Integer carKey : carsWithRamp.keySet()) {
+            carsWithRamp.replace(carKey, carsWithRamp.get(carKey).startEngine());
+        }
     }
 
     @Override
     public void stopEngine() {
-
+        for (Integer carKey : trimCars.keySet()) {
+            trimCars.replace(carKey, trimCars.get(carKey).stopEngine());
+        }
+        for (Integer carKey : carsWithTurbo.keySet()) {
+            carsWithTurbo.replace(carKey, carsWithTurbo.get(carKey).stopEngine());
+        }
+        for (Integer carKey : carsWithRamp.keySet()) {
+            carsWithRamp.replace(carKey, carsWithRamp.get(carKey).stopEngine());
+        }
     }
 
     @Override
@@ -112,33 +146,52 @@ public class Model implements IModel {
         for (Integer carKey : carsWithTurbo.keySet()) {
             carsWithTurbo.replace(carKey, carsWithTurbo.get(carKey).gas(amount));
         }
-
+        for (Integer carKey : carsWithRamp.keySet()) {
+            carsWithRamp.replace(carKey, carsWithRamp.get(carKey).gas(amount));
+        }
 
     }
 
     @Override
     public void brake(int amount) {
-
+        for (Integer carKey : trimCars.keySet()) {
+            trimCars.replace(carKey, trimCars.get(carKey).brake(amount));
+        }
+        for (Integer carKey : carsWithTurbo.keySet()) {
+            carsWithTurbo.replace(carKey, carsWithTurbo.get(carKey).brake(amount));
+        }
+        for (Integer carKey : carsWithRamp.keySet()) {
+            carsWithRamp.replace(carKey, carsWithRamp.get(carKey).brake(amount));
+        }
     }
 
     @Override
     public void raise() {
+        for (Integer carKey : carsWithRamp.keySet()) {
+            carsWithRamp.replace(carKey, carsWithRamp.get(carKey).raise(10));
+        }
 
     }
 
     @Override
     public void lower() {
-
+        for (Integer carKey : carsWithRamp.keySet()) {
+            carsWithRamp.replace(carKey, carsWithRamp.get(carKey).lower(1.0));
+        }
     }
 
     @Override
     public void setTurboOn() {
-
+        for (Integer carKey : carsWithTurbo.keySet()) {
+            carsWithTurbo.replace(carKey, carsWithTurbo.get(carKey).setTurboOn());
+        }
     }
 
     @Override
     public void setTurboOff() {
-
+        for (Integer carKey : carsWithTurbo.keySet()) {
+            carsWithTurbo.replace(carKey, carsWithTurbo.get(carKey).setTurboOff());
+        }
     }
 
 
@@ -163,19 +216,17 @@ public class Model implements IModel {
             case 1 -> {
                 ITurboVehicle saab = CarFactory.createSaab95(new Vector2D(x, 0), new Vector2D(0, 1), 0, false, true);
                 carsWithTurbo.put(saab.hashCode(), saab);
-
             }
             case 2 -> {
                 IRampVehicle scania = CarFactory.createScania(new Vector2D(x, 0), new Vector2D(0, 1), 0);
                 carsWithRamp.put(scania.hashCode(), scania);
-
             }
         }
     }
 
     public void removeCar() {
         Random r = new Random();
-//        int removeLast = carMap.size() - 1;
+        int removeLast = sumCars().size() - 1;
 
         // if(toRemove == null) return;
         try {

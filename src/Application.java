@@ -15,8 +15,11 @@ import java.util.Iterator;
  * hardcoded arguments exists in this class only(tm).
  */
 public class Application {
+    static int carNumber = 0;
 
     public static void main(String[] args) {
+        Map<Integer, Integer> allCars = new HashMap<>();
+
         Map<Integer, ITrim> cars = new HashMap<>();
         Map<Integer, ITurboVehicle> turbos = new HashMap<>();
         Map<Integer, IRampVehicle> ramps = new HashMap<>();
@@ -24,14 +27,16 @@ public class Application {
 
         ITrim volvo = CarFactory.createVolvo240(new Vector2D(0, 0), new Vector2D(0, 1), 0, false);
         cars.put(volvo.hashCode(), volvo);
+        allCars.put(carNumber++, volvo.hashCode());
 
         ITurboVehicle saab95 = CarFactory.createSaab95(new Vector2D(100, 0), new Vector2D(0, 1), 0, false, true);
         turbos.put(saab95.hashCode(), saab95);
+        allCars.put(carNumber++, saab95.hashCode());
 
         IRampVehicle scania = CarFactory.createScania(new Vector2D(200, 0), new Vector2D(0, 1), 0);
         scania.lower(70);
         ramps.put(scania.hashCode(), scania);
-
+        allCars.put(carNumber++, scania.hashCode());
         // Create MVC
         IModel model = new Model(cars, turbos, ramps);
 
