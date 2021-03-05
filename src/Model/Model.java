@@ -238,20 +238,21 @@ public class Model implements IModel {
     public void addCar() {
         Random r = new Random();
         int i = r.nextInt(3);
-
-        int x = (sumCars().size()) * 100;
-        switch (i) {
-            case 0 -> {
-                ITrim volvo = CarFactory.createVolvo240(new Vector2D(x, 0), new Vector2D(0, 1), 0, false);
-                carsWithTrim.add(volvo);
-            }
-            case 1 -> {
-                ITurboVehicle saab = CarFactory.createSaab95(new Vector2D(x, 0), new Vector2D(0, 1), 0, false, true);
-                carsWithTurbo.add(saab);
-            }
-            case 2 -> {
-                IRampVehicle scania = CarFactory.createScania(new Vector2D(x, 0), new Vector2D(0, 1), 0);
-                carsWithRamp.add(scania);
+        if (sumCars().size() < 10) {
+            int x = (sumCars().size()) * 100;
+            switch (i) {
+                case 0 -> {
+                    ITrim volvo = CarFactory.createVolvo240(new Vector2D(x, 0), new Vector2D(0, 1), 0, false);
+                    carsWithTrim.add(volvo);
+                }
+                case 1 -> {
+                    ITurboVehicle saab = CarFactory.createSaab95(new Vector2D(x, 0), new Vector2D(0, 1), 0, false, true);
+                    carsWithTurbo.add(saab);
+                }
+                case 2 -> {
+                    IRampVehicle scania = CarFactory.createScania(new Vector2D(x, 0), new Vector2D(0, 1), 0);
+                    carsWithRamp.add(scania);
+                }
             }
         }
     }
