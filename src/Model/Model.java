@@ -57,19 +57,19 @@ public class Model implements IModel {
             for (Integer carKey : trimCars.keySet()) {
                 trimCars.put(carKey, trimCars.get(carKey).move());
                 if (isOutOfBounds(trimCars.get(carKey)))
-                    trimCars.put(carKey, trimCars.get(carKey).turnAround());
+                    trimCars.replace(carKey, trimCars.get(carKey).turnAround());
             }
 
             for (Integer carKey : carsWithTurbo.keySet()) {
                 carsWithTurbo.put(carKey, carsWithTurbo.get(carKey).move());
                 if (isOutOfBounds(carsWithTurbo.get(carKey)))
-                    carsWithTurbo.get(carKey).turnAround();
+                    carsWithTurbo.replace(carKey, carsWithTurbo.get(carKey).turnAround());
             }
 
             for (Integer carKey : carsWithRamp.keySet()) {
                 carsWithRamp.put(carKey, carsWithRamp.get(carKey).move());
                 if (isOutOfBounds(carsWithRamp.get(carKey)))
-                    carsWithRamp.get(carKey).turnAround();
+                    carsWithRamp.replace(carKey, carsWithRamp.get(carKey).turnAround());
             }
 
             List<ICarable> toSend = new ArrayList<ICarable>();
@@ -153,22 +153,20 @@ public class Model implements IModel {
     public void addCar() {
         Random r = new Random();
         int i = r.nextInt(3);
-        int x = 1 * 100;
+
+        int x = (sumCars().size()) * 100;
         switch (i) {
             case 0 -> {
-                ITrim volvo = CarFactory.createVolvo240(new Vector2D(x, 0), new Vector2D(0, 0), 0, false);
-                //              carMap.put(volvo.hashCode(), volvo);
+                ITrim volvo = CarFactory.createVolvo240(new Vector2D(x, 0), new Vector2D(0, 1), 0, false);
                 trimCars.put(volvo.hashCode(), volvo);
             }
             case 1 -> {
-                ITurboVehicle saab = CarFactory.createSaab95(new Vector2D(x, 0), new Vector2D(0, 0), 0, false, true);
-//                carMap.put(saab.hashCode(), saab);
+                ITurboVehicle saab = CarFactory.createSaab95(new Vector2D(x, 0), new Vector2D(0, 1), 0, false, true);
                 carsWithTurbo.put(saab.hashCode(), saab);
 
             }
             case 2 -> {
-                IRampVehicle scania = CarFactory.createScania(new Vector2D(x, 0), new Vector2D(0, 0), 0);
-//                carMap.put(scania.hashCode(), scania);
+                IRampVehicle scania = CarFactory.createScania(new Vector2D(x, 0), new Vector2D(0, 1), 0);
                 carsWithRamp.put(scania.hashCode(), scania);
 
             }
