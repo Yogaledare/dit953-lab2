@@ -31,5 +31,4 @@ interface ICar {
     Vector2D getDirection();
     String getModelName();
     double getCurrentSpeed();
-
 }

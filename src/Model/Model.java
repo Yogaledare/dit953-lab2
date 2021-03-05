@@ -1,7 +1,6 @@
 package Model;
 
 import Observer.EventSource;
-import View.IPaintable;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,26 +32,13 @@ public class Model implements IModel {
         this(trimCars, turbos);
         this.carsWithRamp = ramps;
         // carMap.getOrDefault(this.hashCode(), null);
-        for (Integer carKey : ramps.keySet()) {
-            this.allCars.put(carNumber++, ramps.get(carKey).hashCode());
-        }
-
     }
 
     public Model(Map<Integer, ITrim> trimCars, Map<Integer, ITurboVehicle> turbos) {
         // this.carMap = allCars;
-        this.trimCars = trimCars;
+        this.carsWithTrim = carsWithTrim;
         this.carsWithTurbo = turbos;
-        for (Integer carKey : trimCars.keySet()) {
-            this.allCars.put(carNumber++, trimCars.get(carKey).hashCode());
-        }
-        for (Integer carKey : turbos.keySet()) {
-            this.allCars.put(carNumber++, turbos.get(carKey).hashCode());
-        }
-
-
     }
-
 
     public Model() {
         trimCars = new HashMap<>();
@@ -104,79 +90,119 @@ public class Model implements IModel {
     }
 
     private List<ICarable> sumCars() {
-        List<ICarable> totalCars = new ArrayList<ICarable>();
-        totalCars.addAll(carsWithTurbo.values());
-        totalCars.addAll(carsWithRamp.values());
-        totalCars.addAll(trimCars.values());
-        return totalCars;
+        List<ICarable> res = new ArrayList<>();
+        res.addAll(carsWithTurbo);
+        res.addAll(carsWithRamp);
+        res.addAll(carsWithTrim);
+        return res;
     }
 
 
     @Override
     public void startEngine() {
-        for (Integer carKey : trimCars.keySet()) {
-            trimCars.replace(carKey, trimCars.get(carKey).startEngine());
+        for (int i = 0; i < carsWithTrim.size(); i++) {
+            var car = carsWithTrim.get(i);
+            carsWithTrim.remove(car);
+            carsWithTrim.add(i, car.startEngine());
         }
-        for (Integer carKey : carsWithTurbo.keySet()) {
-            carsWithTurbo.replace(carKey, carsWithTurbo.get(carKey).startEngine());
+        for (int i = 0; i < carsWithTurbo.size(); i++) {
+            var car = carsWithTurbo.get(i);
+            carsWithTurbo.remove(car);
+            carsWithTurbo.add(i, car.startEngine());
         }
-        for (Integer carKey : carsWithRamp.keySet()) {
-            carsWithRamp.replace(carKey, carsWithRamp.get(carKey).startEngine());
+        for (int i = 0; i < carsWithRamp.size(); i++) {
+            var car = carsWithRamp.get(i);
+            carsWithRamp.remove(car);
+            carsWithRamp.add(i, car.startEngine());
         }
+
     }
 
     @Override
     public void stopEngine() {
-        for (Integer carKey : trimCars.keySet()) {
-            trimCars.replace(carKey, trimCars.get(carKey).stopEngine());
+        for (int i = 0; i < carsWithTrim.size(); i++) {
+            var car = carsWithTrim.get(i);
+            carsWithTrim.remove(car);
+            carsWithTrim.add(i, car.stopEngine());
         }
-        for (Integer carKey : carsWithTurbo.keySet()) {
-            carsWithTurbo.replace(carKey, carsWithTurbo.get(carKey).stopEngine());
+        for (int i = 0; i < carsWithTurbo.size(); i++) {
+            var car = carsWithTurbo.get(i);
+            carsWithTurbo.remove(car);
+            carsWithTurbo.add(i, car.stopEngine());
         }
-        for (Integer carKey : carsWithRamp.keySet()) {
-            carsWithRamp.replace(carKey, carsWithRamp.get(carKey).stopEngine());
+        for (int i = 0; i < carsWithRamp.size(); i++) {
+            var car = carsWithRamp.get(i);
+            carsWithRamp.remove(car);
+            carsWithRamp.add(i, car.stopEngine());
         }
     }
 
     @Override
     public void gas(int amount) {
-        for (Integer carKey : trimCars.keySet()) {
-            trimCars.replace(carKey, trimCars.get(carKey).gas(amount));
+        for (int i = 0; i < carsWithTrim.size(); i++) {
+            var car = carsWithTrim.get(i);
+            carsWithTrim.remove(car);
+            carsWithTrim.add(i, car.gas(amount));
         }
-        for (Integer carKey : carsWithTurbo.keySet()) {
-            carsWithTurbo.replace(carKey, carsWithTurbo.get(carKey).gas(amount));
+        for (int i = 0; i < carsWithTurbo.size(); i++) {
+            var car = carsWithTurbo.get(i);
+            carsWithTurbo.remove(car);
+            carsWithTurbo.add(i, car.gas(amount));
         }
-        for (Integer carKey : carsWithRamp.keySet()) {
-            carsWithRamp.replace(carKey, carsWithRamp.get(carKey).gas(amount));
+        for (int i = 0; i < carsWithRamp.size(); i++) {
+            var car = carsWithRamp.get(i);
+            carsWithRamp.remove(car);
+            carsWithRamp.add(i, car.gas(amount));
         }
 
     }
 
     @Override
     public void brake(int amount) {
-        for (Integer carKey : trimCars.keySet()) {
-            trimCars.replace(carKey, trimCars.get(carKey).brake(amount));
+        for (int i = 0; i < carsWithTrim.size(); i++) {
+            ITrim car = carsWithTrim.get(i);
+            carsWithTrim.remove(car);
+            carsWithTrim.add(car.brake(amount));
+            replace(car, car.brake(amount));
         }
-        for (Integer carKey : carsWithTurbo.keySet()) {
-            carsWithTurbo.replace(carKey, carsWithTurbo.get(carKey).brake(amount));
+        for (int i = 0; i < carsWithTurbo.size(); i++) {
+            ITurboVehicle car = carsWithTurbo.get(i);
+            replace(car, car.brake(amount));
         }
-        for (Integer carKey : carsWithRamp.keySet()) {
-            carsWithRamp.replace(carKey, carsWithRamp.get(carKey).brake(amount));
+        for (int i = 0; i < carsWithRamp.size(); i++) {
+            IRampVehicle car = carsWithRamp.get(i);
+            replace(car, car.brake(amount));
         }
+    }
+    // good?
+    private void replace(ITrim remove, ITrim replace) {
+        carsWithTrim.remove(remove);
+        carsWithTrim.add(replace);
+    }
+    private void replace(ITurboVehicle remove, ITurboVehicle replace) {
+        carsWithTurbo.remove(remove);
+        carsWithTurbo.add(replace);
+    }
+    private void replace(IRampVehicle remove, IRampVehicle replace) {
+        carsWithRamp.remove(remove);
+        carsWithRamp.add(replace);
     }
 
     @Override
     public void raise() {
-        for (Integer carKey : carsWithRamp.keySet()) {
-            carsWithRamp.replace(carKey, carsWithRamp.get(carKey).raise(10));
+        for (int i = 0; i < carsWithRamp.size(); i++) {
+            IRampVehicle car = carsWithRamp.get(i);
+            carsWithRamp.remove(car);
+            carsWithRamp.add(car.raise(10));
         }
-
     }
 
     @Override
     public void lower() {
-        for (Integer carKey : carsWithRamp.keySet()) {
-            carsWithRamp.replace(carKey, carsWithRamp.get(carKey).lower(1.0));
+        for (int i = 0; i < carsWithRamp.size(); i++) {
+            IRampVehicle car = carsWithRamp.get(i);
+            carsWithRamp.remove(car);
+            carsWithRamp.add(car.lower(10));
         }
     }
 
@@ -211,7 +237,7 @@ public class Model implements IModel {
         switch (i) {
             case 0 -> {
                 ITrim volvo = CarFactory.createVolvo240(new Vector2D(x, 0), new Vector2D(0, 1), 0, false);
-                trimCars.put(volvo.hashCode(), volvo);
+                carsWithTrim.add(volvo);
             }
             case 1 -> {
                 ITurboVehicle saab = CarFactory.createSaab95(new Vector2D(x, 0), new Vector2D(0, 1), 0, false, true);
@@ -226,15 +252,23 @@ public class Model implements IModel {
 
     public void removeCar() {
         Random r = new Random();
-        int removeLast = sumCars().size() - 1;
+        int i = r.nextInt(3);
+        if (sumCars().size() == 0) { return; }
 
-        // if(toRemove == null) return;
-        try {
-//            int removedCar = carMap.remove(removeLast).hashCode();
-//            carsWithTurbo.remove(removedCar);
-//            carsWithRamp.remove(removedCar);
-        } catch (IndexOutOfBoundsException ignore) {
-            // say nothing.
+        switch(i){
+            case 0 -> {
+                int indexToRemove = r.nextInt(carsWithTrim.size());
+                if(indexToRemove == 0) return;
+                carsWithTrim.remove(indexToRemove);
+            }
+            case 1 -> {
+                int indexToRemove = r.nextInt(carsWithTurbo.size());
+                carsWithTurbo.remove(indexToRemove);
+            }
+            case 2 -> {
+                int indexToRemove = r.nextInt(carsWithRamp.size());
+                carsWithRamp.remove(indexToRemove);
+            }
         }
 
         /*

@@ -9,7 +9,9 @@
 //
 //public class BasicCar extends Car implements ICar {
 //
-//    public BasicCar(Vector2D pos, Vector2D dir, double currentSpeed, boolean engineOn, double enginePower, double width, double length, String modelName, Color color, int nrDoors) {
+//    public BasicCar(Vector2D pos, Vector2D dir, double currentSpeed,
+//    boolean engineOn, double enginePower, double width, double length,
+//    String modelName, Color color, int nrDoors) {
 //        super(pos, dir, currentSpeed, engineOn, enginePower, width, length, modelName, color, nrDoors);
 //    }
 //

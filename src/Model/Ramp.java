@@ -34,7 +34,7 @@ public class Ramp {
      */
     public Ramp(double maxAngle, double speed){
         this.maxAngle = maxAngle;
-        rampAngle = maxAngle;
+        rampAngle = 0;
         rampSpeed = speed;
     }
 

@@ -18,11 +18,9 @@ public class Application {
     static int carNumber = 0;
 
     public static void main(String[] args) {
-        Map<Integer, Integer> allCars = new HashMap<>();
-
-        Map<Integer, ITrim> cars = new HashMap<>();
-        Map<Integer, ITurboVehicle> turbos = new HashMap<>();
-        Map<Integer, IRampVehicle> ramps = new HashMap<>();
+        List<ITrim> carsWithTrim = new ArrayList<>();
+        List<ITurboVehicle> carsWithTurbo = new ArrayList<>();
+        List<IRampVehicle> carsWithRamp = new ArrayList<>();
 
 
         ITrim volvo = CarFactory.createVolvo240(new Vector2D(0, 0), new Vector2D(0, 1), 0, false);
@@ -38,7 +36,7 @@ public class Application {
         ramps.put(scania.hashCode(), scania);
         allCars.put(carNumber++, scania.hashCode());
         // Create MVC
-        IModel model = new Model(cars, turbos, ramps);
+        IModel model = new Model(carsWithTrim, carsWithTurbo, carsWithRamp);
 
         // First view is a full-blow MVC,
         // includes a car-world, controls, speed-log
