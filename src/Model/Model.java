@@ -55,20 +55,30 @@ public class Model implements IModel {
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent event) {
             for (Integer carKey : trimCars.keySet()) {
+                trimCars.put(carKey, trimCars.get(carKey).move());
                 if (isOutOfBounds(trimCars.get(carKey)))
-                    trimCars.get(carKey).turnAround();
-
+                    trimCars.put(carKey, trimCars.get(carKey).turnAround());
             }
 
             for (Integer carKey : carsWithTurbo.keySet()) {
+                carsWithTurbo.put(carKey, carsWithTurbo.get(carKey).move());
                 if (isOutOfBounds(carsWithTurbo.get(carKey)))
                     carsWithTurbo.get(carKey).turnAround();
-
             }
 
-            modelUpdatedEvent.publish(carsWithTurbo.values());
-            modelUpdatedEvent.publish(trimCars.values());
+            for (Integer carKey : carsWithRamp.keySet()) {
+                carsWithRamp.put(carKey, carsWithRamp.get(carKey).move());
+                if (isOutOfBounds(carsWithRamp.get(carKey)))
+                    carsWithRamp.get(carKey).turnAround();
+            }
 
+            List<ICarable> toSend = new ArrayList<ICarable>();
+            toSend.addAll(carsWithTurbo.values());
+            toSend.addAll(carsWithRamp.values());
+            toSend.addAll(trimCars.values());
+            modelUpdatedEvent.publish(toSend);
+            //modelUpdatedEvent.publish(carsWithTurbo.values());
+            //modelUpdatedEvent.publish(trimCars.values());
         }
     }
 
