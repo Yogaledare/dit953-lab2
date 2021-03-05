@@ -61,8 +61,12 @@ public class RaisedRampState extends State {
     @Override
     IRampVehicle lower(Scania context, double amount) {
         Ramp loweredRamp = new Ramp(context.ramp);
-        loweredRamp.raise(amount);
+        loweredRamp.lower(amount);
+//        System.out.println("sänker");
+//        System.out.println("vinkel: " + loweredRamp.getRampAngle());
+//        System.out.println(loweredRamp.isFullyLowered());
         if (loweredRamp.isFullyLowered()) { // om rampen efter flyttning är helt nere
+//            System.out.println("bytt till neutral state igen");
             return new Scania(context.getPosition(), context.getDirection(), 0, new EngineOffLoweredRampState(), loweredRamp);
         } else {
             return new Scania(context.getPosition(), context.getDirection(), 0, new RaisedRampState(), loweredRamp);

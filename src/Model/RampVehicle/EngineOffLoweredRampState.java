@@ -59,6 +59,8 @@ public class EngineOffLoweredRampState extends State {
         if (raisedRamp.isFullyLowered()) { // om rampen fortfarande är helt nere. amount var 0
             return context;
         } else {
+//            System.out.println("bytt till raised state");
+//            System.out.println("vinkel: " + raisedRamp.getRampAngle());
             return new Scania(context.getPosition(), context.getDirection(), 0, new RaisedRampState(), raisedRamp);
         }
     }

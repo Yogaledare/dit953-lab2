@@ -85,4 +85,8 @@ public class Ramp {
     public boolean isFullyLowered(){
         return rampAngle == 0;
     }
+
+    public double getRampAngle() {
+        return rampAngle;
+    }
 }
