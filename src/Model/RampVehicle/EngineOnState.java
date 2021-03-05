@@ -47,7 +47,7 @@ public class EngineOnState extends State {
     @Override
     IRampVehicle turnAround(Scania context) {
         Vector2D currentDirection = context.getDirection();
-        Vector2D newDirection = currentDirection.rotateCC(Math.PI );
+        Vector2D newDirection = currentDirection.rotateCC(Math.PI);
         return new Scania(context.getPosition(), newDirection, context.getCurrentSpeed(), context.state, context.ramp);
     }
 
@@ -63,10 +63,10 @@ public class EngineOnState extends State {
         return new Scania(context.getPosition(), context.getDirection(), newSpeed, context.state, context.ramp);
     }
 
-        @Override
-        boolean isEngineOn() {
-            return true;
-        }
+    @Override
+    boolean isEngineOn() {
+        return true;
+    }
 
 
     @Override
@@ -78,8 +78,6 @@ public class EngineOnState extends State {
     IRampVehicle lower(Scania context, double amount) {
         return context;
     }
-
-
 
 
 }

@@ -22,19 +22,15 @@ public class Application {
         List<ITurboVehicle> carsWithTurbo = new ArrayList<>();
         List<IRampVehicle> carsWithRamp = new ArrayList<>();
 
-
         ITrim volvo = CarFactory.createVolvo240(new Vector2D(0, 0), new Vector2D(0, 1), 0, false);
-        cars.put(volvo.hashCode(), volvo);
-        allCars.put(carNumber++, volvo.hashCode());
+        carsWithTrim.add(volvo);
 
         ITurboVehicle saab95 = CarFactory.createSaab95(new Vector2D(100, 0), new Vector2D(0, 1), 0, false, true);
-        turbos.put(saab95.hashCode(), saab95);
-        allCars.put(carNumber++, saab95.hashCode());
+        carsWithTurbo.add(saab95);
 
         IRampVehicle scania = CarFactory.createScania(new Vector2D(200, 0), new Vector2D(0, 1), 0);
         scania.lower(70);
-        ramps.put(scania.hashCode(), scania);
-        allCars.put(carNumber++, scania.hashCode());
+        carsWithRamp.add(scania);
         // Create MVC
         IModel model = new Model(carsWithTrim, carsWithTurbo, carsWithRamp);
 
@@ -43,7 +39,9 @@ public class Application {
         makeView1(model);
 
         // Second view includes car-controls only
-//        makeView2(model);
+
+        // Tillfälligt bortkommenterat andra vyn, störande!
+        makeView2(model);
 
         // Start the timer
         model.startTimer();

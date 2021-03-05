@@ -18,33 +18,34 @@ public class Model implements IModel {
     int boardWidth = 800;
     int boardHeight = 800;
 
-    Map<Integer, Integer> allCars;
+    //  CarNumber , carKey
+    // List<Integer, Integer> allCars = new HashMap<>();
 
     // Each car can be once in each map..
-    Map<Integer, ITrim> trimCars;
-    Map<Integer, ITurboVehicle> carsWithTurbo;
-    Map<Integer, IRampVehicle> carsWithRamp;
+    List<ITrim> carsWithTrim;
+    List<ITurboVehicle> carsWithTurbo;
+    List<IRampVehicle> carsWithRamp;
 
     EventSource<ICarable> modelUpdatedEvent = new EventSource<>();
 
     // Constructor to initialize all lists. (ICarable, ITrim, ITurboVehicle, IRampVehicle)
-    public Model(Map<Integer, ITrim> trimCars, Map<Integer, ITurboVehicle> turbos, Map<Integer, IRampVehicle> ramps) {
-        this(trimCars, turbos);
+    public Model(List<ITrim> carsWithTrim, List<ITurboVehicle> turbos, List<IRampVehicle> ramps) {
+        this(carsWithTrim, turbos);
         this.carsWithRamp = ramps;
+
         // carMap.getOrDefault(this.hashCode(), null);
     }
 
-    public Model(Map<Integer, ITrim> trimCars, Map<Integer, ITurboVehicle> turbos) {
+    public Model(List<ITrim> carsWithTrim, List<ITurboVehicle> turbos) {
         // this.carMap = allCars;
         this.carsWithTrim = carsWithTrim;
         this.carsWithTurbo = turbos;
     }
 
     public Model() {
-        trimCars = new HashMap<>();
-        carsWithTurbo = new HashMap<>();
-        carsWithRamp = new HashMap<>();
-        allCars = new HashMap<>();
+        carsWithTrim = new ArrayList<>();
+        carsWithTurbo = new ArrayList<>();
+        carsWithRamp = new ArrayList<>();
 
     }
 
@@ -59,28 +60,29 @@ public class Model implements IModel {
      */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent event) {
-            for (Integer carKey : trimCars.keySet()) {
-                trimCars.put(carKey, trimCars.get(carKey).move());
-                if (isOutOfBounds(trimCars.get(carKey)))
-                    trimCars.replace(carKey, trimCars.get(carKey).turnAround());
+            for (int i = 0; i < carsWithTrim.size(); i++) {
+                var car = carsWithTrim.get(i);
+                if (isOutOfBounds(car)) {
+                    carsWithTrim.remove(car);
+                    carsWithTrim.add(i, car.turnAround());
+                }
             }
-
-            for (Integer carKey : carsWithTurbo.keySet()) {
-                carsWithTurbo.put(carKey, carsWithTurbo.get(carKey).move());
-                if (isOutOfBounds(carsWithTurbo.get(carKey)))
-                    carsWithTurbo.replace(carKey, carsWithTurbo.get(carKey).turnAround());
+            for (int i = 0; i < carsWithTurbo.size(); i++) {
+                var car = carsWithTurbo.get(i);
+                if (isOutOfBounds(car)) {
+                    carsWithTurbo.remove(car);
+                    carsWithTurbo.add(i, car.turnAround());
+                }
             }
-
-            for (Integer carKey : carsWithRamp.keySet()) {
-                carsWithRamp.put(carKey, carsWithRamp.get(carKey).move());
-                if (isOutOfBounds(carsWithRamp.get(carKey)))
-                    carsWithRamp.replace(carKey, carsWithRamp.get(carKey).turnAround());
+            for (int i = 0; i < carsWithRamp.size(); i++) {
+                var car = carsWithRamp.get(i);
+                if (isOutOfBounds(car)) {
+                    carsWithRamp.remove(car);
+                    carsWithRamp.add(i, car.turnAround());
+                }
             }
-
 
             modelUpdatedEvent.publish(sumCars());
-            //modelUpdatedEvent.publish(carsWithTurbo.values());
-            //modelUpdatedEvent.publish(trimCars.values());
         }
     }
 
@@ -208,15 +210,19 @@ public class Model implements IModel {
 
     @Override
     public void setTurboOn() {
-        for (Integer carKey : carsWithTurbo.keySet()) {
-            carsWithTurbo.replace(carKey, carsWithTurbo.get(carKey).setTurboOn());
+        for (int i = 0; i < carsWithTurbo.size(); i++) {
+            var car = carsWithTurbo.get(i);
+            carsWithTurbo.remove(car);
+            carsWithTurbo.add(i, car.setTurboOn());
         }
     }
 
     @Override
     public void setTurboOff() {
-        for (Integer carKey : carsWithTurbo.keySet()) {
-            carsWithTurbo.replace(carKey, carsWithTurbo.get(carKey).setTurboOff());
+        for (int i = 0; i < carsWithTurbo.size(); i++) {
+            var car = carsWithTurbo.get(i);
+            carsWithTurbo.remove(car);
+            carsWithTurbo.add(i, car.setTurboOff());
         }
     }
 
@@ -241,11 +247,11 @@ public class Model implements IModel {
             }
             case 1 -> {
                 ITurboVehicle saab = CarFactory.createSaab95(new Vector2D(x, 0), new Vector2D(0, 1), 0, false, true);
-                carsWithTurbo.put(saab.hashCode(), saab);
+                carsWithTurbo.add(saab);
             }
             case 2 -> {
                 IRampVehicle scania = CarFactory.createScania(new Vector2D(x, 0), new Vector2D(0, 1), 0);
-                carsWithRamp.put(scania.hashCode(), scania);
+                carsWithRamp.add(scania);
             }
         }
     }
@@ -271,13 +277,6 @@ public class Model implements IModel {
             }
         }
 
-        /*
-        switch (i) {
-            case 0 -> cars.remove(cars.size() - 1);
-            case 1 -> carsWithTurbo.remove(carsWithTurbo.size() - 1);
-            case 2 -> carsWithRamp.remove(carsWithRamp.size() - 1);
-        }
-         */
     }
 
 }
