@@ -6,6 +6,7 @@ import Observer.EventObserver;
 import Observer.EventSource;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class CarReciever implements EventObserver<ICarable> {
@@ -18,7 +19,7 @@ public class CarReciever implements EventObserver<ICarable> {
     }
 
     @Override
-    public void actOnPublish(List<ICarable> cars) {
+    public void actOnPublish(Collection<ICarable> cars) {
         List<IPaintable> paintables = new ArrayList<>();
         List<ILoggable> loggables = new ArrayList<>();
         for (ICarable car : cars) {

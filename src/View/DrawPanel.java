@@ -5,10 +5,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
 
 import Model.*;
 import Observer.EventSource;
@@ -52,12 +50,12 @@ public class DrawPanel extends JPanel implements EventObserver<IPaintable> {
     }
 
     @Override
-    public void actOnPublish(List</*? extends */IPaintable> paintables) {
+    public void actOnPublish(Collection</*? extends */IPaintable> paintables) {
         setList(paintables);
         repaint();
     }
 
-    public void setList(List<? extends IPaintable> paintables){
+    public void setList(Collection<? extends IPaintable> paintables){
         this.paintables.clear();
         this.paintables.addAll(paintables);
     }

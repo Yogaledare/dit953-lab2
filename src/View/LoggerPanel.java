@@ -4,6 +4,7 @@ import Observer.EventSource;
 import Observer.EventObserver;
 import javax.swing.*;
 import java.text.DecimalFormat;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -31,7 +32,7 @@ public class LoggerPanel extends JPanel implements EventObserver<ILoggable> {
      * @param loggable, for each ILoggable object we update the view with new values.
      */
     @Override
-    public void actOnPublish(List<ILoggable> loggable) {
+    public void actOnPublish(Collection<ILoggable> loggable) {
         StringBuilder res = new StringBuilder();
         DecimalFormat df = new DecimalFormat("###.#");
 

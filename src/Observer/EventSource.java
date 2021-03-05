@@ -1,10 +1,10 @@
 package Observer;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.ArrayList;
 
 public class EventSource<T> {
-    private final List<EventObserver<T>> subscribers = new ArrayList<>();
+    private final Collection<EventObserver<T>> subscribers = new ArrayList<>();
 
     /**
      * Adds a new subscriber to an object that is observable,
@@ -27,7 +27,7 @@ public class EventSource<T> {
      * Notifies all observers that a event occurred.
      * @param publisher, all objects that inherits the interface
      */
-    public void publish(List<T> publisher){
+    public void publish(Collection<T> publisher){
         for (EventObserver<T> observer : subscribers) {
             observer.actOnPublish(publisher);
         }

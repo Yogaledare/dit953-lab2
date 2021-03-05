@@ -24,30 +24,31 @@ public class Model implements IModel {
 
     // All Cars in this map
 
-    Map<Integer, ICarable>      carMap = new HashMap<>();
+    // Map<Integer, ICarable>      carMap = new HashMap<>();
 
     // Each car can be once in each map..
     Map<Integer, ITrim>         trimCars;
     Map<Integer, ITurboVehicle> carsWithTurbo;
     Map<Integer, IRampVehicle>  carsWithRamp;
 
-    EventSource<ICarable> modelUpdatedEvent = new EventSource<>();
+    EventSource<ITrim> modelUpdatedEvent = new EventSource<>();
+
     // Constructor to initialize all lists. (ICarable, ITrim, ITurboVehicle, IRampVehicle)
-    public Model(Map<Integer,ICarable> allCars, Map<Integer,ITrim> trimCars, Map<Integer,ITurboVehicle> turbos, Map<Integer,IRampVehicle> ramps) {
-        this(allCars, trimCars, turbos);
+    public Model( Map<Integer,ITrim> trimCars, Map<Integer,ITurboVehicle> turbos, Map<Integer,IRampVehicle> ramps) {
+        this(trimCars, turbos);
         this.carsWithRamp = ramps;
-        carMap.getOrDefault(this.hashCode(), null);
+        // carMap.getOrDefault(this.hashCode(), null);
     }
 
-    public Model(Map<Integer,ICarable> allCars, Map<Integer,ITrim> trimCars, Map<Integer,ITurboVehicle> turbos) {
-        this.carMap = allCars;
+    public Model(Map<Integer,ITrim> trimCars, Map<Integer,ITurboVehicle> turbos) {
+        // this.carMap = allCars;
         this.trimCars = trimCars;
         this.carsWithTurbo = turbos;
     }
 
 
     public Model() {
-        carMap = new HashMap<>();
+        // carMap = new HashMap<>();
 
         trimCars = new HashMap<>();
         carsWithTurbo = new HashMap<>();
@@ -65,15 +66,12 @@ public class Model implements IModel {
      */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent event) {
+            for (Integer carKey : trimCars.keySet()) {
+                if (isOutOfBounds(trimCars.get(carKey)))
+                    trimCars.get(carKey).turnAround();
+            }
+            modelUpdatedEvent.publish(trimCars.values());
 
-            var e = carMap.keySet().iterator();
-
-            var car = carMap.get(e.next());
-            if (isOutOfBounds(car))
-                    car.turnAround();
-
-            List<ICarable> tmp = new ArrayList<ICarable>(carMap.values());
-            modelUpdatedEvent.publish(tmp);
         }
     }
 
@@ -95,15 +93,21 @@ public class Model implements IModel {
 
     @Override
     public void gas(int amount) {
-        for (var c : carMap.keySet()) {
-            int carId = carMap.get(c).gas(amount).hashCode();
+        for (Integer carKey : carsWithTurbo.keySet()) {
+            carsWithTurbo.replace(carKey, carsWithTurbo.get(carKey).gas(amount));
+        }
+        for (Integer carKey : carsWithRamp.keySet()) {
+            carsWithRamp.replace(carKey, carsWithRamp.get(carKey).gas(amount));
         }
     }
 
     @Override
     public void brake(int amount) {
-        for (var c : carMap.keySet()) {
-            int carId = carMap.get(c).brake(amount).hashCode();
+        for (Integer carKey : carsWithTurbo.keySet()) {
+            carsWithTurbo.replace(carKey, carsWithTurbo.get(carKey).brake(amount));
+        }
+        for (Integer carKey : carsWithRamp.keySet()) {
+            carsWithRamp.replace(carKey, carsWithRamp.get(carKey).brake(amount));
         }
     }
 
@@ -171,22 +175,22 @@ public class Model implements IModel {
     public void addCar() {
         Random r = new Random();
         int i = r.nextInt(3);
-        int x = carMap.size() * 100;
+        int x = 1 * 100;
         switch (i) {
             case 0 -> {
                 ITrim volvo = CarFactory.createVolvo240(new Vector2D(x, 0), new Vector2D(0, 0), 0, false);
-                carMap.put(volvo.hashCode(), volvo);
+  //              carMap.put(volvo.hashCode(), volvo);
                 trimCars.put(volvo.hashCode(), volvo);
             }
             case 1 -> {
                 ITurboVehicle saab = CarFactory.createSaab95(new Vector2D(x, 0), new Vector2D(0, 0), 0, false, true);
-                carMap.put(saab.hashCode(), saab);
+//                carMap.put(saab.hashCode(), saab);
                 carsWithTurbo.put(saab.hashCode(), saab);
 
             }
             case 2 -> {
                 IRampVehicle scania = CarFactory.createScania(new Vector2D(x, 0), new Vector2D(0, 0), 0);
-                carMap.put(scania.hashCode(), scania);
+//                carMap.put(scania.hashCode(), scania);
                 carsWithRamp.put(scania.hashCode(), scania);
 
             }
@@ -195,13 +199,13 @@ public class Model implements IModel {
 
     public void removeCar() {
         Random r = new Random();
-        int removeLast = carMap.size() - 1;
+//        int removeLast = carMap.size() - 1;
 
         // if(toRemove == null) return;
         try {
-            int removedCar = carMap.remove(removeLast).hashCode();
-            carsWithTurbo.remove(removedCar);
-            carsWithRamp.remove(removedCar);
+//            int removedCar = carMap.remove(removeLast).hashCode();
+//            carsWithTurbo.remove(removedCar);
+//            carsWithRamp.remove(removedCar);
         } catch (IndexOutOfBoundsException ignore) {
             // say nothing.
         }
