@@ -96,10 +96,10 @@ public class Scania extends Car implements IRampVehicle {
         return new Scania(position, direction, getCurrentSpeed(), state, new Ramp(ramp));
     }
 
-    @Override
+/*    @Override
     public <T extends ITransportable> ITransportable follow(ITransporter<T> transporter) {
         return new Scania(transporter.getPosition(), transporter.getDirection(), getCurrentSpeed(), state, new Ramp(ramp));
-    }
+    }*/
 }
 
 
