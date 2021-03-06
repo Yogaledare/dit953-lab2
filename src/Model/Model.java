@@ -18,10 +18,6 @@ public class Model implements IModel {
     int boardWidth = 800;
     int boardHeight = 800;
 
-    //  CarNumber , carKey
-    // List<Integer, Integer> allCars = new HashMap<>();
-
-    // Each car can be once in each map..
     List<ITrim> carsWithTrim;
     List<ITurboVehicle> carsWithTurbo;
     List<IRampVehicle> carsWithRamp;
@@ -29,17 +25,12 @@ public class Model implements IModel {
     EventSource<ICarable> modelUpdatedEvent = new EventSource<>();
 
     // Constructor to initialize all lists. (ICarable, ITrim, ITurboVehicle, IRampVehicle)
-    public Model(List<ITrim> carsWithTrim, List<ITurboVehicle> turbos, List<IRampVehicle> ramps) {
-        this(carsWithTrim, turbos);
-        this.carsWithRamp = ramps;
+    public Model(List<ITrim> carsWithTrim, List<ITurboVehicle> carsWithTurbo, List<IRampVehicle> carsWithRramp) {
+        this.carsWithTrim = carsWithTrim;
+        this.carsWithTurbo = carsWithTurbo;
+        this.carsWithRamp = carsWithRramp;
 
         // carMap.getOrDefault(this.hashCode(), null);
-    }
-
-    public Model(List<ITrim> carsWithTrim, List<ITurboVehicle> turbos) {
-        // this.carMap = allCars;
-        this.carsWithTrim = carsWithTrim;
-        this.carsWithTurbo = turbos;
     }
 
     public Model() {
@@ -149,17 +140,20 @@ public class Model implements IModel {
             replace(car, car.brake(amount));
         }
     }
+
     // good?
     private ITrim replace(ITrim remove, ITrim replace) {
         carsWithTrim.remove(remove);
         carsWithTrim.add(replace);
         return replace;
     }
+
     private ITurboVehicle replace(ITurboVehicle remove, ITurboVehicle replace) {
         carsWithTurbo.remove(remove);
         carsWithTurbo.add(replace);
         return replace;
     }
+
     private IRampVehicle replace(IRampVehicle remove, IRampVehicle replace) {
         carsWithRamp.remove(remove);
         carsWithRamp.add(replace);
