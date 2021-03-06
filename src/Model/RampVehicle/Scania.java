@@ -92,7 +92,7 @@ public class Scania extends Car implements IRampVehicle {
     }
 
     @Override
-    public ITransportable getCarriedTo(Vector2D position, Vector2D direction) {
+    public Scania getCarriedTo(Vector2D position, Vector2D direction) {
         return new Scania(position, direction, getCurrentSpeed(), state, new Ramp(ramp));
     }
 
