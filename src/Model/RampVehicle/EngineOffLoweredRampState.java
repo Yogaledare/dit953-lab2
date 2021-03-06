@@ -8,7 +8,7 @@ public class EngineOffLoweredRampState extends State {
 
     @Override
     IRampVehicle startEngine(Scania context) {
-        return new Scania(context.getPosition(), context.getDirection(), 0, new EngineOnState(), context.ramp);
+        return new Scania(context.getPosition(), context.getDirection(), 0.1, new EngineOnState(), context.ramp);
     }
 
     @Override

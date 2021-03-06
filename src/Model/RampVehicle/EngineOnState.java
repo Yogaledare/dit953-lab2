@@ -1,7 +1,9 @@
 package Model.RampVehicle;
 
+import Model.ITrim;
 import Model.Vector2D;
 import Model.IRampVehicle;
+import Model.Volvo240;
 
 public class EngineOnState extends State {
 
@@ -53,7 +55,7 @@ public class EngineOnState extends State {
 
     @Override
     IRampVehicle gas(Scania context, double amount) {
-        double newSpeed = context.getIncrementedSpeed(amount, context.findSpeedFactor());
+        double newSpeed = context.getIncrementedSpeed(Vector2D.clamp(amount, 0, 1), context.findSpeedFactor());
         return new Scania(context.getPosition(), context.getDirection(), newSpeed, context.state, context.ramp);
     }
 
