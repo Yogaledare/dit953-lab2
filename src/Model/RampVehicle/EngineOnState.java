@@ -61,7 +61,7 @@ public class EngineOnState extends State {
 
     @Override
     IRampVehicle brake(Scania context, double amount) {
-        double newSpeed = context.getDecrementSpeed(amount, context.findSpeedFactor());
+        double newSpeed = context.getDecrementSpeed(Vector2D.clamp(amount, 0, 1), context.findSpeedFactor());
         return new Scania(context.getPosition(), context.getDirection(), newSpeed, context.state, context.ramp);
     }
 
