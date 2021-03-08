@@ -59,7 +59,7 @@ public class Application {
         GasPanel gasPanel = new GasPanel();
 
         // The panel for controlling the cars
-        ControlPanel controlPanel = new ControlPanel(800);
+        ControlPanel controlPanel = new ControlPanel();
 
         // The Logger panel
         LoggerPanel loggerPanel = new LoggerPanel(reciever.getLoggUpdatedEvent());
@@ -89,7 +89,7 @@ public class Application {
         List<JPanel> panels = new ArrayList<>();
 
         GasPanel gasPanel = new GasPanel();
-        ControlPanel controlPanel = new ControlPanel(800);
+        ControlPanel controlPanel = new ControlPanel();
         AddRemovePanel addRemovePanel = new AddRemovePanel();
 
         CarView view = new CarView("Control 2.0");

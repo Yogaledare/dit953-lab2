@@ -15,7 +15,7 @@ public class ControlPanel extends JPanel implements IControlPanel {
     JButton startButton = new JButton("Start all cars");
     JButton stopButton = new JButton("Stop all cars");
 
-    public ControlPanel(int X){
+    public ControlPanel(){
         this.setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
 
         this.add(turboOnButton);
