@@ -1,4 +1,4 @@
-package Model.RampVehicle;
+package Model.Scania;
 
 
 import Model.*;
@@ -19,9 +19,7 @@ public class Scania extends Car implements IRampVehicle {
         this.ramp = ramp;
     }
 
-/*    public Scania(Scania scania) {
-        this(scania.getPosition(), scania.getDirection(), scania.getCurrentSpeed(), scania.state, new Ramp(scania.ramp));
-    }*/
+
 
     @Override
     protected double getIncrementedSpeed(double amount, double speedFactor) {
@@ -102,7 +100,9 @@ public class Scania extends Car implements IRampVehicle {
     }*/
 }
 
-
+/*    public Scania(Scania scania) {
+        this(scania.getPosition(), scania.getDirection(), scania.getCurrentSpeed(), scania.state, new Ramp(scania.ramp));
+    }*/
 
 
 

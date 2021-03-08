@@ -88,15 +88,58 @@ package model {
     }
 
     class Ramp{}
-    class Saab95{}
-    class Scania{
-        -ramp : Ramp
+    class Saab95{
+    +getCarriedTo() : void
     }
-    class TransportTruck{}
+
+    class TransportTruck{
+    +getCarriedTo() : void
+    }
     class Vector2D{}
     class Vehicle{}
-    class Volvo240{}
+    class Volvo240{
+    +getCarriedTo() : void
+    }
     class Workshop{}
+
+
+    package Scania {
+
+    class Scania{
+        ~ramp : Ramp
+        ~state : State
+
+        +getCarriedTo() : void
+
+
+    }
+
+
+    abstract class State {
+        ~{abstract} startEngine(Scania) : IRampVehicle
+        ~{abstract} stopEngine(Scania) : IRampVehicle
+        ~{abstract} move(Scania) : IRampVehicle
+        ~{abstract} turnLeft(Scania) : IRampVehicle
+        ~{abstract} turnRight(Scania) : IRampVehicle
+        ~{abstract} turnAround(Scania) : IRampVehicle
+        ~{abstract} gas(Scania) : IRampVehicle
+        ~{abstract} brake(Scania) : IRampVehicle
+        ~{abstract} isEngineOn(Scania) : boolean
+        ~{abstract} raise(Scania, double) : IRampVehicle
+        ~{abstract} lower(Scania, double) : IRampVehicle
+    }
+
+    class EngineOnState{}
+    class EngineOffLoweredRampState {}
+    class RaisedRampState {}
+
+    State <|-- EngineOffLoweredRampState
+    State <|-- EngineOnState
+    State <|-- RaisedRampState
+    Scania *--> State
+
+}
+
 
 }
 
@@ -199,17 +242,17 @@ Model ....|> IModel
 Model ----> EventSource
 
 Saab95 ...|> ITurbo
-Saab95 ---> Car
+Saab95 ---|> Car
 Saab95 ...> CarFactory
 
 Scania ...|> IRamp
-Scania ---> Car
+Scania ---|> Car
 Scania ...> CarFactory
 
 Vehicle ..|> IMovable
 
 Volvo240 ...|> ITrim
-Volvo240 ---> Car
+Volvo240 ---|> Car
 Volvo240 ...> CarFactory
 
 EventSource *...> EventObserver

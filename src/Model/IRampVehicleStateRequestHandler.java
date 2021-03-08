@@ -1,5 +1,5 @@
 package Model;
-import Model.RampVehicle.State;
+import Model.Scania.State;
 
 public interface IRampVehicleStateRequestHandler {
 
