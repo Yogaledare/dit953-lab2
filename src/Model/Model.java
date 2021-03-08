@@ -60,22 +60,40 @@ public class Model implements IModel {
      */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent event) {
-            for (ITrim car : carsWithTrim) {
-                car = replace(car, car.move());
-                if (isOutOfBounds(car)) {
-                    replace(car, car.turnAround());
+            //for (ITrim car : carsWithTrim) {
+            //    car = replace(car, car.move());
+            //    if (isOutOfBounds(car)) {
+            //        replace(car, car.turnAround());
+            //    }
+            //}
+            for (int i = 0; i < carsWithTrim.size(); i++){
+                carsWithTrim.set(i, carsWithTrim.get(i).move());
+                if(isOutOfBounds(carsWithTrim.get(i))){
+                    carsWithTrim.set(i, carsWithTrim.get(i).turnAround());
                 }
             }
-            for (ITurboVehicle car : carsWithTurbo) {
-                car = replace(car, car.move());
-                if (isOutOfBounds(car)) {
-                    replace(car, car.turnAround());
+            //for (ITurboVehicle car : carsWithTurbo) {
+            //    car = replace(car, car.move());
+            //    if (isOutOfBounds(car)) {
+            //        replace(car, car.turnAround());
+            //    }
+            //}
+            for (int i = 0; i < carsWithTurbo.size(); i++){
+                carsWithTurbo.set(i, carsWithTurbo.get(i).move());
+                if(isOutOfBounds(carsWithTurbo.get(i))){
+                    carsWithTurbo.set(i, carsWithTurbo.get(i).turnAround());
                 }
             }
-            for (IRampVehicle car : carsWithRamp) {
-                car = replace(car, car.move());
-                if (isOutOfBounds(car)) {
-                    replace(car, car.turnAround());
+            //for (IRampVehicle car : carsWithRamp) {
+            //    car = replace(car, car.move());
+            //    if (isOutOfBounds(car)) {
+            //        replace(car, car.turnAround());
+            //    }
+            //}
+            for (int i = 0; i < carsWithRamp.size(); i++){
+                carsWithRamp.set(i, carsWithRamp.get(i).move());
+                if(isOutOfBounds(carsWithRamp.get(i))){
+                    carsWithRamp.set(i, carsWithRamp.get(i).turnAround());
                 }
             }
             modelUpdatedEvent.publish(sumCars());
@@ -98,55 +116,89 @@ public class Model implements IModel {
 
     @Override
     public void startEngine() {
-        for (ITrim car : carsWithTrim) {
-            replace(car, car.startEngine());
+        //for (ITrim car : carsWithTrim) {
+        //    replace(car, car.startEngine());
+        //}
+        for(int i = 0; i < carsWithTrim.size(); i++){
+            carsWithTrim.set(i, carsWithTrim.get(i).startEngine());
         }
-        for (ITurboVehicle car : carsWithTurbo) {
-            replace(car, car.startEngine());
+        //for (ITurboVehicle car : carsWithTurbo) {
+        //    replace(car, car.startEngine());
+        //}
+        for(int i = 0; i < carsWithTurbo.size(); i++){
+            carsWithTurbo.set(i, carsWithTurbo.get(i).startEngine());
         }
-        for (IRampVehicle car : carsWithRamp) {
-            replace(car, car.startEngine());
+        //for (IRampVehicle car : carsWithRamp) {
+        //    replace(car, car.startEngine());
+        //}
+        for(int i = 0; i < carsWithRamp.size(); i++){
+            carsWithRamp.set(i, carsWithRamp.get(i).startEngine());
         }
-
     }
 
     @Override
     public void stopEngine() {
-        for (ITrim car : carsWithTrim) {
-            replace(car, car.stopEngine());
+        //for (ITrim car : carsWithTrim) {
+        //    replace(car, car.stopEngine());
+        //}
+        for(int i = 0; i < carsWithTrim.size(); i++){
+            carsWithTrim.set(i, carsWithTrim.get(i).stopEngine());
         }
-        for (ITurboVehicle car : carsWithTurbo) {
-            replace(car, car.stopEngine());
+        //for (ITurboVehicle car : carsWithTurbo) {
+        //    replace(car, car.stopEngine());
+        //}
+        for(int i = 0; i < carsWithTurbo.size(); i++){
+            carsWithTurbo.set(i, carsWithTurbo.get(i).stopEngine());
         }
-        for (IRampVehicle car : carsWithRamp) {
-            replace(car, car.stopEngine());
+        //for (IRampVehicle car : carsWithRamp) {
+        //    replace(car, car.stopEngine());
+        //}
+        for(int i = 0; i < carsWithRamp.size(); i++){
+            carsWithRamp.set(i, carsWithRamp.get(i).stopEngine());
         }
     }
 
     @Override
     public void gas(int amount) {
-        for (ITrim car : carsWithTrim) {
-            replace(car, car.gas(amount));
+        //for (ITrim car : carsWithTrim) {
+        //    replace(car, car.gas(amount));
+        //}
+        for(int i = 0; i < carsWithTrim.size(); i++){
+            carsWithTrim.set(i, carsWithTrim.get(i).gas(amount));
         }
-        for (ITurboVehicle car : carsWithTurbo) {
-            replace(car, car.gas(amount));
+        //for (ITurboVehicle car : carsWithTurbo) {
+        //    replace(car, car.gas(amount));
+        //}
+        for(int i = 0; i < carsWithTurbo.size(); i++){
+            carsWithTurbo.set(i, carsWithTurbo.get(i).gas(amount));
         }
-        for (IRampVehicle car : carsWithRamp) {
-            replace(car, car.gas(amount));
+        //for (IRampVehicle car : carsWithRamp) {
+        //    replace(car, car.gas(amount));
+        //}
+        for(int i = 0; i < carsWithRamp.size(); i++){
+            carsWithRamp.set(i, carsWithRamp.get(i).gas(amount));
         }
-
     }
 
     @Override
     public void brake(int amount) {
-        for (ITrim car : carsWithTrim) {
-            replace(car, car.brake(amount));
+        //for (ITrim car : carsWithTrim) {
+        //    replace(car, car.brake(amount));
+        //}
+        for(int i = 0; i < carsWithTrim.size(); i++){
+            carsWithTrim.set(i, carsWithTrim.get(i).brake(amount));
         }
-        for (ITurboVehicle car : carsWithTurbo) {
-            replace(car, car.brake(amount));
+        //for (ITurboVehicle car : carsWithTurbo) {
+        //    replace(car, car.brake(amount));
+        //}
+        for(int i = 0; i < carsWithTurbo.size(); i++){
+            carsWithTurbo.set(i, carsWithTurbo.get(i).brake(amount));
         }
-        for (IRampVehicle car : carsWithRamp) {
-            replace(car, car.brake(amount));
+        //for (IRampVehicle car : carsWithRamp) {
+        //    replace(car, car.brake(amount));
+        //}
+        for(int i = 0; i < carsWithRamp.size(); i++){
+            carsWithRamp.set(i, carsWithRamp.get(i).brake(amount));
         }
     }
     // good?
@@ -168,29 +220,41 @@ public class Model implements IModel {
 
     @Override
     public void raise() {
-        for (IRampVehicle car : carsWithRamp) {
-            replace(car, car.raise(10));
+        //for (IRampVehicle car : carsWithRamp) {
+        //    replace(car, car.raise(10));
+        //}
+        for(int i = 0; i < carsWithRamp.size(); i++){
+            carsWithRamp.set(i, carsWithRamp.get(i).raise(10));
         }
     }
 
     @Override
     public void lower() {
-        for (IRampVehicle car : carsWithRamp) {
-            replace(car, car.lower(10));
+        //for (IRampVehicle car : carsWithRamp) {
+        //    replace(car, car.lower(10));
+        //}
+        for(int i = 0; i < carsWithRamp.size(); i++){
+            carsWithRamp.set(i, carsWithRamp.get(i).lower(10));
         }
     }
 
     @Override
     public void setTurboOn() {
-        for (ITurboVehicle car : carsWithTurbo) {
-            replace(car, car.setTurboOn());
+        //for (ITurboVehicle car : carsWithTurbo) {
+        //    replace(car, car.setTurboOn());
+        //}
+        for(int i = 0; i < carsWithTurbo.size(); i++){
+            carsWithTurbo.set(i, carsWithTurbo.get(i).setTurboOn());
         }
     }
 
     @Override
     public void setTurboOff() {
-        for (ITurboVehicle car : carsWithTurbo) {
-            replace(car, car.setTurboOff());
+        //for (ITurboVehicle car : carsWithTurbo) {
+        //    replace(car, car.setTurboOff());
+        //}
+        for(int i = 0; i < carsWithTurbo.size(); i++){
+            carsWithTurbo.set(i, carsWithTurbo.get(i).setTurboOff());
         }
     }
 
