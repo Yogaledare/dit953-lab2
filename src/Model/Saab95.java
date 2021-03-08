@@ -127,7 +127,7 @@ public class Saab95 extends Car implements ITurboVehicle {
     }
 
     @Override
-    public ITransportable getCarriedTo(Vector2D position, Vector2D direction) {
+    public Saab95 getCarriedTo(Vector2D position, Vector2D direction) {
         return new Saab95(position, direction, getCurrentSpeed(), isEngineOn(), isTurboOn());
     }
 

@@ -73,7 +73,7 @@ public abstract class Container<T extends ITransportable> /*implements ITranspor
 
 
 
-    public <K extends ITransportable> void carryElementsTo(/*ITransporter<K> iTransporter*/Vector2D position, Vector2D direction) {
+    public void carryElementsTo(Vector2D position, Vector2D direction) {
         this.position = position;
         this.direction = direction;
 
