@@ -30,8 +30,6 @@ public abstract class State {
 }
 
 /*
-
-
     IRampVehicle raise(double amount) {
         Ramp raisedRamp = new Ramp(context.ramp);
         raisedRamp.raise(amount);

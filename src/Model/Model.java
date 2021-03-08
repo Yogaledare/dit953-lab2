@@ -284,36 +284,29 @@ public class Model implements IModel {
     }
 
     public void removeCar() {
-        Random r = new Random();
-        int i = r.nextInt(3);
+//        Random r = new Random();
+//        int i = r.nextInt(3);
+
+
         if (sumCars().size() == 0) return;
 
-        switch(i){
-            case 0 -> {
-                if(carsWithTrim.size() < 1) {
-                    removeCar();
-                    break;
-                }
-                int indexToRemove = r.nextInt(carsWithTrim.size());
-                carsWithTrim.remove(indexToRemove);
-            }
-            case 1 -> {
-                if(carsWithTurbo.size() < 1) {
-                    removeCar();
-                    break;
-                }
-                int indexToRemove = r.nextInt(carsWithTurbo.size());
-                carsWithTurbo.remove(indexToRemove);
-            }
-            case 2 -> {
-                if(carsWithRamp.size() < 1) {
-                    removeCar();
-                    break;
-                }
-                int indexToRemove = r.nextInt(carsWithRamp.size());
-                carsWithRamp.remove(indexToRemove);
+        double latestCarX = sumCars().get(0).getPosition().getX();
+        double latestCarId = 0;
+
+        for (int i = 0; i < sumCars().size(); i++ ) {
+            if (latestCarX < sumCars().get(i).getPosition().getX()) {
+                latestCarX = sumCars().get(i).getPosition().getX();
             }
         }
+
+        double finalLatestCarX = latestCarX;
+
+        carsWithTrim.removeIf(e -> e.getPosition().getX() == finalLatestCarX);
+        carsWithTurbo.removeIf(e -> e.getPosition().getX() == finalLatestCarX);
+        carsWithRamp.removeIf(e -> e.getPosition().getX() == finalLatestCarX);
+
+
+        System.out.println();
 
     }
 
