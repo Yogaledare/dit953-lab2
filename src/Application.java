@@ -41,7 +41,7 @@ public class Application {
         // Second view includes car-controls only
 
         // Tillfälligt bortkommenterat andra vyn, störande!
-/*        makeView2(model);*/
+//        makeView2(model);
 
         // Start the timer
         model.startTimer();
@@ -82,6 +82,7 @@ public class Application {
         // Controllers
         GasController gasController = new GasController(gasPanel, m);
         ControlPanelController cPC = new ControlPanelController(controlPanel, m);
+        AddRemoveContoller aRC = new AddRemoveContoller(addRemovePanel, m);
     }
 
     private static void makeView2(IModel m) {
