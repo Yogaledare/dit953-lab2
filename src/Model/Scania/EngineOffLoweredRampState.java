@@ -1,4 +1,4 @@
-package Model.RampVehicle;
+package Model.Scania;
 
 import Model.Ramp;
 import Model.IRampVehicle;

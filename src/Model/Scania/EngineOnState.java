@@ -1,9 +1,7 @@
-package Model.RampVehicle;
+package Model.Scania;
 
-import Model.ITrim;
 import Model.Vector2D;
 import Model.IRampVehicle;
-import Model.Volvo240;
 
 public class EngineOnState extends State {
 

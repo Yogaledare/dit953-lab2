@@ -5,7 +5,7 @@ import java.awt.*;
 /**
  * The car component representing car features
  */
-public abstract class Car extends Vehicle implements ITransportable {
+public abstract class Car<T> extends Vehicle implements ITransportable<T> {
     /**
      * Car model
      */
@@ -56,7 +56,7 @@ public abstract class Car extends Vehicle implements ITransportable {
         this.nrDoors = nrDoors;
     }
 
-    public Car(Car car){
+    public Car(Car<T> car){
         super(car.getPosition(), car.getDirection(), car.getCurrentSpeed(), car.isEngineOn(), car.getEnginePower(), car.getWidth(), car.getLength());
         this.modelName = car.modelName;
         this.color = car.color;
