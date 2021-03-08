@@ -53,7 +53,7 @@ public class Application {
         CarReciever reciever = new CarReciever(m.getModelUpdatedEvent());
 
         // The panel where the cars are drawn
-        DrawPanel drawPanel = new DrawPanel(800, 800 - 240, reciever.getPaintUpdatedEvent());
+        DrawPanel drawPanel = new DrawPanel(1000, 800 - 240, reciever.getPaintUpdatedEvent());
 
         // The panel for accelerating/decelerating the cars
         GasPanel gasPanel = new GasPanel();
