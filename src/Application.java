@@ -41,7 +41,7 @@ public class Application {
         // Second view includes car-controls only
 
         // Tillfälligt bortkommenterat andra vyn, störande!
-        makeView2(model);
+/*        makeView2(model);*/
 
         // Start the timer
         model.startTimer();
@@ -67,12 +67,17 @@ public class Application {
         // The actual window
         CarView view = new CarView("CarSim 3.0");
 
+        // panel for adding and removing cars
+        AddRemovePanel addRemovePanel = new AddRemovePanel();
+
+
         view.addUIElement(drawPanel);
         view.addUIElement(loggerPanel);
         view.startNewRow();
         view.addUIElement(controlPanel);
         view.startNewRow();
         view.addUIElement(gasPanel);
+        view.addUIElement(addRemovePanel);
 
         // Controllers
         GasController gasController = new GasController(gasPanel, m);
