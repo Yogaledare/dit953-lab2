@@ -284,10 +284,6 @@ public class Model implements IModel {
     }
 
     public void removeCar() {
-//        Random r = new Random();
-//        int i = r.nextInt(3);
-
-
         if (sumCars().size() == 0) return;
 
         double latestCarX = sumCars().get(0).getPosition().getX();

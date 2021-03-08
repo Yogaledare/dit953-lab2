@@ -71,7 +71,7 @@ public class Saab95 extends Car implements ITurboVehicle {
 
     @Override
     public ITurboVehicle startEngine(){
-        double speed = 0;
+        double speed = getCurrentSpeed();
         if(!isEngineOn())
             speed = 0.1;
         return new Saab95(getPosition(), getDirection(), speed, true, isTurboOn());

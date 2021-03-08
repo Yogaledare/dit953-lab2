@@ -36,7 +36,7 @@ public class Volvo240 extends Car implements ITrim {
 
     @Override
     public ITrim startEngine(){
-        double speed = 0;
+        double speed = getCurrentSpeed();
         if(!isEngineOn())
             speed = 0.1;
         return new Volvo240(getPosition(), getDirection(), speed, true);
